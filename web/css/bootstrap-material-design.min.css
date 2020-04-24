@@ -1632,8 +1632,16 @@ pre code {
     color: #ffc107;
 }
 .etiqueta3:hover {
-  color: #f22112;
-  text-decoration: underline;
+    color: #f22112;
+    text-decoration: underline;
+}
+
+.etiqueta4{
+    color: #ebebeb;
+}
+
+.titulo{
+    background: #024c6a;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -4995,6 +5003,25 @@ a.badge-dark:focus {
     color: #fff;
     background-color: #222;
     border-color: #222;
+}
+.salir {
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #bee5eb;
+    text-shadow: 0 1px 0 #fff;
+    opacity: 0.5;
+}
+.salir:hover {
+    color: #cacaca;
+    text-decoration: none;
+}
+button.salir {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    appearance: none;
 }
 .close {
     float: right;

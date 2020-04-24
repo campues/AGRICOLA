@@ -51,7 +51,7 @@ public class Controlador extends HttpServlet {
     Detallespro de = new Detallespro();
     Producto pro = new Producto();
     Visitas vis = new Visitas();
-    Asociacion aso = new Asociacion();
+    Asociacion asoci = new Asociacion();
 
     int idEmple; // id empleado
 
@@ -465,8 +465,6 @@ public class Controlador extends HttpServlet {
                 e.getStackTrace();
             }
         }
-        String valor = "";
-        valor = request.getParameter("global");
 
         // ==============================EMPLEADOS===========================================================
         if (menu.equals("Empleado")) {
@@ -528,34 +526,53 @@ public class Controlador extends HttpServlet {
             } catch (SQLException e) {
                 e.getStackTrace();
             }
-
         }
         // ==============================ASOCIACION===========================================================
-
         if (menu.equals("Asociacion")) {
             try {
                 switch (accion) {
                     case "Listar":
-                        RequestDispatcher dis = request.getRequestDispatcher("asociacion.jsp");
-                        List<Asociacion> listaAso = asociacionDAO.listarAsociacion();
-                        request.setAttribute("listaAso", listaAso);
-                        dis.forward(request, response);
+                        RequestDispatcher asocd = request.getRequestDispatcher("asociaciones.jsp");
+                        List<Asociacion> list = asociacionDAO.listarAsociacion();
+                        request.setAttribute("asocia", list);
+                        asocd.forward(request, response);
                         break;
                     case "Agregar":
-                        aso.setPk_asociacion(0);
-                        aso.setNombre(request.getParameter("txtNombre"));
-                        aso.setDireccion(request.getParameter("txtDireccion"));
-                        aso.setTelefono(request.getParameter("txtTelefono"));
-                        asociacionDAO.insertarAso(aso);
+                        asoci.setPk_asociacion(0);
+                        asoci.setNombre(request.getParameter("txtNombre"));
+                        asoci.setDireccion(request.getParameter("txtDireccion"));
+                        asoci.setTelefono(request.getParameter("txtTelefono"));
+                        asociacionDAO.insertarAso(asoci);
                         request.getRequestDispatcher("Controlador?menu=Asociacion&accion=Listar").forward(request, response);
+                        break;
+                    case "Editar":
+                        RequestDispatcher restt = request.getRequestDispatcher("asociacion-editar.jsp");
+                        asoci = asociacionDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_asociacion")));
+                        request.setAttribute("asoc", asoci);
+                        restt.forward(request, response);
+                        break;
+                    case "Actualizar":
+                        asoci.setPk_asociacion(Integer.parseInt(request.getParameter("pk")));
+                        asoci.setNombre(request.getParameter("txtNombre"));
+                        asoci.setDireccion(request.getParameter("txtDireccion"));
+                        asoci.setTelefono(request.getParameter("txtTelefono"));
+                        asociacionDAO.actualizar(asoci);
+                        request.getRequestDispatcher("Controlador?menu=Asociacion&accion=Listar").forward(request, response);
+                        break;
+                    case "Buscar":
+                        RequestDispatcher distwg = request.getRequestDispatcher("asociaciones.jsp");
+                        List<Asociacion> lisst = asociacionDAO.listarNom(request.getParameter("txtNombre"));
+                        request.setAttribute("asocia", lisst);
+                        distwg.forward(request, response);
                         break;
                     case "Eliminar":
                         Asociacion asEliminar = asociacionDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_asociacion")));
                         asociacionDAO.eliminarAso(asEliminar);
                         request.getRequestDispatcher("Controlador?menu=Asociacion&accion=Listar").forward(request, response);
                         break;
+
                     default:
-                        break;
+                        throw new AssertionError();
                 }
 
             } catch (SQLException e) {

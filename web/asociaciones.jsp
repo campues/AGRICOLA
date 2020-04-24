@@ -1,5 +1,5 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -30,10 +30,7 @@
 
         <!-- General Styles -->
         <link rel="stylesheet" href="./css/style.css">
-
-
     </head>
-
 
     <body>
         <!-- Main container -->
@@ -54,17 +51,30 @@
                     </a>
                 </nav>
                 <!-- Page header -->
-                <div class="page-header">
-                    <h4 class="text-left">
-                        <i class="fas fa-building fa-fw"></i> &nbsp; CENTROS DE ACOPIOS
-                    </h4>Entidades de apoyo comunitario
-                    <div class="text-center">
-                        <a class="etiqueta3" href="Controlador?menu=Asociacion&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTAS ASOCIACION</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a class="etiqueta3" href="#" data-toggle="modal" data-target="#ModalBuscar"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR ASOCIACION</a>
-                    </div>
+                <div class="full-box page-header">
+                    <h3 class="text-left">
+                        <i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE ASOCIACIONES
+                    </h3>
+                    <p class="text-justify">
+                        Lista de ASOCIACIONES
+                    </p>
                 </div>
-                <!-- ============================================MODAL HERRAMIENTAS=============================0 -->
+
+                <div class="container-fluid">
+                    <ul class="full-box list-unstyled page-nav-tabs">
+                        <li>
+                            <a  href="#" data-toggle="modal" data-target="#ModalAgregar"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR</a>
+                        </li>
+                        <li>
+                            <a href="Controlador?menu=Asociacion&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTAR </a>
+                        </li>
+                        <li>
+                            <a  href="#" data-toggle="modal" data-target="#ModalBuscar"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR </a>
+                        </li>
+
+                    </ul>	
+                </div>
+                <!-- ============================================MODAL BUSCAR============================= -->
                 <div class="modal fade" id="ModalBuscar" tabindex="-1" role="dialog" aria-labelledby="ModalBuscar" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -74,10 +84,10 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <form class="modal-body" action="Controlador?menu=Asociacion" method="POST"  >
+                            <form class="modal-body" action="Controlador?menu=Asociacion" method="POST">
                                 <div class="form-group">
                                     <label  class="bmd-label-floating">Ingresa el Nombre</label>
-                                    <input type="text"  class="form-control" name="txtBusqueda" required="" title="Ingresa el nombre">
+                                    <input type="text"  class="form-control" name="txtNombre" required="" title="Ingresa el nombre">
                                 </div>
                                 <p class="text-center">
                                     <button   type="submit" name="accion" value="Buscar" class="btn btn-raised btn-info "><i class="fas fa-search "></i> &nbsp; BUSCAR</button>
@@ -86,71 +96,67 @@
                         </div>
                     </div>
                 </div>
-                <!-- ===================================================================================================== -->
-                <div class="container-fluid">
-                    <form  name="frm" action="Controlador?menu=Asociacion"  class="form-neon"  method="POST" >
-                        <fieldset>
-                            <legend><i class="far fa-building"></i> &nbsp;Información de la asociacion</legend>
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="form-group label-floating">
-                                        <div class="form-group">
-                                            <input type="hidden"  name="pk" class="form-control"  value="${aso.pk_asociacion}">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-4">
-                                        <div class="form-group">
-                                            <label  class="bmd-label-floating">Nombre</label>
-                                            <input type="text"  class="form-control" name="txtNombre"  value="${aso.nombre}" >
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-4">
-                                        <div class="form-group">
-                                            <label for="" class="bmd-label-floating">Direccion</label>
-                                            <input type="text"  class="form-control" name="txtDireccion" value="${aso.direccion}" >
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-4">
-                                        <div class="form-group">
-                                            <label for="" class="bmd-label-floating">Telefono</label>
-                                            <input type="text"  class="form-control" name="txtTelefono" pattern="[0-9]+"   value="${aso.telefono}" >
-                                        </div>
-                                    </div>
-
-                                    <p class="text-center" style="margin-top: 40px;">
-                                        <input type="submit" class="btn btn-raised btn-success btn-sm" name="accion" value="Actualizar">
-                                        <input id="btn4" type="submit" class="btn btn-raised btn-info btn-sm" name="accion" value="Agregar">
-                                    </p>
-                                </div>
+                <!-- ============================================MODAL AGREGAR============================= -->
+                <div class="modal fade" id="ModalAgregar" tabindex="-1" role="dialog" aria-labelledby="ModalAgregar" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="titulo modal-header">
+                                <h5>Nueva Asociacion</h5>
+                                <button type="button" class="close" data-dismiss="modal" >
+                                    <span class="etiqueta4" >&times;</span>
+                                </button>
                             </div>
-                        </fieldset>
-                    </form>
+                            <form class="modal-body" action="Controlador?menu=Asociacion" method="POST"  >
+                                <div class="form-group">
+                                    <label  class="bmd-label-floating">Nombre</label>
+                                    <input type="text"  class="form-control" name="txtNombre" required="" title="Ingresa el nombre">
+                                </div>
+                                <div class="form-group">
+                                    <label  class="bmd-label-floating">Direccion</label>
+                                    <input type="text"  class="form-control" name="txtDireccion" required="" title="Ingresa el nombre">
+                                </div>
+                                <div class="form-group">
+                                    <label  class="bmd-label-floating">Telefono</label>
+                                    <input type="text"  class="form-control" name="txtTelefono" required="" title="Ingresa el nombre">
+                                </div>
+                                <p class="text-center">
+                                    <button   type="submit" name="accion" value="Agregar" class="btn btn-raised btn-info"><i class=" fas fa-save "></i> &nbsp; AGREGAR</button>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
                 </div>
+
+                
+                <!-- ===================================================================================================== -->
                 <!-- Content here-->
                 <div class="container-fluid">
                     <div class="table-responsive">
                         <table class="table table-dark table-sm">
                             <thead>
                                 <tr class="text-center roboto-medium">
+                                    <th>ID</th>
                                     <th>Nombre</th>
-                                    <th>Doreccion</th>
+                                    <th>Direccion</th>
                                     <th>Telefono</th>
                                     <th class="ac">Editar</th>
                                     <th class="ac">Eliminar</th>
                                 </tr>
                             </thead>
-                            <tbody  >
-                                <c:forEach var="a" items="${listaAso}">
+                            <tbody>
+                                <c:forEach var="as" items="${asocia}">
                                     <tr class="text-center"> 
-                                        <td>${a.nombre}</td>
-                                        <td>${a.direccion}</td>
-                                        <td>${a.telefono}</td>
-                                        <td class="btnLis"><a  title="Actualizar Asociacion"  class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Asociacion&accion=showedit&pk_asociacion=${a.pk_asocaciacon}">
+                                        <td>${as.pk_asociacion}</td>
+                                        <td>${as.nombre}</td>
+                                        <td>${as.direccion}</td>
+                                        <td>${as.telefono}</td>
+                                        <td class="btnLis"><a  title="Actualizar Asociacion"  class="btn btn-raised btn-success btn-sm"   href="Controlador?menu=Asociacion&accion=Editar&pk_asociacion=${as.pk_asociacion}">
                                                 <i class="fas  fa-sync-alt"></i></a>
                                         </td>
-                                        <td ><a title="Eliminar Asociacion"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=Asociacion&accion=Eliminar&pk_asociacion=${a.pk_asocaciacon}">
+                                        <td class="btnLis"><a title="Eliminar Asociacion"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=Asociacion&accion=Eliminar&pk_asociacion=${as.pk_asociacion}">
                                                 <i class="far fa-trash-alt"></i></a>
                                         </td>
+
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -168,6 +174,7 @@
             ==============================================-->
         <!-- jQuery V3.4.1 -->
         <script src="./js/jquery-3.4.1.min.js"></script>
+
         <!-- popper -->
         <script src="./js/popper.min.js"></script>
 
@@ -186,5 +193,4 @@
         </script>
 
         <script src="./js/main.js"></script>
-
     </body></html>

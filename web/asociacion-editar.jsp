@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -52,54 +53,44 @@
                 </nav>
                 <!-- Page header -->
                 <div class="full-box page-header">
-                    <h3 class="text-left">
-                        <i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE ASOCIACIONES
-                    </h3>
-                    <p class="text-justify">
-                        Lista de ASOCIACIONES
-                    </p>
-                </div>
 
-                <div class="container-fluid">
-                    <ul class="full-box list-unstyled page-nav-tabs">
-                        <li>
-                            <a href="agricultor-nuevo.jsp"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR ASOCIACION</a>
-                        </li>
-                        <li>
-                            <a class="active" href="Controlador?menu=Agricultor&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE ASOCIACIONES</a>
-                        </li>
-                        <li>
-                            <a href="Controlador?menu=Agricultor&accion=Enlistar"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR ASOCIACION</a>
-                        </li>
-                    </ul>	
                 </div>
 
                 <!-- Content here-->
                 <div class="container-fluid">
-                    <div class="table-responsive">
-                        <table class="table table-dark table-sm">
-                            <thead>
-                                <tr class="text-center roboto-medium">
-                                    <th>ID</th>
-                                    <th>Nombre</th>
-                                    <th>Direccion</th>
-                                    <th>Telefono</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach var="as" items="${listaAso}">
-                                    <tr class="text-center"> 
-                                        <td>${as.pk_asociacion}</td>
-                                        <td>${as.nombre}</td>
-                                        <td>${as.direccion}</td>
-                                        <td>${as.telefono}</td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                </div>
+                    <form  name="formulario" action="Controlador?menu=Asociacion"  class="form-neon" autocomplete="off" method="POST" >
+                        <fieldset>
+                            <legend><i class="fas fa-store-alt"></i> &nbsp; Verifica los datos antes de guardar</legend>
+                            <!--<div class="nav-lateral-barra"></div> --> 
+                            <div class="row">
+                                <input type="hidden"  name="pk" class="form-control"  value="${asoc.pk_asociacion}">
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label  class="bmd-label-floating">Nombre</label>
+                                        <input type="text"  class="form-control" name="txtNombre"  value="${asoc.nombre}" >
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="" class="bmd-label-floating">Direccion</label>
+                                        <input type="text"  class="form-control" name="txtDireccion" value="${asoc.direccion}" >
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="" class="bmd-label-floating">Telefono</label>
+                                        <input type="text"  class="form-control" name="txtTelefono" pattern="[0-9]+"   value="${asoc.telefono}" >
+                                    </div> 
+                                </div>
+                            </div>
+                        </fieldset>
+                        <p class="text-center" >
+                            <button   type="submit" name="accion" value="Actualizar" class="btn btn-raised btn-success btn-sm"> ACTUALIZAR</button>
+                            <button   type="submit" name="accion" value="Listar" class="btn btn-raised btn-danger btn-sm"> CANCELAR</button>
+                        </p>
+                    </form>
+                </div>	
 
             </section>
         </main>

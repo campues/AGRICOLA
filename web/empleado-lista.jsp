@@ -75,7 +75,7 @@
                         </li>
                     </ul>	
                 </div>
-                <!-- ============================================MODAL HERRAMIENTAS=============================0 -->
+                <!-- ============================================MODAL BUSCAR============================= -->
                 <div class="modal fade" id="ModalBuscar" tabindex="-1" role="dialog" aria-labelledby="ModalBuscar" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
