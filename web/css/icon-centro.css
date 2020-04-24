@@ -1,0 +1,38 @@
+
+/*-------------------------ESTILO DE ICONOS CENTRO------------------------------*/
+.menu{
+    position: relative;
+    left:250px;
+}
+
+.tablas{
+   width: 50%;
+}
+.contenedor{
+    border-radius: 5px;
+    float:left;
+    width: 100px;
+}
+
+img.icon{
+    display: block;
+    margin:10px auto;
+    width:50px; /*Tamano de icono*/
+    -webkit-border-radius: 50%;
+    -webkit-box-shadow: 0px 0px 0px 30px rgba(255,255,255,0);
+    -webkit-transition:box-shadow .4s;
+}
+
+
+/*tamano efecto clic*/
+div.contenedor:hover img.icon{
+    -webkit-box-shadow:0px 0px 0px 0px rgba(2, 2, 2, 0.6);
+}
+.tx{
+    text-align: center;
+    color: #eee;
+    font-weight: bold;
+    background-color:#DC143C;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgb(0, 0, 0);/*Sombra de la lista*/
+}
