@@ -1,7 +1,11 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
+<%
+    if (request.getParameter("cerrar") != null) {
+        session.invalidate();
+    }
+%>
 <html lang="es">
     <head>
         <meta charset="UTF-8">

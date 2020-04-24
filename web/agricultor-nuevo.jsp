@@ -118,7 +118,7 @@
                                     <div class="col-12 col-md-4">
                                         <div class="form-group">
                                             <label for="cliente_apellido" class="bmd-label-floating">Cedula</label>
-                                            <input type="text" class="form-control" name="txtCed" value="${agricul.cedula}"minlength="10" maxlength="10" pattern="[0-9]+" required>
+                                            <input type="text" class="form-control" name="txtCed" value="${agricul.cedula} "minlength="10" maxlength="10" pattern="[0-9]+" required>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-4">

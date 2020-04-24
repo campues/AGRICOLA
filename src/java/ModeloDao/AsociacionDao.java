@@ -19,13 +19,11 @@ public class AsociacionDao {
         System.out.println(jdbcURL);
         con = new Conexion(jdbcURL, jdbcUsername, jdbcPassword);
     }
-
     public AsociacionDao() {
     }
-
     // Insertar Empleado
     public boolean insertarAso(Asociacion as) throws SQLException {
-        String sql = "INSERT INTO asociacion (pk_asociacion, nom_asociacion, direccion, telefono) VALUES (?, ?, ?,?)";
+        String sql = "INSERT INTO asociacion (pk_asociacion, nom_asociacion, direccion, telefono) VALUES (?,?,?,?)";
         System.out.println(as.getNombre());
         con.conectar();
         connection = con.getJdbcConnection();
@@ -50,6 +48,27 @@ public class AsociacionDao {
         Statement statement = connection.createStatement();
         ResultSet res = statement.executeQuery(sql);
 
+        while (res.next()) {
+            Asociacion lir = new Asociacion();
+            lir.setPk_asociacion(res.getInt("pk_asociacion"));
+            lir.setNombre(res.getString("nom_asociacion"));
+            lir.setDireccion(res.getString("direccion"));
+            lir.setTelefono(res.getString("telefono"));
+            listarAso.add(lir);
+        }
+        con.desconectar();
+        return listarAso;
+    }
+
+    // listar Nombre
+    public List listarNombre(String nom) throws SQLException {
+        List<Asociacion> listarAso = new ArrayList<Asociacion>();
+        String sql = "SELECT * FROM asociacion where nom_asociacion=? ";
+        con.conectar();
+        connection = con.getJdbcConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, nom);
+        ResultSet res = statement.executeQuery(sql);
         while (res.next()) {
             Asociacion lir = new Asociacion();
             lir.setPk_asociacion(res.getInt("pk_asociacion"));

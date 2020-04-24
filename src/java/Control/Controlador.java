@@ -51,6 +51,7 @@ public class Controlador extends HttpServlet {
     Detallespro de = new Detallespro();
     Producto pro = new Producto();
     Visitas vis = new Visitas();
+    Asociacion aso = new Asociacion();
 
     int idEmple; // id empleado
 
@@ -277,6 +278,13 @@ public class Controlador extends HttpServlet {
                         request.setAttribute("global", Variables.panPrincipal);
                         dlotee.forward(request, response);
                         break;
+                    case "Buscar":
+                        RequestDispatcher distw = request.getRequestDispatcher("lote-lista.jsp");
+                        List<Lote> l = loteDAO.listarCod(request.getParameter("txtCodigo"));
+                        request.setAttribute("listaAgri", l);
+                        Variables.panPrincipal = 10;
+                        distw.forward(request, response);
+                        break;
                     case "Nuevo":
                         RequestDispatcher d = request.getRequestDispatcher("lote-nuevo.jsp");
                         //lista de asociacion para seleccion 
@@ -414,10 +422,9 @@ public class Controlador extends HttpServlet {
                         dists.forward(request, response);
                         break;
                     case "Buscar":
-                        RequestDispatcher distw = request.getRequestDispatcher("agricultor-buscar.jsp");
+                        RequestDispatcher distw = request.getRequestDispatcher("agricultor-lista.jsp");
                         List<Agricultor> liss = agricultorDAO.listarAgriCed(request.getParameter("txtCedula"));
                         request.setAttribute("listaAgri", liss);
-                        request.setAttribute("cedula", request.getParameter("txtCedula"));
                         Variables.panPrincipal = 10;
                         distw.forward(request, response);
                         break;
@@ -479,7 +486,7 @@ public class Controlador extends HttpServlet {
                         em.setContrasena(request.getParameter("txtContrasena"));
                         em.setTipo(request.getParameter("opTipo"));
                         empleadoDAO.insertarEm(em);
-                        request.getRequestDispatcher("Controlador?menu=Empleados&accion=Listar").forward(request, response);
+                        request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
                         break;
                     case "Editar":
                         RequestDispatcher rest = request.getRequestDispatcher("empleado-nuevo.jsp");
@@ -529,22 +536,19 @@ public class Controlador extends HttpServlet {
             try {
                 switch (accion) {
                     case "Listar":
-                        RequestDispatcher dis = request.getRequestDispatcher("asociacion-lista.jsp");
+                        RequestDispatcher dis = request.getRequestDispatcher("asociacion.jsp");
                         List<Asociacion> listaAso = asociacionDAO.listarAsociacion();
                         request.setAttribute("listaAso", listaAso);
                         dis.forward(request, response);
                         break;
                     case "Agregar":
-                        System.out.println("entro");
-                        Asociacion asoc = new Asociacion(
-                                0, request.getParameter("txtNombre"),
-                                request.getParameter("txtDireccion"),
-                                request.getParameter("txtTelefono")
-                        );
-                        asociacionDAO.insertarAso(asoc);
+                        aso.setPk_asociacion(0);
+                        aso.setNombre(request.getParameter("txtNombre"));
+                        aso.setDireccion(request.getParameter("txtDireccion"));
+                        aso.setTelefono(request.getParameter("txtTelefono"));
+                        asociacionDAO.insertarAso(aso);
                         request.getRequestDispatcher("Controlador?menu=Asociacion&accion=Listar").forward(request, response);
                         break;
-
                     case "Eliminar":
                         Asociacion asEliminar = asociacionDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_asociacion")));
                         asociacionDAO.eliminarAso(asEliminar);

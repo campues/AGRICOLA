@@ -24,7 +24,7 @@ public class AgricultorDao {
         con = new Conexion(jdbcURL, jdbcUsername, jdbcPassword);
     }
 
-    // listar todos las asociaciones
+    // listar todos Agricultores
     public List<Agricultor> listarAgricultor() throws SQLException {
 
         List<Agricultor> listarAgri = new ArrayList<Agricultor>();
@@ -51,7 +51,34 @@ public class AgricultorDao {
         con.desconectar();
         return listarAgri;
     }
-
+  // LISTAR POR BUSQUEDA
+    public Agricultor buscarCed(String cedula) throws SQLException {
+        Agricultor agricultor = null;
+        String sql = "SELECT * FROM agricultor WHERE cedula= ? ";
+        con.conectar();
+        connection = con.getJdbcConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, cedula);
+        ResultSet res = statement.executeQuery();
+        if (res.next()) {
+            agricultor = new Agricultor(
+                    res.getInt("pk_agricultor"),
+                    res.getString("nombre1"),
+                    res.getString("nombre2"),
+                    res.getString("apellido1"),
+                    res.getString("apellido2"),
+                    res.getString("cedula"),
+                    res.getString("direccion"),
+                    res.getString("telefono"),
+                    res.getString("fechaAfiliacion"),
+                    res.getString("estatus"),
+                    res.getString("liderAsociacion")
+            );
+        }
+        res.close();
+        con.desconectar();
+        return agricultor;
+    }
     // Insertar Empleado
     public boolean insertarAgr(Agricultor agri) throws SQLException {
         String sql = "INSERT INTO agricultor (pk_agricultor, nombre1, nombre2, apellido1, apellido2, cedula, "
@@ -137,39 +164,9 @@ public class AgricultorDao {
 
     }
 
-    // Obtener por PK
-    public Agricultor buscarCed(String cedula) throws SQLException {
-        Agricultor agricultor = null;
-        String sql = "SELECT * FROM agricultor WHERE cedula= ? ";
-        con.conectar();
-        connection = con.getJdbcConnection();
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, cedula);
-        ResultSet res = statement.executeQuery();
-        if (res.next()) {
-            agricultor = new Agricultor(
-                    res.getInt("pk_agricultor"),
-                    res.getString("nombre1"),
-                    res.getString("nombre2"),
-                    res.getString("apellido1"),
-                    res.getString("apellido2"),
-                    res.getString("cedula"),
-                    res.getString("direccion"),
-                    res.getString("telefono"),
-                    res.getString("fechaAfiliacion"),
-                    res.getString("estatus"),
-                    res.getString("liderAsociacion")
-            );
-        }
-        res.close();
-        con.desconectar();
-        return agricultor;
-
-    }
 
     // listar todos las asociaciones
     public List<Agricultor> listarAgriCed(String cedula) throws SQLException {
-
         List<Agricultor> listarAgri = new ArrayList<Agricultor>();
         String sql = "SELECT * FROM agricultor WHERE cedula= ? ";
         con.conectar();

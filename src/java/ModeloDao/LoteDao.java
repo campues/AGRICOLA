@@ -25,7 +25,6 @@ public class LoteDao {
 
     // listar todos 
     public List<Lote> listarLote() throws SQLException {
-
         List<Lote> listarLote = new ArrayList<Lote>();
         String sql = "SELECT * FROM lote";
         con.conectar();
@@ -45,7 +44,7 @@ public class LoteDao {
         return listarLote;
     }
 
-   // listar ID
+    // listar ID
     public List<Lote> listarLoteID() throws SQLException {
 
         List<Lote> listarLoteID = new ArrayList<Lote>();
@@ -66,6 +65,29 @@ public class LoteDao {
         con.desconectar();
         return listarLoteID;
     }
+    // listar ID
+
+    public List<Lote> listarCod(String codi) throws SQLException {
+        List<Lote> listarLoteID = new ArrayList<Lote>();
+        String sql = "select * from lote WHERE codigo=? and fk_agricultorl='" + global.idAgricultor + "'  ";
+        con.conectar();
+        connection = con.getJdbcConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, codi);
+        ResultSet res = statement.executeQuery();
+        while (res.next()) {
+            int pk = res.getInt("pk_lote");
+            String ubi = res.getString("ubi_Geografica");
+            String codd = res.getString("codigo");
+            String obs = res.getString("observaciones");
+            String rec = res.getString("recomendaciones");
+            Lote lote = new Lote(pk, ubi, codd, obs, rec);
+            listarLoteID.add(lote);
+        }
+        con.desconectar();
+        return listarLoteID;
+    }
+
     // Obtener por PK
     public Lote obtenerPorId(int pk_lote) throws SQLException {
         Lote lote = null;

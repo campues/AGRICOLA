@@ -69,16 +69,39 @@
                             <a href="Controlador?menu=Lote&accion=Nuevo"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR LOTE</a>
                         </li>
                         <li>
-                            <a  class="active" href="Controlador?menu=Lote&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE LOTES</a>
+                            <a href="Controlador?menu=Lote&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE LOTES</a>
                         </li>
                         <li>
-                            <a href="lote-buscar.jsp"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR LOTES</a>
+                            <a  data-toggle="modal" data-target="#ModalBuscar"><i  class="fas fa-search fa-fw"></i> &nbsp; BUSCAR LOTE</a>
                         </li>
                         <li>
                             <a href="Controlador?menu=Agricultor&accion=Listar"><i class="fas fa-backspace fa-fw"></i> &nbsp; Regresar</a>
                         </li>
                     </ul>
                 </div>
+                  <!-- ============================================MODAL HERRAMIENTAS=============================0 -->
+                <div class="modal fade" id="ModalBuscar" tabindex="-1" role="dialog" aria-labelledby="ModalBuscar" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="etiqueta">¿Busca algun lote en especial?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form class="modal-body" action="Controlador?menu=Lote" method="POST"  >
+                                <div class="form-group">
+                                    <label  class="bmd-label-floating">Ingresa el Codigo del lote</label>
+                                    <input type="text"  class="form-control" name="txtCodigo" required="" title="Ingresa el dato ">
+                                </div>
+                                <p class="text-center">
+                                    <button   type="submit" name="accion" value="Buscar" class="btn btn-raised btn-info "><i class="fas fa-search "></i> &nbsp; BUSCAR</button>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- ===================================================================================================== -->
                 <!--CONTENT-->
                 <div class="container-fluid">
                     <strong class="text-danger">

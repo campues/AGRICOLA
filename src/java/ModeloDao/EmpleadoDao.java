@@ -25,7 +25,6 @@ public class EmpleadoDao {
         con = new Conexion(jdbcURL, jdbcUsername, jdbcPassword);
     }
 //METODO DE CONSULTA DEL DATO DESDE LA BASE DE DATOS
-
     public Empleado validar(String user, String dni) throws SQLException {
         Empleado emple = null;
         String sql = "select * from empleado where usuario=? and contrasena=?";
@@ -98,7 +97,7 @@ public class EmpleadoDao {
         return listarEm;
     }
 
-    // Obtener por Nombre
+    // LISTAR POR BUSQUEDA 
     public List<Empleado> buscarNom(String nombre) throws SQLException {
         List<Empleado> listarEm = new ArrayList<Empleado>();
         String sql = "SELECT * FROM empleado WHERE nombre= ? ";
