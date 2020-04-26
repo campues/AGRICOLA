@@ -61,24 +61,25 @@ public class AsociacionDao {
     }
 
     // listar Nombre
-    public List<Asociacion> listarNom(String nomf) throws SQLException {
-        List<Asociacion> listarAso = new ArrayList<Asociacion>();
-        String sql = "SELECT * FROM asociacion where nom_asociacion= ? ";
+    public List<Asociacion> BuscarNombre(String nombre) throws SQLException {
+        List<Asociacion> listarAsoc = new ArrayList<Asociacion>();
+        String sql = "SELECT * FROM asociacion WHERE nom_asociacion= ? ";
         con.conectar();
         connection = con.getJdbcConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, nomf);
-        ResultSet res = statement.executeQuery(sql);
-        while (res.next()) {
-            int pk = res.getInt("pk_asociacion");
-            String nomb = res.getString("nom_asociacion");
-            String dir = res.getString("direccion");
-            String tel = res.getString("telefono");
-            Asociacion asociacion = new Asociacion(pk, nomb, dir, tel);
-            listarAso.add(asociacion);
+        statement.setString(1, nombre);
+        ResultSet res = statement.executeQuery();
+        if (res.next()) {
+            Asociacion as = new Asociacion();
+            as.setPk_asociacion(res.getInt(1));
+            as.setNombre(res.getString(2));
+            as.setDireccion(res.getString(3));
+            as.setTelefono(res.getString(4));
+            listarAsoc.add(as);
         }
+        res.close();
         con.desconectar();
-        return listarAso;
+        return listarAsoc;
     }
 
     // Obtener por PK

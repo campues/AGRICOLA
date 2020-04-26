@@ -394,17 +394,13 @@ table form {
   padding: 20px 25px;
 }
 .tile {
-  height: 200px;
-  width: 200px;
+  height: 150px;
+  width: 150px;
   margin: 10px;
   display: inline-block;
   text-decoration: none;
-  color: var(--accent-color);
-  border: 1px solid var(--border-color);
   border-radius: 3px;
-  user-select: none;
-  transition: all 0.2s ease-in-out;
-  background-color: #fff;
+
 }
 .tile:hover {
   text-decoration: none;
@@ -524,3 +520,44 @@ table form {
 }
 
 /*----------  Keyframes  ----------*/
+
+/* FOOTER=================================================*/
+
+footer { 
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    /*background: rgba(0, 0, 0, 0.616);*/
+    color: white;
+    text-align: center;
+}
+
+footer p {
+    color: #fff;
+    font-size: 13px;
+    letter-spacing: .4px;
+}
+
+footer a {
+    color: #4a89dc;
+    text-decoration: none;
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease;
+}
+
+footer a:hover {
+    color: #666;
+    text-decoration: underline;
+}
+
+footer img { 
+    margin-bottom: -15px;
+    width: 70px;
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease;
+}
+
+footer img:hover { opacity: .83; }
+
+footer img:focus , footer a:focus { outline: none; }

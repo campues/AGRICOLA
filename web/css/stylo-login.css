@@ -3,49 +3,57 @@ body
 {
     margin:0;
     padding:0;
-    background:url(../assets/img/fondos.jpg);
+    background:url(../assets/img/fon2.jpg);
     background-size:cover;
-    font-family:  sans-serif;
     height: 100vh;
+    font-family: Century Gothic, sans-serif;
 }
 .login-box {
     width: 300px;/*ancho*/
-    height: 420px;/*largo*/
-    border-radius: 20px;
-    background: rgba(0, 0, 0, 0.616);
-    color: #fff;
-    top: 50%;
+    height: 380px;/*largo*/
+    background: rgba(6, 5, 1,0.747);
+
+    top: 40%;
     left: 50%;
     position: absolute;
     transform: translate(-50%, -50%);
     box-sizing: border-box;
     padding: 70px 30px;
-    box-shadow: 0px 0px 10px rgb(255, 255, 255);
 
+}
+label{
+    color: #fff;
+    font-size: 12px;
+    font-family: Century Gothic, sans-serif;
+}
+p{
+    text-align: center;
+    color: red;
+    font-size: 12px;
 }
 
 .login-box .avatar {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     position: absolute;
     top: -50px;
-    left: calc(50% - 50px);
+    left: calc(55% - 55px);
 }
 
 .login-box h1 {
     margin: 0;
-    padding: 0 0 20px;
+    padding: 0 0 25px;
     text-align: center;
     font-size: 22px;
-    text-transform: uppercase;
     color: rgb(6, 170, 219);
 }
 
 .login-box label {
     margin: 0;
     padding: 0;
-    font-weight: bold;
+    font-family: Verdana, Geneva, sans-serif;
+    color: #ffc107;
     display: block;
 }
 
@@ -88,10 +96,9 @@ body
     outline: none;
     height: 40px;
 
-    background: #ffc107;
+    background: #34ce57;
     color: #fff;
     font-size: 18px;
-    border-radius: 20px;
 }
 
 .login-box input[type="submit"]:hover {
@@ -99,3 +106,44 @@ body
     background: #b80f22;
     color: #000;
 }
+
+/* FOOTER=================================================*/
+
+footer { 
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    /*background: rgba(0, 0, 0, 0.616);*/
+    color: white;
+    text-align: center;
+}
+
+footer p {
+    color: #fff;
+    font-size: 13px;
+    letter-spacing: .4px;
+}
+
+footer a {
+    color: #4a89dc;
+    text-decoration: none;
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease;
+}
+
+footer a:hover {
+    color: #666;
+    text-decoration: underline;
+}
+
+footer img { 
+    margin-bottom: -15px;
+    width: 70px;
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease;
+}
+
+footer img:hover { opacity: .83; }
+
+footer img:focus , footer a:focus { outline: none; }

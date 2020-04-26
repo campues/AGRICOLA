@@ -41,14 +41,16 @@
 <section class="full-box nav-lateral">
     <div class="full-box nav-lateral-bg show-nav-lateral"></div>
     <div class="full-box nav-lateral-content">
+        
         <figure class="full-box nav-lateral-avatar">
             <i class="far fa-times-circle show-nav-lateral"></i>
-            <img src="./assets/avatar/Avatar.png" class="img-fluid" alt="Avatar">
+            <img src="./assets/avatar/Avatar2.png" class="img-fluid" style="background: #03a9f4;" alt="Avatar">
             <figcaption class="roboto-medium text-center">
                 <%=sesionOK.getAttribute("nom")%>  <%=sesionOK.getAttribute("ape")%> <br><small class="roboto-condensed-light"><%=sesionOK.getAttribute("usu")%></small>
             </figcaption>
-
+            
         </figure>
+           
         <div class="full-box nav-lateral-bar"></div>
         <nav class="full-box nav-lateral-menu">
             <ul>

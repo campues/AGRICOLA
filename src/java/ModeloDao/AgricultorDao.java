@@ -164,7 +164,6 @@ public class AgricultorDao {
 
     }
 
-
     // listar todos las asociaciones
     public List<Agricultor> listarAgriCed(String cedula) throws SQLException {
         List<Agricultor> listarAgri = new ArrayList<Agricultor>();

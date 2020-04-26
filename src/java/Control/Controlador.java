@@ -33,7 +33,7 @@ import javax.servlet.http.Part;
 @MultipartConfig(maxFileSize = 16177215)
 public class Controlador extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
+  //  private static final long serialVersionUID = 1L;
     EmpleadoDao empleadoDAO;
     AsociacionDao asociacionDAO;
     AgricultorDao agricultorDAO;
@@ -561,7 +561,7 @@ public class Controlador extends HttpServlet {
                         break;
                     case "Buscar":
                         RequestDispatcher distwg = request.getRequestDispatcher("asociaciones.jsp");
-                        List<Asociacion> lisst = asociacionDAO.listarNom(request.getParameter("txtNombre"));
+                        List<Asociacion> lisst = asociacionDAO.BuscarNombre(request.getParameter("txtBusqueda"));
                         request.setAttribute("asocia", lisst);
                         distwg.forward(request, response);
                         break;
@@ -572,7 +572,7 @@ public class Controlador extends HttpServlet {
                         break;
 
                     default:
-                        throw new AssertionError();
+                        break;
                 }
 
             } catch (SQLException e) {

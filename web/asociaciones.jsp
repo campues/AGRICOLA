@@ -69,33 +69,11 @@
                             <a href="Controlador?menu=Asociacion&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTAR </a>
                         </li>
                         <li>
-                            <a  href="#" data-toggle="modal" data-target="#ModalBuscar"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR </a>
+                            <a href="#" data-toggle="modal" data-target="#ModalBuscar"><i  class="fas fa-search fa-fw"></i> &nbsp; BUSCAR </a>
                         </li>
-
                     </ul>	
                 </div>
-                <!-- ============================================MODAL BUSCAR============================= -->
-                <div class="modal fade" id="ModalBuscar" tabindex="-1" role="dialog" aria-labelledby="ModalBuscar" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="etiqueta">¿A que asociacion estas buscando?</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <form class="modal-body" action="Controlador?menu=Asociacion" method="POST">
-                                <div class="form-group">
-                                    <label  class="bmd-label-floating">Ingresa el Nombre</label>
-                                    <input type="text"  class="form-control" name="txtNombre" required="" title="Ingresa el nombre">
-                                </div>
-                                <p class="text-center">
-                                    <button   type="submit" name="accion" value="Buscar" class="btn btn-raised btn-info "><i class="fas fa-search "></i> &nbsp; BUSCAR</button>
-                                </p>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+
                 <!-- ============================================MODAL AGREGAR============================= -->
                 <div class="modal fade" id="ModalAgregar" tabindex="-1" role="dialog" aria-labelledby="ModalAgregar" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -126,8 +104,28 @@
                         </div>
                     </div>
                 </div>
-
-                
+                <!-- ============================================MODAL BUSCAR============================= -->
+                <div class="modal fade" id="ModalBuscar" tabindex="-1" role="dialog" aria-labelledby="ModalBuscar" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="etiqueta">¿A que empleado estas buscando?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form class="modal-body" action="Controlador?menu=Asociacion" method="POST"  >
+                                <div class="form-group">
+                                    <label  class="bmd-label-floating">Ingresa el Nombre</label>
+                                    <input type="text"  class="form-control" name="txtBusqueda" required="" title="Ingresa un nombre">
+                                </div>
+                                <p class="text-center">
+                                    <button   type="submit" name="accion" value="Buscar" class="btn btn-raised btn-info "><i class="fas fa-search "></i> &nbsp; BUSCAR</button>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 <!-- ===================================================================================================== -->
                 <!-- Content here-->
                 <div class="container-fluid">
@@ -146,23 +144,21 @@
                             <tbody>
                                 <c:forEach var="as" items="${asocia}">
                                     <tr class="text-center"> 
-                                        <td>${as.pk_asociacion}</td>
-                                        <td>${as.nombre}</td>
-                                        <td>${as.direccion}</td>
-                                        <td>${as.telefono}</td>
+                                        <td>${as.getPk_asociacion()}</td>
+                                        <td>${as.getNombre()}</td>
+                                        <td>${as.getDireccion()}</td>
+                                        <td>${as.getTelefono()}</td>
                                         <td class="btnLis"><a  title="Actualizar Asociacion"  class="btn btn-raised btn-success btn-sm"   href="Controlador?menu=Asociacion&accion=Editar&pk_asociacion=${as.pk_asociacion}">
                                                 <i class="fas  fa-sync-alt"></i></a>
                                         </td>
                                         <td class="btnLis"><a title="Eliminar Asociacion"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=Asociacion&accion=Eliminar&pk_asociacion=${as.pk_asociacion}">
                                                 <i class="far fa-trash-alt"></i></a>
                                         </td>
-
                                     </tr>
                                 </c:forEach>
                             </tbody>
                         </table>
                     </div>
-
                 </div>
 
             </section>

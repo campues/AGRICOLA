@@ -10,7 +10,6 @@ public class Asociacion {
 
     // Constructor vacio
     public Asociacion() {
-
     }
     // zona de constructor
 public Asociacion(int pk_asociacion, String nombre, String direccion, String telefono) {

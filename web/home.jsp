@@ -5,7 +5,6 @@
 <html lang="es">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <title>Home</title>
         <!-- Normalize V8.0.1 -->
@@ -59,62 +58,54 @@
                     <h3 class="text-left">
                         <img src="assets/img/LOGO.png" style="width: 70px;">&nbsp; SISTEMA AGRICOLA
                     </h3>
-                    <p class="text-justify" style="color: beige;">
+                    <p >
                         Los sistemas agrícolas se definen como conjuntos de explotaciones agrícolas individuales con recursos básicos, pautas empresariales, medios familiares de sustento y limitaciones en general similares, a los cuales corresponderían estrategias de desarrollo e intervenciones parecidas. Según el alcance del análisis, un sistema agrícola puede abarcar unas docenas o a muchos millones de familias.
                     </p>
                 </div>
 
-                <div class="menu">
-                    <table class="tablas">
+                <!-- Content -->
+                <div class="full-box tile-container">
+                    <a href="Controlador?menu=Agricultor&accion=Listar" class="tile">
+                        <div class="contenedor">
+                            <img class="icon" src="assets/inicio/farmer.png">
+                            <p class="tx">Agricultor</p>
+                        </div>
+                    </a>
+                    <a href="Controlador?menu=Lote&accion=Listar" class="tile">
+                        <div class="contenedor">
+                            <img class="icon" src="assets/inicio/inspeccion.png">
+                            <p class="tx">Terrenos</p>
+                        </div>
+                    </a>
+                    <a href="Controlador?menu=Cultivo&accion=Listar" class="tile">
+                        <div class="contenedor">
+                            <img class="icon" src="assets/inicio/plants.png">
+                            <p class="tx">Cultivos</p>
+                        </div>
+                    </a>
 
-                        <tr>
-                            <td >
-                                <div class="contenedor" id="icono" >
-                                    <a href="Controlador?menu=Agricultor&accion=Listar"><img class="icon" src="assets/inicio/farmer.png"></a>
-                                    <p class="tx">Agricultores</p>
-                                </div>
+                    <a href="Controlador?menu=Productos&accion=Listar" class="tile">
+                        <div class="contenedor">
+                            <img class="icon" src="assets/inicio/fertilizer.png">
+                            <p class="tx">Productos</p>
+                        </div>
+                    </a>
 
-                            </td>
-                            <td>
-                                <div class="contenedor"  id="icono" >
-                                    <a href="Controlador?menu=Lote&accion=Listar"><img class="icon" src="assets/inicio/inspeccion.png"></a>
-                                    <p class="tx">Terrenos</p>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="contenedor">
-                                    <a href="Controlador?menu=Cultivo&accion=Listar"><img class="icon" src="assets/inicio/plants.png"></a>
-                                    <p class="tx">Cultivos</p>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="contenedor">
-                                    <a href="Controlador?menu=Productos&accion=Listar"><img class="icon" src="assets/inicio/fertilizer.png"></a>
-                                    <p class="tx">Productos</p>
-                                </div>
-                            </td>
-                           
-                            <td>
-                                <div class="contenedor">
-                                    <a href="Controlador?menu=Empleado&accion=Listar"> <img class="icon" src="assets/inicio/user01.png"></a>
-                                    <p class="tx">Usuarios</p>
-                                </div>
-                            </td>
-                           
-                            <td>
-                                <div class="contenedor">
-                                    <a  class="btn-exit-system"><img class="icon" src="assets/inicio/salir.png"></a>
-                                    <p class="tx">Salir</p>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
+                    <a href="Controlador?menu=Empleado&accion=Listar" class="tile">
+                        <div class="contenedor">
+                            <img class="icon" src="assets/inicio/user01.png">
+                            <p class="tx">Usuarios</p>
+                        </div>
+                    </a>
+
                 </div>
-            </section>
-        </main>
 
+            </section>
+
+        </main>
+         
+         
+       
 
         <!--=============================================
         =            Include JavaScript files           =
