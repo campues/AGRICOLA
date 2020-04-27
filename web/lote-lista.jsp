@@ -72,7 +72,7 @@
                             <a href="Controlador?menu=Lote&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE LOTES</a>
                         </li>
                         <li>
-                            <a  data-toggle="modal" data-target="#ModalBuscar"><i  class="fas fa-search fa-fw"></i> &nbsp; BUSCAR LOTE</a>
+                            <a href="" data-toggle="modal" data-target="#ModalBuscar"><i  class="fas fa-search fa-fw"></i> &nbsp; BUSCAR LOTE</a>
                         </li>
                         <li>
                             <a href="Controlador?menu=Agricultor&accion=Listar"><i class="fas fa-backspace fa-fw"></i> &nbsp; Regresar</a>

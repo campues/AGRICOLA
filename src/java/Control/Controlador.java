@@ -115,9 +115,6 @@ public class Controlador extends HttpServlet {
                         vis.setParentesco(request.getParameter("opParentesco"));
                         vis.setTipo_auditoria(request.getParameter("opAuditoria"));
                         vis.setCertificado(request.getParameter("checCertf"));
-                        Part part = request.getPart("fileAnexo");
-                        InputStream anexo = part.getInputStream();
-                        vis.setAnexoCertif(anexo);
                         vis.setTipoInspeccion(request.getParameter("opInspeccion"));
 
                         vis.setCon_compromiso(request.getParameter("checContrato"));
@@ -132,7 +129,7 @@ public class Controlador extends HttpServlet {
                         vis.setFk_lote(Integer.parseInt(request.getParameter("fkLote")));
                         vis.setFk_empleadov(Integer.parseInt(request.getParameter("fkEmpleado")));
 
-                        visitasDAO.insertarVisita(vis);
+                        visitasDAO.insertarVisitaSIN(vis);
                         request.getRequestDispatcher("Controlador?menu=Visitas&accion=Listar").forward(request, response);
                         break;
                     case "Eliminar":
@@ -311,9 +308,6 @@ public class Controlador extends HttpServlet {
                         lote.setAltura(request.getParameter("txtAlt"));
                         lote.setCodigo(request.getParameter("txtCod"));
 
-                        Part part = request.getPart("fileCroquis");
-                        InputStream inputt = part.getInputStream();
-                        lote.setCroquis(inputt);
                         lote.setCertificado(request.getParameter("txtCertificado"));
 
                         lote.setBanio(request.getParameter("checBanio"));
@@ -351,8 +345,8 @@ public class Controlador extends HttpServlet {
                         lote.setFk_agricultorl(Integer.parseInt(request.getParameter("fkAgricultor")));
 
                         lote.setFk_asociacion(Integer.parseInt(request.getParameter("selectAso")));
-                        loteDAO.insertarLote(lote);
-                        request.getRequestDispatcher("lote-datos.jsp").forward(request, response);
+                        loteDAO.insertarLoteSIN(lote);
+                        request.getRequestDispatcher("Controlador?menu=Lote&accion=Listarr").forward(request, response);
                         break;
                     case "Eliminar":
                         Lote loEliminar = loteDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_lote")));

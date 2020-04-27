@@ -28,7 +28,7 @@ public class Lote {
     private String ob_capacitacion; // Descrip
     private String m_transporte; // Check
     private String ob_transporte; // Descrip
-    
+
     private String inc_abono; // Descrip
     private String riesgo_erosion; // Descrip
 
@@ -39,12 +39,13 @@ public class Lote {
     private String agua_procesamiento;// Check
     private String des_produccion;// Descrip
 
-
     private int fk_provincia;
     private int fk_agricultorl;
     private int fk_asociacion;
 
-    //zona de constructores
+      //zona de contructores 32 atributos
+    public Lote() {
+    }
 
     public Lote(int pk_lote, String ubi_Geografica, String codigo, String observaciones, String recomendaciones) {
         this.pk_lote = pk_lote;
@@ -54,8 +55,6 @@ public class Lote {
         this.recomendaciones = recomendaciones;
     }
 
-   
-    
     public Lote(int pk_lote, String ubi_Geografica, String altura, String codigo, String parroquia, String observaciones, String recomendaciones, InputStream croquis, String certificado, String banio, String agua_potable, String luz_electrica, String agua_riego, String bodega, String poscosecha, String ob_bodega, String ob_poscosecha, String capacitacion, String ob_capacitacion, String m_transporte, String ob_transporte, String inc_abono, String riesgo_erosion, String registr_lote, String usopp, String en_prdoduc, String cont_lateral, String agua_procesamiento, String des_produccion, int fk_provincia, int fk_agricultorl, int fk_asociacion) {
         this.pk_lote = pk_lote;
         this.ubi_Geografica = ubi_Geografica;
@@ -90,10 +89,14 @@ public class Lote {
         this.fk_agricultorl = fk_agricultorl;
         this.fk_asociacion = fk_asociacion;
     }
-    
-    
+
+    public InputStream getCroquis() {
+        return croquis;
+    }
+
     //Zona getts y setss
-    public Lote() {
+    public void setCroquis(InputStream croquis) {
+        this.croquis = croquis;
     }
 
     public int getPk_lote() {
@@ -150,14 +153,6 @@ public class Lote {
 
     public void setRecomendaciones(String recomendaciones) {
         this.recomendaciones = recomendaciones;
-    }
-
-    public InputStream getCroquis() {
-        return croquis;
-    }
-
-    public void setCroquis(InputStream croquis) {
-        this.croquis = croquis;
     }
 
     public String getCertificado() {
@@ -351,5 +346,5 @@ public class Lote {
     public void setFk_asociacion(int fk_asociacion) {
         this.fk_asociacion = fk_asociacion;
     }
-    
+
 }

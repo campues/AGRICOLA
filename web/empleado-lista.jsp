@@ -71,7 +71,7 @@
                             <a href="Controlador?menu=Empleado&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE USUARIOS</a>
                         </li>
                         <li>
-                            <a  data-toggle="modal" data-target="#ModalBuscar"><i  class="fas fa-search fa-fw"></i> &nbsp; BUSCAR USUARIO</a>
+                            <a  href="#" data-toggle="modal" data-target="#ModalBuscar"><i  class="fas fa-search fa-fw"></i> &nbsp; BUSCAR USUARIO</a>
                         </li>
                     </ul>	
                 </div>

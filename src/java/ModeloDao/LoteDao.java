@@ -1,7 +1,6 @@
 package ModeloDao;
 
 import Control.Variables;
-import Modelo.Agricultor;
 import Modelo.Lote;
 import config.Conexion;
 import java.sql.Connection;
@@ -118,8 +117,7 @@ public class LoteDao {
                 + "recomendaciones,croquis,cerficacion,banio,agua_potable,luz_electrica,agua_riego,"
                 + "bodega,poscosecha,ob_bodega,ob_poscosecha,capacitaciones,ob_capacitaciones,"
                 + "m_transporte,ob_transporte,inc_abono,riesgo_erosion,registr_lote,usopp,"
-                + "en_prdoduc,cont_lateral,agua_procesamiento,des_produccion,fk_provincia,fk_agricultorl,"
-                + "fk_asociacionl) "
+                + "en_prdoduc,cont_lateral,agua_procesamiento,des_produccion,fk_provincia,fk_agricultorl,fk_asociacionl)"
                 + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         System.out.println(lote.getPk_lote());
@@ -164,6 +162,57 @@ public class LoteDao {
         return rowInserted;
     }
 
+    // Insertar Lote SIN IMAGEN
+    public boolean insertarLoteSIN(Lote lot) throws SQLException {
+        String sql = "INSERT INTO lote (pk_lote,ubi_Geografica,altura,codigo,parroquia,observaciones,"
+                + "recomendaciones,certificacion,banio,agua_potable,luz_electrica,agua_riego,"
+                + "bodega,poscosecha,ob_bodega,ob_poscosecha,capacitaciones,ob_capacitaciones,"
+                + "m_transporte,ob_transporte,inc_abono,riesgo_erosion,registr_lote,usopp,"
+                + "en_prdoduc,cont_lateral,agua_procesamiento,des_produccion,fk_provincia,fk_agricultorl,fk_asociacionl)"
+                + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+        System.out.println(lot.getPk_lote());
+        con.conectar();
+        connection = con.getJdbcConnection();
+        PreparedStatement stm = connection.prepareStatement(sql);
+        stm.setString(1, null);
+        stm.setString(2, lot.getUbi_Geografica());
+        stm.setString(3, lot.getAltura());
+        stm.setString(4, lot.getCodigo());
+        stm.setString(5, lot.getParroquia());
+        stm.setString(6, lot.getObservaciones());
+        stm.setString(7, lot.getRecomendaciones());
+        stm.setString(8, lot.getCertificado());
+        stm.setString(9, lot.getBanio());
+        stm.setString(10, lot.getAgua_potable());
+        stm.setString(11, lot.getLuz_electrica());
+        stm.setString(12, lot.getAgua_riego());
+        stm.setString(13, lot.getBodega());
+        stm.setString(14, lot.getPoscosecha());
+        stm.setString(15, lot.getOb_bodega());
+        stm.setString(16, lot.getOb_poscosecha());
+        stm.setString(17, lot.getCapacitacion());
+        stm.setString(18, lot.getOb_capacitacion());
+        stm.setString(19, lot.getM_transporte());
+        stm.setString(20, lot.getOb_transporte());
+        stm.setString(21, lot.getInc_abono());
+        stm.setString(22, lot.getRiesgo_erosion());
+        stm.setString(23, lot.getRegistr_lote());
+        stm.setString(24, lot.getUsopp());
+        stm.setString(25, lot.getEn_prdoduc());
+        stm.setString(26, lot.getCont_lateral());
+        stm.setString(27, lot.getAgua_procesamiento());
+        stm.setString(28, lot.getDes_produccion());
+        stm.setInt(29, lot.getFk_provincia());
+        stm.setInt(30, lot.getFk_agricultorl());
+        stm.setInt(31, lot.getFk_asociacion());
+        boolean rowInserted = stm.executeUpdate() > 0;
+        stm.close();
+        con.desconectar();
+        return rowInserted;
+    }
+
+    
     // actualizar
     public boolean actualizar(Lote lote) throws SQLException {
         boolean rowActualizar = false;

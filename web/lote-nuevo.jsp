@@ -73,9 +73,7 @@
                         <li>
                             <a   href="Controlador?menu=Lote&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE LOTES</a>
                         </li>
-                        <li>
-                            <a href="lote-buscar.jsp"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR LOTES</a>
-                        </li>
+                        
                     </ul>
                 </div>
 
@@ -108,13 +106,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="" class="etiqueta">Croquis</label>
-                                            <label  class="bmd-label-floating">Croquis</label>
-                                            <input type="file" class="form-control" name="fileCroquis">
-                                        </div>
-                                    </div>
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label for="item" class="bmd-label-floating">Provincia</label>
@@ -142,22 +133,23 @@
                                             </select>
                                         </div>
                                     </div>
-
-                                    <div class="col-md-6">
+                                  
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="" class="etiqueta">Certificado:</label>
                                             <label style="color: #020202;">SI</label> <input  type="radio" name="txtCertificado" value="SI" required="">&nbsp;
                                             <label style="color: #020202;">NO</label><input type="radio" name="txtCertificado" value="NO" required="">
                                         </div>
+                                         
                                     </div>
-                                   
-                                    <div class="col-12 col-md-6">
+                                    
+                                    <div class="col-12 col-md-4">
                                         <div class="form-group">
                                             <label for="item" class="bmd-label-floating">Observaciones</label>
                                             <input type="text" class="form-control" name="txtObserv" id="item" >
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-6">
+                                    <div class="col-12 col-md-4">
                                         <div class="form-group">
                                             <label for="item" class="bmd-label-floating">Recomendaciones</label>
                                             <input type="text" class="form-control" name="txtRecom"  id="item" >
@@ -167,70 +159,7 @@
                                 </div>
                             </div>
                         </fieldset>
-                        <br>
-                        <!-- ============================================BOTO DE HERRAMIENTA =============================0 -->
-
-                        <p class="text-center">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalHerramienta"><i class="fas fa-box-open"></i> &nbsp; Herramientas</button>
-                        </p>
-                        <!-- ============================================MODAL HERRAMIENTAS=============================0 -->
-                        <div class="modal fade" id="ModalHerramienta" tabindex="-1" role="dialog" aria-labelledby="ModalHerramienta" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="ModalCliente">Agregar cliente</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <input type="text"   name="fk_loteh"  value="<%=Variables.idLote%>">
-                                        <div class="container-fluid">
-                                            <div class="form-group">
-                                                <label for="item" class="bmd-label-floating">Herramientas</label>
-                                                <select class="form-control" name="opHerramientas" id="item">
-                                                    <option value="" selected="" disabled="">Seleccione una opcion</option>
-                                                    <option value="Pala">Pala</option>
-                                                    <option value="Pico">Pico</option>
-                                                    <option value="Bomba de mochila">Bomba de mochila</option>
-                                                    <option value="Podadora">Podadora</option>
-                                                    <option value="Escabadora">Escabadora</option>
-                                                    <option value="Machete">Machete</option>
-                                                    <option value="Asadon">Asadon</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="container-fluid">
-                                            <div class="form-group">
-                                                <label  class="bmd-label-floating">Cantidad</label>
-                                                <input type="text"  class="form-control" name="agregar_cliente">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <button type="button" class="btn btn-raised btn-info btn-sm"><i class="far fa-save"></i>&nbsp;  Agregar</button>
-                                        <div class="container-fluid">
-                                            <div class="table-responsive">
-                                                <table class="table table-hover table-bordered table-sm">
-                                                    <tr class="text-center">
-                                                        <th>Cod</th>
-                                                        <th>Nombre</th>
-                                                        <th>Cantidad</th>
-                                                    </tr>
-                                                    <tr class="text-center">
-                                                        <td>1</td>
-                                                        <td>Pala</td>
-                                                        <td>5</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                       
                         <!-- ===================================================================================================== -->
 
                         <fieldset>

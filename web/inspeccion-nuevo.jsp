@@ -129,12 +129,7 @@
                                             <label class="etiqueta">NO</label><input type="radio" name="checCertf" value="NO" required="">
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="" class="etiqueta">Anexo Certifiacion</label>
-                                            <input type="file"  class="form-control" name="fileAnexo">
-                                        </div>
-                                    </div>
+                                   
                                     <div class="col-12 col-md-3">
                                         <div class="form-group">
                                             <label for="item" class="etiqueta">Tipo de Inspeccion</label>

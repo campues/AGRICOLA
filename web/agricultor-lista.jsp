@@ -73,7 +73,7 @@
                             <a href="Controlador?menu=Agricultor&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE AGRICULTORES</a>
                         </li>
                         <li>
-                              <a  data-toggle="modal" data-target="#ModalBuscar"><i  class="fas fa-search fa-fw"></i> &nbsp; BUSCAR AGRICULTOR</a>
+                            <a  href="" data-toggle="modal" data-target="#ModalBuscar"><i  class="fas fa-search fa-fw"></i> &nbsp; BUSCAR AGRICULTOR</a>
                         </li>
                     </ul>	
                 </div>

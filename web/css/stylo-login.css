@@ -6,7 +6,7 @@ body
     background:url(../assets/img/fon2.jpg);
     background-size:cover;
     height: 100vh;
-    font-family: Century Gothic, sans-serif;
+    font-family: sans-serif;
 }
 .login-box {
     width: 300px;/*ancho*/

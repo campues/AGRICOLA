@@ -38,7 +38,7 @@ public class Visitas {
         this.fk_lote = fk_lote;
         this.fk_empleadov = fk_empleadov;
     }
-    
+
 
     public Visitas(int pk_visitas, String fecha, String nom_informante, String parentesco, String tipo_auditoria, String obHalasgoDete, String obPlazoAccion, String certificado, InputStream anexoCertif, String tipoInspeccion, String con_compromiso, String np_organica, String rc_interno, String elab_bocashi, String pco_uvillas, String cos_poscosecha, int fk_lote, int fk_empleadov) {
         this.pk_visitas = pk_visitas;

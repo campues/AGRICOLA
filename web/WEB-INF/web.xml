@@ -43,10 +43,10 @@
     </context-param>
     <context-param>
         <param-name>jdbcUsername</param-name>
-        <param-value>root</param-value>
+        <param-value>loscaser_admin</param-value>
     </context-param>
     <context-param>
         <param-name>jdbcPassword</param-name>
-        <param-value>123456</param-value>
+        <param-value>AGRICOLA2020</param-value>
     </context-param>
 </web-app>
