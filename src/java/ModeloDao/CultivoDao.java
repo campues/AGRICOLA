@@ -1,5 +1,6 @@
 package ModeloDao;
 
+import Control.Variables;
 import Modelo.Cultivo;
 import config.Conexion;
 import java.sql.Connection;
@@ -11,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CultivoDao {
+
+    Variables global = new Variables();
 
     private Conexion con;
     private Connection connection;
@@ -30,29 +33,124 @@ public class CultivoDao {
         Statement statement = connection.createStatement();
         ResultSet res = statement.executeQuery(sql);
         while (res.next()) {
-            int pk = res.getInt("pk_cultivo");
-            String nom = res.getString("nom_cultivo");
-            String are = res.getString("area");
-            String den = res.getString("densidadSiembra");
-            String numP = res.getString("numPlantas");
-            String fec = res.getString("fecha_insumo");
-            String esC = res.getString("es_cosecha");
-            String est = res.getString("estatus");
-            String anio1 = res.getString("anio_organica");
-            String anio2 = res.getString("anio_inspeccion");
-            int fkV = res.getInt("fk_visitass");
-            Cultivo cul = new Cultivo(pk, nom, are, den, numP, fec, esC, est, anio1, anio2, fkV);
-            listarCul.add(cul);
+            Cultivo c = new Cultivo();
+            c.setPk_cultivo(res.getInt("pk_cultivo"));
+            c.setNomCultivo(res.getString("nomCultivo"));
+            c.setArea(res.getString("area"));
+            c.setDensidadSiembra(res.getString("densSiembra"));
+            c.setNumPlantas(res.getString("numPlantas"));
+            c.setFechaPro(res.getString("fechaPro_prohibido"));
+            c.setEs_cosecha(res.getString("estiCosecha"));
+            c.setEstatus(res.getString("estatus"));
+            c.setAnio_organica(res.getString("anioOrganico"));
+            c.setAnio_inspeccion(res.getString("anioInspeccion"));
+            c.setFk_visitasc(res.getInt("fk_visitasc"));
+            listarCul.add(c);
         }
         con.desconectar();
         return listarCul;
+    }
+
+    public List<Cultivo> listarCultivoID() throws SQLException {
+
+        List<Cultivo> listarCul = new ArrayList<Cultivo>();
+        String sql = "SELECT * FROM cultivo WHERE fk_visitasc='" + global.idVisitas + "' ";
+        con.conectar();
+        connection = con.getJdbcConnection();
+        Statement statement = connection.createStatement();
+        ResultSet res = statement.executeQuery(sql);
+        while (res.next()) {
+            Cultivo c = new Cultivo();
+            c.setPk_cultivo(res.getInt("pk_cultivo"));
+            c.setNomCultivo(res.getString("nomCultivo"));
+            c.setNumPlantas(res.getString("numPlantas"));
+            c.setEstatus(res.getString("estatus"));
+            listarCul.add(c);
+        }
+        con.desconectar();
+        return listarCul;
+    }
+  // listar ID
+
+    public List<Cultivo> listarNom(String nom) throws SQLException {
+          List<Cultivo> listarCul = new ArrayList<Cultivo>();
+        String sql = "select * from cultivo WHERE nomCultivo=?  ";
+        con.conectar();
+        connection = con.getJdbcConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, nom);
+        ResultSet res = statement.executeQuery();
+        while (res.next()) {
+             Cultivo c = new Cultivo();
+            c.setPk_cultivo(res.getInt("pk_cultivo"));
+            c.setNomCultivo(res.getString("nomCultivo"));
+            c.setNumPlantas(res.getString("numPlantas"));
+            c.setEstatus(res.getString("estatus"));
+            listarCul.add(c);
+        }
+        con.desconectar();
+        return  listarCul;
+    }
+
+    // Insertar Cultivo
+    public boolean insertarCul(Cultivo cu) throws SQLException {
+        String sql = "INSERT INTO cultivo (pk_cultivo,nomCultivo,area,densSiembra,numPlantas,fechaPro_prohibido,"
+                + "estiCosecha,estatus,anioOrganico,anioInspeccion,fk_visitasc) "
+                + "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        System.out.println(cu.getNomCultivo());
+        con.conectar();
+        connection = con.getJdbcConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, null);
+        statement.setString(2, cu.getNomCultivo());
+        statement.setString(3, cu.getArea());
+        statement.setString(4, cu.getDensidadSiembra());
+        statement.setString(5, cu.getNumPlantas());
+        statement.setString(6, cu.getFechaPro());
+        statement.setString(7, cu.getEs_cosecha());
+        statement.setString(8, cu.getEstatus());
+        statement.setString(9, cu.getAnio_organica());
+        statement.setString(10, cu.getAnio_inspeccion());
+        statement.setInt(11, cu.getFk_visitasc());
+
+        boolean rowInserted = statement.executeUpdate() > 0;
+        statement.close();
+        con.desconectar();
+        return rowInserted;
+    }
+    // actualizar
+
+    public boolean actualizar(Cultivo cu) throws SQLException {
+        boolean rowActualizar = false;
+        String sql = "UPDATE cultivo SET nomCultivo=?,area=?,densSiembra=?,numPlantas=?,fechaPro_prohibido=?, "
+                + "estiCosecha=?,estatus=?,anioOrganico=?,anioInspeccion=?,fk_visitasc=? WHERE pk_cultivo=? ";
+        con.conectar();
+        connection = con.getJdbcConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, cu.getNomCultivo());
+        statement.setString(2, cu.getArea());
+        statement.setString(3, cu.getDensidadSiembra());
+        statement.setString(4, cu.getNumPlantas());
+        statement.setString(5, cu.getFechaPro());
+        statement.setString(6, cu.getEs_cosecha());
+        statement.setString(7, cu.getEstatus());
+        statement.setString(8, cu.getAnio_organica());
+        statement.setString(9, cu.getAnio_inspeccion());
+        statement.setInt(10, cu.getFk_visitasc());
+        statement.setInt(11, cu.getPk_cultivo());
+        System.out.println(cu.getNomCultivo());
+
+        rowActualizar = statement.executeUpdate() > 0;
+        statement.close();
+        con.desconectar();
+        return rowActualizar;
     }
 
     // Obtener por PK
     public Cultivo obtenerPorId(int pk_cul) throws SQLException {
         Cultivo cultivo = null;
 
-        String sql = "SELECT * FROM cultivo WHERE pk_cultivo= ? ";
+        String sql = "SELECT * FROM cultivo WHERE pk_cultivo=? ";
         con.conectar();
         connection = con.getJdbcConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
@@ -61,16 +159,16 @@ public class CultivoDao {
         if (res.next()) {
             cultivo = new Cultivo(
                     res.getInt("pk_cultivo"),
-                    res.getString("nom_cultivo"),
+                    res.getString("nomCultivo"),
                     res.getString("area"),
-                    res.getString("densidadSiembra"),
+                    res.getString("denSiembra"),
                     res.getString("numPlantas"),
-                    res.getString("fecha_insumo"),
-                    res.getString("es_cosecha"),
+                    res.getString("fechaPro_prohibido"),
+                    res.getString("estiCosecha"),
                     res.getString("estatus"),
-                    res.getString("anio_organica"),
-                    res.getString("anio_inspeccion"),
-                    res.getInt("fk_visitass")
+                    res.getString("anioOrganico"),
+                    res.getString("anioInspeccion"),
+                    res.getInt("fk_visitasc")
             );
         }
         res.close();

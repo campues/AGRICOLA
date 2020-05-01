@@ -2,6 +2,7 @@ package Control;
 
 import Modelo.Agricultor;
 import Modelo.Asociacion;
+import Modelo.Colmenas;
 import Modelo.Cultivo;
 import Modelo.Detallespro;
 import Modelo.Empleado;
@@ -11,6 +12,7 @@ import Modelo.Producto;
 import Modelo.Visitas;
 import ModeloDao.AgricultorDao;
 import ModeloDao.AsociacionDao;
+import ModeloDao.ColmenaDao;
 import ModeloDao.CultivoDao;
 import ModeloDao.DetallesproDao;
 import ModeloDao.EmpleadoDao;
@@ -33,7 +35,7 @@ import javax.servlet.http.Part;
 @MultipartConfig(maxFileSize = 16177215)
 public class Controlador extends HttpServlet {
 
-  //  private static final long serialVersionUID = 1L;
+    //  private static final long serialVersionUID = 1L;
     EmpleadoDao empleadoDAO;
     AsociacionDao asociacionDAO;
     AgricultorDao agricultorDAO;
@@ -43,6 +45,7 @@ public class Controlador extends HttpServlet {
     VisitasDao visitasDAO;
     DetallesproDao detalleDAO;
     HerramientasDao herraDao;
+    ColmenaDao colmenaDAO;
 
     Herramientas h = new Herramientas();
     Empleado em = new Empleado();
@@ -52,6 +55,8 @@ public class Controlador extends HttpServlet {
     Producto pro = new Producto();
     Visitas vis = new Visitas();
     Asociacion asoci = new Asociacion();
+    Cultivo cu = new Cultivo();
+    Colmenas col = new Colmenas();
 
     int idEmple; // id empleado
 
@@ -69,6 +74,7 @@ public class Controlador extends HttpServlet {
             productoDAO = new ProductoDao(jdbcURL, jdbcUsername, jdbcPassword);
             detalleDAO = new DetallesproDao(jdbcURL, jdbcUsername, jdbcPassword);
             herraDao = new HerramientasDao(jdbcURL, jdbcUsername, jdbcPassword);
+            colmenaDAO = new ColmenaDao(jdbcURL, jdbcUsername, jdbcPassword);
 
         } catch (Exception e) {
 
@@ -132,6 +138,16 @@ public class Controlador extends HttpServlet {
                         visitasDAO.insertarVisitaSIN(vis);
                         request.getRequestDispatcher("Controlador?menu=Visitas&accion=Listar").forward(request, response);
                         break;
+                    case "VerCultivo":
+                        vis = visitasDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_visitas")));
+                        Variables.idVisitas = vis.getPk_visitas();
+                        response.sendRedirect("Controlador?menu=Cultivo&accion=Listar");
+                        break;
+                    case "VerColmena":
+                        vis = visitasDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_visitas")));
+                        Variables.idVisitas = vis.getPk_visitas();
+                        response.sendRedirect("Controlador?menu=Colmenas&accion=Listar");
+                        break;
                     case "Eliminar":
                         Visitas viEliminar = visitasDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_visitas")));
                         visitasDAO.eliminarVisitas(viEliminar);
@@ -141,6 +157,94 @@ public class Controlador extends HttpServlet {
                         break;
                 }
 
+            } catch (SQLException e) {
+                e.getStackTrace();
+            }
+        }
+        // ==============================COLMENAS===========================================================
+        if (menu.equals("Colmenas")) {
+            try {
+                switch (accion) {
+                    case "Listar":
+                        RequestDispatcher disCult = request.getRequestDispatcher("colmenas.jsp");
+                        List<Colmenas> list = colmenaDAO.listarColmenaID();
+                        request.setAttribute("listaCol", list);
+                        disCult.forward(request, response);
+                        break;
+                    case "Agregar":
+                        col.setPk_colmenas(0);
+                        col.setCodColmena(request.getParameter("txtCodigo"));
+                        col.setAbejas(request.getParameter("radioA"));
+                        col.setReina(request.getParameter("radioR"));
+                        col.setPiso(request.getParameter("txtNumero"));
+                        col.setAlimentacion(request.getParameter("txtAlimentacion"));
+                        col.setCantidad(request.getParameter("txtCantidad"));
+                        col.setDescripcion(request.getParameter("txtDescripcion"));
+                        col.setActividad(request.getParameter("txtActividad"));
+                        col.setTratamiento(request.getParameter("txtTratamiento"));
+                        col.setFk_visitas(Integer.parseInt(request.getParameter("fkVisitas")));
+                        colmenaDAO.insertarCol(col);
+                        request.getRequestDispatcher("Controlador?menu=Colmenas&accion=Listar").forward(request, response);
+                        break;
+                    case "Buscar":
+                        RequestDispatcher distw = request.getRequestDispatcher("colmenas.jsp");
+                        List<Colmenas> colme = colmenaDAO.listarCodigo(request.getParameter("txtBusqueda"));
+                        request.setAttribute("listaCol", colme);
+                        distw.forward(request, response);
+                        break;
+                    case "Eliminar":
+                        Colmenas colEliminar = colmenaDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_colmenas")));
+                        colmenaDAO.eliminarColmena(colEliminar);
+                        request.getRequestDispatcher("Controlador?menu=Colmenas&accion=Listar").forward(request, response);
+                        break;
+                    default:
+                        break;
+                }
+            } catch (SQLException e) {
+                e.getStackTrace();
+            }
+        }
+
+        // ==============================CULTIVO===========================================================
+        if (menu.equals("Cultivo")) {
+            try {
+                switch (accion) {
+                    case "Listar":
+                        RequestDispatcher disCult = request.getRequestDispatcher("cultivo.jsp");
+                        List<Cultivo> list = cultivoDAO.listarCultivoID();
+                        request.setAttribute("listaCul", list);
+                        disCult.forward(request, response);
+                        break;
+                    case "Agregar":
+                        cu.setPk_cultivo(0);
+                        cu.setNomCultivo(request.getParameter("txtNombre"));
+                        cu.setArea(request.getParameter("txtArea"));
+                        cu.setDensidadSiembra(request.getParameter("txtDensidad"));
+                        cu.setNumPlantas(request.getParameter("txtNumero"));
+                        cu.setFechaPro(request.getParameter("txtFecha"));
+                        cu.setEs_cosecha(request.getParameter("txtEstimacion"));
+                        cu.setEstatus(request.getParameter("opEstatus"));
+                        cu.setAnio_organica(request.getParameter("txtAnio_or"));
+                        cu.setAnio_inspeccion(request.getParameter("txtAnio_ins"));
+                        cu.setFk_visitasc(Integer.parseInt(request.getParameter("fkVisitas")));
+                        cultivoDAO.insertarCul(cu);
+                        request.getRequestDispatcher("Controlador?menu=Cultivo&accion=Listar").forward(request, response);
+                        break;
+                    case "Buscar":
+                        RequestDispatcher distw = request.getRequestDispatcher("cultivo.jsp");
+                        List<Cultivo> cul = cultivoDAO.listarNom(request.getParameter("txtBusqueda"));
+                        request.setAttribute("listaCul", cul);
+                        distw.forward(request, response);
+                        break;
+                   
+                    case "Eliminar":
+                        Cultivo culEliminar = cultivoDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_cultivo")));
+                        cultivoDAO.eliminarCult(culEliminar);
+                        request.getRequestDispatcher("Controlador?menu=Cultivo&accion=Listar").forward(request, response);
+                        break;
+                    default:
+                        break;
+                }
             } catch (SQLException e) {
                 e.getStackTrace();
             }
@@ -607,52 +711,6 @@ public class Controlador extends HttpServlet {
             }
         }
 
-        // ==============================CULTIVO===========================================================
-        if (menu.equals("Cultivo")) {
-            try {
-                switch (accion) {
-                    case "Listar":
-                        RequestDispatcher disCult = request.getRequestDispatcher("cultivo.jsp");
-                        List<Cultivo> listaCul = cultivoDAO.listarCultivo();
-                        request.setAttribute("listaCul", listaCul);
-                        disCult.forward(request, response);
-                        break;
-                    case "Eliminar":
-                        Cultivo culEliminar = cultivoDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_cultivo")));
-                        cultivoDAO.eliminarCult(culEliminar);
-                        request.getRequestDispatcher("Controlador?menu=Cultivo&accion=Listar").forward(request, response);
-                        break;
-                    default:
-                        break;
-                }
-            } catch (SQLException e) {
-                e.getStackTrace();
-            }
-        }
-
-        // ==============================VISITAS===========================================================
-        if (menu.equals("Visitas")) {
-            try {
-                switch (accion) {
-                    case "Listar":
-                        RequestDispatcher dVisitas = request.getRequestDispatcher("visita.jsp");
-                        List<Visitas> listaVi = visitasDAO.listarVisitas();
-                        request.setAttribute("listaVisita", listaVi);
-                        dVisitas.forward(request, response);
-                        break;
-                    case "Eliminar":
-                        Visitas viEliminar = visitasDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_visitas")));
-                        visitasDAO.eliminarVisitas(viEliminar);
-                        request.getRequestDispatcher("Controlador?menu=Visitas&accion=Listar").forward(request, response);
-                        break;
-                    default:
-                        break;
-                }
-
-            } catch (SQLException e) {
-                e.getStackTrace();
-            }
-        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

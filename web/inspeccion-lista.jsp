@@ -92,6 +92,9 @@
                                     <th>Lote</th>
                                     <th>Empleado</th>
                                     <th class="ac" >Eliminar</th>
+                                    <th class="ac" >Cultivo</th>
+                                    <th class="ac" >Apicultura</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -104,8 +107,14 @@
                                         <td>${v.fk_lote}</td>
                                         <td>${v.fk_empleadov}</td>
 
-                                        <td><a class="btn btn-raised btn-danger btn-sm" href="Controlador?menu=Visitas&accion=Eliminar&pk_visitas=${v.pk_visitas}">
+                                        <td  class="btnLis"><a  class="btn btn-raised btn-danger btn-sm" href="Controlador?menu=Visitas&accion=Eliminar&pk_visitas=${v.pk_visitas}">
                                                 <i class="far fa-trash-alt"></i></a>
+                                        </td >
+                                        <td  class="btnLis"><a class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Visitas&accion=VerCultivo&pk_visitas=${v.pk_visitas}">
+                                                <i class="fas fa-clipboard-list"></i></a>
+                                        </td>
+                                        <td  class="btnLis"><a class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Visitas&accion=VerColmena&pk_visitas=${v.pk_visitas}">
+                                                <i class="fas fa-box-open"></i></a>
                                         </td>
                                     </tr>
                                 </c:forEach>

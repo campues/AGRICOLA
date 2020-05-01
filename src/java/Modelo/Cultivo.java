@@ -5,39 +5,40 @@ import java.util.Date;
 public class Cultivo {
     //zona de atributo
     private int pk_cultivo;
-    private String nom_cultivo;
-    private String area;
-    private String densidadSiembra;
-    private String numPlantas;
-    private String fecha_insumo;
-    private String es_cosecha;
-    private String estatus;
-    private String anio_organica;
-    private String anio_inspeccion;
-    private int fk_visitas;
+    private String nomCultivo;  // texto   Nuevo / SCI  
+    private String area;        // texto Nuevo/SCI
+    private String densidadSiembra;// texto SCI
+    private String numPlantas; // numero SCI
+    private String fechaPro; // texto SCI
+    private String es_cosecha;// numero SCI estimacion de cosecha
+    private String estatus;// combobox SCI
+    private String anio_organica;  // texto  Nuevo
+    private String anio_inspeccion; // texto Nuevo
+    private int fk_visitasc;
+    
+    
+      public Cultivo() {
+    }
     
     //zona de contructores
 
-    public Cultivo(int pk_cultivo, String nom_cultivo, String area, String densidadSiembra, String numPlantas, String fecha_insumo, String es_cosecha, String estatus, String anio_organica, String anio_inspeccion, int fk_visitas) {
+    public Cultivo(int pk_cultivo, String nomCultivo, String area, String densidadSiembra, String numPlantas, String fechaPro, String es_cosecha, String estatus, String anio_organica, String anio_inspeccion, int fk_visitasc) {
         this.pk_cultivo = pk_cultivo;
-        this.nom_cultivo = nom_cultivo;
+        this.nomCultivo = nomCultivo;
         this.area = area;
         this.densidadSiembra = densidadSiembra;
         this.numPlantas = numPlantas;
-        this.fecha_insumo = fecha_insumo;
+        this.fechaPro = fechaPro;
         this.es_cosecha = es_cosecha;
         this.estatus = estatus;
         this.anio_organica = anio_organica;
         this.anio_inspeccion = anio_inspeccion;
-        this.fk_visitas = fk_visitas;
+        this.fk_visitasc = fk_visitasc;
     }
 
-    public Cultivo(int pk_cultivo, String nom_cultivo) {
-        this.pk_cultivo = pk_cultivo;
-        this.nom_cultivo = nom_cultivo;
-    }
-    public Cultivo() {
-    }
+   
+  
+    
     //zona de gett y setts
 
     public int getPk_cultivo() {
@@ -48,12 +49,12 @@ public class Cultivo {
         this.pk_cultivo = pk_cultivo;
     }
 
-    public String getNom_cultivo() {
-        return nom_cultivo;
+    public String getNomCultivo() {
+        return nomCultivo;
     }
 
-    public void setNom_cultivo(String nom_cultivo) {
-        this.nom_cultivo = nom_cultivo;
+    public void setNomCultivo(String nomCultivo) {
+        this.nomCultivo = nomCultivo;
     }
 
     public String getArea() {
@@ -80,14 +81,15 @@ public class Cultivo {
         this.numPlantas = numPlantas;
     }
 
-    public  String getFecha_insumo() {
-        return fecha_insumo;
+    public String getFechaPro() {
+        return fechaPro;
     }
 
-    public void setFecha_insumo( String fecha_insumo) {
-        this.fecha_insumo = fecha_insumo;
+    public void setFechaPro(String fechaPro) {
+        this.fechaPro = fechaPro;
     }
 
+   
     public String getEs_cosecha() {
         return es_cosecha;
     }
@@ -120,17 +122,15 @@ public class Cultivo {
         this.anio_inspeccion = anio_inspeccion;
     }
 
-    public int getFk_visitas() {
-        return fk_visitas;
+    public int getFk_visitasc() {
+        return fk_visitasc;
     }
 
-    public void setFk_visitas(int fk_visitas) {
-        this.fk_visitas = fk_visitas;
+    public void setFk_visitasc(int fk_visitasc) {
+        this.fk_visitasc = fk_visitasc;
     }
 
-    
-    
-    
+
     
     
 }

@@ -66,7 +66,9 @@
                 <!--CONTENT-->
                 <div class="container-fluid">
                     <form action="Controlador?menu=Herramientas"  class="form-neon" method="POST">
-                        <input type="hidden"   name="fk_loteh"  value="<%=Variables.idLote%>">
+                        <legend><i class="fas fa-pallet "></i> &nbsp; Herramientas</legend>
+
+                        <input type="text"   name="fk_loteh"  value="<%=Variables.idLote%>">
                         <div class="row">
                             <div class="col-12 col-md-2">
                                 <div class="form-group">
@@ -89,9 +91,9 @@
                                     <input type="text"  class="form-control" name="txtCantidad">
                                 </div>
                             </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-raised btn-info btn-sm" name="accion" value="Agregar" ><i class="far fa-save"></i> &nbsp; AGREGAR</button>
-                                </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-raised btn-info btn-sm" name="accion" value="Agregar" ><i class="far fa-save"></i> &nbsp; AGREGAR</button>
+                            </div>
                         </div>
                     </form>
                 </div>
