@@ -85,17 +85,57 @@
                                 </button>
                             </div>
                             <form class="modal-body" action="Controlador?menu=Asociacion" method="POST"  >
-                                <div class="form-group">
-                                    <label  class="bmd-label-floating">Nombre</label>
-                                    <input type="text"  class="form-control" name="txtNombre" required="" title="Ingresa el nombre">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label  class="bmd-label-floating">Nombre Asociacion</label>
+                                            <input type="text"  class="form-control" name="txtNombre" required=""  pattern="[A-Za-z]+"  >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label  class="bmd-label-floating">Ruc</label>
+                                            <input type="number"  class="form-control" name="txtRuc" required="" >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label  class="bmd-label-floating">Geolocalización</label>
+                                            <input type="text"  class="form-control" name="txtGeoloc" required="" >
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label  class="bmd-label-floating">Telefono</label>
+                                            <input type="number"  class="form-control" name="txtTelefono" required=""  >
+                                        </div>
+                                    </div>
                                 </div>
+
+
+                                <div class="form-group">
+                                    <label  class="bmd-label-floating">Nombres Completos (Responsable)</label>
+                                    <input type="text"  class="form-control" name="txtResponsable" required=""  >
+                                </div>
+
+
                                 <div class="form-group">
                                     <label  class="bmd-label-floating">Direccion</label>
-                                    <input type="text"  class="form-control" name="txtDireccion" required="" title="Ingresa el nombre">
+                                    <input type="text"  class="form-control" name="txtDireccion" required="" >
                                 </div>
                                 <div class="form-group">
-                                    <label  class="bmd-label-floating">Telefono</label>
-                                    <input type="text"  class="form-control" name="txtTelefono" required="" title="Ingresa el nombre">
+                                    <label  class="bmd-label-floating">Parroquia</label>
+                                    <input type="text"  class="form-control" name="txtParroquia" required="" pattern="[A-Za-z]+"  >
+                                </div>
+                                <div class="form-group">
+                                    <label for="item" class="bmd-label-floating">Provincia</label>
+                                    <select class="form-control" name="opProvincia" id="item">
+                                        <option value="" selected="" disabled="">Seleccione una opcion</option>
+                                        <c:forEach var="p" items="${lisPro}" >
+                                            <option value="${p.pk_provincia}">${p.nomProvincia}</option>
+                                        </c:forEach>
+                                    </select>
                                 </div>
                                 <p class="text-center">
                                     <button   type="submit" name="accion" value="Agregar" class="btn btn-raised btn-info"><i class=" fas fa-save "></i> &nbsp; AGREGAR</button>
@@ -109,14 +149,14 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="etiqueta">¿A que empleado estas buscando?</h5>
+                                <h5 class="etiqueta">¿A que Asocianción estas buscando?</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <form class="modal-body" action="Controlador?menu=Asociacion" method="POST"  >
                                 <div class="form-group">
-                                    <label  class="bmd-label-floating">Ingresa el Nombre</label>
+                                    <label  class="bmd-label-floating">Ingresa el Nombre </label>
                                     <input type="text"  class="form-control" name="txtBusqueda" required="" title="Ingresa un nombre">
                                 </div>
                                 <p class="text-center">
@@ -135,7 +175,8 @@
                                 <tr class="text-center roboto-medium">
                                     <th>ID</th>
                                     <th>Nombre</th>
-                                    <th>Direccion</th>
+                                    <th>Ruc</th>
+                                    <th>Provincia</th>
                                     <th>Telefono</th>
                                     <th class="ac">Editar</th>
                                     <th class="ac">Eliminar</th>
@@ -144,10 +185,11 @@
                             <tbody>
                                 <c:forEach var="as" items="${asocia}">
                                     <tr class="text-center"> 
-                                        <td>${as.getPk_asociacion()}</td>
-                                        <td>${as.getNombre()}</td>
-                                        <td>${as.getDireccion()}</td>
-                                        <td>${as.getTelefono()}</td>
+                                        <td>${as.pk_asociacion}</td>
+                                        <td>${as.nomAsociacion}</td>
+                                        <td>${as.ruc}</td>
+                                        <td>${as.fk_provinciaa}</td>
+                                        <td>${as.telefono}</td>
                                         <td class="btnLis"><a  title="Actualizar Asociacion"  class="btn btn-raised btn-success btn-sm"   href="Controlador?menu=Asociacion&accion=Editar&pk_asociacion=${as.pk_asociacion}">
                                                 <i class="fas  fa-sync-alt"></i></a>
                                         </td>

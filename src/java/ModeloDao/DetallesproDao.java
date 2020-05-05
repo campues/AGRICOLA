@@ -45,8 +45,8 @@ public class DetallesproDao {
         con.desconectar();
         return rowInserted;
     }
-    
-     // actualizar
+
+    // actualizar
     public boolean actualizar(Detallespro det) throws SQLException {
         boolean rowActualizar = false;
         String sql = "UPDATE detallespro SET fechaEntrega=?,cantidad=?,fk_agricultor=?,fk_producto=?, fk_empleado=? "
@@ -97,25 +97,29 @@ public class DetallesproDao {
     }
 
     // listar todos los empleados
-    public List<Detallespro> listarDetallesPro() throws SQLException {
+    public List<Detallespro> listarDetalleAgri(String nombreAgri) throws SQLException {
 
         List<Detallespro> listarDeta = new ArrayList<Detallespro>();
-               String sql = "SELECT * FROM detallespro ";
+        String sql = " SELECT pk_detallesPro,fechaEntrega,cantidad,nombre1,nomInsumos,nombre FROM detallespro "
+                + " JOIN agricultor on agricultor.pk_agricultor=detallespro.fk_agricultor "
+                + " JOIN producto on producto.pk_producto=detallespro.fk_producto "
+                + " JOIN empleado on empleado.pk_empleado=detallespro.fk_empleado WHERE nombre1=? ";
 
         con.conectar();
         connection = con.getJdbcConnection();
-        Statement stat = connection.createStatement();
-        ResultSet re = stat.executeQuery(sql);
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, nombreAgri);
+        ResultSet res = statement.executeQuery();
+        if (res.next()) {
+            Detallespro de = new Detallespro();
+            de.setPk_detallesPro(res.getInt(1));
+            de.setFechaEntrega(res.getString(2));
+            de.setCantidad(res.getString(3));
+            de.setFk_agricutor(res.getString(4));
+            de.setFk_producto(res.getString(5));
+            de.setFk_empleado(res.getString(6));
 
-        while (re.next()) {
-            int pk = re.getInt("pk_detallesPro");
-            String fecha = re.getString("fechaEntrega");
-            String cantidad = re.getString("cantidad");
-            String fk_agri = re.getString("fk_agricultor");
-            String fk_pro = re.getString("fk_producto");
-            String fk_emple = re.getString("fk_empleado");
-            Detallespro detalle = new Detallespro(pk, fecha, cantidad, fk_agri, fk_pro, fk_emple);
-            listarDeta.add(detalle);
+            listarDeta.add(de);
         }
         con.desconectar();
         return listarDeta;
@@ -124,8 +128,8 @@ public class DetallesproDao {
     // Obtener por PK
     public Detallespro obtenerPorId(int pk) throws SQLException {
         Detallespro detalles = null;
-        String sql = "SELECT * FROM detallespro WHERE pk_detallesPro= ? " ;
-       
+        String sql = "SELECT * FROM detallespro WHERE pk_detallesPro= ? ";
+
         con.conectar();
         connection = con.getJdbcConnection();
         PreparedStatement statement = connection.prepareStatement(sql);

@@ -1,5 +1,6 @@
 package ModeloDao;
 
+import Control.Variables;
 import Modelo.Empleado;
 import Modelo.Herramientas;
 import config.Conexion;
@@ -13,6 +14,7 @@ import java.util.List;
 
 public class HerramientasDao {
     //variables para la conexion 
+    Variables global = new Variables();
 
     private Conexion con;
     private Connection connection;
@@ -70,15 +72,35 @@ public class HerramientasDao {
         con.desconectar();
         return listarHe;
     }
+    // listar todos los empleados
+
+    public List<Herramientas> listarHerramientasID() throws SQLException {
+
+        List<Herramientas> listarHe = new ArrayList<Herramientas>();
+        String sql = "select * from herramientas WHERE fk_loteh='" + global.idLote + "' ";
+      
+        con.conectar();
+        connection = con.getJdbcConnection();
+        Statement statement = connection.createStatement();
+        ResultSet res = statement.executeQuery(sql);
+
+        while (res.next()) {
+            Herramientas her = new Herramientas();
+            her.setPk_herramientas(res.getInt("pk_herramientas"));
+            her.setNomHerramienta(res.getString("nomHerramienta"));
+            her.setCantidad(res.getString("cantidad"));
+            her.setFk_loteh(res.getString("fk_loteh"));
+            listarHe.add(her);
+        }
+        con.desconectar();
+        return listarHe;
+    }
 
     // Obtener por PK
     public Herramientas obtenerPorId(int pk) throws SQLException {
         Herramientas herramienta = null;
         String sql = "SELECT * FROM herramientas WHERE pk_herramientas= ? ";
-        // String sql2 = "SELECT  pk_empleado,nombre,apellido, usuario, contrasena, tipo "
-        //       + "FROM empleado JOIN tipo_empleado ON tipo_empleado.pk_tipo = empleado.fk_tipo "
-        //     + "WHERE pk_empleado=?";
-
+      
         con.conectar();
         connection = con.getJdbcConnection();
         PreparedStatement statement = connection.prepareStatement(sql);

@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page import="Control.Variables"%>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -58,73 +59,72 @@
 
                 <!-- Content here-->
                 <div class="container-fluid">
-                    <form  name="formulario" action="Controlador?menu=Asociacion"  class="form-neon" autocomplete="off" method="POST" >
+                    <form  name="formulario" action="Controlador?menu=Cultivo"  class="form-neon" autocomplete="off" method="POST" >
                         <fieldset>
                             <legend><i class="fas fa-store-alt"></i> &nbsp; Verifica los datos antes de guardar</legend>
                             <!--<div class="nav-lateral-barra"></div> --> 
                             <div class="row">
-                                <input type="hidden"  name="pk" class="form-control"  value="${asoc.pk_asociacion}">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label  class="bmd-label-floating">Nombre Asociacion</label>
-                                        <input type="text"  class="form-control" name="txtNombre" required=""  pattern="[A-Za-z]+" value="${asoc.nomAsociacion}" >
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label  class="bmd-label-floating">Ruc</label>
-                                        <input type="number"  class="form-control" name="txtRuc" required=""  value="${asoc.ruc}" >
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label  class="bmd-label-floating">Geolocalización</label>
-                                        <input type="text"  class="form-control" name="txtGeoloc" required="" value="${asoc.geolocalizacion}" >
-                                    </div>
-                                </div>
+                                <input type="hidden"  name="pk" class="form-control"  value="${cult.pk_cultivo}">
 
-                                <div class="col-md-2">
+                                <input type="hidden"  class="" name="fkVisitas"   value="<%=Variables.idVisitas%>" id="item_codigo" readonly="readonly" >
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <label  class="bmd-label-floating">Telefono</label>
-                                        <input type="number"  class="form-control" name="txtTelefono" required="" value="${asoc. telefono}" >
+                                        <label  class="bmd-label-floating">Nombre</label>
+                                        <input type="text"  class="form-control" name="txtNombre" required="" value="${cult.nomCultivo}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label  class="bmd-label-floating">Area</label>
+                                        <input type="text"  class="form-control" name="txtArea" required=""  value="${cult.area}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label  class="bmd-label-floating">Densidad</label>
+                                        <input type="text"  class="form-control" name="txtDensidad" required=""  value="${cult.densidadSiembra}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label  class="bmd-label-floating">Numero</label>
+                                        <input type="number"  class="form-control" name="txtNumero" required=""  value="${cult.numPlantas}">
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label  class="">Aplicación del último producto prohibido,fecha</label>
+                                        <input type="date"  class="form-control" name="txtFecha" required=""  value="${cult.fechaPro}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label  class="bmd-label-floating">Estimado de cosecha</label>
+                                        <input type="number"  class="form-control" name="txtEstimacion" required=""  value="${cult.es_cosecha}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label  class="bmd-label-floating">Nombres Completos (Responsable)</label>
-                                        <input type="text"  class="form-control" name="txtResponsable" required="" value="${asoc.responsable}" >
+                                        <label for="item" class="bmd-label-floating">Estatus</label>
+                                        <select class="form-control" name="opEstatus" id="item">
+                                            <option value="Organico" <c:if test="${org == estatus}"> selected </c:if>>Organico</option>
+                                            <option value="Convencional" <c:if test="${conv == estatus}"> selected</c:if>>Convencional</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <label  class="bmd-label-floating">Direccion</label>
-                                        <input type="text"  class="form-control" name="txtDireccion" required="" value="${asoc.direccion}" >
-                                    </div>
-                                </div>
 
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label  class="bmd-label-floating">Manejo Organicamente desde(Año)</label>
+                                            <input type="number"  class="form-control" name="txtAnio_or" required=""  value="${cult.anio_organica}">
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label  class="bmd-label-floating">Parroquia</label>
-                                        <input type="text"  class="form-control" name="txtParroquia" required=""  value="${asoc.parroquia}" >
+                                        <label  class="bmd-label-floating">Año de la primera preinspección</label>
+                                        <input type="number"  class="form-control" name="txtAnio_ins" required=""  value="${cult.anio_inspeccion}">
                                     </div>
                                 </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="item" class="bmd-label-floating">Provincia</label>
-                                        <select class="form-control" name="opProvincia" id="item">
-                                            <option value="" selected="" disabled="">Seleccione una opcion</option>
-                                            <c:forEach var="p" items="${lisPro}" >
-                                                <option value="${p.pk_provincia}"
-                                                        <c:if test="${p.pk_provincia == asoc.getFk_provinciaa()}">
-                                                            selected
-                                                        </c:if>
-                                                        >${p.nomProvincia}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </div>
-
                             </div>
                         </fieldset>
                         <p class="text-center" >

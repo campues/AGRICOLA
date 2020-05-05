@@ -72,7 +72,7 @@
                             <a  class="active" href="Controlador?menu=Visitas&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA INSPECCIONES</a>
                         </li>
                         <li>
-                            <a href="Controlador?menu=Lote&accion=Listar"><i class="fas fa-backspace fa-fw"></i> &nbsp; Regresar</a>
+                            <a href="Controlador?menu=Lote&accion=Listar"><i class="fas icon-back fa-fw"></i> &nbsp; Regresar</a>
                         </li>
                     </ul>
                 </div>

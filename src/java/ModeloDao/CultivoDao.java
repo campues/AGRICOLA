@@ -70,10 +70,10 @@ public class CultivoDao {
         con.desconectar();
         return listarCul;
     }
-  // listar ID
+    // listar ID
 
     public List<Cultivo> listarNom(String nom) throws SQLException {
-          List<Cultivo> listarCul = new ArrayList<Cultivo>();
+        List<Cultivo> listarCul = new ArrayList<Cultivo>();
         String sql = "select * from cultivo WHERE nomCultivo=?  ";
         con.conectar();
         connection = con.getJdbcConnection();
@@ -81,7 +81,7 @@ public class CultivoDao {
         statement.setString(1, nom);
         ResultSet res = statement.executeQuery();
         while (res.next()) {
-             Cultivo c = new Cultivo();
+            Cultivo c = new Cultivo();
             c.setPk_cultivo(res.getInt("pk_cultivo"));
             c.setNomCultivo(res.getString("nomCultivo"));
             c.setNumPlantas(res.getString("numPlantas"));
@@ -89,15 +89,14 @@ public class CultivoDao {
             listarCul.add(c);
         }
         con.desconectar();
-        return  listarCul;
+        return listarCul;
     }
 
     // Insertar Cultivo
     public boolean insertarCul(Cultivo cu) throws SQLException {
-        String sql = "INSERT INTO cultivo (pk_cultivo,nomCultivo,area,densSiembra,numPlantas,fechaPro_prohibido,"
+        String sql = "INSERT INTO cultivo (pk_cultivo,nomCultivo,area,denSiembra,numPlantas,fechaPro_prohibido,"
                 + "estiCosecha,estatus,anioOrganico,anioInspeccion,fk_visitasc) "
                 + "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-        System.out.println(cu.getNomCultivo());
         con.conectar();
         connection = con.getJdbcConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
@@ -112,6 +111,7 @@ public class CultivoDao {
         statement.setString(9, cu.getAnio_organica());
         statement.setString(10, cu.getAnio_inspeccion());
         statement.setInt(11, cu.getFk_visitasc());
+        System.out.println(cu.getNomCultivo());
 
         boolean rowInserted = statement.executeUpdate() > 0;
         statement.close();
@@ -122,7 +122,7 @@ public class CultivoDao {
 
     public boolean actualizar(Cultivo cu) throws SQLException {
         boolean rowActualizar = false;
-        String sql = "UPDATE cultivo SET nomCultivo=?,area=?,densSiembra=?,numPlantas=?,fechaPro_prohibido=?, "
+        String sql = "UPDATE cultivo SET nomCultivo=?,area=?,denSiembra=?,numPlantas=?,fechaPro_prohibido=?, "
                 + "estiCosecha=?,estatus=?,anioOrganico=?,anioInspeccion=?,fk_visitasc=? WHERE pk_cultivo=? ";
         con.conectar();
         connection = con.getJdbcConnection();

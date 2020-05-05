@@ -30,7 +30,7 @@
 
         <!-- General Styles -->
         <link rel="stylesheet" href="./css/style.css">
-       
+
 
     </head>
 
@@ -63,86 +63,100 @@
                     </p>
                 </div>
                 <div class="container-fluid">
-                    <form  name="frm" action="Controlador?menu=Detalles"  class="form-neon"  method="POST" >
-                        <fieldset>
-                            <legend><i class="far fa-building"></i> &nbsp;Suministrar Producto</legend>
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="form-group label-floating">
-                                        <div class="form-group">
-                                            <input type="hidden"  name="pk" class="form-control"  value="${detalle.pk_detallesPro}">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-2">
-                                        <div class="form-group">
-                                            <label  class="">Fecha</label>
-                                            <input type="date"  class="form-control" name="txtFecha"  value="${detalle.fechaEntrega}" >
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-1">
-                                        <div class="form-group">
-                                            <label for="" class="bmd-label-floating">Cantidad</label>
-                                            <input type="text"  class="form-control" name="txtCantidad" value="${detalle.cantidad}" >
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12 col-md-2">
-                                        <div class="form-group">
-                                            <label for="item" class="bmd-label-floating">Agricultor</label>
-
-                                            <select class="form-control" name="txtAgricultor" id="item"  >
-                                                <option value="" selected="" disabled="">Seleccione Agricultor</option>
-                                                <c:forEach var="a" items="${listaAgri}" >
-                                                    <option  value="${a.pk_agricultor}" 
-                                                             <c:if test="${a.pk_agricultor == detalle.getFk_agricutor()}">
-                                                                 selected
-                                                             </c:if>
-                                                             >${a.nombre1}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                                    </div> 
-                                    <div class="col-12 col-md-3">
-                                        <div class="form-group">
-                                            <label for="item" class="bmd-label-floating">Producto</label>
-                                            <select class="form-control" name="txtProducto" id="item" >
-                                                <option value="" selected="" disabled="">Seleccione el Producto</option>
-                                                <c:forEach var="p" items="${listaPro}">
-                                                    <option value="${p.pk_producto}"
-                                                            <c:if test="${p.pk_producto == detalle.getFk_producto()}">
-                                                                selected
-                                                            </c:if>
-                                                            >${p.nomInsumos}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                                    </div> 
-                                    <div class="col-12 col-md-3">
-                                        <div class="form-group">
-                                            <label for="item" class="bmd-label-floating">Empleado</label>
-                                            <select class="form-control" name="txtEmpleado" id="item" >
-                                                <option value="" selected="" disabled="">Seleccione Empleado</option>
-                                                <c:forEach var="em" items="${listaEmple}">
-                                                    <option value="${em.pk_empleado}"
-                                                            <c:if test="${em.pk_empleado == detalle.getFk_empleado()}">
-                                                                selected
-                                                            </c:if>
-                                                            >${em.nombre}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                                    </div> 
-                                    <p class="text-center" style="margin-top: 40px;">
-                                        <input type="submit" class="btn btn-raised btn-success btn-sm" name="accion" value="Actualizar">
-                                        <input id="btn4" type="submit" class="btn btn-raised btn-info btn-sm" name="accion" value="Agregar">
-
-                                    </p>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </form>
+                    <ul class="full-box list-unstyled page-nav-tabs">
+                        <li>
+                            <a  href="#" data-toggle="modal" data-target="#ModalAgregar"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR</a>
+                        </li>
+                        <li>
+                            <a href="Controlador?menu=Detalles&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTAR </a>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#ModalBuscar"><i  class="fas fa-search fa-fw"></i> &nbsp; BUSCAR </a>
+                        </li>
+                    </ul>	
                 </div>
+                <!-- ============================================MODAL AGREGAR============================= -->
+                <div class="modal fade" id="ModalAgregar" tabindex="-1" role="dialog" aria-labelledby="ModalAgregar" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="titulo modal-header">
+                                <h5>Nuevo Suministro</h5>
+                                <button type="button" class="close" data-dismiss="modal" >
+                                    <span class="etiqueta4" >&times;</span>
+                                </button>
+                            </div>
+                            <form class="modal-body" action="Controlador?menu=Detalles" method="POST"  >
 
+                                <div class="form-group">
+                                    <input type="hidden"  name="pk" class="form-control"  value="${detalle.pk_detallesPro}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label  class="">Fecha</label>
+                                    <input type="date"  class="form-control" name="txtFecha"  value="${detalle.fechaEntrega}" >
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="bmd-label-floating">Cantidad</label>
+                                    <input type="text"  class="form-control" name="txtCantidad" value="${detalle.cantidad}" >
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="item" class="bmd-label-floating">Agricultor</label>
+
+                                    <select class="form-control" name="txtAgricultor" id="item"  >
+                                        <option value="" selected="" disabled="">Seleccione Agricultor</option>
+                                        <c:forEach var="a" items="${listaAgri}" >
+                                            <option  value="${a.pk_agricultor}">${a.nombre1}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div> 
+                                <div class="form-group">
+                                    <label for="item" class="bmd-label-floating">Producto</label>
+                                    <select class="form-control" name="txtProducto" id="item" >
+                                        <option value="" selected="" disabled="">Seleccione el Producto</option>
+                                        <c:forEach var="p" items="${listaPro}">
+                                            <option value="${p.pk_producto}">${p.nomInsumos}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="item" class="bmd-label-floating">Empleado</label>
+                                    <select class="form-control" name="txtEmpleado" id="item" >
+                                        <option value="" selected="" disabled="">Seleccione Empleado</option>
+                                        <c:forEach var="em" items="${listaEmple}">
+                                            <option value="${em.pk_empleado}">${em.nombre}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <p class="text-center">
+                                    <button   type="submit" name="accion" value="Agregar" class="btn btn-raised btn-info"><i class=" fas fa-save "></i> &nbsp; AGREGAR</button>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================MODAL BUSCAR============================= -->
+                <div class="modal fade" id="ModalBuscar" tabindex="-1" role="dialog" aria-labelledby="ModalBuscar" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="etiqueta">¿A Agricultor estas buscando?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form class="modal-body" action="Controlador?menu=Detalles" method="POST"  >
+                                <div class="form-group">
+                                    <label  class="bmd-label-floating">Ingresa el Nombre del Agricultor </label>
+                                    <input type="text"  class="form-control" name="txtBusqueda" required="" title="Ingresa un nombre">
+                                </div>
+                                <p class="text-center">
+                                    <button   type="submit" name="accion" value="Buscar" class="btn btn-raised btn-info "><i class="fas fa-search "></i> &nbsp; BUSCAR</button>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 <!-- Content here-->
                 <div class="container-fluid">
                     <div class="table-responsive">
@@ -169,10 +183,10 @@
                                         <td>${de.fk_agricutor}</td>
                                         <td>${de.fk_producto}</td>
                                         <td>${de.fk_empleado}</td>
-                                        <td class="btnLis"><a  title="Actualizar Suministro"  class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Detalles&accion=showedit&pk_detallesPro=${de.pk_detallesPro}">
+                                        <td class="btnLis"><a  title="Actualizar Suministro"  class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Detalles&accion=Editar&pk_detallesPro=${de.pk_detallesPro}">
                                                 <i class="fas  fa-sync-alt"></i></a>
                                         </td>
-                                        <td ><a title="Eliminar Suministro"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=Detalles&accion=Eliminar&pk_detallesPro=${de.pk_detallesPro}">
+                                        <td class="btnLis"><a title="Eliminar Suministro"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=Detalles&accion=Eliminar&pk_detallesPro=${de.pk_detallesPro}">
                                                 <i class="far fa-trash-alt"></i></a>
                                         </td>
                                     </tr>
@@ -205,9 +219,9 @@
         <!-- Bootstrap Material Design V4.0 -->
         <script src="./js/bootstrap-material-design.min.js"></script>
         <script>
-                                                $(document).ready(function () {
-                                                    $('body').bootstrapMaterialDesign();
-                                                });
+            $(document).ready(function () {
+                $('body').bootstrapMaterialDesign();
+            });
         </script>
 
         <script src="./js/main.js"></script>

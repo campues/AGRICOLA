@@ -58,73 +58,71 @@
 
                 <!-- Content here-->
                 <div class="container-fluid">
-                    <form  name="formulario" action="Controlador?menu=Asociacion"  class="form-neon" autocomplete="off" method="POST" >
+                    <form  name="formulario" action="Controlador?menu=Detalles"  class="form-neon" autocomplete="off" method="POST" >
                         <fieldset>
                             <legend><i class="fas fa-store-alt"></i> &nbsp; Verifica los datos antes de guardar</legend>
                             <!--<div class="nav-lateral-barra"></div> --> 
                             <div class="row">
-                                <input type="hidden"  name="pk" class="form-control"  value="${asoc.pk_asociacion}">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label  class="bmd-label-floating">Nombre Asociacion</label>
-                                        <input type="text"  class="form-control" name="txtNombre" required=""  pattern="[A-Za-z]+" value="${asoc.nomAsociacion}" >
-                                    </div>
+                                <div class="form-group">
+                                    <input type="hidden"  name="pk" class="form-control"  value="${detalle.pk_detallesPro}">
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label  class="bmd-label-floating">Ruc</label>
-                                        <input type="number"  class="form-control" name="txtRuc" required=""  value="${asoc.ruc}" >
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label  class="bmd-label-floating">Geolocalización</label>
-                                        <input type="text"  class="form-control" name="txtGeoloc" required="" value="${asoc.geolocalizacion}" >
-                                    </div>
-                                </div>
-
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label  class="bmd-label-floating">Telefono</label>
-                                        <input type="number"  class="form-control" name="txtTelefono" required="" value="${asoc. telefono}" >
+                                        <label  class="">Fecha</label>
+                                        <input type="date"  class="form-control" name="txtFecha"  value="${detalle.fechaEntrega}" >
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label  class="bmd-label-floating">Nombres Completos (Responsable)</label>
-                                        <input type="text"  class="form-control" name="txtResponsable" required="" value="${asoc.responsable}" >
+                                        <label for="" class="bmd-label-floating">Cantidad</label>
+                                        <input type="text"  class="form-control" name="txtCantidad" value="${detalle.cantidad}" >
                                     </div>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label  class="bmd-label-floating">Direccion</label>
-                                        <input type="text"  class="form-control" name="txtDireccion" required="" value="${asoc.direccion}" >
-                                    </div>
+                                        <label for="item" class="bmd-label-floating">Agricultor</label>
+                                        <select class="form-control" name="txtAgricultor" id="item"  >
+                                            <option value="" selected="" disabled="">Seleccione Agricultor</option>
+                                            <c:forEach var="a" items="${listaAgri}" >
+                                                <option  value="${a.pk_agricultor}" 
+                                                         <c:if test="${a.pk_agricultor == detalle.getFk_agricutor()}">
+                                                             selected
+                                                         </c:if>
+                                                         >${a.nombre1}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div> 
                                 </div>
-
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label  class="bmd-label-floating">Parroquia</label>
-                                        <input type="text"  class="form-control" name="txtParroquia" required=""  value="${asoc.parroquia}" >
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="item" class="bmd-label-floating">Provincia</label>
-                                        <select class="form-control" name="opProvincia" id="item">
-                                            <option value="" selected="" disabled="">Seleccione una opcion</option>
-                                            <c:forEach var="p" items="${lisPro}" >
-                                                <option value="${p.pk_provincia}"
-                                                        <c:if test="${p.pk_provincia == asoc.getFk_provinciaa()}">
+                                        <label for="item" class="bmd-label-floating">Producto</label>
+                                        <select class="form-control" name="txtProducto" id="item" >
+                                            <option value="" selected="" disabled="">Seleccione el Producto</option>
+                                            <c:forEach var="p" items="${listaPro}">
+                                                <option value="${p.pk_producto}"
+                                                        <c:if test="${p.pk_producto == detalle.getFk_producto()}">
                                                             selected
                                                         </c:if>
-                                                        >${p.nomProvincia}</option>
+                                                        >${p.nomInsumos}</option>
                                             </c:forEach>
                                         </select>
                                     </div>
                                 </div>
-
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="item" class="bmd-label-floating">Empleado</label>
+                                        <select class="form-control" name="txtEmpleado" id="item" >
+                                            <option value="" selected="" disabled="">Seleccione Empleado</option>
+                                            <c:forEach var="em" items="${listaEmple}">
+                                                <option value="${em.pk_empleado}"
+                                                        <c:if test="${em.pk_empleado == detalle.getFk_empleado()}">
+                                                            selected
+                                                        </c:if>
+                                                        >${em.nombre}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </fieldset>
                         <p class="text-center" >

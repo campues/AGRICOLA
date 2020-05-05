@@ -25,15 +25,22 @@ public class AsociacionDao {
 
     // Insertar Empleado
     public boolean insertarAso(Asociacion as) throws SQLException {
-        String sql = "INSERT INTO asociacion (pk_asociacion, nom_asociacion, direccion, telefono) VALUES (?,?,?,?)";
-        System.out.println(as.getNombre());
+        String sql = "INSERT INTO asociacion (pk_asociacion,nomAsociacion,ruc,responsable,geolocalizacion, "
+                + "direccion,telefono,parroquia,fk_provinciaa) VALUES (?,?,?,?,?,?,?,?,?)";
+        System.out.println(as.getNomAsociacion());
         con.conectar();
         connection = con.getJdbcConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, null);
-        statement.setString(2, as.getNombre());
-        statement.setString(3, as.getDireccion());
-        statement.setString(4, as.getTelefono());
+        statement.setString(2, as.getNomAsociacion());
+        statement.setString(3, as.getRuc());
+        statement.setString(4, as.getResponsable());
+        statement.setString(5, as.getGeolocalizacion());
+        statement.setString(6, as.getDireccion());
+        statement.setString(7, as.getTelefono());
+        statement.setString(8, as.getParroquia());
+        statement.setString(9, as.getFk_provinciaa());
+
         boolean rowInserted = statement.executeUpdate() > 0;
         statement.close();
         con.desconectar();
@@ -43,18 +50,21 @@ public class AsociacionDao {
     // listar todos las asociaciones
     public List listarAsociacion() throws SQLException {
         List<Asociacion> listarAso = new ArrayList<Asociacion>();
-        String sql = "SELECT * FROM asociacion";
+        String sql = "select pk_asociacion,nomAsociacion,ruc,responsable,geolocalizacion, "
+                + "direccion,telefono,parroquia,nomProvincia from asociacion "
+                + "JOIN provincia ON provincia.pk_provincia=asociacion.fk_provinciaa";
         con.conectar();
         connection = con.getJdbcConnection();
         Statement statement = connection.createStatement();
         ResultSet res = statement.executeQuery(sql);
         while (res.next()) {
-            int pk = res.getInt("pk_asociacion");
-            String nom = res.getString("nom_asociacion");
-            String dir = res.getString("direccion");
-            String tel = res.getString("telefono");
-            Asociacion asoc = new Asociacion(pk, nom, dir, tel);
-            listarAso.add(asoc);
+            Asociacion aso = new Asociacion();
+            aso.setPk_asociacion(res.getInt("pk_asociacion"));
+            aso.setNomAsociacion(res.getString("nomAsociacion"));
+            aso.setRuc(res.getString("ruc"));
+            aso.setFk_provinciaa(res.getString("nomProvincia"));
+            aso.setTelefono(res.getString("telefono"));
+            listarAso.add(aso);
         }
         con.desconectar();
         return listarAso;
@@ -63,7 +73,9 @@ public class AsociacionDao {
     // listar Nombre
     public List<Asociacion> BuscarNombre(String nombre) throws SQLException {
         List<Asociacion> listarAsoc = new ArrayList<Asociacion>();
-        String sql = "SELECT * FROM asociacion WHERE nom_asociacion= ? ";
+        String sql = "SELECT pk_asociacion,nomAsociacion,ruc,nomProvincia,telefono from asociacion "
+                + "join provincia on provincia.pk_provincia=asociacion.fk_provinciaa"
+                + " WHERE nomAsociacion=?";
         con.conectar();
         connection = con.getJdbcConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
@@ -72,9 +84,10 @@ public class AsociacionDao {
         if (res.next()) {
             Asociacion as = new Asociacion();
             as.setPk_asociacion(res.getInt(1));
-            as.setNombre(res.getString(2));
-            as.setDireccion(res.getString(3));
-            as.setTelefono(res.getString(4));
+            as.setNomAsociacion(res.getString(2));
+            as.setRuc(res.getString(3));
+            as.setFk_provinciaa(res.getString(4));
+            as.setTelefono(res.getString(5));
             listarAsoc.add(as);
         }
         res.close();
@@ -95,9 +108,14 @@ public class AsociacionDao {
         if (res.next()) {
             asociacion = new Asociacion(
                     res.getInt("pk_asociacion"),
-                    res.getString("nom_asociacion"),
+                    res.getString("nomAsociacion"),
+                    res.getString("ruc"),
+                    res.getString("responsable"),
+                    res.getString("geolocalizacion"),
                     res.getString("direccion"),
-                    res.getString("telefono")
+                    res.getString("telefono"),
+                    res.getString("parroquia"),
+                    res.getString("fk_provinciaa")
             );
         }
         res.close();
@@ -108,14 +126,21 @@ public class AsociacionDao {
     // actualizar
     public boolean actualizar(Asociacion as) throws SQLException {
         boolean rowActualizar = false;
-        String sql = "UPDATE asociacion SET nom_asociacion=?,direccion=?,telefono=? WHERE pk_asociacion=?";
+        String sql = "UPDATE asociacion SET nomAsociacion=?,ruc=?,responsable=?,geolocalizacion=?,"
+                + "direccion=?,telefono=?,parroquia=?,fk_provinciaa=? WHERE pk_asociacion=? ";
         con.conectar();
         connection = con.getJdbcConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, as.getNombre());
-        statement.setString(2, as.getDireccion());
-        statement.setString(3, as.getTelefono());
-        statement.setInt(4, as.getPk_asociacion());
+        statement.setString(1, as.getNomAsociacion());
+        statement.setString(2, as.getRuc());
+        statement.setString(3, as.getResponsable());
+        statement.setString(4, as.getGeolocalizacion());
+        statement.setString(5, as.getDireccion());
+        statement.setString(6, as.getTelefono());
+        statement.setString(7, as.getParroquia());
+        statement.setString(8, as.getFk_provinciaa());
+        statement.setInt(9, as.getPk_asociacion());
+
         rowActualizar = statement.executeUpdate() > 0;
         statement.close();
         con.desconectar();

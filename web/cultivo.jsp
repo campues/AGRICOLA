@@ -73,7 +73,7 @@
                             <a href="#" data-toggle="modal" data-target="#ModalBuscar"><i  class="fas fa-search fa-fw"></i> &nbsp; BUSCAR </a>
                         </li>
                         <li>
-                            <a href="Controlador?menu=Visitas&accion=Listar"><i class="fas fa-backspace fa-fw"></i> &nbsp; Regresar</a>
+                            <a href="Controlador?menu=Visitas&accion=Listar"><i class="fas icon-back fa-fw"></i> &nbsp; Regresar</a>
                         </li>
                     </ul>	
                 </div>
@@ -134,7 +134,7 @@
                                                 <select class="form-control" name="opEstatus" id="item">
                                                     <option value="" selected="" disabled="">Seleccione una opcion</option>
                                                     <option  value="Organico">Organico</option>
-                                                    <option value="Convencional">Convencinal</option>
+                                                    <option value="Convencional">Convencional</option>
                                                 </select>
                                             </div>
                                         </div>

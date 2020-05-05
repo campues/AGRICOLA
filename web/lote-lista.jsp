@@ -75,7 +75,7 @@
                             <a href="" data-toggle="modal" data-target="#ModalBuscar"><i  class="fas fa-search fa-fw"></i> &nbsp; BUSCAR LOTE</a>
                         </li>
                         <li>
-                            <a href="Controlador?menu=Agricultor&accion=Listar"><i class="fas fa-backspace fa-fw"></i> &nbsp; Regresar</a>
+                            <a href="Controlador?menu=Agricultor&accion=Listar"><i class="fas icon-back fa-fw"></i> &nbsp; Regresar</a>
                         </li>
                     </ul>
                 </div>

@@ -73,7 +73,7 @@
                         <li>
                             <a   href="Controlador?menu=Lote&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE LOTES</a>
                         </li>
-                        
+
                     </ul>
                 </div>
 
@@ -106,13 +106,18 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-12 col-md-6">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="item" class="bmd-label-floating">Provincia</label>
-                                            <select class="form-control" name="selectProvi" id="item">
+                                            <select class="form-control" name="opProvincia" id="item">
                                                 <option value="" selected="" disabled="">Seleccione una opcion</option>
-                                                <option  value="1">Pichincha</option>
-                                                <option value="2">Imbabura</option>
+                                                <c:forEach var="p" items="${lisPro}" >
+                                                    <option value="${p.pk_provincia}"
+                                                            <c:if test="${p.pk_provincia == asoc.getFk_provinciaa()}">
+                                                                selected
+                                                            </c:if>
+                                                            >${p.nomProvincia}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                     </div>
@@ -128,21 +133,21 @@
                                             <select class="form-control" name="selectAso" id="item">
                                                 <option value="" selected="" disabled="">Seleccione una opcion</option>
                                                 <c:forEach var="a" items="${lisAso}" >
-                                                    <option value="${a.pk_asociacion}">${a.nombre}</option>
+                                                    <option value="${a.pk_asociacion}">${a.nomAsociacion}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>
                                     </div>
-                                  
+
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="" class="etiqueta">Certificado:</label>
                                             <label style="color: #020202;">SI</label> <input  type="radio" name="txtCertificado" value="SI" required="">&nbsp;
                                             <label style="color: #020202;">NO</label><input type="radio" name="txtCertificado" value="NO" required="">
                                         </div>
-                                         
+
                                     </div>
-                                    
+
                                     <div class="col-12 col-md-4">
                                         <div class="form-group">
                                             <label for="item" class="bmd-label-floating">Observaciones</label>
@@ -159,7 +164,7 @@
                                 </div>
                             </div>
                         </fieldset>
-                       
+
                         <!-- ===================================================================================================== -->
 
                         <fieldset>

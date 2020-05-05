@@ -1,6 +1,7 @@
 package Control;
 
 import Modelo.Agricultor;
+import Modelo.Animales;
 import Modelo.Asociacion;
 import Modelo.Colmenas;
 import Modelo.Cultivo;
@@ -8,9 +9,12 @@ import Modelo.Detallespro;
 import Modelo.Empleado;
 import Modelo.Herramientas;
 import Modelo.Lote;
+import Modelo.ManObra;
 import Modelo.Producto;
+import Modelo.Provincia;
 import Modelo.Visitas;
 import ModeloDao.AgricultorDao;
+import ModeloDao.AnimalesDao;
 import ModeloDao.AsociacionDao;
 import ModeloDao.ColmenaDao;
 import ModeloDao.CultivoDao;
@@ -18,7 +22,9 @@ import ModeloDao.DetallesproDao;
 import ModeloDao.EmpleadoDao;
 import ModeloDao.HerramientasDao;
 import ModeloDao.LoteDao;
+import ModeloDao.ManObraDao;
 import ModeloDao.ProductoDao;
+import ModeloDao.ProvinciaDao;
 import ModeloDao.VisitasDao;
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,6 +52,9 @@ public class Controlador extends HttpServlet {
     DetallesproDao detalleDAO;
     HerramientasDao herraDao;
     ColmenaDao colmenaDAO;
+    ProvinciaDao proviDAO;
+    AnimalesDao animalDAO;
+    ManObraDao mObraDAO;
 
     Herramientas h = new Herramientas();
     Empleado em = new Empleado();
@@ -57,6 +66,9 @@ public class Controlador extends HttpServlet {
     Asociacion asoci = new Asociacion();
     Cultivo cu = new Cultivo();
     Colmenas col = new Colmenas();
+    Provincia provi = new Provincia();
+    Animales anim = new Animales();
+    ManObra mObra = new ManObra();
 
     int idEmple; // id empleado
 
@@ -75,6 +87,9 @@ public class Controlador extends HttpServlet {
             detalleDAO = new DetallesproDao(jdbcURL, jdbcUsername, jdbcPassword);
             herraDao = new HerramientasDao(jdbcURL, jdbcUsername, jdbcPassword);
             colmenaDAO = new ColmenaDao(jdbcURL, jdbcUsername, jdbcPassword);
+            proviDAO = new ProvinciaDao(jdbcURL, jdbcUsername, jdbcPassword);
+            animalDAO = new AnimalesDao(jdbcURL, jdbcUsername, jdbcPassword);
+            mObraDAO = new ManObraDao(jdbcURL, jdbcUsername, jdbcPassword);
 
         } catch (Exception e) {
 
@@ -186,6 +201,7 @@ public class Controlador extends HttpServlet {
                         colmenaDAO.insertarCol(col);
                         request.getRequestDispatcher("Controlador?menu=Colmenas&accion=Listar").forward(request, response);
                         break;
+
                     case "Buscar":
                         RequestDispatcher distw = request.getRequestDispatcher("colmenas.jsp");
                         List<Colmenas> colme = colmenaDAO.listarCodigo(request.getParameter("txtBusqueda"));
@@ -236,7 +252,33 @@ public class Controlador extends HttpServlet {
                         request.setAttribute("listaCul", cul);
                         distw.forward(request, response);
                         break;
-                   
+                    case "Editar":
+                        String org = "Organico",
+                         conv = "Convencional";
+                        RequestDispatcher restt = request.getRequestDispatcher("cultivo-editar.jsp");
+                        cu = cultivoDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_cultivo")));
+                        request.setAttribute("cult", cu);
+                        //estatus para comparacion 
+                        request.setAttribute("estatus", cu.getEstatus());
+                        request.setAttribute("org", org);
+                        request.setAttribute("conv", conv);
+                        restt.forward(request, response);
+                        break;
+                    case "Actualizar":
+                        cu.setPk_cultivo(Integer.parseInt(request.getParameter("pk")));
+                        cu.setNomCultivo(request.getParameter("txtNombre"));
+                        cu.setArea(request.getParameter("txtArea"));
+                        cu.setDensidadSiembra(request.getParameter("txtDensidad"));
+                        cu.setNumPlantas(request.getParameter("txtNumero"));
+                        cu.setFechaPro(request.getParameter("txtFecha"));
+                        cu.setEs_cosecha(request.getParameter("txtEstimacion"));
+                        cu.setEstatus(request.getParameter("opEstatus"));
+                        cu.setAnio_organica(request.getParameter("txtAnio_or"));
+                        cu.setAnio_inspeccion(request.getParameter("txtAnio_ins"));
+                        cu.setFk_visitasc(Integer.parseInt(request.getParameter("fkVisitas")));
+                        cultivoDAO.actualizar(cu);
+                        request.getRequestDispatcher("Controlador?menu=Cultivo&accion=Listar").forward(request, response);
+                        break;
                     case "Eliminar":
                         Cultivo culEliminar = cultivoDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_cultivo")));
                         cultivoDAO.eliminarCult(culEliminar);
@@ -249,44 +291,104 @@ public class Controlador extends HttpServlet {
                 e.getStackTrace();
             }
         }
-        // ==============================Herramientas===========================================================
+        // ==============================HERRAMIENTAS -> DATOS EXTRAS===========================================================
         if (menu.equals("Herramientas")) {
             try {
                 switch (accion) {
-                    case "Listar":
-                        RequestDispatcher dispatc = request.getRequestDispatcher("lote-datos.jsp");
-                        List<Herramientas> listaHe = herraDao.listarHerramientas();
-                        request.setAttribute("listaHerra", listaHe);
-                        dispatc.forward(request, response);
-
-                        break;
                     case "Agregar":
                         h.setPk_herramientas(0);
                         h.setNomHerramienta(request.getParameter("opHerramientas"));
                         h.setCantidad(request.getParameter("txtCantidad"));
                         h.setFk_loteh(request.getParameter("fk_loteh"));
                         herraDao.insertarHerra(h);
-                        request.getRequestDispatcher("Controlador?menu=Herramientas&accion=Listar").forward(request, response);
-                        break;
-                    case "Editar":
-                        h = herraDao.obtenerPorId(Integer.parseInt(request.getParameter("pk_herramientas")));
-                        request.setAttribute("herraienta", h);
-                        request.getRequestDispatcher("Controlador?menu=Herramientas&accion=Listar").forward(request, response);
+                        request.getRequestDispatcher("Controlador?menu=DatosExtras&accion=Listar").forward(request, response);
                         break;
                     case "Eliminar":
                         h = herraDao.obtenerPorId(Integer.parseInt(request.getParameter("pk_herramientas")));
                         herraDao.eliminarHerr(h);
-                        request.getRequestDispatcher("Controlador?menu=Herramientas&accion=Listar").forward(request, response);
+                        request.getRequestDispatcher("Controlador?menu=DatosExtras&accion=Listar").forward(request, response);
                         break;
                     default:
                         break;
                 }
-
             } catch (SQLException e) {
                 e.getStackTrace();
             }
-
         }
+        // ==============================ANIMALES -> DATOS EXTRAS===========================================================
+        if (menu.equals("Animales")) {
+            try {
+                switch (accion) {
+                    case "Agregar":
+                        anim.setPk_animales(0);
+                        anim.setEspecie(request.getParameter("opAnimales"));
+                        anim.setCantidad(request.getParameter("txtCantidad"));
+                        anim.setFk_lotea(request.getParameter("fk_lotea"));
+                        animalDAO.insertarAnimales(anim);
+                        request.getRequestDispatcher("Controlador?menu=DatosExtras&accion=Listar").forward(request, response);
+                        break;
+                    case "Eliminar":
+                        anim = animalDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_animales")));
+                        animalDAO.eliminarAnimal(anim);
+                        request.getRequestDispatcher("Controlador?menu=DatosExtras&accion=Listar").forward(request, response);
+                        break;
+                    default:
+                        break;
+                }
+            } catch (SQLException e) {
+                e.getStackTrace();
+            }
+        }
+        // ==============================MANO OBRA -> DATOS EXTRAS===========================================================
+        if (menu.equals("ManObra")) {
+            try {
+                switch (accion) {
+                    case "Agregar":
+                        mObra.setPk_manObra(0);
+                        mObra.setFamilia(request.getParameter("opfamilia"));
+                        mObra.setEdad(request.getParameter("opEdad"));
+                        mObra.setSexo(request.getParameter("opSexo"));
+                        mObra.setCantidad(request.getParameter("txtCantidad"));
+                        mObra.setFk_lotem(request.getParameter("fk_lotem"));
+                        mObraDAO.insertarManObra(mObra);
+                        request.getRequestDispatcher("Controlador?menu=DatosExtras&accion=Listar").forward(request, response);
+                        break;
+                    case "Eliminar":
+                        mObra = mObraDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_manObra")));
+                        mObraDAO.eliminarManObra(mObra);
+                        request.getRequestDispatcher("Controlador?menu=DatosExtras&accion=Listar").forward(request, response);
+                        break;
+                    default:
+                        break;
+                }
+            } catch (SQLException e) {
+                e.getStackTrace();
+            }
+        }
+        // DATOS EXTRAS-------------------------
+        if (menu.equals("DatosExtras")) {
+            try {
+                switch (accion) {
+                    case "Listar":
+                        RequestDispatcher dispatc = request.getRequestDispatcher("lote-datos.jsp");
+                        //lista Herramientas
+                        List<Herramientas> listaHe = herraDao.listarHerramientasID();
+                        request.setAttribute("listaHerra", listaHe);
+                        // lista Animales
+                        List<Animales> listaAni = animalDAO.listarAnimalesID();
+                        request.setAttribute("listaAnim", listaAni);
+                        // lista Mano Obra
+                        List<ManObra> listaMano= mObraDAO.listarManObraID();
+                        request.setAttribute("listaMan", listaMano);
+                        dispatc.forward(request, response);
+                        break;
+                    default:
+                        break;
+                }
+            } catch (Exception e) {
+            }
+        }
+
         // ==============================DETALLES PRODUCTO===========================================================
         if (menu.equals("Detalles")) {
             try {
@@ -296,16 +398,13 @@ public class Controlador extends HttpServlet {
                         RequestDispatcher distt = request.getRequestDispatcher("suministro.jsp");
                         List<Detallespro> listaDetalle = detalleDAO.listarDetalles();
                         request.setAttribute("listaDe", listaDetalle);
-
+                        //LISTA PARA RELLENAR CAMPOS DE SECECCION
                         List<Producto> listaProd = productoDAO.listarProducto();
                         request.setAttribute("listaPro", listaProd);
-
                         List<Empleado> listaEm = empleadoDAO.listarEmpleados();
                         request.setAttribute("listaEmple", listaEm);
-
                         List<Agricultor> listaAgric = agricultorDAO.listarAgricultor();
                         request.setAttribute("listaAgri", listaAgric);
-
                         distt.forward(request, response);
                         break;
                     case "Agregar":
@@ -319,12 +418,17 @@ public class Controlador extends HttpServlet {
                         RequestDispatcher distss = request.getRequestDispatcher("Controlador?menu=Detalles&accion=Listar");
                         distss.forward(request, response);
                         break;
-                    case "showedit":
-                        RequestDispatcher dists = request.getRequestDispatcher("Controlador?menu=Detalles&accion=Listar");
+                    case "Editar":
+                        RequestDispatcher dists = request.getRequestDispatcher("suministro-editar.jsp");
                         de = detalleDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_detallesPro")));
                         request.setAttribute("detalle", de);
-                        request.setAttribute("fk", de.getFk_agricutor());
-                        Variables.idAgricultor = Integer.parseInt(de.getFk_agricutor());
+                        //Lista para realizar la comparacion y seleccion
+                        List<Producto> listaProdd = productoDAO.listarProducto();
+                        request.setAttribute("listaPro", listaProdd);
+                        List<Empleado> listaEmm = empleadoDAO.listarEmpleados();
+                        request.setAttribute("listaEmple", listaEmm);
+                        List<Agricultor> listaAgricc = agricultorDAO.listarAgricultor();
+                        request.setAttribute("listaAgri", listaAgricc);
                         dists.forward(request, response);
                         break;
                     case "Actualizar":
@@ -337,6 +441,12 @@ public class Controlador extends HttpServlet {
                         de.setFk_empleado(request.getParameter("txtEmpleado"));
                         detalleDAO.actualizar(de);
                         request.getRequestDispatcher("Controlador?menu=Detalles&accion=Listar").forward(request, response);
+                        break;
+                    case "Buscar":
+                        RequestDispatcher redic = request.getRequestDispatcher("suministro.jsp");
+                        List<Detallespro> lisst = detalleDAO.listarDetalleAgri(request.getParameter("txtBusqueda"));
+                        request.setAttribute("listaDe", lisst);
+                        redic.forward(request, response);
                         break;
                     case "Eliminar":
                         Detallespro detaEliminar = detalleDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_detallesPro")));
@@ -391,6 +501,9 @@ public class Controlador extends HttpServlet {
                         //lista de asociacion para seleccion 
                         List<Asociacion> list = asociacionDAO.listarAsociacion();
                         request.setAttribute("lisAso", list);
+                        //lista provincia y compara
+                        List<Provincia> listaproo = proviDAO.listarProvincia();
+                        request.setAttribute("lisPro", listaproo);
                         d.forward(request, response);
                         break;
                     case "VerVisitas":
@@ -401,10 +514,7 @@ public class Controlador extends HttpServlet {
                     case "LoteDatos":
                         lote = loteDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_lote")));
                         Variables.idLote = lote.getPk_lote();
-                        List<Herramientas> listaHe = herraDao.listarHerramientas();
-                        request.setAttribute("listaHerra", listaHe);
-                        response.sendRedirect("lote-datos.jsp");
-                        // request.getRequestDispatcher("Controlador?menu=Lote=Listar").forward(request, response);
+                        request.getRequestDispatcher("Controlador?menu=DatosExtras&accion=Listar").forward(request, response);
                         break;
                     case "Agregar":
                         lote.setPk_lote(0);
@@ -444,7 +554,7 @@ public class Controlador extends HttpServlet {
                         lote.setParroquia(request.getParameter("txtPar"));
                         lote.setObservaciones(request.getParameter("txtObserv"));
                         lote.setRecomendaciones(request.getParameter("txtRecom"));
-                        lote.setFk_provincia(Integer.parseInt(request.getParameter("selectProvi")));
+                        lote.setFk_provincia(Integer.parseInt(request.getParameter("opProvincia")));
 
                         lote.setFk_agricultorl(Integer.parseInt(request.getParameter("fkAgricultor")));
 
@@ -631,15 +741,22 @@ public class Controlador extends HttpServlet {
                 switch (accion) {
                     case "Listar":
                         RequestDispatcher asocd = request.getRequestDispatcher("asociaciones.jsp");
+                        List<Provincia> listapro = proviDAO.listarProvincia();
+                        request.setAttribute("lisPro", listapro);
                         List<Asociacion> list = asociacionDAO.listarAsociacion();
                         request.setAttribute("asocia", list);
                         asocd.forward(request, response);
                         break;
                     case "Agregar":
                         asoci.setPk_asociacion(0);
-                        asoci.setNombre(request.getParameter("txtNombre"));
+                        asoci.setNomAsociacion(request.getParameter("txtNombre"));
+                        asoci.setRuc(request.getParameter("txtRuc"));
+                        asoci.setResponsable(request.getParameter("txtResponsable"));
+                        asoci.setGeolocalizacion(request.getParameter("txtGeoloc"));
                         asoci.setDireccion(request.getParameter("txtDireccion"));
                         asoci.setTelefono(request.getParameter("txtTelefono"));
+                        asoci.setParroquia(request.getParameter("txtParroquia"));
+                        asoci.setFk_provinciaa(request.getParameter("opProvincia"));
                         asociacionDAO.insertarAso(asoci);
                         request.getRequestDispatcher("Controlador?menu=Asociacion&accion=Listar").forward(request, response);
                         break;
@@ -647,13 +764,21 @@ public class Controlador extends HttpServlet {
                         RequestDispatcher restt = request.getRequestDispatcher("asociacion-editar.jsp");
                         asoci = asociacionDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_asociacion")));
                         request.setAttribute("asoc", asoci);
+                        //lista provincia y compara
+                        List<Provincia> listaproo = proviDAO.listarProvincia();
+                        request.setAttribute("lisPro", listaproo);
                         restt.forward(request, response);
                         break;
                     case "Actualizar":
                         asoci.setPk_asociacion(Integer.parseInt(request.getParameter("pk")));
-                        asoci.setNombre(request.getParameter("txtNombre"));
+                        asoci.setNomAsociacion(request.getParameter("txtNombre"));
+                        asoci.setRuc(request.getParameter("txtRuc"));
+                        asoci.setResponsable(request.getParameter("txtResponsable"));
+                        asoci.setGeolocalizacion(request.getParameter("txtGeoloc"));
                         asoci.setDireccion(request.getParameter("txtDireccion"));
                         asoci.setTelefono(request.getParameter("txtTelefono"));
+                        asoci.setParroquia(request.getParameter("txtParroquia"));
+                        asoci.setFk_provinciaa(request.getParameter("opProvincia"));
                         asociacionDAO.actualizar(asoci);
                         request.getRequestDispatcher("Controlador?menu=Asociacion&accion=Listar").forward(request, response);
                         break;
