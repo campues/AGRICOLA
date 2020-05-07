@@ -70,27 +70,24 @@ public class DetallesproDao {
 
     // listar todos los empleados
     public List<Detallespro> listarDetalles() throws SQLException {
-
         List<Detallespro> listarDeta = new ArrayList<Detallespro>();
         String sql = " SELECT pk_detallesPro,fechaEntrega,cantidad,nombre1,nomInsumos,nombre FROM detallespro "
                 + " JOIN agricultor on agricultor.pk_agricultor=detallespro.fk_agricultor "
                 + " JOIN producto on producto.pk_producto=detallespro.fk_producto "
                 + " JOIN empleado on empleado.pk_empleado=detallespro.fk_empleado ";
-
         con.conectar();
         connection = con.getJdbcConnection();
         Statement stat = connection.createStatement();
         ResultSet re = stat.executeQuery(sql);
-
         while (re.next()) {
-            int pk = re.getInt("pk_detallesPro");
-            String fecha = re.getString("fechaEntrega");
-            String cantidad = re.getString("cantidad");
-            String fk_agri = re.getString("nombre1");
-            String fk_pro = re.getString("nomInsumos");
-            String fk_emple = re.getString("nombre");
-            Detallespro detalle = new Detallespro(pk, fecha, cantidad, fk_agri, fk_pro, fk_emple);
-            listarDeta.add(detalle);
+            Detallespro de = new Detallespro();
+            de.setPk_detallesPro(re.getInt("pk_detallesPro"));
+            de.setFechaEntrega(re.getString("fechaEntrega"));
+            de.setCantidad(re.getString("cantidad"));
+            de.setFk_agricutor(re.getString("nombre1"));
+            de.setFk_producto(re.getString("nomInsumos"));
+            de.setFk_empleado(re.getString("nombre"));
+            listarDeta.add(de);
         }
         con.desconectar();
         return listarDeta;
@@ -98,7 +95,6 @@ public class DetallesproDao {
 
     // listar todos los empleados
     public List<Detallespro> listarDetalleAgri(String nombreAgri) throws SQLException {
-
         List<Detallespro> listarDeta = new ArrayList<Detallespro>();
         String sql = " SELECT pk_detallesPro,fechaEntrega,cantidad,nombre1,nomInsumos,nombre FROM detallespro "
                 + " JOIN agricultor on agricultor.pk_agricultor=detallespro.fk_agricultor "

@@ -69,7 +69,6 @@ public class AsociacionDao {
         con.desconectar();
         return listarAso;
     }
-
     // listar Nombre
     public List<Asociacion> BuscarNombre(String nombre) throws SQLException {
         List<Asociacion> listarAsoc = new ArrayList<Asociacion>();

@@ -1,10 +1,13 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page import="Modelo.Detallespro"%>
+<%@page import="Modelo.Empleado"%>
+<%@page import="Modelo.Producto"%>
+<%@page import="Modelo.Agricultor"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <title>Datos de la empresa</title>
 
         <!-- Normalize V8.0.1 -->
@@ -30,11 +33,14 @@
 
         <!-- General Styles -->
         <link rel="stylesheet" href="./css/style.css">
-
-
     </head>
 
-
+    <%
+        List<Agricultor> agricultor = (List<Agricultor>) request.getAttribute("listaAgri");
+        List<Producto> producto = (List<Producto>) request.getAttribute("listaPro");
+        List<Empleado> empleado = (List<Empleado>) request.getAttribute("listaEmple");
+        List<Detallespro> detalles = (List<Detallespro>) request.getAttribute("listaDe");
+    %>
     <body>
         <!-- Main container -->
         <main class="full-box main-container">
@@ -88,44 +94,45 @@
                             <form class="modal-body" action="Controlador?menu=Detalles" method="POST"  >
 
                                 <div class="form-group">
-                                    <input type="hidden"  name="pk" class="form-control"  value="${detalle.pk_detallesPro}">
+                                    <input type="hidden"  name="pk" class="form-control" >
                                 </div>
 
                                 <div class="form-group">
                                     <label  class="">Fecha</label>
-                                    <input type="date"  class="form-control" name="txtFecha"  value="${detalle.fechaEntrega}" >
+                                    <input type="date"  class="form-control" name="txtFecha" >
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="bmd-label-floating">Cantidad</label>
-                                    <input type="text"  class="form-control" name="txtCantidad" value="${detalle.cantidad}" >
+                                    <input type="text"  class="form-control" name="txtCantidad" >
                                 </div>
 
                                 <div class="form-group">
                                     <label for="item" class="bmd-label-floating">Agricultor</label>
 
                                     <select class="form-control" name="txtAgricultor" id="item"  >
-                                        <option value="" selected="" disabled="">Seleccione Agricultor</option>
-                                        <c:forEach var="a" items="${listaAgri}" >
-                                            <option  value="${a.pk_agricultor}">${a.nombre1}</option>
-                                        </c:forEach>
+                                        <option value="" selected disabled>Seleccione Agricultor</option>
+                                        <%for (Agricultor ag : agricultor) {%> 
+                                        <option value="<%=ag.getPk_agricultor()%>"><%=ag.getNombre1()%> </option>
+                                        <%} %>
                                     </select>
                                 </div> 
                                 <div class="form-group">
                                     <label for="item" class="bmd-label-floating">Producto</label>
                                     <select class="form-control" name="txtProducto" id="item" >
-                                        <option value="" selected="" disabled="">Seleccione el Producto</option>
-                                        <c:forEach var="p" items="${listaPro}">
-                                            <option value="${p.pk_producto}">${p.nomInsumos}</option>
-                                        </c:forEach>
+                                        <option value="" selected disabled>Seleccione el Producto</option>
+                                        <option value="" selected disabled>Seleccione Agricultor</option>
+                                        <%for (Producto pro : producto) {%> 
+                                        <option value="<%=pro.getPk_producto()%>"><%=pro.getNomInsumos()%> </option>
+                                        <%} %>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="item" class="bmd-label-floating">Empleado</label>
                                     <select class="form-control" name="txtEmpleado" id="item" >
-                                        <option value="" selected="" disabled="">Seleccione Empleado</option>
-                                        <c:forEach var="em" items="${listaEmple}">
-                                            <option value="${em.pk_empleado}">${em.nombre}</option>
-                                        </c:forEach>
+                                        <option value="" selected disabled >Seleccione Empleado</option>
+                                        <%for (Empleado em : empleado) {%> 
+                                        <option value="<%=em.getPk_empleado()%>"><%=em.getNombre()%> </option>
+                                        <%}%>
                                     </select>
                                 </div>
                                 <p class="text-center">
@@ -171,42 +178,38 @@
                                     <th >Empleado</th>
                                     <th class="ac">Editar</th>
                                     <th class="ac">Eliminar</th>
-
                                 </tr>
                             </thead>
-                            <tbody  >
-                                <c:forEach var="de" items="${listaDe}">
-                                    <tr class="text-center"> 
-                                        <td>${de.pk_detallesPro}</td>
-                                        <td>${de.fechaEntrega}</td>
-                                        <td>${de.cantidad}</td>
-                                        <td>${de.fk_agricutor}</td>
-                                        <td>${de.fk_producto}</td>
-                                        <td>${de.fk_empleado}</td>
-                                        <td class="btnLis"><a  title="Actualizar Suministro"  class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Detalles&accion=Editar&pk_detallesPro=${de.pk_detallesPro}">
-                                                <i class="fas  fa-sync-alt"></i></a>
-                                        </td>
-                                        <td class="btnLis"><a title="Eliminar Suministro"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=Detalles&accion=Eliminar&pk_detallesPro=${de.pk_detallesPro}">
-                                                <i class="far fa-trash-alt"></i></a>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
+                            <tbody >
+                                <%for (Detallespro de : detalles) {%>
+                                <tr class="text-center"> 
+                                    <td><%=de.getPk_detallesPro()%></td>
+                                    <td><%=de.getFechaEntrega()%></td>
+                                    <td><%=de.getCantidad()%></td>
+                                    <td><%=de.getFk_agricutor()%></td>
+                                    <td><%=de.getFk_producto()%></td>
+                                    <td><%=de.getFk_empleado()%></td>
+                                    <td class="btnLis"><a  title="Actualizar Suministro"  class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Detalles&accion=Editar&pk_detallesPro=<%=de.getPk_detallesPro()%>">
+                                            <i class="fas  fa-sync-alt"></i></a>
+                                    </td>
+                                    <td class="btnLis"><a title="Eliminar Suministro"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=Detalles&accion=Eliminar&pk_detallesPro=<%=de.getPk_detallesPro()%>">
+                                            <i class="far fa-trash-alt"></i></a>
+                                    </td>
+                                </tr>
+                                <%}%>
                             </tbody>
                         </table>
                     </div>
-
                 </div>
-
-
             </section>
         </main>
 
-
         <!--=============================================
-            =            Include JavaScript files           =
-            ==============================================-->
+               =            Include JavaScript files           =
+               ==============================================-->
         <!-- jQuery V3.4.1 -->
         <script src="./js/jquery-3.4.1.min.js"></script>
+
         <!-- popper -->
         <script src="./js/popper.min.js"></script>
 
@@ -225,5 +228,5 @@
         </script>
 
         <script src="./js/main.js"></script>
-
-    </body></html>
+    </body>
+</html>

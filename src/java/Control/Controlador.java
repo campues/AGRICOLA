@@ -33,12 +33,13 @@ import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-@MultipartConfig(maxFileSize = 16177215)
+@WebServlet(name = "Controlador")
 public class Controlador extends HttpServlet {
 
     //  private static final long serialVersionUID = 1L;
@@ -77,6 +78,7 @@ public class Controlador extends HttpServlet {
         String jdbcUsername = getServletContext().getInitParameter("jdbcUsername");
         String jdbcPassword = getServletContext().getInitParameter("jdbcPassword");
         try {
+            super.init();
             asociacionDAO = new AsociacionDao(jdbcURL, jdbcUsername, jdbcPassword);
             empleadoDAO = new EmpleadoDao(jdbcURL, jdbcUsername, jdbcPassword);
             agricultorDAO = new AgricultorDao(jdbcURL, jdbcUsername, jdbcPassword);
@@ -96,10 +98,7 @@ public class Controlador extends HttpServlet {
         }
     }
 
-    public Controlador() {
-        super();
-    }
-
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String menu = request.getParameter("menu");
@@ -378,7 +377,7 @@ public class Controlador extends HttpServlet {
                         List<Animales> listaAni = animalDAO.listarAnimalesID();
                         request.setAttribute("listaAnim", listaAni);
                         // lista Mano Obra
-                        List<ManObra> listaMano= mObraDAO.listarManObraID();
+                        List<ManObra> listaMano = mObraDAO.listarManObraID();
                         request.setAttribute("listaMan", listaMano);
                         dispatc.forward(request, response);
                         break;
@@ -393,19 +392,26 @@ public class Controlador extends HttpServlet {
         if (menu.equals("Detalles")) {
             try {
                 switch (accion) {
-
                     case "Listar":
-                        RequestDispatcher distt = request.getRequestDispatcher("suministro.jsp");
-                        List<Detallespro> listaDetalle = detalleDAO.listarDetalles();
-                        request.setAttribute("listaDe", listaDetalle);
-                        //LISTA PARA RELLENAR CAMPOS DE SECECCION
-                        List<Producto> listaProd = productoDAO.listarProducto();
-                        request.setAttribute("listaPro", listaProd);
-                        List<Empleado> listaEm = empleadoDAO.listarEmpleados();
-                        request.setAttribute("listaEmple", listaEm);
-                        List<Agricultor> listaAgric = agricultorDAO.listarAgricultor();
-                        request.setAttribute("listaAgri", listaAgric);
-                        distt.forward(request, response);
+                        try {
+                            List<Agricultor> listaAgric = agricultorDAO.listarAgricultor();
+                            request.setAttribute("listaAgri", listaAgric);
+
+                            List<Producto> listaProd = productoDAO.listarProducto();
+                            request.setAttribute("listaPro", listaProd);
+
+                            List<Empleado> listaEm = empleadoDAO.listarEmpleados();
+                            request.setAttribute("listaEmple", listaEm);
+
+                            List<Detallespro> listaDetalle = detalleDAO.listarDetalles();
+                            request.setAttribute("listaDe", listaDetalle);
+
+                            request.getRequestDispatcher("suministro.jsp").forward(request, response);
+                        } catch (Exception e) {
+                            request.setAttribute("error", e);
+                            request.getRequestDispatcher("error.jsp").forward(request, response);
+                        }
+
                         break;
                     case "Agregar":
                         de.setPk_detallesPro(0);
@@ -423,12 +429,13 @@ public class Controlador extends HttpServlet {
                         de = detalleDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_detallesPro")));
                         request.setAttribute("detalle", de);
                         //Lista para realizar la comparacion y seleccion
+                        List<Agricultor> listaAgricc = agricultorDAO.listarAgricultor();
+                        request.setAttribute("listaAgri", listaAgricc);
                         List<Producto> listaProdd = productoDAO.listarProducto();
                         request.setAttribute("listaPro", listaProdd);
                         List<Empleado> listaEmm = empleadoDAO.listarEmpleados();
                         request.setAttribute("listaEmple", listaEmm);
-                        List<Agricultor> listaAgricc = agricultorDAO.listarAgricultor();
-                        request.setAttribute("listaAgri", listaAgricc);
+
                         dists.forward(request, response);
                         break;
                     case "Actualizar":
@@ -458,7 +465,8 @@ public class Controlador extends HttpServlet {
                 }
 
             } catch (SQLException e) {
-                e.getStackTrace();
+                request.setAttribute("error", e);
+                request.getRequestDispatcher("error.jsp").forward(request, response);
             }
         }
 
@@ -838,9 +846,9 @@ public class Controlador extends HttpServlet {
 
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("Hola Soy doGET..");
         doPost(request, response);
     }
 
