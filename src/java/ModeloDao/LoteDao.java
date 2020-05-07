@@ -162,7 +162,7 @@ public class LoteDao {
         return rowInserted;
     }
 
-    // Insertar Lote SIN IMAGEN
+     // Insertar Lote SIN IMAGEN
     public boolean insertarLoteSIN(Lote lot) throws SQLException {
         String sql = "INSERT INTO lote (pk_lote,ubi_Geografica,altura,codigo,parroquia,observaciones,"
                 + "recomendaciones,certificacion,banio,agua_potable,luz_electrica,agua_riego,"

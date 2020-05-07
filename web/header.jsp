@@ -128,6 +128,7 @@
                     <a href="Controlador?menu=Detalles&accion=Listar"><i class="icon-add-to-list"></i> &nbsp; Suministro</a>
                 </li>
                
+               
             </ul>
         </nav>
 

@@ -5,25 +5,23 @@ public class RotacionCultivo {
 
     private int pk_rotacionCultivo;
     private String anio;
+    private String nombre;
     private String observacion;
-    private int fk_cultivoc;
+    private String fk_cultivoc;
     //zona de contructores
 
     public RotacionCultivo() {
     }
-    public RotacionCultivo(int pk_rotacionCultivo, String anio, String observacion, int fk_cultivoc) {
+
+    public RotacionCultivo(int pk_rotacionCultivo, String anio, String nombre, String observacion, String fk_cultivoc) {
         this.pk_rotacionCultivo = pk_rotacionCultivo;
         this.anio = anio;
+        this.nombre = nombre;
         this.observacion = observacion;
         this.fk_cultivoc = fk_cultivoc;
     }
 
-    public RotacionCultivo(int pk_rotacionCultivo, String anio) {
-        this.pk_rotacionCultivo = pk_rotacionCultivo;
-        this.anio = anio;
-    }
     //zona de getts y setts
-
     public int getPk_rotacionCultivo() {
         return pk_rotacionCultivo;
     }
@@ -48,12 +46,20 @@ public class RotacionCultivo {
         this.observacion = observacion;
     }
 
-    public int getFk_cultivoc() {
+    public String getFk_cultivoc() {
         return fk_cultivoc;
     }
 
-    public void setFk_cultivoc(int fk_cultivoc) {
+    public void setFk_cultivoc(String fk_cultivoc) {
         this.fk_cultivoc = fk_cultivoc;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
 }

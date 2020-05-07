@@ -195,6 +195,7 @@
                                     <th>Estatus</th>
                                     <th class="ac">Editar</th>
                                     <th class="ac">Eliminar</th>
+                                    <th class="ac">D.Extras</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -209,6 +210,9 @@
                                         </td>
                                         <td class="btnLis"><a title="Eliminar Cultivo"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=Cultivo&accion=Eliminar&pk_cultivo=${cu.pk_cultivo}">
                                                 <i class="far fa-trash-alt"></i></a>
+                                        </td>
+                                        <td class="btnLis"><a title="Agregar datos Extras al Lote" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Cultivo&accion=CultivoExtras&pk_cultivo=${cu.pk_cultivo}">
+                                                <i class="fas icon-text-document-inverted"></i></a>
                                         </td>
                                     </tr>
                                 </c:forEach>

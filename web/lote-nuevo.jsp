@@ -141,11 +141,10 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="" class="etiqueta">Certificado:</label>
+                                         <   <label for="" class="etiqueta">Certificado:</label>
                                             <label style="color: #020202;">SI</label> <input  type="radio" name="txtCertificado" value="SI" required="">&nbsp;
                                             <label style="color: #020202;">NO</label><input type="radio" name="txtCertificado" value="NO" required="">
                                         </div>
-
                                     </div>
 
                                     <div class="col-12 col-md-4">
