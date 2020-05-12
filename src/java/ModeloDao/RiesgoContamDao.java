@@ -31,25 +31,26 @@ public class RiesgoContamDao {
 //METODO DE CONSULTA DEL DATO DESDE LA BASE DE DATOS
 
     public boolean insertarRiesgo(RiesgoContam ries) throws SQLException {
-        String sql = "INSERT INTO riesgocontam (tamaCultivo,tipoCultivo,tipoAplicacion,situacionVecino,tAgOrganica,"
-                + "poProductivo,recFruta,total,selecCultivo,obCultivo,tipoRiesgo, fk_cultivor)"
-                + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO riesgocontam (pk_riesgoContam,tamaCultivo,tipoCultivo,tipoAplicacion,situacionVecino,tAgOrganica, "
+                + "poProductivo,recFruta,total,selecCultivo,obCultivo,tipoRiesgo,fk_cultivor)"
+                + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
         System.out.println(ries.getFk_cultivor());
         con.conectar();
         connection = con.getJdbcConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, ries.getTamaCultivo());
-        statement.setInt(2, ries.getTipoCultivo());
-        statement.setInt(3, ries.getTipoAplicacion());
-        statement.setInt(4, ries.getSituacionVecino());
-        statement.setInt(5, ries.gettAgOrganica());
-        statement.setInt(6, ries.getPoProductivo());
-        statement.setInt(7, ries.getRecFruta());
-        statement.setInt(8, ries.getTotal());
-        statement.setString(9, ries.getSelecCultivo());
-        statement.setString(10, ries.getObCultivo());
-        statement.setString(11, ries.getTipoRiesgo());
-        statement.setInt(12, ries.getFk_cultivor());
+        statement.setString(1, null);
+        statement.setString(2, ries.getTamaCultivo());
+        statement.setString(3, ries.getTipoCultivo());
+        statement.setString(4, ries.getTipoAplicacion());
+        statement.setString(5, ries.getSituacionVecino());
+        statement.setString(6, ries.gettAgOrganica());
+        statement.setString(7, ries.getPoProductivo());
+        statement.setString(8, ries.getRecFruta());
+        statement.setString(9, ries.getTotal());
+        statement.setString(10, ries.getSelecCultivo());
+        statement.setString(11, ries.getObCultivo());
+        statement.setString(12, ries.getTipoRiesgo());
+        statement.setInt(13, ries.getFk_cultivor());
 
         boolean rowInserted = statement.executeUpdate() > 0;
         statement.close();
@@ -70,7 +71,9 @@ public class RiesgoContamDao {
 
         while (res.next()) {
             RiesgoContam ries = new RiesgoContam();
+            ries.setPk_riesgoContam(res.getInt("pk_riesgoContam"));
             ries.setSelecCultivo(res.getString("selecCultivo"));
+            ries.setTotal(res.getString("total"));
             ries.setObCultivo(res.getString("obCultivo"));
             ries.setTipoRiesgo(res.getString("tipoRiesgo"));
             listarRiesg.add(ries);
@@ -90,9 +93,19 @@ public class RiesgoContamDao {
         ResultSet res = statement.executeQuery();
         if (res.next()) {
             riesgo = new RiesgoContam(
+                    res.getInt("pk_riesgoContam"),
+                    res.getString("tamaCultivo"),
+                    res.getString("tipoCultivo"),
+                    res.getString("tipoAplicacion"),
+                    res.getString("situacionVecino"),
+                    res.getString("tAgOrganica"),
+                    res.getString("poProductivo"),
+                    res.getString("recFruta"),
+                    res.getString("total"),
                     res.getString("selecCultivo"),
                     res.getString("obCultivo"),
-                    res.getString("tipoRiesgo")
+                    res.getString("tipoRiesgo"),
+                    res.getInt("fk_cultivor")
             );
         }
         res.close();
@@ -101,13 +114,14 @@ public class RiesgoContamDao {
     }
 
     //eliminar
-    public boolean eliminarRotacion(RiesgoContam ries) throws SQLException {
+    public boolean eliminarRiesgo(RiesgoContam ri) throws SQLException {
+        
         boolean rowEliminar = false;
-        String sql = "DELETE FROM riesgocontam WHERE pk_riesgoContam=?";
+        String sql = "DELETE FROM riesgocontam WHERE pk_riesgoContam=? ";
         con.conectar();
         connection = con.getJdbcConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, ries.getPk_riesgoContam());
+        statement.setInt(1, ri.getPk_riesgoContam());
         rowEliminar = statement.executeUpdate() > 0;
         statement.close();
         con.desconectar();

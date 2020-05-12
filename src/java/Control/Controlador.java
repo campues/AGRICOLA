@@ -14,6 +14,7 @@ import Modelo.ManObra;
 import Modelo.ProdAplicados;
 import Modelo.Producto;
 import Modelo.Provincia;
+import Modelo.RiesgoContam;
 import Modelo.RotacionCultivo;
 import Modelo.Visitas;
 import ModeloDao.AgricultorDao;
@@ -30,6 +31,7 @@ import ModeloDao.ManObraDao;
 import ModeloDao.ProAplicadosDao;
 import ModeloDao.ProductoDao;
 import ModeloDao.ProvinciaDao;
+import ModeloDao.RiesgoContamDao;
 import ModeloDao.RotacionCultivoDao;
 import ModeloDao.VisitasDao;
 import java.io.IOException;
@@ -64,6 +66,7 @@ public class Controlador extends HttpServlet {
     InsumoLoteDao insumoDAO;
     RotacionCultivoDao rotacionCulDAO;
     ProAplicadosDao prodAplicadosDAO;
+    RiesgoContamDao rContaminacionDAO;
 
     Herramientas h = new Herramientas();
     Empleado em = new Empleado();
@@ -81,8 +84,7 @@ public class Controlador extends HttpServlet {
     InsumoLote insumo = new InsumoLote();
     RotacionCultivo roCultivo = new RotacionCultivo();
     ProdAplicados proApli = new ProdAplicados();
-
-    int idEmple; // id empleado
+    RiesgoContam rcontam = new RiesgoContam();
 
     public void init() {
         String jdbcURL = getServletContext().getInitParameter("jdbcURL");
@@ -106,6 +108,7 @@ public class Controlador extends HttpServlet {
             insumoDAO = new InsumoLoteDao(jdbcURL, jdbcUsername, jdbcPassword);
             rotacionCulDAO = new RotacionCultivoDao(jdbcURL, jdbcUsername, jdbcPassword);
             prodAplicadosDAO = new ProAplicadosDao(jdbcURL, jdbcUsername, jdbcPassword);
+            rContaminacionDAO = new RiesgoContamDao(jdbcURL, jdbcUsername, jdbcPassword);
 
         } catch (Exception e) {
 
@@ -218,7 +221,27 @@ public class Controlador extends HttpServlet {
                         colmenaDAO.insertarCol(col);
                         request.getRequestDispatcher("Controlador?menu=Colmenas&accion=Listar").forward(request, response);
                         break;
-
+                    case "Actualizar":
+                        col.setPk_colmenas(Integer.parseInt(request.getParameter("pk")));
+                        col.setCodColmena(request.getParameter("txtCodigo"));
+                        col.setAbejas(request.getParameter("radioA"));
+                        col.setReina(request.getParameter("radioR"));
+                        col.setPiso(request.getParameter("txtNumero"));
+                        col.setAlimentacion(request.getParameter("txtAlimentacion"));
+                        col.setCantidad(request.getParameter("txtCantidad"));
+                        col.setDescripcion(request.getParameter("txtDescripcion"));
+                        col.setActividad(request.getParameter("txtActividad"));
+                        col.setTratamiento(request.getParameter("txtTratamiento"));
+                        col.setFk_visitas(Integer.parseInt(request.getParameter("fkVisitas")));
+                        colmenaDAO.actualizar(col);
+                        request.getRequestDispatcher("Controlador?menu=Colmenas&accion=Listar").forward(request, response);
+                        break;
+                    case "Editar":
+                        RequestDispatcher restt = request.getRequestDispatcher("colmenas-editar.jsp");
+                        col = colmenaDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_colmenas")));
+                        request.setAttribute("colm", col);
+                        restt.forward(request, response);
+                        break;
                     case "Buscar":
                         RequestDispatcher distw = request.getRequestDispatcher("colmenas.jsp");
                         List<Colmenas> colme = colmenaDAO.listarCodigo(request.getParameter("txtBusqueda"));
@@ -275,16 +298,16 @@ public class Controlador extends HttpServlet {
                         Variables.idCultivo = cu.getPk_cultivo();
                         request.getRequestDispatcher("Controlador?menu=CultivoDatos&accion=Listar").forward(request, response);
                         break;
+                    case "CultivoRiesgo":
+                        cu = cultivoDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_cultivo")));
+                        Variables.idCultivo = cu.getPk_cultivo();
+                        request.getRequestDispatcher("Controlador?menu=Rcontaminacion&accion=Listar").forward(request, response);
+
+                        break;
                     case "Editar":
-                        String org = "Organico",
-                         conv = "Convencional";
                         RequestDispatcher restt = request.getRequestDispatcher("cultivo-editar.jsp");
                         cu = cultivoDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_cultivo")));
                         request.setAttribute("cult", cu);
-                        //estatus para comparacion 
-                        request.setAttribute("estatus", cu.getEstatus());
-                        request.setAttribute("org", org);
-                        request.setAttribute("conv", conv);
                         restt.forward(request, response);
                         break;
                     case "Actualizar":
@@ -314,6 +337,58 @@ public class Controlador extends HttpServlet {
                 request.setAttribute("error", e);
                 request.getRequestDispatcher("error.jsp").forward(request, response);
             }
+        }
+        // ==============================RIESGO CONTAMINACION===========================================================
+        if (menu.equals("Rcontaminacion")) {
+            switch (accion) {
+                case "Listar":
+                    try {
+                        RequestDispatcher disCult = request.getRequestDispatcher("riesgoContam.jsp");
+                        List<RiesgoContam> liste = rContaminacionDAO.listarRiesgoID();
+                        request.setAttribute("lisRiesgo", liste);
+                        disCult.forward(request, response);
+                    } catch (SQLException e) {
+                        request.setAttribute("error", e);
+                        request.getRequestDispatcher("error.jsp").forward(request, response);
+                    }
+                    break;
+                case "Agregar":
+                    try {
+                        rcontam.setPk_riesgoContam(0);
+                        rcontam.setSelecCultivo(request.getParameter("opSelect"));
+                        rcontam.setTamaCultivo(request.getParameter("n1"));
+                        rcontam.setTipoCultivo(request.getParameter("n2"));
+                        rcontam.setTipoAplicacion(request.getParameter("n3"));
+                        rcontam.setSituacionVecino(request.getParameter("n4"));
+                        rcontam.settAgOrganica(request.getParameter("n5"));
+                        rcontam.setPoProductivo(request.getParameter("n6"));
+                        rcontam.setRecFruta(request.getParameter("n7"));
+                        rcontam.setTotal(request.getParameter("total"));
+                        rcontam.setObCultivo(request.getParameter("txtObserv"));
+                        rcontam.setTipoRiesgo(request.getParameter("txtTipoRiesgo"));
+                        rcontam.setFk_cultivor(Integer.parseInt(request.getParameter("fk_cultivor")));
+                        rContaminacionDAO.insertarRiesgo(rcontam);
+                        request.getRequestDispatcher("Controlador?menu=Rcontaminacion&accion=Listar").forward(request, response);
+
+                    } catch (SQLException e) {
+                        request.setAttribute("error", e);
+                        request.getRequestDispatcher("error.jsp").forward(request, response);
+                    }
+                    break;
+                case "Eliminar":
+                    try {
+                        rcontam = rContaminacionDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_riesgoContam")));
+                        rContaminacionDAO.eliminarRiesgo(rcontam);
+                        request.getRequestDispatcher("Controlador?menu=Rcontaminacion&accion=Listar").forward(request, response);
+                    } catch (SQLException e) {
+                        request.setAttribute("error", e);
+                        request.getRequestDispatcher("error.jsp").forward(request, response);
+                    }
+                    break;
+                default:
+                    break;
+            }
+
         }
         // ==============================ROTACION cultivo-> CULTIVO DATOS===========================================================
         if (menu.equals("RotacionCultivo")) {
@@ -396,8 +471,8 @@ public class Controlador extends HttpServlet {
                         //lista Rotacion
                         List<RotacionCultivo> listaRo = rotacionCulDAO.listarRotacionID();
                         request.setAttribute("listaRotacion", listaRo);
-                        
-                         //lista Prod Aplicados
+
+                        //lista Prod Aplicados
                         List<ProdAplicados> listaProd = prodAplicadosDAO.listarProdID();
                         request.setAttribute("listaProducto", listaProd);
                         dispatc.forward(request, response);
@@ -462,21 +537,23 @@ public class Controlador extends HttpServlet {
                 request.getRequestDispatcher("error.jsp").forward(request, response);
             }
         }
-        // ==============================ANIMALES -> DATOS EXTRAS===========================================================
-        if (menu.equals("Animales")) {
+        // ==============================MANO DE OBRA -> DATOS EXTRAS===========================================================
+        if (menu.equals("ManObra")) {
             try {
                 switch (accion) {
                     case "Agregar":
-                        anim.setPk_animales(0);
-                        anim.setEspecie(request.getParameter("opAnimales"));
-                        anim.setCantidad(request.getParameter("txtCantidad"));
-                        anim.setFk_lotea(request.getParameter("fk_lotea"));
-                        animalDAO.insertarAnimales(anim);
+                        mObra.setPk_manObra(0);
+                        mObra.setFamilia(request.getParameter("opfamilia"));
+                        mObra.setEdad(request.getParameter("opEdad"));
+                        mObra.setSexo(request.getParameter("opSexo"));
+                        mObra.setCantidad(request.getParameter("txtCantidad"));
+                        mObra.setFk_lotem(request.getParameter("fk_lotem"));
+                        mObraDAO.insertarManObra(mObra);
                         request.getRequestDispatcher("Controlador?menu=DatosExtras&accion=Listar").forward(request, response);
                         break;
                     case "Eliminar":
-                        anim = animalDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_animales")));
-                        animalDAO.eliminarAnimal(anim);
+                        mObra = mObraDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_manObra")));
+                        mObraDAO.eliminarManObra(mObra);
                         request.getRequestDispatcher("Controlador?menu=DatosExtras&accion=Listar").forward(request, response);
                         break;
                     default:
@@ -794,15 +871,9 @@ public class Controlador extends HttpServlet {
                         dispatcherw.forward(request, response);
                         break;
                     case "showedit":
-                        String valor1 = "ACTIVO";
-                        String valor2 = "INACTIVO";
                         RequestDispatcher dists = request.getRequestDispatcher("agricultor-nuevo.jsp");
                         ag = agricultorDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_agricultor")));
                         request.setAttribute("agricul", ag);
-                        request.setAttribute("estatus", ag.getEstatus());
-                        request.setAttribute("result1", valor1);
-                        request.setAttribute("result2", valor2);
-
                         dists.forward(request, response);
                         break;
                     case "Buscar":
@@ -856,7 +927,7 @@ public class Controlador extends HttpServlet {
             try {
                 switch (accion) {
                     case "Listar":
-                        RequestDispatcher dispatc = request.getRequestDispatcher("empleado-lista.jsp");
+                        RequestDispatcher dispatc = request.getRequestDispatcher("empleado.jsp");
                         List<Empleado> listaEm = empleadoDAO.listarEmpleados();
                         request.setAttribute("empleados", listaEm);
                         dispatc.forward(request, response);
@@ -872,19 +943,13 @@ public class Controlador extends HttpServlet {
                         request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
                         break;
                     case "Editar":
-                        RequestDispatcher rest = request.getRequestDispatcher("empleado-nuevo.jsp");
-                        idEmple = Integer.parseInt(request.getParameter("pk_empleado"));
-                        Empleado e = empleadoDAO.obtenerPorId(idEmple);
-                        request.setAttribute("emple", e);
-                        request.setAttribute("tipo", e.getTipo());
-                        request.setAttribute("n1", 1);
-                        request.setAttribute("n2", 2);
-                        request.setAttribute("n3", 3);
-                        request.setAttribute("n", 4);
-                        rest.forward(request, response);
+                        RequestDispatcher restt = request.getRequestDispatcher("empleado-editar.jsp");
+                        em = empleadoDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_empleado")));
+                        request.setAttribute("emple", em);
+                        restt.forward(request, response);
                         break;
                     case "Actualizar":
-                        em.setPk_empleado(idEmple);
+                        em.setPk_empleado(Integer.parseInt(request.getParameter("pk")));
                         em.setNombre(request.getParameter("txtNombre"));
                         em.setApellido(request.getParameter("txtApellido"));
                         em.setUsuario(request.getParameter("txtUsuario"));
@@ -894,14 +959,14 @@ public class Controlador extends HttpServlet {
                         request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
                         break;
                     case "Buscar":
-                        RequestDispatcher distw = request.getRequestDispatcher("empleado-lista.jsp");
+                        RequestDispatcher distw = request.getRequestDispatcher("empleado.jsp");
                         List<Empleado> liss = empleadoDAO.buscarNom(request.getParameter("txtBusqueda"));
                         request.setAttribute("empleados", liss);
                         distw.forward(request, response);
                         break;
                     case "Eliminar":
-                        idEmple = Integer.parseInt(request.getParameter("pk_empleado"));
-                        empleadoDAO.eliminarEm(idEmple);
+                        em = empleadoDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_empleado")));
+                        empleadoDAO.eliminarEm(em);
                         request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
                         break;
                     default:

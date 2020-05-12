@@ -4,14 +4,14 @@ public class RiesgoContam {
     //zona de atributo
 
     private int pk_riesgoContam;
-    private int tamaCultivo;
-    private int tipoCultivo;
-    private int tipoAplicacion;
-    private int situacionVecino;
-    private int tAgOrganica;
-    private int poProductivo;
-    private int recFruta;
-    private int total;
+    private String tamaCultivo;
+    private String tipoCultivo;
+    private String tipoAplicacion;
+    private String situacionVecino;
+    private String tAgOrganica;
+    private String poProductivo;
+    private String recFruta;
+    private String total;
     private String selecCultivo;
     private String obCultivo;
     private String tipoRiesgo;
@@ -20,30 +20,19 @@ public class RiesgoContam {
     public RiesgoContam() {
     }
 
-    public RiesgoContam(String selecCultivo, String obCultivo, String tipoRiesgo) {
-        this.selecCultivo = selecCultivo;
-        this.obCultivo = obCultivo;
-        this.tipoRiesgo = tipoRiesgo;
-    }
-    
-
-    public RiesgoContam(int pk_riesgoContam, int tamaCultivo, int tipoCultivo, int tipoAplicacion, int situacionVecino, int tAgOrganica, int poProductivo, int recFruta, int total, String selecCultivo, String obCultivo, String tipoRiesgo, int fk_cultivor) {
+    public RiesgoContam(int pk_riesgoContam, String total, String selecCultivo, String obCultivo, String tipoRiesgo) {
         this.pk_riesgoContam = pk_riesgoContam;
-        this.tamaCultivo = tamaCultivo;
-        this.tipoCultivo = tipoCultivo;
-        this.tipoAplicacion = tipoAplicacion;
-        this.situacionVecino = situacionVecino;
-        this.tAgOrganica = tAgOrganica;
-        this.poProductivo = poProductivo;
-        this.recFruta = recFruta;
         this.total = total;
         this.selecCultivo = selecCultivo;
         this.obCultivo = obCultivo;
         this.tipoRiesgo = tipoRiesgo;
-        this.fk_cultivor = fk_cultivor;
     }
 
-    public RiesgoContam(int tamaCultivo, int tipoCultivo, int tipoAplicacion, int situacionVecino, int tAgOrganica, int poProductivo, int recFruta, int total, String selecCultivo, String obCultivo, String tipoRiesgo, int fk_cultivor) {
+   
+
+
+    public RiesgoContam(int pk_riesgoContam, String tamaCultivo, String tipoCultivo, String tipoAplicacion, String situacionVecino, String tAgOrganica, String poProductivo, String recFruta, String total, String selecCultivo, String obCultivo, String tipoRiesgo, int fk_cultivor) {
+        this.pk_riesgoContam = pk_riesgoContam;
         this.tamaCultivo = tamaCultivo;
         this.tipoCultivo = tipoCultivo;
         this.tipoAplicacion = tipoAplicacion;
@@ -66,67 +55,67 @@ public class RiesgoContam {
         this.pk_riesgoContam = pk_riesgoContam;
     }
 
-    public int getTamaCultivo() {
+    public String getTamaCultivo() {
         return tamaCultivo;
     }
 
-    public void setTamaCultivo(int tamaCultivo) {
+    public void setTamaCultivo(String tamaCultivo) {
         this.tamaCultivo = tamaCultivo;
     }
 
-    public int getTipoCultivo() {
+    public String getTipoCultivo() {
         return tipoCultivo;
     }
 
-    public void setTipoCultivo(int tipoCultivo) {
+    public void setTipoCultivo(String tipoCultivo) {
         this.tipoCultivo = tipoCultivo;
     }
 
-    public int getTipoAplicacion() {
+    public String getTipoAplicacion() {
         return tipoAplicacion;
     }
 
-    public void setTipoAplicacion(int tipoAplicacion) {
+    public void setTipoAplicacion(String tipoAplicacion) {
         this.tipoAplicacion = tipoAplicacion;
     }
 
-    public int getSituacionVecino() {
+    public String getSituacionVecino() {
         return situacionVecino;
     }
 
-    public void setSituacionVecino(int situacionVecino) {
+    public void setSituacionVecino(String situacionVecino) {
         this.situacionVecino = situacionVecino;
     }
 
-    public int gettAgOrganica() {
+    public String gettAgOrganica() {
         return tAgOrganica;
     }
 
-    public void settAgOrganica(int tAgOrganica) {
+    public void settAgOrganica(String tAgOrganica) {
         this.tAgOrganica = tAgOrganica;
     }
 
-    public int getPoProductivo() {
+    public String getPoProductivo() {
         return poProductivo;
     }
 
-    public void setPoProductivo(int poProductivo) {
+    public void setPoProductivo(String poProductivo) {
         this.poProductivo = poProductivo;
     }
 
-    public int getRecFruta() {
+    public String getRecFruta() {
         return recFruta;
     }
 
-    public void setRecFruta(int recFruta) {
+    public void setRecFruta(String recFruta) {
         this.recFruta = recFruta;
     }
 
-    public int getTotal() {
+    public String getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(String total) {
         this.total = total;
     }
 
@@ -161,8 +150,5 @@ public class RiesgoContam {
     public void setFk_cultivor(int fk_cultivor) {
         this.fk_cultivor = fk_cultivor;
     }
-    
-    
-    
-}
 
+}

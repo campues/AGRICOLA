@@ -196,6 +196,7 @@
                                     <th class="ac">Editar</th>
                                     <th class="ac">Eliminar</th>
                                     <th class="ac">D.Extras</th>
+                                    <th class="ac">R.Contam</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -213,6 +214,9 @@
                                         </td>
                                         <td class="btnLis"><a title="Agregar datos Extras al Lote" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Cultivo&accion=CultivoExtras&pk_cultivo=${cu.pk_cultivo}">
                                                 <i class="fas icon-text-document-inverted"></i></a>
+                                        </td>
+                                         <td class="btnLis"><a title="Riesgo de contaminacion" class="btn btn-raised btn-warning btn-sm" href="Controlador?menu=Cultivo&accion=CultivoRiesgo&pk_cultivo=${cu.pk_cultivo}">
+                                                <i class="fas icon-add-to-list"></i></a>
                                         </td>
                                     </tr>
                                 </c:forEach>

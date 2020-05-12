@@ -29,7 +29,7 @@ public class EmpleadoDao {
 //METODO DE CONSULTA DEL DATO DESDE LA BASE DE DATOS
 
     public Empleado validar(String user, String dni) throws SQLException {
-       String sql = "select * from empleado where usuario=? and contrasena=?";
+        String sql = "select * from empleado where usuario=? and contrasena=?";
         Empleado emple = null;
         con.conectar();
         connection = con.getJdbcConnection();
@@ -75,7 +75,7 @@ public class EmpleadoDao {
     // listar todos los empleados
     public List<Empleado> listarEmpleados() throws SQLException {
         List<Empleado> listarEm = new ArrayList<Empleado>();
-         String sql = "SELECT * FROM empleado ";
+        String sql = "SELECT * FROM empleado ";
         con.conectar();
         connection = con.getJdbcConnection();
         ps = connection.prepareStatement(sql);
@@ -168,12 +168,13 @@ public class EmpleadoDao {
     }
 
     //eliminar
-    public boolean eliminarEm(int pk) throws SQLException {
+    public boolean eliminarEm(Empleado pk) throws SQLException {
         boolean rowEliminar = false;
-        String sql = "DELETE FROM empleado WHERE pk_empleado=" + pk;
+        String sql = "DELETE FROM empleado WHERE pk_empleado=?";
         con.conectar();
         connection = con.getJdbcConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, pk.getPk_empleado());
         rowEliminar = statement.executeUpdate() > 0;
         statement.close();
         con.desconectar();

@@ -112,8 +112,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-
                                 <div class="form-group">
                                     <label  class="bmd-label-floating">Nombres Completos (Responsable)</label>
                                     <input type="text"  class="form-control" name="txtResponsable" required=""  >

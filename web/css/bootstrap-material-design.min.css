@@ -1323,6 +1323,11 @@ pre code {
     margin-bottom: 1rem;
     color: #212529;
 }
+.table2 {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: black;
+}
 .table td,
 .table th {
     padding: 0.75rem;
@@ -1597,6 +1602,25 @@ pre code {
     box-shadow: none;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+.entrada{
+    border: none;
+}
+
+
+.entrada {
+    border-radius: 5px;
+    border-bottom: 1px solid gray;
+    border-top : 1px solid gray;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    background: transparent;
+    outline: none;
+    text-align: center;
+    width: 30%;
+}
+.entrada:focus{
+    border-color: #ec0505;
+}
 
 .texto {
     border: 0;
@@ -1609,6 +1633,22 @@ pre code {
 .texto:focus{
     border-color: #ec0505;
 }
+
+
+
+.txte {
+    border: 0;
+    border-bottom: 0px solid gray;
+    background: transparent;
+    outline: none;
+    color: #333333;
+    width: 100%;
+    font-size: 15px;
+}
+.txte:focus{
+    border-color: #ec0505;
+}
+
 
 .bordeDiv{
 

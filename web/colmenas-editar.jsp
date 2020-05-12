@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="Control.Variables"%>
+<jsp:useBean id="c" class="Modelo.Colmenas" scope="request" />
 
 <!DOCTYPE html>
 <html lang="es">
@@ -33,8 +34,8 @@
         <!-- General Styles -->
         <link rel="stylesheet" href="./css/style.css">
     </head>
-
     <body>
+
         <!-- Main container -->
         <main class="full-box main-container">
             <!--------------EMCABEZADO------------------->
@@ -54,75 +55,75 @@
                 </nav>
                 <!-- Page header -->
                 <div class="full-box page-header">
-
                 </div>
-
                 <!-- Content here-->
                 <div class="container-fluid">
-                    <form  name="formulario" action="Controlador?menu=Cultivo"  class="form-neon" autocomplete="off" method="POST" >
+                    <form  name="formulario" action="Controlador?menu=Colmenas"  class="form-neon" autocomplete="off" method="POST" >
                         <fieldset>
                             <legend><i class="fas fa-store-alt"></i> &nbsp; Verifica los datos antes de guardar</legend>
                             <!--<div class="nav-lateral-barra"></div> --> 
                             <div class="row">
-                                <input type="hidden"  name="pk" class="form-control"  value="${cult.pk_cultivo}">
-
                                 <input type="hidden"  class="" name="fkVisitas"   value="<%=Variables.idVisitas%>" id="item_codigo" readonly="readonly" >
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label  class="bmd-label-floating">Nombre</label>
-                                        <input type="text"  class="form-control" name="txtNombre" required="" value="${cult.nomCultivo}">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label  class="bmd-label-floating">Area</label>
-                                        <input type="text"  class="form-control" name="txtArea" required=""  value="${cult.area}">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label  class="bmd-label-floating">Densidad</label>
-                                        <input type="text"  class="form-control" name="txtDensidad" required=""  value="${cult.densidadSiembra}">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label  class="bmd-label-floating">Numero</label>
-                                        <input type="number"  class="form-control" name="txtNumero" required=""  value="${cult.numPlantas}">
-                                    </div>
-                                </div>
+                                <input type="hidden"  name="pk" class="form-control"  value="${colm.pk_colmenas}">
+
                                 <div class="col-md-5">
                                     <div class="form-group">
-                                        <label  class="">Aplicación del último producto prohibido,fecha</label>
-                                        <input type="date"  class="form-control" name="txtFecha" required=""  value="${cult.fechaPro}">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label  class="bmd-label-floating">Estimado de cosecha</label>
-                                        <input type="number"  class="form-control" name="txtEstimacion" required=""  value="${cult.es_cosecha}">
+                                        <label for="" style="color: #007065;">Abejas:</label>
+                                        <label style="color: #020202;">SI</label> 
+                                        <input  type="radio" name="radioA" value="SI"<c:if test="${colm.abejas == 'SI'}">checked</c:if> >&nbsp;
+                                        <label style="color: #020202;">NO</label>
+                                        <input type="radio" name="radioA" value="NO"<c:if test="${colm.abejas == 'NO'}">checked</c:if> >
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="item" class="bmd-label-floating">Estatus</label>
-                                        <select class="form-control" name="opEstatus" id="item">
-                                            <option value="Organico" <c:if test="${cult.estatus == 'Organico'}"> selected </c:if>>Organico</option>
-                                            <option value="Convencional" <c:if test="${cult.estatus == 'Convencional'}"> selected</c:if>>Convencional</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label  class="bmd-label-floating">Manejo Organicamente desde(Año)</label>
-                                            <input type="number"  class="form-control" name="txtAnio_or" required=""  value="${cult.anio_organica}">
+                                        <label for="" style="color: #007065;">Reina:</label>
+                                        <label style="color: #020202;">SI</label> <input  type="radio" name="radioR" value="SI" <c:if test="${colm.reina == 'SI'}">checked</c:if> >&nbsp;
+                                        <label style="color: #020202;">NO</label><input type="radio" name="radioR" value="NO" <c:if test="${colm.reina == 'NO'}">checked</c:if> >
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <div class="form-group">
-                                        <label  class="bmd-label-floating">Año de la primera preinspección</label>
-                                        <input type="number"  class="form-control" name="txtAnio_ins" required=""  value="${cult.anio_inspeccion}">
+                                        <label  class="bmd-label-floating">Codigo</label>
+                                        <input type="text"  class="form-control" name="txtCodigo" required="" value="${colm.codColmena}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label  class="bmd-label-floating">Pisos</label>
+                                        <input type="number"  class="form-control" name="txtNumero" required="" value="${colm.piso}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label  class="bmd-label-floating">Cantidad</label>
+                                        <input type="number"  class="form-control" name="txtCantidad" required="" value="${colm.cantidad}">
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label  class="bmd-label-floating">Alimentacion</label>
+                                        <input type="text"  class="form-control" name="txtAlimentacion" required="" title="Ingresa la fecha" value="${colm.alimentacion}">
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label  class="bmd-label-floating">Descripcion</label>
+                                        <input type="text"  class="form-control" name="txtDescripcion" required="" value="${colm.descripcion}">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-11">
+                                    <div class="form-group">
+                                        <label  class="bmd-label-floating">Actividad</label>
+                                        <input type="text"  class="form-control" name="txtActividad" required="" value="${colm.actividad}">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-11">
+                                    <div class="form-group">
+                                        <label  class="bmd-label-floating">Tratamiento</label>
+                                        <input type="text"  class="form-control" name="txtTratamiento" required="" value="${colm.tratamiento}">
                                     </div>
                                 </div>
                             </div>

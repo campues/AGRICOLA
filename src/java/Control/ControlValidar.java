@@ -1,6 +1,8 @@
 package Control;
 
+import Modelo.Agricultor;
 import Modelo.Empleado;
+import ModeloDao.AgricultorDao;
 import ModeloDao.EmpleadoDao;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -54,6 +56,7 @@ public class ControlValidar extends HttpServlet {
                     sesionOK.setAttribute("tipo", em.getTipo());
                     global.emplUsuario = em.getTipo();
                     request.getRequestDispatcher("Controlador?menu=Inicio").forward(request, response);
+
                 }
             } catch (Exception e) {
                 RequestDispatcher res = request.getRequestDispatcher("index.jsp");

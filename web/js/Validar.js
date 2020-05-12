@@ -9,11 +9,11 @@ function iniciar() {
 
 function validar2() {
     var n0 = document.getElementsByName("txtCedula").value;
-        var error= document.getElementById("error");
+    var error = document.getElementById("error");
 
     if (n0.value === "") {
         n0.focus();
-        error.textContent="Digita la cedula";
+        error.textContent = "Digita la cedula";
         return false;
     }
 }
@@ -77,33 +77,5 @@ function validar() {
         return false;
     } else {
         alertify.success("Producto Registrado");
-    }
-}
-function soloLetras(e) {
-    key = e.keyCode || e.which;
-    teclado = String.fromCharCode(key);
-
-    if ((teclado < 'A' || teclado > 'z') && teclado !== ' ') {
-        e.preventDefault();
-    }
-}
-
-function soloDecimal(e) {
-    key = e.keyCode || e.which;
-    teclado = String.fromCharCode(key);
-    numero = "0123456789.";
-
-    if (numero.indexOf(teclado) == -1) {
-        e.preventDefault();
-    }
-}
-
-function soloEnteros(e) {
-    key = e.keyCode || e.which;
-    teclado = String.fromCharCode(key);
-    numero = "0123456789";
-
-    if (numero.indexOf(teclado) == -1) {
-        e.preventDefault();
     }
 }

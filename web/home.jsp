@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="Modelo.Agricultor"%>
 <%@page import="Control.Variables"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
@@ -62,13 +64,14 @@
                         Los sistemas agrícolas se definen como conjuntos de explotaciones agrícolas individuales con recursos básicos, pautas empresariales, medios familiares de sustento y limitaciones en general similares, a los cuales corresponderían estrategias de desarrollo e intervenciones parecidas. Según el alcance del análisis, un sistema agrícola puede abarcar unas docenas o a muchos millones de familias.
                     </p>
                 </div>
-
+               
                 <!-- Content -->
                 <div class="full-box tile-container">
                     <a href="Controlador?menu=Agricultor&accion=Listar" class="tile">
                         <div class="contenedor">
                             <img class="icon" src="assets/inicio/farmer.png">
                             <p class="tx">Agricultor</p>
+                           
                         </div>
                     </a>
                     <a href="Controlador?menu=Lote&accion=Listar" class="tile">
@@ -103,9 +106,9 @@
             </section>
 
         </main>
-         
-         
-       
+
+
+
 
         <!--=============================================
         =            Include JavaScript files           =

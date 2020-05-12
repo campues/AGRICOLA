@@ -41,16 +41,16 @@
 <section class="full-box nav-lateral">
     <div class="full-box nav-lateral-bg show-nav-lateral"></div>
     <div class="full-box nav-lateral-content">
-        
+
         <figure class="full-box nav-lateral-avatar">
             <i class="far fa-times-circle show-nav-lateral"></i>
             <img src="./assets/avatar/Avatar2.png" class="img-fluid" style="background: #03a9f4;" alt="Avatar">
             <figcaption class="roboto-medium text-center">
                 <%=sesionOK.getAttribute("nom")%>  <%=sesionOK.getAttribute("ape")%> <br><small class="roboto-condensed-light"><%=sesionOK.getAttribute("usu")%></small>
             </figcaption>
-            
+
         </figure>
-           
+
         <div class="full-box nav-lateral-bar"></div>
         <nav class="full-box nav-lateral-menu">
             <ul>
@@ -110,13 +110,11 @@
                 <li>
                     <a href="#" class="nav-btn-submenu"><i class="fas  fa-user-secret fa-fw"></i> &nbsp; Usuarios <i class="fas fa-chevron-down"></i></a>
                     <ul>
-                        <li>
-                            <a href="empleado-nuevo.jsp"><i class="fas fa-plus fa-fw"></i> &nbsp; Nuevo usuario</a>
-                        </li>
+                       
                         <li>
                             <a href="Controlador?menu=Empleado&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de usuarios</a>
                         </li>
-                       
+
                     </ul>
                 </li>
 
@@ -127,8 +125,8 @@
                 <li>
                     <a href="Controlador?menu=Detalles&accion=Listar"><i class="icon-add-to-list"></i> &nbsp; Suministro</a>
                 </li>
-               
-               
+
+
             </ul>
         </nav>
 

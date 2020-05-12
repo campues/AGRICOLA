@@ -170,7 +170,6 @@
                         <table class="table table-dark table-sm">
                             <thead>
                                 <tr class="text-center roboto-medium">
-                                    <th>Id</th>
                                     <th>Fecha</th>
                                     <th>Cantidad</th>
                                     <th>Agricultor</th>
@@ -183,7 +182,6 @@
                             <tbody >
                                 <%for (Detallespro de : detalles) {%>
                                 <tr class="text-center"> 
-                                    <td><%=de.getPk_detallesPro()%></td>
                                     <td><%=de.getFechaEntrega()%></td>
                                     <td><%=de.getCantidad()%></td>
                                     <td><%=de.getFk_agricutor()%></td>

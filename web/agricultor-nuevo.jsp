@@ -144,16 +144,8 @@
                                             <label for="item" class="bmd-label-floating">Estatus</label>
                                             <select class="form-control" name="txtEst" id="item" required="">
                                                 <option value="" selected="" disabled="">Seleccione una opcion</option>
-                                                <option value="ACTIVO"
-                                                        <c:if test="${result1 == estatus}">
-                                                            selected
-                                                        </c:if>
-                                                        >Activo</option>
-                                                <option value="INACTIVO"
-                                                        <c:if test="${result2 == estatus}">
-                                                            selected
-                                                        </c:if>
-                                                        >Inactivo</option>
+                                                <option value="ACTIVO"<c:if test="${agricul.estatus == 'ACTIVO'}">selected</c:if> >Activo</option>
+                                                <option value="INACTIVO" <c:if test="${agricul.estatus == 'INACTIVO'}">selected </c:if>>Inactivo</option>
                                             </select>
                                         </div>
                                     </div> 
@@ -161,8 +153,8 @@
                                     <div class="col-12 col-md-4">
                                         <div class="form-group">
                                             <label for="" style="color: #007065;">Lider Asociacion:</label>
-                                            <label style="color: #020202;">SI</label> <input  type="radio" name="radioL" value="SI" required="">&nbsp;
-                                            <label style="color: #020202;">NO</label><input type="radio" name="radioL" value="NO" required="">
+                                            <label style="color: #020202;">SI</label> <input  type="radio" name="radioL" value="SI" required="" <c:if test="${agricul.liderAsociacion == 'SI'}">checked</c:if>>&nbsp;
+                                            <label style="color: #020202;">NO</label><input type="radio" name="radioL" value="NO" required="" <c:if test="${agricul.liderAsociacion == 'NO'}">checked</c:if>>
                                         </div>
                                     </div>
                                 </div>

@@ -209,7 +209,7 @@
                                         <td class="btnLis"><a  title="Actualizar Colmena"  class="btn btn-raised btn-success btn-sm"   href="Controlador?menu=Colmenas&accion=Editar&pk_colmenas=${abe.pk_colmenas}">
                                                 <i class="fas  fa-sync-alt"></i></a>
                                         </td>
-                                        <td class="btnLis"><a title="Eliminar Colmena"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=Cultivo&accion=Eliminar&pk_colmenas=${abe.pk_colmenas}">
+                                        <td class="btnLis"><a title="Eliminar Colmena"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=Colmenas&accion=Eliminar&pk_colmenas=${abe.pk_colmenas}">
                                                 <i class="far fa-trash-alt"></i></a>
                                         </td>
                                     </tr>

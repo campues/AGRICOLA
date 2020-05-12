@@ -51,6 +51,8 @@ public class AgricultorDao {
         con.desconectar();
         return listarAgri;
     }
+   
+    
   // LISTAR POR BUSQUEDA
     public Agricultor buscarCed(String cedula) throws SQLException {
         Agricultor agricultor = null;
@@ -134,6 +136,7 @@ public class AgricultorDao {
         return rowActualizar;
     }
 
+    
     // Obtener por PK
     public Agricultor obtenerPorId(int pk_agricultor) throws SQLException {
         Agricultor agricultor = null;

@@ -125,7 +125,7 @@ public class ColmenaDao {
 
     public boolean actualizar(Colmenas col) throws SQLException {
         boolean rowActualizar = false;
-        String sql = "UPDATE cultivo SET codColmena=?,abejas=?,reina=?,piso=?,alimentacion=?,cantidad=?,"
+        String sql = "UPDATE colmenas SET codColmena=?,abejas=?,reina=?,piso=?,alimentacion=?,cantidad=?,"
                 + "descripcion=?,actividad=?,tratamiento=?,fk_visitas=? WHERE pk_colmenas=? ";
         con.conectar();
         connection = con.getJdbcConnection();
@@ -162,7 +162,7 @@ public class ColmenaDao {
             colmenas = new Colmenas(
                     res.getInt("pk_colmenas"),
                     res.getString("codColmena"),
-                    res.getString("abeja"),
+                    res.getString("abejas"),
                     res.getString("reina"),
                     res.getString("piso"),
                     res.getString("alimentacion"),
@@ -181,7 +181,7 @@ public class ColmenaDao {
     //eliminar
     public boolean eliminarColmena(Colmenas col) throws SQLException {
         boolean rowEliminar = false;
-        String sql = "DELETE FROM colmenas WHERE pk_colmenas=?";
+        String sql = "DELETE FROM colmenas WHERE pk_colmenas=? ";
         con.conectar();
         connection = con.getJdbcConnection();
         PreparedStatement statement = connection.prepareStatement(sql);

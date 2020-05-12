@@ -56,34 +56,17 @@
                 </nav>
                 <!-- Page header -->
                 <div class="full-box page-header">
-                    <h3 class="text-left">
-                        <i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO USUARIO
-                    </h3>
-                    <p class="text-justify">
-                        Agrega nuevos usuarios y puedes dar permisos para acceder al sistema
-                    </p>
-                </div>
-
-                <div class="container-fluid">
-                    <ul class="full-box list-unstyled page-nav-tabs">
-                        <li>
-                            <a class="active" href="empleado-nuevo.jsp"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO USUARIO</a>
-                        </li>
-                        <li>
-                            <a href="Controlador?menu=Empleado&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE USUARIOS</a>
-                        </li>
-
-                    </ul>	
                 </div>
                 <!-- Content -->
                 <div class="container-fluid">
                     <form action="Controlador?menu=Empleado" class="form-neon" autocomplete="off" method="POST">
                         <fieldset>
-                            <legend><i class="fas fa-user-lock"></i> &nbsp; Informacion del Empleado</legend>
+                            <legend><i class="fas fa-sync-alt"></i> &nbsp; Verifica los datos antes de guardar</legend>
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-5">
                                         <div class="form-group">
+                                            <input type="hidden" class="form-control" name="pk" value="${emple.getPk_empleado()}">
                                             <label for="usuario_nombre" class="bmd-label-floating">Nombres</label>
                                             <input type="text" class="form-control" name="txtNombre" value="${emple.getNombre()}">
                                         </div>
@@ -118,26 +101,23 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12">
-                                        <p ><span class="badge badge-info">Control total</span> <label class=" etiqueta">Permisos para registrar, actualizar y eliminar</label> </p>
-                                        <p><span class="badge badge-success">Edicion</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="etiqueta">Permisos para registrar y actualizar</label> </p>
-                                        <p><span class="badge badge-dark">Registrar</span> &nbsp;&nbsp;&nbsp;<label class="etiqueta"> Solo permisos para registrar</label></p>
+                                        <span class="badge badge-info">Control total</span> <label class=" etiqueta">Permisos para registrar, actualizar y eliminar</label> <br>
+                                        <span class="badge badge-success">Edicion</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="etiqueta">Permisos para registrar y actualizar</label> <br>
+                                        <span class="badge badge-dark">Registrar</span> &nbsp;&nbsp;&nbsp;&nbsp;<label class="etiqueta"> Solo permisos para registrar</label>
                                         <div class="form-group">
                                             <select class="form-control" name="opTipo">
-
-                                                <option value="1" <c:if test="${n1 == tipo}"> selected </c:if>>Control total</option>
-                                                <option value="2" <c:if test="${n2 == tipo}"> selected</c:if>>Edicion</option>
-                                                <option value="3"<c:if test="${n3 == tipo}">selected </c:if>>Registrar</option>
-                                                <option disabled <c:if test="${n == tipo}">selected </c:if>>Seleccione una opcion</option>
+                                                <option value="1" <c:if test="${emple.tipo == '1'}"> selected </c:if>>Control total</option>
+                                                <option value="2" <c:if test="${emple.tipo == '2'}"> selected</c:if>>Edicion</option>
+                                                <option value="3"<c:if test="${emple.tipo == '3'}">selected </c:if>>Registrar</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </fieldset>
-                        <p class="text-center" style="margin-top: 40px;">
-                            <button  id="btn4" type="submit" name="accion" value="Actualizar" class="btn btn-raised btn-success btn-sm"><i class="fas fa-sync-alt"></i> &nbsp;ACTUALIZAR</button>
-                            &nbsp; &nbsp;
-                            <button id="btn4"  type="submit" name="accion" value="Agregar" class="btn btn-raised btn-info btn-sm"><i class="far fa-save"></i> &nbsp; AGREGAR</button>
+                        <p class="text-center" >
+                            <button   type="submit" name="accion" value="Actualizar" class="btn btn-raised btn-success btn-sm"> ACTUALIZAR</button>
+                            <button   type="submit" name="accion" value="Listar" class="btn btn-raised btn-danger btn-sm"> CANCELAR</button>
                         </p>
                     </form>
                 </div>
