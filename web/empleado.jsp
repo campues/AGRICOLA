@@ -8,31 +8,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <title>Lista usuarios</title>
-
-        <!-- Normalize V8.0.1 -->
-        <link rel="stylesheet" href="./css/normalize.css">
-
-        <!-- Bootstrap V4.3 -->
-        <link rel="stylesheet" href="./css/bootstrap.min.css">
-
-        <!-- Bootstrap Material Design V4.0 -->
-        <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
-
-        <!-- Font Awesome V5.9.0 -->
-        <link rel="stylesheet" href="./css/all.css">
-
-        <!-- Sweet Alerts V8.13.0 CSS file -->
-        <link rel="stylesheet" href="./css/sweetalert2.min.css">
-
-        <!-- Sweet Alert V8.13.0 JS file-->
-        <script src="./js/sweetalert2.min.js" ></script>
-
-        <!-- jQuery Custom Content Scroller V3.1.5 -->
-        <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
-
-        <!-- General Styles -->
-        <link rel="stylesheet" href="./css/style.css">
-
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"/> 
 
     </head>
     <%
@@ -75,7 +51,7 @@
                             <a  href="#" data-toggle="modal" data-target="#ModalAgregar"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR</a>
                         </li>
                         <li>
-                            <a href="Controlador?menu=Empleado&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE USUARIOS</a>
+                            <a href="Controlador?menu=Empleados&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE USUARIOS</a>
                         </li>
                         <li>
                             <a  href="#" data-toggle="modal" data-target="#ModalBuscar"><i  class="fas fa-search fa-fw"></i> &nbsp; BUSCAR USUARIO</a>
@@ -92,7 +68,7 @@
                                     <span class="etiqueta4" >&times;</span>
                                 </button>
                             </div>
-                            <form action="Controlador?menu=Empleado" class="form-neon" autocomplete="off" method="POST">
+                            <form action="Controlador?menu=Empleados" class="form-neon" autocomplete="off" method="POST">
                                 <fieldset>
                                     <div class="container-fluid">
                                         <div class="row">
@@ -166,7 +142,7 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <form class="modal-body" action="Controlador?menu=Empleado" method="POST"  >
+                            <form class="modal-body" action="Controlador?menu=Empleados" method="POST"  >
                                 <div class="form-group">
                                     <label  class="bmd-label-floating">Ingresa el Nombre</label>
                                     <input type="text"  class="form-control" name="txtBusqueda" required="" title="Ingresa un nombre">
@@ -183,9 +159,9 @@
                 <!-- Content -->
                 <div class="container-fluid">
                     <div class="table-responsive">
-                        <table class="table table-dark table-sm">
-                            <thead>
-                                <tr class="text-center roboto-medium">
+                        <table id="tablalist" class="table table-dark table-sm">
+                            <thead >
+                                <tr class="roboto-medium">
                                     <th>Nombre</th>
                                     <th>Apellido</th>
                                     <th>Usuario</th>
@@ -195,7 +171,7 @@
                                 </tr>
                             </thead>
                             <% for (Empleado em : emplea) {%>
-                            <tr class="text-center">
+                            <tr >
                                 <td><%=em.getNombre()%></td>
                                 <td><%=em.getApellido()%></td>
                                 <td><%=em.getUsuario()%></td>
@@ -208,39 +184,26 @@
                                     Registro
                                     <%}%>
                                 </td>
-                                <td class="btnLis">
-                                    <a class="btn btn-raised btn-success btn-sm"   href="Controlador?menu=Empleado&accion=Editar&pk_empleado=<%=em.getPk_empleado()%>" >
+                                <td class="btnLis text-center">
+                                    <a class="btn btn-raised btn-success btn-sm"   href="Controlador?menu=Empleados&accion=Editar&pk_empleado=<%=em.getPk_empleado()%>" >
                                         <i class="fas  fa-sync-alt"></i></a>
                                 </td>
-                                <td class="btnLis">
-                                    <a class="btn btn-raised btn-danger btn-sm" href="Controlador?menu=Empleado&accion=Eliminar&pk_empleado=<%=em.getPk_empleado()%>" >
+                                <td class="btnLis text-center">
+                                    <a class="btn btn-raised btn-danger btn-sm" href="Controlador?menu=Empleados&accion=Eliminar&pk_empleado=<%=em.getPk_empleado()%>" >
                                         <i class="far fa-trash-alt"></i></a>
                                 </td>
                             </tr>
                             <%}%>
                             </tbody>
-
                         </table>
                     </div>
-
                 </div>
-
             </section>
+            <!--    Datatables-->
+            <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
+            <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script> 
+            <script src="js/datetable.js" type="text/javascript"></script>
         </main>
-
-
-        <!--=============================================
-        =            Include JavaScript files           =
-        ==============================================-->
-        <!-- jQuery V3.4.1 -->
-        <script src="./js/jquery-3.4.1.min.js" ></script>
-
-        <!-- popper -->
-        <script src="./js/popper.min.js" ></script>
-
-        <!-- Bootstrap V4.3 -->
-        <script src="./js/bootstrap.min.js" ></script>
-
         <!-- jQuery Custom Content Scroller V3.1.5 -->
         <script src="./js/jquery.mCustomScrollbar.concat.min.js" ></script>
 

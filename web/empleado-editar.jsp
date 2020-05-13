@@ -59,7 +59,7 @@
                 </div>
                 <!-- Content -->
                 <div class="container-fluid">
-                    <form action="Controlador?menu=Empleado" class="form-neon" autocomplete="off" method="POST">
+                    <form action="Controlador?menu=Empleados" class="form-neon" autocomplete="off" method="POST">
                         <fieldset>
                             <legend><i class="fas fa-sync-alt"></i> &nbsp; Verifica los datos antes de guardar</legend>
                             <div class="container-fluid">

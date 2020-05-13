@@ -7,30 +7,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <title>Datos de la empresa</title>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"/> 
 
-        <!-- Normalize V8.0.1 -->
-        <link rel="stylesheet" href="./css/normalize.css">
-
-        <!-- Bootstrap V4.3 -->
-        <link rel="stylesheet" href="./css/bootstrap.min.css">
-
-        <!-- Bootstrap Material Design V4.0 -->
-        <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
-
-        <!-- Font Awesome V5.9.0 -->
-        <link rel="stylesheet" href="./css/all.css">
-
-        <!-- Sweet Alerts V8.13.0 CSS file -->
-        <link rel="stylesheet" href="./css/sweetalert2.min.css">
-
-        <!-- Sweet Alert V8.13.0 JS file-->
-        <script src="./js/sweetalert2.min.js"></script>
-
-        <!-- jQuery Custom Content Scroller V3.1.5 -->
-        <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
-
-        <!-- General Styles -->
-        <link rel="stylesheet" href="./css/style.css">
     </head>
 
     <body>
@@ -186,9 +164,9 @@
                 <!-- Content here-->
                 <div class="container-fluid">
                     <div class="table-responsive">
-                        <table class="table table-dark table-sm">
-                            <thead>
-                                <tr class="text-center roboto-medium">
+                        <table id="tablalist" class="table table-dark table-sm">
+                            <thead >
+                                <tr class="roboto-medium">
                                     <th>ID</th>
                                     <th>Codigo</th>
                                     <th>Ajebas</th>
@@ -200,16 +178,16 @@
                             </thead>
                             <tbody>
                                 <c:forEach var="abe" items="${listaCol}">
-                                    <tr class="text-center"> 
+                                    <tr > 
                                         <td>${abe.pk_colmenas}</td>
                                         <td>${abe.codColmena}</td>
                                         <td>${abe.abejas}</td>
                                         <td>${abe.piso}</td>
                                         <td>${abe.cantidad}</td>
-                                        <td class="btnLis"><a  title="Actualizar Colmena"  class="btn btn-raised btn-success btn-sm"   href="Controlador?menu=Colmenas&accion=Editar&pk_colmenas=${abe.pk_colmenas}">
+                                        <td class="btnLis text-center"><a  title="Actualizar Colmena"  class="btn btn-raised btn-success btn-sm"   href="Controlador?menu=Colmenas&accion=Editar&pk_colmenas=${abe.pk_colmenas}">
                                                 <i class="fas  fa-sync-alt"></i></a>
                                         </td>
-                                        <td class="btnLis"><a title="Eliminar Colmena"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=Colmenas&accion=Eliminar&pk_colmenas=${abe.pk_colmenas}">
+                                        <td class="btnLis text-center"><a title="Eliminar Colmena"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=Colmenas&accion=Eliminar&pk_colmenas=${abe.pk_colmenas}">
                                                 <i class="far fa-trash-alt"></i></a>
                                         </td>
                                     </tr>
@@ -220,21 +198,11 @@
                 </div>
 
             </section>
+        <!--    Datatables-->
+            <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
+            <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script> 
+            <script src="js/datetable.js" type="text/javascript"></script>
         </main>
-
-
-        <!--=============================================
-            =            Include JavaScript files           =
-            ==============================================-->
-        <!-- jQuery V3.4.1 -->
-        <script src="./js/jquery-3.4.1.min.js"></script>
-
-        <!-- popper -->
-        <script src="./js/popper.min.js"></script>
-
-        <!-- Bootstrap V4.3 -->
-        <script src="./js/bootstrap.min.js"></script>
-
         <!-- jQuery Custom Content Scroller V3.1.5 -->
         <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
 
@@ -247,4 +215,5 @@
         </script>
 
         <script src="./js/main.js"></script>
-    </body></html>
+    </body>
+</html>

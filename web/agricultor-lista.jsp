@@ -7,32 +7,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <title>Lista de clientes</title>
-
-        <!-- Normalize V8.0.1 -->
-        <link rel="stylesheet" href="./css/normalize.css">
-
-        <!-- Bootstrap V4.3 -->
-        <link rel="stylesheet" href="./css/bootstrap.min.css">
-
-        <!-- Bootstrap Material Design V4.0 -->
-        <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
-
-        <!-- Font Awesome V5.9.0 -->
-        <link rel="stylesheet" href="./css/all.css">
-
-        <!-- Sweet Alerts V8.13.0 CSS file -->
-        <link rel="stylesheet" href="./css/sweetalert2.min.css">
-
-        <!-- Sweet Alert V8.13.0 JS file-->
-        <script src="./js/sweetalert2.min.js" ></script>
-
-        <!-- jQuery Custom Content Scroller V3.1.5 -->
-        <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
-
-        <!-- General Styles -->
-        <link rel="stylesheet" href="./css/style.css">
-
-
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"/> 
     </head>
     <body>
 
@@ -77,7 +52,7 @@
                         </li>
                     </ul>	
                 </div>
- <!-- ============================================MODAL HERRAMIENTAS=============================0 -->
+                <!-- ============================================MODAL HERRAMIENTAS=============================0 -->
                 <div class="modal fade" id="ModalBuscar" tabindex="-1" role="dialog" aria-labelledby="ModalBuscar" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -103,9 +78,9 @@
                 <!-- Content here-->
                 <div class="container-fluid">
                     <div class="table-responsive">
-                        <table class="table table-dark table-sm">
+                      <table id="tablalist" class="table table-dark table-sm">
                             <thead>
-                                <tr class="text-center roboto-medium">
+                                <tr class=" roboto-medium">
                                     <th>ID</th>
                                     <th>Nombre</th>
                                     <th>Apellido</th>
@@ -121,7 +96,7 @@
                             </thead>
                             <tbody>
                                 <c:forEach var="a" items="${listaAgri}">
-                                    <tr class="text-center"> 
+                                    <tr > 
                                         <td>${a.pk_agricultor}</td>
                                         <td>${a.nombre1}</td>
                                         <td>${a.apellido1}</td>
@@ -130,13 +105,13 @@
                                         <td>${a.estatus}</td>
                                         <td>${a.fechaAfiliacion}</td>
 
-                                        <td class="btnLis"><a  title="Actualizar datos del Agricultor" class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Agricultor&accion=showedit&pk_agricultor=${a.pk_agricultor}">
+                                        <td class="btnLis text-center"><a  title="Actualizar datos del Agricultor" class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Agricultor&accion=showedit&pk_agricultor=${a.pk_agricultor}">
                                                 <i class="fas  fa-sync-alt"></i></a>
                                         </td>
-                                        <td class="btnLis"><a title="Eliminar Agricultor"  id="elimina" class="btn btn-raised btn-danger btn-sm" href="Controlador?menu=Agricultor&accion=Eliminar&pk_agricultor=${a.pk_agricultor}">
+                                        <td class="btnLis text-center"><a title="Eliminar Agricultor"  id="elimina" class="btn btn-raised btn-danger btn-sm" href="Controlador?menu=Agricultor&accion=Eliminar&pk_agricultor=${a.pk_agricultor}">
                                                 <i class="far fa-trash-alt"></i></a>
                                         </td>
-                                        <td class="btnLis"><a title="Lotes del Agricultor" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Agricultor&accion=VerTerreno&pk_agricultor=${a.pk_agricultor}">
+                                        <td class="btnLis text-center"><a title="Lotes del Agricultor" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Agricultor&accion=VerTerreno&pk_agricultor=${a.pk_agricultor}">
                                                 <i class="fas fa-box-open"></i></a>
                                         </td>
 
@@ -148,30 +123,22 @@
 
                 </div>
             </section>
+            <!--    Datatables-->
+            <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
+            <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script> 
+            <script src="js/datetable.js" type="text/javascript"></script>
         </main>
-
-
-        <!--=============================================
-        =            Include JavaScript files           =
-        ==============================================-->
-        <!-- jQuery V3.4.1 -->
-        <script src="./js/jquery-3.4.1.min.js" ></script>
-
-        <!-- popper -->
-        <script src="./js/popper.min.js" ></script>
-
-        <!-- Bootstrap V4.3 -->
-        <script src="./js/bootstrap.min.js" ></script>
-
         <!-- jQuery Custom Content Scroller V3.1.5 -->
-        <script src="./js/jquery.mCustomScrollbar.concat.min.js" ></script>
+        <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
 
         <!-- Bootstrap Material Design V4.0 -->
-        <script src="./js/bootstrap-material-design.min.js" ></script>
-        <script>$(document).ready(function () {
+        <script src="./js/bootstrap-material-design.min.js"></script>
+        <script>
+            $(document).ready(function () {
                 $('body').bootstrapMaterialDesign();
-            });</script>
+            });
+        </script>
 
-        <script src="./js/main.js" ></script>
+        <script src="./js/main.js"></script>
     </body>
 </html>

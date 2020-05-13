@@ -9,30 +9,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Datos de la empresa</title>
-
-        <!-- Normalize V8.0.1 -->
-        <link rel="stylesheet" href="./css/normalize.css">
-
-        <!-- Bootstrap V4.3 -->
-        <link rel="stylesheet" href="./css/bootstrap.min.css">
-
-        <!-- Bootstrap Material Design V4.0 -->
-        <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
-
-        <!-- Font Awesome V5.9.0 -->
-        <link rel="stylesheet" href="./css/all.css">
-
-        <!-- Sweet Alerts V8.13.0 CSS file -->
-        <link rel="stylesheet" href="./css/sweetalert2.min.css">
-
-        <!-- Sweet Alert V8.13.0 JS file-->
-        <script src="./js/sweetalert2.min.js"></script>
-
-        <!-- jQuery Custom Content Scroller V3.1.5 -->
-        <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
-
-        <!-- General Styles -->
-        <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"/> 
     </head>
 
     <%
@@ -47,7 +24,7 @@
             <!--------------EMCABEZADO------------------->
             <jsp:include page="header.jsp"/>
             <!-- Page content -->
-            <section class="full-box page-content">
+            <section class="full-box page-content" >
                 <nav class="full-box navbar-info">
                     <a href="#" class="float-left show-nav-lateral">
                         <i class="fas fa-exchange-alt"></i>
@@ -165,23 +142,23 @@
                     </div>
                 </div>
                 <!-- Content here-->
-                <div class="container-fluid">
+                <div class="container-fluid"  >
                     <div class="table-responsive">
-                        <table class="table table-dark table-sm">
-                            <thead>
-                                <tr class="text-center roboto-medium">
+                        <table id="tablalist" class="table table-dark table-sm">
+                            <thead >
+                                <tr class="roboto-medium">
                                     <th>Fecha</th>
                                     <th>Cantidad</th>
                                     <th>Agricultor</th>
                                     <th >Producto</th>
                                     <th >Empleado</th>
-                                    <th class="ac">Editar</th>
+                                    <th class="ac" >Editar</th>
                                     <th class="ac">Eliminar</th>
                                 </tr>
                             </thead>
                             <tbody >
                                 <%for (Detallespro de : detalles) {%>
-                                <tr class="text-center"> 
+                                <tr > 
                                     <td><%=de.getFechaEntrega()%></td>
                                     <td><%=de.getCantidad()%></td>
                                     <td><%=de.getFk_agricutor()%></td>
@@ -200,23 +177,13 @@
                     </div>
                 </div>
             </section>
+            <!--    Datatables-->
+            <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
+            <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script> 
+            <script src="js/datetable.js" type="text/javascript"></script>
         </main>
-
-        <!--=============================================
-               =            Include JavaScript files           =
-               ==============================================-->
-        <!-- jQuery V3.4.1 -->
-        <script src="./js/jquery-3.4.1.min.js"></script>
-
-        <!-- popper -->
-        <script src="./js/popper.min.js"></script>
-
-        <!-- Bootstrap V4.3 -->
-        <script src="./js/bootstrap.min.js"></script>
-
         <!-- jQuery Custom Content Scroller V3.1.5 -->
         <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
-
         <!-- Bootstrap Material Design V4.0 -->
         <script src="./js/bootstrap-material-design.min.js"></script>
         <script>

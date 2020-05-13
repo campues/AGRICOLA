@@ -110,7 +110,7 @@
                 <li>
                     <a href="#" class="nav-btn-submenu"><i class="fas  fa-user-secret fa-fw"></i> &nbsp; Usuarios <i class="fas fa-chevron-down"></i></a>
                     <ul>
-                       
+
                         <li>
                             <a href="Controlador?menu=Empleado&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de usuarios</a>
                         </li>
@@ -125,8 +125,7 @@
                 <li>
                     <a href="Controlador?menu=Detalles&accion=Listar"><i class="icon-add-to-list"></i> &nbsp; Suministro</a>
                 </li>
-
-
+               
             </ul>
         </nav>
 

@@ -94,7 +94,7 @@
                         </div>
                     </a>
 
-                    <a href="Controlador?menu=Empleado&accion=Listar" class="tile">
+                    <a href="Controlador?menu=Empleados&accion=Listar" class="tile">
                         <div class="contenedor">
                             <img class="icon" src="assets/inicio/user01.png">
                             <p class="tx">Usuarios</p>
