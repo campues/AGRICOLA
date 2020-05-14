@@ -1,3 +1,4 @@
+<% HttpSession sesionOK = request.getSession();%>
 <%@page import="Modelo.Detallespro"%>
 <%@page import="Modelo.Empleado"%>
 <%@page import="Modelo.Producto"%>
@@ -19,22 +20,25 @@
         List<Detallespro> detalles = (List<Detallespro>) request.getAttribute("listaDe");
     %>
     <body>
-        <!-- Main container -->
-        <main class="full-box main-container" >
+      <!-- Main container -->
+        <main class="full-box main-container">
             <!--------------EMCABEZADO------------------->
             <jsp:include page="header.jsp"/>
+            <!-- Dialog help -->
+            <jsp:include page="ayuda.jsp"/>
             <!-- Page content -->
-            <section class="full-box page-content" >
+            <section class="full-box page-content">
                 <nav class="full-box navbar-info">
                     <a href="#" class="float-left show-nav-lateral">
                         <i class="fas fa-exchange-alt"></i>
                     </a>
-                    <a href="user-update.jsp">
-                        <i class="fas fa-user-cog"></i>
+                    <a href="#!" data-toggle="modal"  data-target="#ModalInfo">
+                        <i title="Ayuda" class="fas icon-help-with-circle"></i>
                     </a>
                     <a href="#" class="btn-exit-system">
-                        <i class="fas fa-power-off"></i>
+                        <i class="fas fa-power-off"> &nbsp;Salir</i>
                     </a>
+
                 </nav>
                 <!-- Page header -->
                 <div class="full-box page-header">
@@ -48,19 +52,19 @@
                 <div class="container-fluid">
                     <ul class="full-box list-unstyled page-nav-tabs">
                         <li>
-                            <a  href="#" data-toggle="modal" data-target="#ModalAgregar"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR</a>
+                            <a  href="#" data-toggle="modal"  data-target="#ModalAgregar"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR</a>
                         </li>
                         <li>
                             <a href="Controlador?menu=Detalles&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTAR </a>
                         </li>
                         <li>
-                            <a href="#" data-toggle="modal" data-target="#ModalBuscar"><i  class="fas fa-search fa-fw"></i> &nbsp; BUSCAR </a>
+                            <a   href="#" data-toggle="modal" data-target="#ModalBuscar"><i  class="fas fa-search fa-fw"></i> &nbsp; BUSCAR </a>
                         </li>
                     </ul>	
                 </div>
                 <!-- ============================================MODAL AGREGAR============================= -->
                 <div class="modal fade" id="ModalAgregar" tabindex="-1" role="dialog" aria-labelledby="ModalAgregar" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
+                    <div class="modal-dialog " role="document">
                         <div class="modal-content">
                             <div class="titulo modal-header">
                                 <h5>Nuevo Suministro</h5>
@@ -113,7 +117,7 @@
                                     </select>
                                 </div>
                                 <p class="text-center">
-                                    <button   type="submit" name="accion" value="Agregar" class="btn btn-raised btn-info"><i class=" fas fa-save "></i> &nbsp; AGREGAR</button>
+                                    <button   type="submit" name="accion" value="Agregar" class="btn btn-raised btn-info" onkeyup="validar2()"><i class=" fas fa-save "></i> &nbsp; AGREGAR</button>
                                 </p>
                             </form>
                         </div>
@@ -143,7 +147,7 @@
                 </div>
                 <!-- Content here-->
                 <div class="container-fluid"  >
-                    <div class="table-responsive">
+                    <div class="table-responsive ">
                         <table id="tablalist" class="table table-dark table-sm">
                             <thead >
                                 <tr class="roboto-medium">
@@ -152,7 +156,14 @@
                                     <th>Agricultor</th>
                                     <th >Producto</th>
                                     <th >Empleado</th>
-                                    <th class="ac" >Opciones</th>
+                                        <%if (session.getAttribute("tipo").equals("1")) {%>
+                                    <th class="ac">Opciones</th>
+                                        <%} else if (session.getAttribute("tipo").equals("2")) {%>
+                                    <th class="ac">Opciones</th>
+
+                                    <%} else {%>
+
+                                    <%}%>
                                 </tr>
                             </thead>
                             <tbody >
@@ -163,13 +174,22 @@
                                     <td><%=de.getFk_agricutor()%></td>
                                     <td><%=de.getFk_producto()%></td>
                                     <td><%=de.getFk_empleado()%></td>
-                                   
+                                    <%if (session.getAttribute("tipo").equals("1")) {%>
                                     <td class="btnLis text-center">
                                         <a  title="Actualizar Suministro"  class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Detalles&accion=Editar&pk_detallesPro=<%=de.getPk_detallesPro()%>">
                                             <i class="fas  fa-sync-alt"></i></a>
-                                        <a title="Eliminar Suministro"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=Detalles&accion=Eliminar&pk_detallesPro=<%=de.getPk_detallesPro()%>">
+                                        <a id="bee" title="Eliminar Suministro"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=Detalles&accion=Eliminar&pk_detallesPro=<%=de.getPk_detallesPro()%>">
                                             <i class="far fa-trash-alt"></i></a>
                                     </td>
+                                    <%} else if (session.getAttribute("tipo").equals("2")) {%>
+                                    <td class="btnLis text-center">
+                                        <a  title="Actualizar Suministro"  class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Detalles&accion=Editar&pk_detallesPro=<%=de.getPk_detallesPro()%>">
+                                            <i class="fas  fa-sync-alt"></i></a>
+                                    </td>
+
+                                    <%} else {%>
+
+                                    <%}%>
                                 </tr>
                                 <%}%>
                             </tbody>
@@ -177,7 +197,14 @@
                     </div>
                 </div>
             </section>
+
+
+            <!-- popper -->
+            <script src="./js/popper.min.js"></script>
+            <!-- Bootstrap V4.3 -->
+            <script src="./js/bootstrap.min.js"></script>
             <!--    Datatables-->
+            <script src="js/Validar.js" type="text/javascript"></script>
             <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
             <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script> 
             <script src="js/datetable.js" type="text/javascript"></script>
@@ -187,9 +214,9 @@
         <!-- Bootstrap Material Design V4.0 -->
         <script src="./js/bootstrap-material-design.min.js"></script>
         <script>
-            $(document).ready(function () {
-                $('body').bootstrapMaterialDesign();
-            });
+                                        $(document).ready(function () {
+                                            $('body').bootstrapMaterialDesign();
+                                        });
         </script>
 
         <script src="./js/main.js"></script>

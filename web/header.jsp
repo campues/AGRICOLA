@@ -1,3 +1,4 @@
+
 <% HttpSession sesionOK = request.getSession();%>
 
 <%
@@ -48,7 +49,6 @@
             <figcaption class="roboto-medium text-center">
                 <%=sesionOK.getAttribute("nom")%>  <%=sesionOK.getAttribute("ape")%> <br><small class="roboto-condensed-light"><%=sesionOK.getAttribute("usu")%></small>
             </figcaption>
-
         </figure>
 
         <div class="full-box nav-lateral-bar"></div>
@@ -107,12 +107,12 @@
                     </ul>
                 </li>
 
-                <li>
+                <li id="tipoU">
                     <a href="#" class="nav-btn-submenu"><i class="fas  fa-user-secret fa-fw"></i> &nbsp; Usuarios <i class="fas fa-chevron-down"></i></a>
                     <ul>
 
                         <li>
-                            <a href="Controlador?menu=Empleado&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de usuarios</a>
+                            <a href="Controlador?menu=Empleados&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de usuarios</a>
                         </li>
 
                     </ul>
@@ -125,10 +125,15 @@
                 <li>
                     <a href="Controlador?menu=Detalles&accion=Listar"><i class="icon-add-to-list"></i> &nbsp; Suministro</a>
                 </li>
-               
+
             </ul>
         </nav>
 
     </div>
-
+    <script>
+        <%if (sesionOK.getAttribute("tipo").equals("1")) {%>
+        <%} else {%>
+        document.getElementById('tipoU').style.display = "none";
+        <%}%>
+    </script>
 </section>

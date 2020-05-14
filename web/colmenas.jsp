@@ -12,22 +12,25 @@
     </head>
 
     <body>
-        <!-- Main container -->
+           <!-- Main container -->
         <main class="full-box main-container">
             <!--------------EMCABEZADO------------------->
             <jsp:include page="header.jsp"/>
+            <!-- Dialog help -->
+            <jsp:include page="ayuda.jsp"/>
             <!-- Page content -->
             <section class="full-box page-content">
                 <nav class="full-box navbar-info">
                     <a href="#" class="float-left show-nav-lateral">
                         <i class="fas fa-exchange-alt"></i>
                     </a>
-                    <a href="user-update.jsp">
-                        <i class="fas fa-user-cog"></i>
+                    <a href="#!" data-toggle="modal"  data-target="#ModalInfo">
+                        <i title="Ayuda" class="fas icon-help-with-circle"></i>
                     </a>
                     <a href="#" class="btn-exit-system">
-                        <i class="fas fa-power-off"></i>
+                        <i class="fas fa-power-off"> &nbsp;Salir</i>
                     </a>
+
                 </nav>
                 <!-- Page header -->
                 <div class="full-box page-header">
@@ -172,8 +175,14 @@
                                     <th>Ajebas</th>
                                     <th>Piso</th>
                                     <th>Cantidad</th>
-                                    <th class="ac">Editar</th>
-                                    <th class="ac">Eliminar</th>
+                                        <%if (session.getAttribute("tipo").equals("1")) {%>
+                                    <th class="ac">Opciones</th>
+                                        <%} else if (session.getAttribute("tipo").equals("2")) {%>
+                                    <th class="ac">Opciones</th>
+
+                                    <%} else {%>
+
+                                    <%}%>
                                 </tr>
                             </thead>
                             <tbody>
@@ -184,12 +193,24 @@
                                         <td>${abe.abejas}</td>
                                         <td>${abe.piso}</td>
                                         <td>${abe.cantidad}</td>
-                                        <td class="btnLis text-center"><a  title="Actualizar Colmena"  class="btn btn-raised btn-success btn-sm"   href="Controlador?menu=Colmenas&accion=Editar&pk_colmenas=${abe.pk_colmenas}">
+
+                                        <%if (session.getAttribute("tipo").equals("1")) {%>
+                                        <td class="btnLis text-center">
+                                            <a  title="Actualizar Colmena"  class="btn btn-raised btn-success btn-sm"   href="Controlador?menu=Colmenas&accion=Editar&pk_colmenas=${abe.pk_colmenas}">
                                                 <i class="fas  fa-sync-alt"></i></a>
-                                        </td>
-                                        <td class="btnLis text-center"><a title="Eliminar Colmena"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=Colmenas&accion=Eliminar&pk_colmenas=${abe.pk_colmenas}">
+                                            <a title="Eliminar Colmena"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=Colmenas&accion=Eliminar&pk_colmenas=${abe.pk_colmenas}">
                                                 <i class="far fa-trash-alt"></i></a>
                                         </td>
+                                        <%} else if (session.getAttribute("tipo").equals("2")) {%>
+                                        <td class="btnLis text-center">
+
+                                            <a  title="Actualizar Colmena"  class="btn btn-raised btn-success btn-sm"   href="Controlador?menu=Colmenas&accion=Editar&pk_colmenas=${abe.pk_colmenas}">
+                                                <i class="fas  fa-sync-alt"></i></a>
+                                        </td>
+                                        <%} else {%>
+
+                                        <%}%>
+
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -198,11 +219,13 @@
                 </div>
 
             </section>
-        <!--    Datatables-->
+            <!--    Datatables-->
             <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
             <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script> 
             <script src="js/datetable.js" type="text/javascript"></script>
         </main>
+        <!-- popper -->
+        <script src="./js/popper.min.js"></script>
         <!-- jQuery Custom Content Scroller V3.1.5 -->
         <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
 

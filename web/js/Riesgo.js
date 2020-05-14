@@ -13,7 +13,7 @@ function CalcularTotal() {
     if (Tcultivo > 3) {
         alertify.alert("Error", "El criterio es entre 1 y  3").set('label', 'OK');
         return false;
-    }
+    } 
     if (TipCultivo > 3) {
         alertify.alert("Error", "El criterio es entre 1 y  3").set('label', 'OK');
         return false;

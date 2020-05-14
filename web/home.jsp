@@ -1,3 +1,4 @@
+<% HttpSession sesionOK = request.getSession();%>
 <%@page import="java.util.List"%>
 <%@page import="Modelo.Agricultor"%>
 <%@page import="Control.Variables"%>
@@ -42,18 +43,21 @@
         <main class="full-box main-container">
             <!--------------EMCABEZADO------------------->
             <jsp:include page="header.jsp"/>
+            <!-- Dialog help -->
+            <jsp:include page="ayuda.jsp"/>
             <!-- Page content -->
             <section class="full-box page-content">
                 <nav class="full-box navbar-info">
                     <a href="#" class="float-left show-nav-lateral">
                         <i class="fas fa-exchange-alt"></i>
                     </a>
-                    <a href="user-update.jsp">
-                        <i class="fas fa-user-cog"></i>
+                    <a href="#!" data-toggle="modal"  data-target="#ModalInfo">
+                        <i title="Ayuda" class="fas icon-help-with-circle"></i>
                     </a>
                     <a href="#" class="btn-exit-system">
                         <i class="fas fa-power-off"> &nbsp;Salir</i>
                     </a>
+
                 </nav>
                 <!-- Page header -->
                 <div class="full-box page-header">
@@ -64,14 +68,14 @@
                         Los sistemas agrícolas se definen como conjuntos de explotaciones agrícolas individuales con recursos básicos, pautas empresariales, medios familiares de sustento y limitaciones en general similares, a los cuales corresponderían estrategias de desarrollo e intervenciones parecidas. Según el alcance del análisis, un sistema agrícola puede abarcar unas docenas o a muchos millones de familias.
                     </p>
                 </div>
-               
+
                 <!-- Content -->
                 <div class="full-box tile-container">
                     <a href="Controlador?menu=Agricultor&accion=Listar" class="tile">
                         <div class="contenedor">
                             <img class="icon" src="assets/inicio/farmer.png">
                             <p class="tx">Agricultor</p>
-                           
+
                         </div>
                     </a>
                     <a href="Controlador?menu=Lote&accion=Listar" class="tile">
@@ -94,12 +98,13 @@
                         </div>
                     </a>
 
-                    <a href="Controlador?menu=Empleados&accion=Listar" class="tile">
+                    <a id="tipoUs" href="Controlador?menu=Empleados&accion=Listar" class="tile">
                         <div class="contenedor">
                             <img class="icon" src="assets/inicio/user01.png">
                             <p class="tx">Usuarios</p>
                         </div>
                     </a>
+
 
                 </div>
 
@@ -108,7 +113,12 @@
         </main>
 
 
-
+        <script>
+            <%if (sesionOK.getAttribute("tipo").equals("1")) {%>
+            <%} else {%>
+            document.getElementById('tipoUs').style.display = "none";
+            <%}%>
+        </script>
 
         <!--=============================================
         =            Include JavaScript files           =

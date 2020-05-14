@@ -24,7 +24,7 @@
         <link rel="stylesheet" href="./css/sweetalert2.min.css">
 
         <!-- Sweet Alert V8.13.0 JS file-->
-        <script src="./js/sweetalert2.min.js" ></script>
+        <script src="./js/sweetalert2.min.js"></script>
 
         <!-- jQuery Custom Content Scroller V3.1.5 -->
         <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
@@ -35,24 +35,25 @@
 
     </head>
     <body>
-
-
-        <!-- Main container -->
+      <!-- Main container -->
         <main class="full-box main-container">
             <!--------------EMCABEZADO------------------->
             <jsp:include page="header.jsp"/>
+            <!-- Dialog help -->
+            <jsp:include page="ayuda.jsp"/>
             <!-- Page content -->
             <section class="full-box page-content">
                 <nav class="full-box navbar-info">
                     <a href="#" class="float-left show-nav-lateral">
                         <i class="fas fa-exchange-alt"></i>
                     </a>
-                    <a href="user-update.jsp">
-                        <i class="fas fa-user-cog"></i>
+                    <a href="#!" data-toggle="modal"  data-target="#ModalInfo">
+                        <i title="Ayuda" class="fas icon-help-with-circle"></i>
                     </a>
                     <a href="#" class="btn-exit-system">
-                        <i class="fas fa-power-off"></i>
+                        <i class="fas fa-power-off"> &nbsp;Salir</i>
                     </a>
+
                 </nav>
                 <!-- Page header -->
                 <div class="full-box page-header">
@@ -72,7 +73,7 @@
                         <li>
                             <a  href="Controlador?menu=Agricultor&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE AGRICULTORES</a>
                         </li>
-                      
+
                     </ul>	
                 </div>
 
@@ -116,7 +117,7 @@
                                     <div class="col-12 col-md-4">
                                         <div class="form-group">
                                             <label for="cliente_apellido" class="bmd-label-floating">Cedula</label>
-                                            <input type="text" class="form-control" name="txtCed" value="${agricul.cedula} "minlength="10" maxlength="10" pattern="[0-9]+" required>
+                                            <input type="text" class="form-control" name="txtCed" value="${agricul.cedula}" minlength="10" maxlength="10" pattern="[0-9]+" required>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-4">
@@ -146,14 +147,14 @@
                                                 <option value="" selected="" disabled="">Seleccione una opcion</option>
                                                 <option value="ACTIVO"<c:if test="${agricul.estatus == 'ACTIVO'}">selected</c:if> >Activo</option>
                                                 <option value="INACTIVO" <c:if test="${agricul.estatus == 'INACTIVO'}">selected </c:if>>Inactivo</option>
-                                            </select>
-                                        </div>
-                                    </div> 
+                                                </select>
+                                            </div>
+                                        </div> 
 
-                                    <div class="col-12 col-md-4">
-                                        <div class="form-group">
-                                            <label for="" style="color: #007065;">Lider Asociacion:</label>
-                                            <label style="color: #020202;">SI</label> <input  type="radio" name="radioL" value="SI" required="" <c:if test="${agricul.liderAsociacion == 'SI'}">checked</c:if>>&nbsp;
+                                        <div class="col-12 col-md-4">
+                                            <div class="form-group">
+                                                <label for="" style="color: #007065;">Lider Asociacion:</label>
+                                                <label style="color: #020202;">SI</label> <input  type="radio" name="radioL" value="SI" required="" <c:if test="${agricul.liderAsociacion == 'SI'}">checked</c:if>>&nbsp;
                                             <label style="color: #020202;">NO</label><input type="radio" name="radioL" value="NO" required="" <c:if test="${agricul.liderAsociacion == 'NO'}">checked</c:if>>
                                         </div>
                                     </div>
@@ -180,6 +181,7 @@
         ==============================================-->
         <!-- jQuery V3.4.1 -->
         <script src="./js/jquery-3.4.1.min.js" ></script>
+        <script src="./js/bootstrap.min.js"></script>
 
         <!-- popper -->
         <script src="./js/popper.min.js" ></script>

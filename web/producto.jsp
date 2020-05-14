@@ -10,22 +10,25 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"/> 
     </head>
     <body>
-        <!-- Main container -->
+              <!-- Main container -->
         <main class="full-box main-container">
             <!--------------EMCABEZADO------------------->
             <jsp:include page="header.jsp"/>
+            <!-- Dialog help -->
+            <jsp:include page="ayuda.jsp"/>
             <!-- Page content -->
             <section class="full-box page-content">
                 <nav class="full-box navbar-info">
                     <a href="#" class="float-left show-nav-lateral">
                         <i class="fas fa-exchange-alt"></i>
                     </a>
-                    <a href="user-update.jsp">
-                        <i class="fas fa-user-cog"></i>
+                    <a href="#!" data-toggle="modal"  data-target="#ModalInfo">
+                        <i title="Ayuda" class="fas icon-help-with-circle"></i>
                     </a>
                     <a href="#" class="btn-exit-system">
-                        <i class="fas fa-power-off"></i>
+                        <i class="fas fa-power-off"> &nbsp;Salir</i>
                     </a>
+
                 </nav>
                 <!-- Page header -->
                 <div class="full-box page-header">
@@ -72,14 +75,18 @@
                 <!-- Content here-->
                 <div class="container-fluid">
                     <div class="table-responsive">
-                         <table id="tablalist" class="table table-dark table-sm">
+                        <table id="tablalist" class="table table-dark table-sm">
                             <thead >
                                 <tr class="roboto-medium">
                                     <th>Id</th>
                                     <th>Nombre</th>
                                     <th>Stock</th>
                                     <th>Tipo</th>
+                                        <%if (session.getAttribute("tipo").equals("1")) {%>
                                     <th class="ac" >Accion</th>
+                                        <%} else {%>
+
+                                    <%}%>
                                 </tr>
                             </thead>
                             <tbody>
@@ -89,9 +96,14 @@
                                         <td><c:out value="${pro.nomInsumos}"/></td>
                                         <td><c:out value="${pro.stock}"/></td>
                                         <td><c:out value="${pro.tipoInsumo}"/></td>
-                                        <td class="btnLis text-center"><a title="Eliminar Producto"   class="btn btn-warning" href="Controlador?menu=Productos&accion=Eliminar&pk_producto=<c:out value="${pro.pk_producto}"/>">
+                                        <%if (session.getAttribute("tipo").equals("1")) {%>
+
+                                        <td class="btnLis text-center"><a title="Eliminar Producto"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=Productos&accion=Eliminar&pk_producto=<c:out value="${pro.pk_producto}"/>">
                                                 <i class="far fa-trash-alt"></i></a>
                                         </td>
+                                        <%} else {%>
+
+                                        <%}%>
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -102,11 +114,13 @@
 
 
             </section>
-        <!--    Datatables-->
+            <!--    Datatables-->
             <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
             <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script> 
             <script src="js/datetable.js" type="text/javascript"></script>
         </main>
+        <!-- popper -->
+        <script src="./js/popper.min.js"></script>
         <!-- jQuery Custom Content Scroller V3.1.5 -->
         <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
         <!-- Bootstrap Material Design V4.0 -->

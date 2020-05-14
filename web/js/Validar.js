@@ -8,14 +8,7 @@ function iniciar() {
 }
 
 function validar2() {
-    var n0 = document.getElementsByName("txtCedula").value;
-    var error = document.getElementById("error");
-
-    if (n0.value === "") {
-        n0.focus();
-        error.textContent = "Digita la cedula";
-        return false;
-    }
+    alertify.success("Producto Registrado");
 }
 
 function validar() {

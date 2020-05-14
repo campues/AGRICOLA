@@ -13,22 +13,25 @@
 
 
     <body>
-        <!-- Main container -->
+             <!-- Main container -->
         <main class="full-box main-container">
             <!--------------EMCABEZADO------------------->
             <jsp:include page="header.jsp"/>
+            <!-- Dialog help -->
+            <jsp:include page="ayuda.jsp"/>
             <!-- Page content -->
             <section class="full-box page-content">
                 <nav class="full-box navbar-info">
                     <a href="#" class="float-left show-nav-lateral">
                         <i class="fas fa-exchange-alt"></i>
                     </a>
-                    <a href="user-update.jsp">
-                        <i class="fas fa-user-cog"></i>
+                    <a href="#!" data-toggle="modal"  data-target="#ModalInfo">
+                        <i title="Ayuda" class="fas icon-help-with-circle"></i>
                     </a>
                     <a href="#" class="btn-exit-system">
-                        <i class="fas fa-power-off"></i>
+                        <i class="fas fa-power-off"> &nbsp;Salir</i>
                     </a>
+
                 </nav>
                 <!-- Page header -->
                 <div class="full-box page-header">
@@ -106,12 +109,23 @@
                                         <td>${l.observaciones}</td>
                                         <td>${l.recomendaciones}</td>
 
-                                        <td class="text-center"><a title="Eliminar Registro" class="btn btn-raised btn-danger btn-sm" href="Controlador?menu=Lote&accion=Eliminar&pk_lote=${l.pk_lote}">
+                                        <td class="text-center">
+                                            <%if (session.getAttribute("tipo").equals("1")) {%>
+                                            <a title="Eliminar Registro" class="btn btn-raised btn-danger btn-sm" href="Controlador?menu=Lote&accion=Eliminar&pk_lote=${l.pk_lote}">
                                                 <i class="far fa-trash-alt"></i></a>
                                             <a title="Agregar datos Extras al Lote" class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Lote&accion=LoteDatos&pk_lote=${l.pk_lote}">
                                                 <i class="fas icon-text-document-inverted"></i></a>
                                             <a title="Lista de Visitas" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Lote&accion=VerVisitas&pk_lote=${l.pk_lote}">
                                                 <i class="fas fa-clipboard-list"></i></a>
+                                                <%} else {%>
+                                            <a title="Agregar datos Extras al Lote" class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Lote&accion=LoteDatos&pk_lote=${l.pk_lote}">
+                                                <i class="fas icon-text-document-inverted"></i></a>
+                                            <a title="Lista de Visitas" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Lote&accion=VerVisitas&pk_lote=${l.pk_lote}">
+                                                <i class="fas fa-clipboard-list"></i></a>
+
+                                            <%}%>
+
+
                                         </td>
 
                                     </tr>

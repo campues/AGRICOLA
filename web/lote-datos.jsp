@@ -35,22 +35,25 @@
     </head>
 
     <body>
-        <!-- Main container -->
+             <!-- Main container -->
         <main class="full-box main-container">
             <!--------------EMCABEZADO------------------->
             <jsp:include page="header.jsp"/>
+            <!-- Dialog help -->
+            <jsp:include page="ayuda.jsp"/>
             <!-- Page content -->
             <section class="full-box page-content">
                 <nav class="full-box navbar-info">
                     <a href="#" class="float-left show-nav-lateral">
                         <i class="fas fa-exchange-alt"></i>
                     </a>
-                    <a href="user-update.jsp">
-                        <i class="fas fa-user-cog"></i>
+                    <a href="#!" data-toggle="modal"  data-target="#ModalInfo">
+                        <i title="Ayuda" class="fas icon-help-with-circle"></i>
                     </a>
                     <a href="#" class="btn-exit-system">
-                        <i class="fas fa-power-off"></i>
+                        <i class="fas fa-power-off"> &nbsp;Salir</i>
                     </a>
+
                 </nav>
                 <!-- Page header -->
                 <div class="full-box page-header">
@@ -116,7 +119,11 @@
                                         <tr class="text-center roboto-medium">
                                             <th>Nombre</th>
                                             <th>Cantidad</th>
+                                                <%if (session.getAttribute("tipo").equals("1")) {%>
                                             <th>Eliminar</th>
+                                                <%} else {%>
+
+                                            <%}%>
                                         </tr>
                                     </thead>
                                     <tbody  >
@@ -124,9 +131,13 @@
                                             <tr class="text-center">
                                                 <td>${h.nomHerramienta}</td>
                                                 <td>${h.cantidad}</td>
+                                                <%if (session.getAttribute("tipo").equals("1")) {%>
                                                 <td class="btnLis"><a title="Eliminar Herramienta"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=Herramientas&accion=Eliminar&pk_herramientas=${h.pk_herramientas}">
                                                         <i class="far fa-trash-alt"></i></a>
                                                 </td>
+                                                <%} else {%>
+
+                                                <%}%>
                                             </tr>
                                         </c:forEach>
                                     </tbody>
@@ -179,7 +190,11 @@
                                         <tr class="text-center roboto-medium">
                                             <th>Especie</th>
                                             <th>Cantidad</th>
+                                                <%if (session.getAttribute("tipo").equals("1")) {%>
                                             <th>Eliminar</th>
+                                                <%} else {%>
+
+                                            <%}%>
                                         </tr>
                                     </thead>
                                     <tbody  >
@@ -187,9 +202,13 @@
                                             <tr class="text-center">
                                                 <td>${a.especie}</td>
                                                 <td>${a.cantidad}</td>
+                                                <%if (session.getAttribute("tipo").equals("1")) {%>
                                                 <td class="btnLis"><a title="Eliminar Especie"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=Animales&accion=Eliminar&pk_animales=${a.pk_animales}">
                                                         <i class="far fa-trash-alt"></i></a>
                                                 </td>
+                                                <%} else {%>
+
+                                                <%}%>
                                             </tr>
                                         </c:forEach>
                                     </tbody>
@@ -257,7 +276,11 @@
                                             <th>Edad</th>
                                             <th>Sexo</th>
                                             <th>Cantidad</th>
+                                                <%if (session.getAttribute("tipo").equals("1")) {%>
                                             <th>Eliminar</th>
+                                                <%} else {%>
+
+                                            <%}%>
                                         </tr>
                                     </thead>
                                     <tbody  >
@@ -267,9 +290,13 @@
                                                 <td>${m.edad}</td>
                                                 <td>${m.sexo}</td>
                                                 <td>${m.cantidad}</td>
+                                                <%if (session.getAttribute("tipo").equals("1")) {%>
                                                 <td class="btnLis"><a title="Eliminar Mano Obra"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=ManObra&accion=Eliminar&pk_manObra=${m.pk_manObra}">
                                                         <i class="far fa-trash-alt"></i></a>
                                                 </td>
+                                                <%} else {%>
+
+                                                <%}%>
                                             </tr>
                                         </c:forEach>
                                     </tbody>
@@ -277,7 +304,7 @@
                             </div>
                         </div>
                         <!---------->
-                         <!-- ============================================MODAL AGREGAR INSUMOS============================= -->
+                        <!-- ============================================MODAL AGREGAR INSUMOS============================= -->
                         <div class="modal fade " id="ModalInsumo" tabindex="-1" role="dialog" aria-labelledby="ModalInsumo" aria-hidden="true">
                             <div class="modal-dialog " role="document">
                                 <div class="modal-content "  >
@@ -324,7 +351,11 @@
                                             <th>Tipo</th>
                                             <th>Nombre</th>
                                             <th>Cantidad</th>
+                                                <%if (session.getAttribute("tipo").equals("1")) {%>
                                             <th>Eliminar</th>
+                                                <%} else {%>
+
+                                            <%}%>
                                         </tr>
                                     </thead>
                                     <tbody  >
@@ -333,9 +364,13 @@
                                                 <td>${in.tipoInsumo}</td>
                                                 <td>${in.nomInsumo}</td>
                                                 <td>${in.cantidad}</td>
+                                                <%if (session.getAttribute("tipo").equals("1")) {%>
                                                 <td class="btnLis"><a title="Eliminar Producto aplicado"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=InsumoLote&accion=Eliminar&pk_insumo=${in.pk_insumo}">
                                                         <i class="far fa-trash-alt"></i></a>
                                                 </td>
+                                                <%} else {%>
+
+                                                <%}%>
                                             </tr>
                                         </c:forEach>
                                     </tbody>

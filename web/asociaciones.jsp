@@ -10,22 +10,25 @@
     </head>
 
     <body>
-        <!-- Main container -->
+             <!-- Main container -->
         <main class="full-box main-container">
             <!--------------EMCABEZADO------------------->
             <jsp:include page="header.jsp"/>
+            <!-- Dialog help -->
+            <jsp:include page="ayuda.jsp"/>
             <!-- Page content -->
             <section class="full-box page-content">
                 <nav class="full-box navbar-info">
                     <a href="#" class="float-left show-nav-lateral">
                         <i class="fas fa-exchange-alt"></i>
                     </a>
-                    <a href="user-update.jsp">
-                        <i class="fas fa-user-cog"></i>
+                    <a href="#!" data-toggle="modal"  data-target="#ModalInfo">
+                        <i title="Ayuda" class="fas icon-help-with-circle"></i>
                     </a>
                     <a href="#" class="btn-exit-system">
-                        <i class="fas fa-power-off"></i>
+                        <i class="fas fa-power-off"> &nbsp;Salir</i>
                     </a>
+
                 </nav>
                 <!-- Page header -->
                 <div class="full-box page-header">
@@ -153,8 +156,14 @@
                                     <th>Ruc</th>
                                     <th>Provincia</th>
                                     <th>Telefono</th>
-                                    <th class="ac">Editar</th>
-                                    <th class="ac">Eliminar</th>
+                                        <%if (session.getAttribute("tipo").equals("1")) {%>
+                                    <th class="ac text-center">Opciones</th>
+                                        <%} else if (session.getAttribute("tipo").equals("2")) {%>
+                                    <th class="ac text-center">Opciones</th>
+                                        <%} else {%>
+
+                                    <%}%> 
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -165,12 +174,23 @@
                                         <td>${as.ruc}</td>
                                         <td>${as.fk_provinciaa}</td>
                                         <td>${as.telefono}</td>
-                                        <td class="btnLis text-center"><a  title="Actualizar Asociacion"  class="btn btn-raised btn-success btn-sm"   href="Controlador?menu=Asociacion&accion=Editar&pk_asociacion=${as.pk_asociacion}">
+
+                                        <%if (session.getAttribute("tipo").equals("1")) {%>
+                                        <td class="btnLis text-center">
+                                            <a  title="Actualizar Asociacion"  class="btn btn-raised btn-success btn-sm"   href="Controlador?menu=Asociacion&accion=Editar&pk_asociacion=${as.pk_asociacion}">
                                                 <i class="fas  fa-sync-alt"></i></a>
-                                        </td>
-                                        <td class="btnLis text-center"><a title="Eliminar Asociacion"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=Asociacion&accion=Eliminar&pk_asociacion=${as.pk_asociacion}">
+                                            <a title="Eliminar Asociacion"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=Asociacion&accion=Eliminar&pk_asociacion=${as.pk_asociacion}">
                                                 <i class="far fa-trash-alt"></i></a>
                                         </td>
+                                        <%} else if (session.getAttribute("tipo").equals("2")) {%>
+                                        <td class="btnLis text-center">
+                                            <a  title="Actualizar Asociacion"  class="btn btn-raised btn-success btn-sm"   href="Controlador?menu=Asociacion&accion=Editar&pk_asociacion=${as.pk_asociacion}">
+                                                <i class="fas  fa-sync-alt"></i></a>
+                                        </td>
+
+                                        <%} else {%>
+
+                                        <%}%>  
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -184,6 +204,8 @@
             <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script> 
             <script src="js/datetable.js" type="text/javascript"></script>
         </main>
+        <!-- popper -->
+        <script src="./js/popper.min.js"></script>
         <!-- jQuery Custom Content Scroller V3.1.5 -->
         <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
         <!-- Bootstrap Material Design V4.0 -->

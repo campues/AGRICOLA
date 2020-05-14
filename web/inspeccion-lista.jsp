@@ -11,22 +11,25 @@
     </head>
 
     <body>
-        <!-- Main container -->
+           <!-- Main container -->
         <main class="full-box main-container">
             <!--------------EMCABEZADO------------------->
             <jsp:include page="header.jsp"/>
+            <!-- Dialog help -->
+            <jsp:include page="ayuda.jsp"/>
             <!-- Page content -->
             <section class="full-box page-content">
                 <nav class="full-box navbar-info">
                     <a href="#" class="float-left show-nav-lateral">
                         <i class="fas fa-exchange-alt"></i>
                     </a>
-                    <a href="user-update.jsp">
-                        <i class="fas fa-user-cog"></i>
+                    <a href="#!" data-toggle="modal"  data-target="#ModalInfo">
+                        <i title="Ayuda" class="fas icon-help-with-circle"></i>
                     </a>
                     <a href="#" class="btn-exit-system">
-                        <i class="fas fa-power-off"></i>
+                        <i class="fas fa-power-off"> &nbsp;Salir</i>
                     </a>
+
                 </nav>
                 <!-- Page header -->
                 <div class="full-box page-header">
@@ -66,9 +69,8 @@
                                     <th>Tipo Inspec.</th>
                                     <th>Lote</th>
                                     <th>Empleado</th>
-                                    <th class="ac" >Eliminar</th>
-                                    <th class="ac" >Apicultura</th>
-                                    <th class="ac" >Cultivo</th>
+
+                                    <th class="ac text-center" >Opciones</th>
 
                                 </tr>
                             </thead>
@@ -81,15 +83,21 @@
                                         <td>${v.tipoInspeccion}</td>
                                         <td>${v.fk_lote}</td>
                                         <td>${v.fk_empleadov}</td>
-
-                                        <td  class="btnLis text-center"><a  class="btn btn-raised btn-danger btn-sm" href="Controlador?menu=Visitas&accion=Eliminar&pk_visitas=${v.pk_visitas}">
+                                        <td  class="text-center">
+                                            <%if (session.getAttribute("tipo").equals("1")) {%> 
+                                            <a title="Eliminar registro"  class="btn btn-raised btn-danger btn-sm" href="Controlador?menu=Visitas&accion=Eliminar&pk_visitas=${v.pk_visitas}">
                                                 <i class="far fa-trash-alt"></i></a>
-                                        </td >
-                                        <td  class="btnLis text-center"><a class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Visitas&accion=VerColmena&pk_visitas=${v.pk_visitas}">
+                                            <a title="Apicultura" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Visitas&accion=VerColmena&pk_visitas=${v.pk_visitas}">
                                                 <i class="fas fa-box-open"></i></a>
-                                        </td>
-                                        <td  class="btnLis text-center"><a class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Visitas&accion=VerCultivo&pk_visitas=${v.pk_visitas}">
+                                            <a  title="Cultivos" class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Visitas&accion=VerCultivo&pk_visitas=${v.pk_visitas}">
                                                 <i class="fas fa-clipboard-list"></i></a>
+                                                <%} else {%>
+                                            <a title="Apicultura" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Visitas&accion=VerColmena&pk_visitas=${v.pk_visitas}">
+                                                <i class="fas fa-box-open"></i></a>
+                                            <a  title="Cultivos" class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Visitas&accion=VerCultivo&pk_visitas=${v.pk_visitas}">
+                                                <i class="fas fa-clipboard-list"></i></a>
+                                                <%}%>
+
                                         </td>
                                     </tr>
                                 </c:forEach>

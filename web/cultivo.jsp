@@ -16,18 +16,21 @@
         <main class="full-box main-container">
             <!--------------EMCABEZADO------------------->
             <jsp:include page="header.jsp"/>
+            <!-- Dialog help -->
+            <jsp:include page="ayuda.jsp"/>
             <!-- Page content -->
             <section class="full-box page-content">
                 <nav class="full-box navbar-info">
                     <a href="#" class="float-left show-nav-lateral">
                         <i class="fas fa-exchange-alt"></i>
                     </a>
-                    <a href="user-update.jsp">
-                        <i class="fas fa-user-cog"></i>
+                    <a href="#!" data-toggle="modal"  data-target="#ModalInfo">
+                        <i title="Ayuda" class="fas icon-help-with-circle"></i>
                     </a>
                     <a href="#" class="btn-exit-system">
-                        <i class="fas fa-power-off"></i>
+                        <i class="fas fa-power-off"> &nbsp;Salir</i>
                     </a>
+
                 </nav>
                 <!-- Page header -->
                 <div class="full-box page-header">
@@ -164,17 +167,14 @@
                 <!-- Content here-->
                 <div class="container-fluid">
                     <div class="table-responsive">
-                       <table id="tablalist" class="table table-dark table-sm">
+                        <table id="tablalist" class="table table-dark table-sm">
                             <thead >
                                 <tr class="roboto-medium">
                                     <th>ID</th>
                                     <th>Cultivo</th>
                                     <th>Numero plantas</th>
                                     <th>Estatus</th>
-                                    <th class="ac">Editar</th>
-                                    <th class="ac">Eliminar</th>
-                                    <th class="ac">D.Extras</th>
-                                    <th class="ac">R.Contam</th>
+                                    <th class="ac text-center">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -184,17 +184,36 @@
                                         <td>${cu.nomCultivo}</td>
                                         <td>${cu.numPlantas}</td>
                                         <td>${cu.estatus}</td>
-                                        <td class="btnLis text-center"><a  title="Actualizar Cultivo"  class="btn btn-raised btn-success btn-sm"   href="Controlador?menu=Cultivo&accion=Editar&pk_cultivo=${cu.pk_cultivo}">
+
+                                        <td class="col-re text-center">
+                                            <%if (session.getAttribute("tipo").equals("1")) {%>
+                                            <a  title="Actualizar Cultivo"  class="btn btn-raised btn-success btn-sm"   href="Controlador?menu=Cultivo&accion=Editar&pk_cultivo=${cu.pk_cultivo}">
                                                 <i class="fas  fa-sync-alt"></i></a>
-                                        </td>
-                                        <td class="btnLis text-center"><a title="Eliminar Cultivo"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=Cultivo&accion=Eliminar&pk_cultivo=${cu.pk_cultivo}">
+
+                                            <a title="Eliminar Cultivo"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=Cultivo&accion=Eliminar&pk_cultivo=${cu.pk_cultivo}">
                                                 <i class="far fa-trash-alt"></i></a>
-                                        </td>
-                                        <td class="btnLis text-center"><a title="Agregar datos Extras al Lote" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Cultivo&accion=CultivoExtras&pk_cultivo=${cu.pk_cultivo}">
+
+                                            <a title="Agregar datos Extras al Lote" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Cultivo&accion=CultivoExtras&pk_cultivo=${cu.pk_cultivo}">
                                                 <i class="fas icon-text-document-inverted"></i></a>
-                                        </td>
-                                        <td class="btnLis text-center"><a title="Riesgo de contaminacion" class="btn btn-raised btn-warning btn-sm" href="Controlador?menu=Cultivo&accion=CultivoRiesgo&pk_cultivo=${cu.pk_cultivo}">
+
+                                            <a title="Riesgo de contaminacion" class="btn btn-raised btn-warning btn-sm" href="Controlador?menu=Cultivo&accion=CultivoRiesgo&pk_cultivo=${cu.pk_cultivo}">
                                                 <i class="fas icon-add-to-list"></i></a>
+                                                <%} else if (session.getAttribute("tipo").equals("2")) {%>
+                                            <a  title="Actualizar Cultivo"  class="btn btn-raised btn-success btn-sm"   href="Controlador?menu=Cultivo&accion=Editar&pk_cultivo=${cu.pk_cultivo}">
+                                                <i class="fas  fa-sync-alt"></i></a>
+                                            <a title="Agregar datos Extras al Lote" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Cultivo&accion=CultivoExtras&pk_cultivo=${cu.pk_cultivo}">
+                                                <i class="fas icon-text-document-inverted"></i></a>
+
+                                            <a title="Riesgo de contaminacion" class="btn btn-raised btn-warning btn-sm" href="Controlador?menu=Cultivo&accion=CultivoRiesgo&pk_cultivo=${cu.pk_cultivo}">
+                                                <i class="fas icon-add-to-list"></i></a>
+
+                                            <%} else {%>
+                                            <a title="Agregar datos Extras al Lote" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Cultivo&accion=CultivoExtras&pk_cultivo=${cu.pk_cultivo}">
+                                                <i class="fas icon-text-document-inverted"></i></a>
+
+                                            <a title="Riesgo de contaminacion" class="btn btn-raised btn-warning btn-sm" href="Controlador?menu=Cultivo&accion=CultivoRiesgo&pk_cultivo=${cu.pk_cultivo}">
+                                                <i class="fas icon-add-to-list"></i></a>
+                                                <%}%>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -209,6 +228,8 @@
             <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script> 
             <script src="js/datetable.js" type="text/javascript"></script>
         </main>
+        <!-- popper -->
+        <script src="./js/popper.min.js"></script>
         <!-- jQuery Custom Content Scroller V3.1.5 -->
         <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
 

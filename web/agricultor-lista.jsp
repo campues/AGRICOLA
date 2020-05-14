@@ -10,24 +10,25 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"/> 
     </head>
     <body>
-
-
-        <!-- Main container -->
+      <!-- Main container -->
         <main class="full-box main-container">
             <!--------------EMCABEZADO------------------->
             <jsp:include page="header.jsp"/>
+            <!-- Dialog help -->
+            <jsp:include page="ayuda.jsp"/>
             <!-- Page content -->
             <section class="full-box page-content">
                 <nav class="full-box navbar-info">
                     <a href="#" class="float-left show-nav-lateral">
                         <i class="fas fa-exchange-alt"></i>
                     </a>
-                    <a href="user-update.jsp">
-                        <i class="fas fa-user-cog"></i>
+                    <a href="#!" data-toggle="modal"  data-target="#ModalInfo">
+                        <i title="Ayuda" class="fas icon-help-with-circle"></i>
                     </a>
                     <a href="#" class="btn-exit-system">
-                        <i class="fas fa-power-off"></i>
+                        <i class="fas fa-power-off"> &nbsp;Salir</i>
                     </a>
+
                 </nav>
                 <!-- Page header -->
                 <div class="full-box page-header">
@@ -102,12 +103,27 @@
                                         <td>${a.estatus}</td>
                                         <td>${a.fechaAfiliacion}</td>
 
-                                        <td class=" text-center"><a  title="Actualizar datos del Agricultor" class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Agricultor&accion=showedit&pk_agricultor=${a.pk_agricultor}">
+                                        <td class=" text-center">
+                                            <%if (session.getAttribute("tipo").equals("1")) {%>
+                                            <a  title="Actualizar datos del Agricultor" class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Agricultor&accion=showedit&pk_agricultor=${a.pk_agricultor}">
                                                 <i class="fas  fa-sync-alt"></i></a>
-                                            <a title="Eliminar Agricultor"  id="elimina" class="btn btn-raised btn-danger btn-sm" href="Controlador?menu=Agricultor&accion=Eliminar&pk_agricultor=${a.pk_agricultor}">
+
+                                            <a  title="Eliminar Agricultor"  id="be" class="btn btn-raised btn-danger btn-sm" href="Controlador?menu=Agricultor&accion=Eliminar&pk_agricultor=${a.pk_agricultor}">
                                                 <i class="far fa-trash-alt"></i></a>
+
                                             <a title="Lotes del Agricultor" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Agricultor&accion=VerTerreno&pk_agricultor=${a.pk_agricultor}">
                                                 <i class="fas fa-box-open"></i></a>
+
+                                            <%} else if (session.getAttribute("tipo").equals("2")) {%>
+                                            <a  title="Actualizar datos del Agricultor" class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Agricultor&accion=showedit&pk_agricultor=${a.pk_agricultor}">
+                                                <i class="fas  fa-sync-alt"></i></a>
+                                            <a title="Lotes del Agricultor" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Agricultor&accion=VerTerreno&pk_agricultor=${a.pk_agricultor}">
+                                                <i class="fas fa-box-open"></i></a>
+                                                <%} else {%>
+                                            <a title="Lotes del Agricultor" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Agricultor&accion=VerTerreno&pk_agricultor=${a.pk_agricultor}">
+                                                <i class="fas fa-box-open"></i></a>
+                                                <%}%>
+
                                         </td>
 
                                     </tr>
@@ -118,6 +134,7 @@
 
                 </div>
             </section>
+
             <!--    Datatables-->
             <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
             <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script> 
