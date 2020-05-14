@@ -94,9 +94,7 @@
                                     <th>Codigo</th>
                                     <th>Observaciones</th>
                                     <th>Recomendaciones</th>
-                                    <th class="ac">Eliminar</th>
-                                    <th class="ac">D.Extras</th>
-                                    <th class="ac">Inspeccion</th>
+                                    <th class="ac text-center">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -108,15 +106,14 @@
                                         <td>${l.observaciones}</td>
                                         <td>${l.recomendaciones}</td>
 
-                                        <td class="btnLis text-center"><a class="btn btn-raised btn-danger btn-sm" href="Controlador?menu=Lote&accion=Eliminar&pk_lote=${l.pk_lote}">
+                                        <td class="text-center"><a title="Eliminar Registro" class="btn btn-raised btn-danger btn-sm" href="Controlador?menu=Lote&accion=Eliminar&pk_lote=${l.pk_lote}">
                                                 <i class="far fa-trash-alt"></i></a>
-                                        </td>
-                                        <td class="btnLis text-center"><a title="Agregar datos Extras al Lote" class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Lote&accion=LoteDatos&pk_lote=${l.pk_lote}">
+                                            <a title="Agregar datos Extras al Lote" class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Lote&accion=LoteDatos&pk_lote=${l.pk_lote}">
                                                 <i class="fas icon-text-document-inverted"></i></a>
-                                        </td>
-                                        <td class="btnLis text-center"><a title="Lista de Visitas" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Lote&accion=VerVisitas&pk_lote=${l.pk_lote}">
+                                            <a title="Lista de Visitas" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Lote&accion=VerVisitas&pk_lote=${l.pk_lote}">
                                                 <i class="fas fa-clipboard-list"></i></a>
                                         </td>
+
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -127,7 +124,7 @@
                     </nav>
                 </div>
             </section>
-          <!--    Datatables-->
+            <!--    Datatables-->
             <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
             <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script> 
             <script src="js/datetable.js" type="text/javascript"></script>

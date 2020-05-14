@@ -55,7 +55,7 @@ public class Lote {
         this.recomendaciones = recomendaciones;
     }
 
-    public Lote(int pk_lote, String ubi_Geografica, String altura, String codigo, String parroquia, String observaciones, String recomendaciones, InputStream croquis, String certificado, String banio, String agua_potable, String luz_electrica, String agua_riego, String bodega, String poscosecha, String ob_bodega, String ob_poscosecha, String capacitacion, String ob_capacitacion, String m_transporte, String ob_transporte, String inc_abono, String riesgo_erosion, String registr_lote, String usopp, String en_prdoduc, String cont_lateral, String agua_procesamiento, String des_produccion, int fk_provincia, int fk_agricultorl, int fk_asociacion) {
+    public Lote(int pk_lote, String ubi_Geografica, String altura, String codigo, String parroquia, String observaciones, String recomendaciones, String certificado, String banio, String agua_potable, String luz_electrica, String agua_riego, String bodega, String poscosecha, String ob_bodega, String ob_poscosecha, String capacitacion, String ob_capacitacion, String m_transporte, String ob_transporte, String inc_abono, String riesgo_erosion, String registr_lote, String usopp, String en_prdoduc, String cont_lateral, String agua_procesamiento, String des_produccion, int fk_provincia, int fk_agricultorl, int fk_asociacion) {
         this.pk_lote = pk_lote;
         this.ubi_Geografica = ubi_Geografica;
         this.altura = altura;
@@ -63,7 +63,6 @@ public class Lote {
         this.parroquia = parroquia;
         this.observaciones = observaciones;
         this.recomendaciones = recomendaciones;
-        this.croquis = croquis;
         this.certificado = certificado;
         this.banio = banio;
         this.agua_potable = agua_potable;
@@ -88,15 +87,6 @@ public class Lote {
         this.fk_provincia = fk_provincia;
         this.fk_agricultorl = fk_agricultorl;
         this.fk_asociacion = fk_asociacion;
-    }
-
-    public InputStream getCroquis() {
-        return croquis;
-    }
-
-    //Zona getts y setss
-    public void setCroquis(InputStream croquis) {
-        this.croquis = croquis;
     }
 
     public int getPk_lote() {

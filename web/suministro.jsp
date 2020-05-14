@@ -20,7 +20,7 @@
     %>
     <body>
         <!-- Main container -->
-        <main class="full-box main-container">
+        <main class="full-box main-container" >
             <!--------------EMCABEZADO------------------->
             <jsp:include page="header.jsp"/>
             <!-- Page content -->
@@ -152,8 +152,7 @@
                                     <th>Agricultor</th>
                                     <th >Producto</th>
                                     <th >Empleado</th>
-                                    <th class="ac" >Editar</th>
-                                    <th class="ac">Eliminar</th>
+                                    <th class="ac" >Opciones</th>
                                 </tr>
                             </thead>
                             <tbody >
@@ -164,10 +163,11 @@
                                     <td><%=de.getFk_agricutor()%></td>
                                     <td><%=de.getFk_producto()%></td>
                                     <td><%=de.getFk_empleado()%></td>
-                                    <td class="btnLis"><a  title="Actualizar Suministro"  class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Detalles&accion=Editar&pk_detallesPro=<%=de.getPk_detallesPro()%>">
+                                   
+                                    <td class="btnLis text-center">
+                                        <a  title="Actualizar Suministro"  class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Detalles&accion=Editar&pk_detallesPro=<%=de.getPk_detallesPro()%>">
                                             <i class="fas  fa-sync-alt"></i></a>
-                                    </td>
-                                    <td class="btnLis"><a title="Eliminar Suministro"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=Detalles&accion=Eliminar&pk_detallesPro=<%=de.getPk_detallesPro()%>">
+                                        <a title="Eliminar Suministro"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=Detalles&accion=Eliminar&pk_detallesPro=<%=de.getPk_detallesPro()%>">
                                             <i class="far fa-trash-alt"></i></a>
                                     </td>
                                 </tr>

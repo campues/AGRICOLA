@@ -1,8 +1,6 @@
 package Modelo;
 
 import java.io.InputStream;
-import java.util.Date;
-
 public class Visitas {
     //zona de atributo
 
@@ -39,8 +37,7 @@ public class Visitas {
         this.fk_empleadov = fk_empleadov;
     }
 
-
-    public Visitas(int pk_visitas, String fecha, String nom_informante, String parentesco, String tipo_auditoria, String obHalasgoDete, String obPlazoAccion, String certificado, InputStream anexoCertif, String tipoInspeccion, String con_compromiso, String np_organica, String rc_interno, String elab_bocashi, String pco_uvillas, String cos_poscosecha, int fk_lote, int fk_empleadov) {
+    public Visitas(int pk_visitas, String fecha, String nom_informante, String parentesco, String tipo_auditoria, String obHalasgoDete, String obPlazoAccion, String certificado, String tipoInspeccion, String con_compromiso, String np_organica, String rc_interno, String elab_bocashi, String pco_uvillas, String cos_poscosecha, int fk_lote, int fk_empleadov) {
         this.pk_visitas = pk_visitas;
         this.fecha = fecha;
         this.nom_informante = nom_informante;
@@ -49,7 +46,6 @@ public class Visitas {
         this.obHalasgoDete = obHalasgoDete;
         this.obPlazoAccion = obPlazoAccion;
         this.certificado = certificado;
-        this.anexoCertif = anexoCertif;
         this.tipoInspeccion = tipoInspeccion;
         this.con_compromiso = con_compromiso;
         this.np_organica = np_organica;
@@ -125,14 +121,6 @@ public class Visitas {
         this.certificado = certificado;
     }
 
-    public InputStream getAnexoCertif() {
-        return anexoCertif;
-    }
-
-    public void setAnexoCertif(InputStream anexoCertif) {
-        this.anexoCertif = anexoCertif;
-    }
-
     public String getTipoInspeccion() {
         return tipoInspeccion;
     }
@@ -204,6 +192,7 @@ public class Visitas {
     public void setFk_empleadov(int fk_empleadov) {
         this.fk_empleadov = fk_empleadov;
     }
-    
+
+
 
 }

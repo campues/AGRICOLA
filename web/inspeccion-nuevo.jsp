@@ -7,31 +7,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <title>Nuevo lote</title>
-
-        <!-- Normalize V8.0.1 -->
-        <link rel="stylesheet" href="./css/normalize.css">
-
-        <!-- Bootstrap V4.3 -->
-        <link rel="stylesheet" href="./css/bootstrap.min.css">
-
-        <!-- Bootstrap Material Design V4.0 -->
-        <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
-
-        <!-- Font Awesome V5.9.0 -->
-        <link rel="stylesheet" href="./css/all.css">
-
-        <!-- Sweet Alerts V8.13.0 CSS file -->
-        <link rel="stylesheet" href="./css/sweetalert2.min.css">
-
-        <!-- Sweet Alert V8.13.0 JS file-->
-        <script src="./js/sweetalert2.min.js"></script>
-
-        <!-- jQuery Custom Content Scroller V3.1.5 -->
-        <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
-
-        <!-- General Styles -->
-        <link rel="stylesheet" href="./css/style.css">
-
     </head>
 
 
@@ -79,7 +54,7 @@
 
                 <!--======================CONTENIDO==========================00-->
                 <div class="container-fluid">
-                    <form action="Controlador?menu=Visitas"  class="form-neon" method="POST" enctype="multipart/form-data" >
+                    <form action="Controlador?menu=Visitas"  class="form-neon" method="POST" >
                         <fieldset>
                             <legend><i class="far fa-plus-square"></i> &nbsp; Datos de la inspeccion</legend>
                             <input type="hidden"  class="" name="fkLote"   value="<%=Variables.idLote%>" id="item_codigo" readonly="readonly" >
@@ -101,7 +76,7 @@
                                     <div class="col-12 col-md-3">
                                         <div class="form-group">
                                             <label for="item" class="etiqueta">Parentesco</label>
-                                            <select class="form-control" name="opParentesco" id="item">
+                                            <select class="form-control" name="opParentesco" >
                                                 <option value="" selected="" disabled="">Seleccione una opcion</option>
                                                 <option value="Hijo">Hijo</option>
                                                 <option value="Nieto">Nieto</option>
@@ -115,7 +90,7 @@
                                     <div class="col-12 col-md-3">
                                         <div class="form-group">
                                             <label for="item" class="etiqueta">Tipo de Auditoria</label>
-                                            <select class="form-control" name="opAuditoria" id="item">
+                                            <select class="form-control" name="opAuditoria" >
                                                 <option value="" selected="" disabled="">Seleccione una opcion</option>
                                                 <option  value="Normal">Normal</option>
                                                 <option value="Extraordinaria">Extraordinaria</option>
@@ -145,12 +120,8 @@
                                             <label for="item" class="bmd-label-floating">Empleado</label>
                                             <select class="form-control" name="fkEmpleado" id="item" >
                                                 <option value="" selected="" disabled="">Seleccione Empleado</option>
-                                                <c:forEach var="em" items="${lisEmple}">
-                                                    <option value="${em.pk_empleado}"
-                                                             <c:if test="${em.pk_empleado == detalle.getFk_empleado()}">
-                                                                 selected
-                                                             </c:if>
-                                                            >${em.nombre}</option>
+                                                <c:forEach var="em" items="${lisEmplea}">
+                                                    <option value="${em.pk_empleado}">${em.nombre}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>
@@ -212,8 +183,6 @@
                 </div>
             </section>
         </main>
-
-
         <!--=============================================
         =            Include JavaScript files           =
         ==============================================-->

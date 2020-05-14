@@ -129,7 +129,119 @@ public class Controlador extends HttpServlet {
             Variables.panPrincipal = 0;
             Variables.idAgricultor = 0;
         }
+// ==============================LOTE===========================================================
+        if (menu.equals("Lote")) {
+            try {
+                switch (accion) {
+                    case "Listar":
+                        RequestDispatcher dlote = request.getRequestDispatcher("lote-lista.jsp");
+                        if (Variables.panPrincipal > 0) {
+                            List<Lote> listaLo = loteDAO.listarLoteID();
+                            request.setAttribute("listaLote", listaLo);
+                            Variables.idLote = lote.getPk_lote();
+                        } else {
+                            List<Lote> listaLo = loteDAO.listarLote();
+                            request.setAttribute("listaLote", listaLo);
+                            Variables.idAgricultor = 0;
+                            Variables.agriNombre = "";
+                            Variables.agriApellido = "";
+                        }
+                        dlote.forward(request, response);
+                        break;
+                    case "Listarr":
+                        RequestDispatcher dlotee = request.getRequestDispatcher("lote-lista.jsp");
+                        List<Lote> listaLo = loteDAO.listarLoteID();
+                        request.setAttribute("listaLote", listaLo);
+                        Variables.idLote = lote.getPk_lote();
+                        request.setAttribute("global", Variables.panPrincipal);
+                        dlotee.forward(request, response);
+                        break;
+                    case "Buscar":
+                        RequestDispatcher distw = request.getRequestDispatcher("lote-lista.jsp");
+                        List<Lote> l = loteDAO.listarCod(request.getParameter("txtCodigo"));
+                        request.setAttribute("listaAgri", l);
+                        Variables.panPrincipal = 10;
+                        distw.forward(request, response);
+                        break;
+                    case "Nuevo":
+                        RequestDispatcher d = request.getRequestDispatcher("lote-nuevo.jsp");
+                        //lista de asociacion para seleccion 
+                        List<Asociacion> lists = asociacionDAO.listarAsociacion();
+                        request.setAttribute("lisAso", lists);
+                        //lista provincia y compara
+                        List<Provincia> listaproz = proviDAO.listarProvincia();
+                        request.setAttribute("lisPro", listaproz);
+                        d.forward(request, response);
+                        break;
+                    case "VerVisitas":
+                        lote = loteDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_lote")));
+                        Variables.idLote = lote.getPk_lote();
+                        response.sendRedirect("Controlador?menu=Visitas&accion=Listar");
+                        break;
+                    case "LoteDatos":
+                        lote = loteDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_lote")));
+                        Variables.idLote = lote.getPk_lote();
+                        request.getRequestDispatcher("Controlador?menu=DatosExtras&accion=Listar").forward(request, response);
+                        break;
+                    case "Agregar":
+                        lote.setPk_lote(0);
+                        lote.setUbi_Geografica(request.getParameter("txtUbi"));
+                        lote.setAltura(request.getParameter("txtAlt"));
+                        lote.setCodigo(request.getParameter("txtCod"));
 
+                        lote.setCertificado(request.getParameter("txtCertificado"));
+
+                        lote.setBanio(request.getParameter("checBanio"));
+                        lote.setAgua_potable(request.getParameter("checAguaP"));
+                        lote.setLuz_electrica(request.getParameter("checLuzE"));
+                        lote.setAgua_riego(request.getParameter("checAguaR"));
+
+                        lote.setBodega(request.getParameter("checBodega"));
+                        lote.setOb_bodega(request.getParameter("txtObBodega"));
+                        lote.setPoscosecha(request.getParameter("checPoscosecha"));
+                        lote.setOb_poscosecha(request.getParameter("txtOb_poscosecha"));
+
+                        lote.setCapacitacion(request.getParameter("checCapacitacion"));
+                        lote.setOb_capacitacion(request.getParameter("txtObCapacitacion"));
+                        lote.setM_transporte(request.getParameter("checTransp"));
+                        lote.setOb_transporte(request.getParameter("txtObTransporte"));
+
+                        lote.setInc_abono(request.getParameter("txtInserAbono"));
+                        lote.setRiesgo_erosion(request.getParameter("txtRiegoE"));
+
+                        lote.setRegistr_lote(request.getParameter("opRegistro"));
+
+                        lote.setUsopp(request.getParameter("checUsopp"));
+                        lote.setEn_prdoduc(request.getParameter("checEnpro"));
+                        lote.setCont_lateral(request.getParameter("checContLateral"));
+                        lote.setAgua_procesamiento(request.getParameter("checAguaPro"));
+
+                        lote.setDes_produccion(request.getParameter("txtDesProduccion"));
+
+                        lote.setParroquia(request.getParameter("txtPar"));
+                        lote.setObservaciones(request.getParameter("txtObserv"));
+                        lote.setRecomendaciones(request.getParameter("txtRecom"));
+                        lote.setFk_provincia(Integer.parseInt(request.getParameter("opProvincia")));
+
+                        lote.setFk_agricultorl(Integer.parseInt(request.getParameter("fkAgricultor")));
+
+                        lote.setFk_asociacion(Integer.parseInt(request.getParameter("selectAso")));
+                        loteDAO.insertarLoteSIN(lote);
+                        request.getRequestDispatcher("Controlador?menu=Lote&accion=Listarr").forward(request, response);
+                        break;
+                    case "Eliminar":
+                        Lote loEliminar = loteDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_lote")));
+                        loteDAO.eliminarLote(loEliminar);
+                        request.getRequestDispatcher("Controlador?menu=Lote&accion=Listarr").forward(request, response);
+                        break;
+                    default:
+                        break;
+                }
+            } catch (Exception e) {
+                request.setAttribute("error", e);
+                request.getRequestDispatcher("error.jsp").forward(request, response);
+            }
+        }
         // ==============================INSPECCION VISITA=======================================================
         if (menu.equals("Visitas")) {
             try {
@@ -144,8 +256,8 @@ public class Controlador extends HttpServlet {
                     case "Nuevo":
                         RequestDispatcher d = request.getRequestDispatcher("inspeccion-nuevo.jsp");
                         //lista de empleado para seleccion Multiple
-                        List<Empleado> list = empleadoDAO.listarEmpleados();
-                        request.setAttribute("lisEmple", list);
+                        List<Empleado> listr = empleadoDAO.listarEmpleados();
+                        request.setAttribute("lisEmplea", listr);
                         d.forward(request, response);
                         break;
                     case "Agregar":
@@ -702,160 +814,6 @@ public class Controlador extends HttpServlet {
             }
         }
 
-        // ==============================LOTE===========================================================
-        if (menu.equals("Lote")) {
-            switch (accion) {
-                case "Listar":
-                    try {
-                        RequestDispatcher dlote = request.getRequestDispatcher("lote-lista.jsp");
-                        if (Variables.panPrincipal > 0) {
-                            List<Lote> listaLo = loteDAO.listarLoteID();
-                            request.setAttribute("listaLote", listaLo);
-                            Variables.idLote = lote.getPk_lote();
-                        } else {
-                            List<Lote> listaLo = loteDAO.listarLote();
-                            request.setAttribute("listaLote", listaLo);
-                            Variables.idAgricultor = 0;
-                            Variables.agriNombre = "";
-                            Variables.agriApellido = "";
-                        }
-                        dlote.forward(request, response);
-                    } catch (Exception e) {
-                        request.setAttribute("error", e);
-                        request.getRequestDispatcher("error.jsp").forward(request, response);
-                    }
-
-                    break;
-                case "Listarr":
-                    try {
-                        RequestDispatcher dlotee = request.getRequestDispatcher("lote-lista.jsp");
-                        List<Lote> listaLo = loteDAO.listarLoteID();
-                        request.setAttribute("listaLote", listaLo);
-                        Variables.idLote = lote.getPk_lote();
-                        request.setAttribute("global", Variables.panPrincipal);
-                        dlotee.forward(request, response);
-                    } catch (Exception e) {
-                        request.setAttribute("error", e);
-                        request.getRequestDispatcher("error.jsp").forward(request, response);
-                    }
-                    break;  
-                case "Buscar":
-                    try {
-                        RequestDispatcher distw = request.getRequestDispatcher("lote-lista.jsp");
-                        List<Lote> l = loteDAO.listarCod(request.getParameter("txtCodigo"));
-                        request.setAttribute("listaAgri", l);
-                        Variables.panPrincipal = 10;
-                        distw.forward(request, response);
-                    } catch (Exception e) {
-                        request.setAttribute("error", e);
-                        request.getRequestDispatcher("error.jsp").forward(request, response);
-                    }
-
-                    break;
-                case "Nuevo":
-                    try {
-                        RequestDispatcher d = request.getRequestDispatcher("lote-nuevo.jsp");
-                        //lista de asociacion para seleccion 
-                        List<Asociacion> list = asociacionDAO.listarAsociacion();
-                        request.setAttribute("lisAso", list);
-                        //lista provincia y compara
-                        List<Provincia> listaproo = proviDAO.listarProvincia();
-                        request.setAttribute("lisPro", listaproo);
-                        d.forward(request, response);
-                    } catch (Exception e) {
-                        request.setAttribute("error", e);
-                        request.getRequestDispatcher("error.jsp").forward(request, response);
-                    }
-                    break;
-                case "VerVisitas":
-                    try {
-                        lote = loteDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_lote")));
-                        Variables.idLote = lote.getPk_lote();
-                        response.sendRedirect("Controlador?menu=Visitas&accion=Listar");
-                    } catch (Exception e) {
-                        request.setAttribute("error", e);
-                        request.getRequestDispatcher("error.jsp").forward(request, response);
-                    }
-
-                    break;
-                case "LoteDatos":
-                    try {
-                        lote = loteDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_lote")));
-                        Variables.idLote = lote.getPk_lote();
-                        request.getRequestDispatcher("Controlador?menu=DatosExtras&accion=Listar").forward(request, response);
-                    } catch (Exception e) {
-                        request.setAttribute("error", e);
-                        request.getRequestDispatcher("error.jsp").forward(request, response);
-                    }
-                    break;
-                case "Agregar":
-                    try {
-                        lote.setPk_lote(0);
-                        lote.setUbi_Geografica(request.getParameter("txtUbi"));
-                        lote.setAltura(request.getParameter("txtAlt"));
-                        lote.setCodigo(request.getParameter("txtCod"));
-
-                        lote.setCertificado(request.getParameter("txtCertificado"));
-
-                        lote.setBanio(request.getParameter("checBanio"));
-                        lote.setAgua_potable(request.getParameter("checAguaP"));
-                        lote.setLuz_electrica(request.getParameter("checLuzE"));
-                        lote.setAgua_riego(request.getParameter("checAguaR"));
-
-                        lote.setBodega(request.getParameter("checBodega"));
-                        lote.setOb_bodega(request.getParameter("txtObBodega"));
-                        lote.setPoscosecha(request.getParameter("checPoscosecha"));
-                        lote.setOb_poscosecha(request.getParameter("txtOb_poscosecha"));
-
-                        lote.setCapacitacion(request.getParameter("checCapacitacion"));
-                        lote.setOb_capacitacion(request.getParameter("txtObCapacitacion"));
-                        lote.setM_transporte(request.getParameter("checTransp"));
-                        lote.setOb_transporte(request.getParameter("txtObTransporte"));
-
-                        lote.setInc_abono(request.getParameter("txtInserAbono"));
-                        lote.setRiesgo_erosion(request.getParameter("txtRiegoE"));
-
-                        lote.setRegistr_lote(request.getParameter("opRegistro"));
-
-                        lote.setUsopp(request.getParameter("checUsopp"));
-                        lote.setEn_prdoduc(request.getParameter("checEnpro"));
-                        lote.setCont_lateral(request.getParameter("checContLateral"));
-                        lote.setAgua_procesamiento(request.getParameter("checAguaPro"));
-
-                        lote.setDes_produccion(request.getParameter("txtDesProduccion"));
-
-                        lote.setParroquia(request.getParameter("txtPar"));
-                        lote.setObservaciones(request.getParameter("txtObserv"));
-                        lote.setRecomendaciones(request.getParameter("txtRecom"));
-                        lote.setFk_provincia(Integer.parseInt(request.getParameter("opProvincia")));
-
-                        lote.setFk_agricultorl(Integer.parseInt(request.getParameter("fkAgricultor")));
-
-                        lote.setFk_asociacion(Integer.parseInt(request.getParameter("selectAso")));
-                        loteDAO.insertarLoteSIN(lote);
-                        request.getRequestDispatcher("Controlador?menu=Lote&accion=Listarr").forward(request, response);
-                    } catch (Exception e) {
-                        request.setAttribute("error", e);
-                        request.getRequestDispatcher("error.jsp").forward(request, response);
-                    }
-
-                    break;
-                case "Eliminar":
-                    try {
-                        Lote loEliminar = loteDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_lote")));
-                        loteDAO.eliminarLote(loEliminar);
-                        request.getRequestDispatcher("Controlador?menu=Lote&accion=Listarr").forward(request, response);
-                    } catch (Exception e) {
-                        request.setAttribute("error", e);
-                        request.getRequestDispatcher("error.jsp").forward(request, response);
-                    }
-
-                    break;
-                default:
-                    break;
-            }
-
-        }
         // ==============================AGRICULTOR===========================================================
         if (menu.equals("Agricultor")) {
             try {

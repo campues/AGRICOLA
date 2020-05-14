@@ -78,7 +78,7 @@
                 <!-- Content here-->
                 <div class="container-fluid">
                     <div class="table-responsive">
-                      <table id="tablalist" class="table table-dark table-sm">
+                        <table id="tablalist" class="table table-dark table-sm">
                             <thead>
                                 <tr class=" roboto-medium">
                                     <th>ID</th>
@@ -88,10 +88,7 @@
                                     <th>Telefono</th>
                                     <th>Estatus</th>
                                     <th>Fecha Afiliacion</th>
-                                    <th class="ac">Editar</th>
-                                    <th class="ac">Eliminar</th>
-                                    <th class="ac" >Lotes</th>
-
+                                    <th class="ac text-center">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -105,13 +102,11 @@
                                         <td>${a.estatus}</td>
                                         <td>${a.fechaAfiliacion}</td>
 
-                                        <td class="btnLis text-center"><a  title="Actualizar datos del Agricultor" class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Agricultor&accion=showedit&pk_agricultor=${a.pk_agricultor}">
+                                        <td class=" text-center"><a  title="Actualizar datos del Agricultor" class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Agricultor&accion=showedit&pk_agricultor=${a.pk_agricultor}">
                                                 <i class="fas  fa-sync-alt"></i></a>
-                                        </td>
-                                        <td class="btnLis text-center"><a title="Eliminar Agricultor"  id="elimina" class="btn btn-raised btn-danger btn-sm" href="Controlador?menu=Agricultor&accion=Eliminar&pk_agricultor=${a.pk_agricultor}">
+                                            <a title="Eliminar Agricultor"  id="elimina" class="btn btn-raised btn-danger btn-sm" href="Controlador?menu=Agricultor&accion=Eliminar&pk_agricultor=${a.pk_agricultor}">
                                                 <i class="far fa-trash-alt"></i></a>
-                                        </td>
-                                        <td class="btnLis text-center"><a title="Lotes del Agricultor" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Agricultor&accion=VerTerreno&pk_agricultor=${a.pk_agricultor}">
+                                            <a title="Lotes del Agricultor" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Agricultor&accion=VerTerreno&pk_agricultor=${a.pk_agricultor}">
                                                 <i class="fas fa-box-open"></i></a>
                                         </td>
 

@@ -7,34 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <title>Nuevo lote</title>
-
-        <!-- Normalize V8.0.1 -->
-        <link rel="stylesheet" href="./css/normalize.css">
-
-        <!-- Bootstrap V4.3 -->
-        <link rel="stylesheet" href="./css/bootstrap.min.css">
-
-        <!-- Bootstrap Material Design V4.0 -->
-        <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
-
-        <!-- Font Awesome V5.9.0 -->
-        <link rel="stylesheet" href="./css/all.css">
-
-        <!-- Sweet Alerts V8.13.0 CSS file -->
-        <link rel="stylesheet" href="./css/sweetalert2.min.css">
-
-        <!-- Sweet Alert V8.13.0 JS file-->
-        <script src="./js/sweetalert2.min.js"></script>
-
-        <!-- jQuery Custom Content Scroller V3.1.5 -->
-        <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
-
-        <!-- General Styles -->
-        <link rel="stylesheet" href="./css/style.css">
-
     </head>
-
-
     <body>
         <!-- Main container -->
         <main class="full-box main-container">
@@ -58,7 +31,6 @@
                     <h3 class="text-danger">
                         AGRICULTOR:
                         <%=Variables.agriNombre%>  &nbsp; <%=Variables.agriApellido%> &nbsp;
-                        ID LOTE:<%=Variables.idLote%>
                     </h3>
                     <p class="text-justify">
                         <i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR LOTE <br>
@@ -76,10 +48,9 @@
 
                     </ul>
                 </div>
-
                 <!--======================CONTENIDO==========================00-->
                 <div class="container-fluid">
-                    <form action="Controlador?menu=Lote"  class="form-neon" method="POST" enctype="multipart/form-data" >
+                    <form action="Controlador?menu=Lote"  class="form-neon" method="POST"  >
                         <fieldset>
                             <legend><i class="far fa-plus-square"></i> &nbsp; Informacion del lote</legend>
                             <input type="hidden"  class="" name="fkAgricultor"   value="<%=Variables.idAgricultor%>" id="item_codigo" readonly="readonly" >
@@ -112,11 +83,7 @@
                                             <select class="form-control" name="opProvincia" id="item">
                                                 <option value="" selected="" disabled="">Seleccione una opcion</option>
                                                 <c:forEach var="p" items="${lisPro}" >
-                                                    <option value="${p.pk_provincia}"
-                                                            <c:if test="${p.pk_provincia == asoc.getFk_provinciaa()}">
-                                                                selected
-                                                            </c:if>
-                                                            >${p.nomProvincia}</option>
+                                                    <option value="${p.pk_provincia}">${p.nomProvincia}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>
