@@ -11,9 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DetallesproDao {
+
     //variables para la conexion 
     private Conexion con;
     private Connection connection;
+
 
     public DetallesproDao() {
     }

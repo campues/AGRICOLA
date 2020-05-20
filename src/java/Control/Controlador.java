@@ -34,10 +34,12 @@ import ModeloDao.ProvinciaDao;
 import ModeloDao.RiesgoContamDao;
 import ModeloDao.RotacionCultivoDao;
 import ModeloDao.VisitasDao;
+import config.GenerarSerie;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -88,6 +90,7 @@ public class Controlador extends HttpServlet {
     RotacionCultivo roCultivo = new RotacionCultivo();
     ProdAplicados proApli = new ProdAplicados();
     RiesgoContam rcontam = new RiesgoContam();
+    String numeroserie = "";
 
     public void init() {
         String jdbcURL = getServletContext().getInitParameter("jdbcURL");
@@ -142,13 +145,16 @@ public class Controlador extends HttpServlet {
                             List<Lote> listaLo = loteDAO.listarLoteID();
                             request.setAttribute("listaLote", listaLo);
                             Variables.idLote = lote.getPk_lote();
+
                         } else {
                             List<Lote> listaLo = loteDAO.listarLote();
                             request.setAttribute("listaLote", listaLo);
                             Variables.idAgricultor = 0;
                             Variables.agriNombre = "";
                             Variables.agriApellido = "";
+
                         }
+
                         dlote.forward(request, response);
                         break;
                     case "Listarr":
@@ -173,7 +179,33 @@ public class Controlador extends HttpServlet {
                         request.setAttribute("lisAso", lists);
                         //lista provincia y compara
                         List<Provincia> listaproz = proviDAO.listarProvincia();
+
                         request.setAttribute("lisPro", listaproz);
+
+                        //DATOS DEL AGRICULTOR=============================================================
+                        String nombre1 = Variables.agriNombre.split("")[0];
+                        String apellido = Variables.agriApellido.split("")[0];
+                        //generar serie automatica
+                        numeroserie = loteDAO.GenerarSerie();
+                        if (numeroserie == null) {
+                            numeroserie = "0001";
+                            request.setAttribute("nserie", nombre1 + apellido + numeroserie);
+                        } else {
+                            char r1 = numeroserie.charAt(2);
+                            char r2 = numeroserie.charAt(3);
+                            char r3 = numeroserie.charAt(4);
+                            char r4 = numeroserie.charAt(5);
+                            String r = "";
+                            r = "" + r1 + r2 + r3 + r4;
+                            int incrementar = Integer.parseInt(r);
+                            GenerarSerie gs = new GenerarSerie();
+                            numeroserie = gs.NumeroSerie2(incrementar);
+                            request.setAttribute("nserie", nombre1 + apellido + numeroserie);
+                        }
+                        //genera numero aleatorio de 3 digitos
+                        String randon = UUID.randomUUID().toString().toUpperCase().substring(0, 3);
+                        request.setAttribute("random", nombre1 + apellido + randon);
+
                         d.forward(request, response);
                         break;
                     case "VerVisitas":
@@ -759,7 +791,6 @@ public class Controlador extends HttpServlet {
                             request.setAttribute("error", e);
                             request.getRequestDispatcher("error.jsp").forward(request, response);
                         }
-
                         break;
                     case "Agregar":
                         de.setPk_detallesPro(0);
@@ -769,9 +800,9 @@ public class Controlador extends HttpServlet {
                         de.setFk_producto(request.getParameter("txtProducto"));
                         de.setFk_empleado(request.getParameter("txtEmpleado"));
                         msj = "";
-                       // int v = detalleDAO.registrar_Suminstro(de);
-                        
-                        if (detalleDAO.insertarDetalle(de)==true) {
+                        // int v = detalleDAO.registrar_Suminstro(de);
+
+                        if (detalleDAO.insertarDetalle(de) == true) {
                             msj = "5"; //si inserto correctamente
                         } else {
                             msj = "6"; //hubo un error en inserccion
@@ -937,6 +968,7 @@ public class Controlador extends HttpServlet {
                         RequestDispatcher dispatc = request.getRequestDispatcher("empleado.jsp");
                         List<Empleado> listaEm = empleadoDAO.listarEmpleados();
                         request.setAttribute("empleados", listaEm);
+
                         dispatc.forward(request, response);
                     } catch (Exception e) {
                         request.setAttribute("error", e);
@@ -944,6 +976,7 @@ public class Controlador extends HttpServlet {
                     }
 
                     break;
+
                 case "Agregar":
                     try {
                         em.setPk_empleado(0);
@@ -1008,9 +1041,9 @@ public class Controlador extends HttpServlet {
                     }
                     break;
                 default:
-                    throw new AssertionError();
-            }
+                    break;
 
+            }
         }
         // ==============================ASOCIACION===========================================================
         if (menu.equals("Asociacion")) {

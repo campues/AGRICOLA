@@ -123,6 +123,7 @@
                                         <input type="text"  class="form-control" name="txtCantidad" >
                                     </div>
 
+
                                     <div class="form-group">
                                         <label for="item" class="bmd-label-floating">Agricultor</label>
 

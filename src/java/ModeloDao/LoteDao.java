@@ -17,6 +17,9 @@ public class LoteDao {
     private Conexion con;
     private Connection connection;
 
+    private ResultSet rs = null;//contiene los resultados de una consulta SQL
+    private PreparedStatement ps = null;
+
     public LoteDao(String jdbcURL, String jdbcUsername, String jdbcPassword) throws SQLException {
         System.out.println(jdbcURL);
         con = new Conexion(jdbcURL, jdbcUsername, jdbcPassword);
@@ -64,7 +67,21 @@ public class LoteDao {
         con.desconectar();
         return listarLoteID;
     }
-    // listar ID
+    // CONSULTA PARA GENERAR CODIGO
+
+    public String GenerarSerie() throws SQLException {
+        String numeroserie = "";
+        String sql = "select max(codigo) from lote WHERE fk_agricultorl='" + global.idAgricultor + "' ";
+
+        con.conectar();
+        connection = con.getJdbcConnection();
+        ps = connection.prepareStatement(sql);
+        rs = ps.executeQuery();
+        if (rs.next()) {
+            numeroserie = rs.getString(1);
+        }
+        return numeroserie;
+    }
 
     public List<Lote> listarCod(String codi) throws SQLException {
         List<Lote> listarLoteID = new ArrayList<Lote>();
@@ -111,8 +128,7 @@ public class LoteDao {
         return lote;
     }
 
-
-     // Insertar Lote SIN IMAGEN
+    // Insertar Lote SIN IMAGEN
     public boolean insertarLoteSIN(Lote lot) throws SQLException {
         String sql = "INSERT INTO lote (pk_lote,ubi_Geografica,altura,codigo,parroquia,observaciones, "
                 + "recomendaciones,certificacion,banio,agua_potable,luz_electrica,agua_riego, "
@@ -162,7 +178,6 @@ public class LoteDao {
         return rowInserted;
     }
 
-    
     // actualizar
     public boolean actualizar(Lote lote) throws SQLException {
         boolean rowActualizar = false;

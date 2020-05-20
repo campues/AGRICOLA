@@ -26,8 +26,10 @@ public class EmpleadoDao {
         System.out.println(jdbcURL);
         con = new Conexion(jdbcURL, jdbcUsername, jdbcPassword);
     }
-//METODO DE CONSULTA DEL DATO DESDE LA BASE DE DATOS
 
+    
+
+//METODO DE CONSULTA DEL DATO DESDE LA BASE DE DATOS
     public Empleado validar(String user, String dni) throws SQLException {
         String sql = "select * from empleado where usuario=? and contrasena=?";
         Empleado emple = null;

@@ -99,6 +99,7 @@
                                                         <input type="password" class="form-control" name="txtContrasena"  id="pass">
                                                     </div>
                                                 </div>
+
                                                 <div class="form-group" style="padding-top:45px;">
                                                     <i class=" fa fa-eye etiqueta" id="show" onclick="mostrar()"></i>
                                                 </div>
@@ -120,7 +121,6 @@
                                                             <option value="1" >Control total</option>
                                                             <option value="2" >Edicion</option>
                                                             <option value="3">Registrar</option>
-
                                                         </select>
                                                     </div>
                                                 </div>
@@ -160,6 +160,7 @@
                     <!-- ===================================================================================================== -->
 
                     <!-- Content -->
+                  
                     <div class="table-responsive">
                         <table id="tablalist" class="table table-dark table-sm">
                             <thead >

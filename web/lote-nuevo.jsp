@@ -54,7 +54,7 @@
                     </ul>
                 </div>
                 <!--======================CONTENIDO==========================00-->
-
+                <%=Variables.agriNombre%>  &nbsp; <%=Variables.agriApellido%>&nbsp;
                 <div class="container-fluid">
                     <form action="Controlador?menu=Lote"  id="registro" class="form-neon" method="POST"  >
                         <fieldset>
@@ -69,7 +69,7 @@
                                     <div class=col-md-3">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Geolocalización</label>
-                                            <input type="text"  class="form-control" name="txtUbi" id="txtUbi"   >
+                                            <input type="text"  title="Latitud/Longitud -> 0.0440903/-78.142985" class="form-control" name="txtUbi" id="txtUbi"   >
                                         </div>
                                     </div>
 
@@ -82,10 +82,10 @@
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label  class="bmd-label-floating">Codigo</label>
-                                            <input type="text" class="form-control" name="txtCod"  >
+                                            <input type="text" readonly class="form-control" name="txtCod"  value="${nserie}"  >
+                                            <input type="text" readonly class="form-control" name=""  value="${random}"  >
                                         </div>
                                     </div>
-
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="item" class="bmd-label-floating">Provincia</label>

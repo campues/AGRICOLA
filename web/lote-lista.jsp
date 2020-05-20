@@ -86,6 +86,7 @@
                         COD: <%=Variables.idAgricultor%>
                         <%=Variables.agriNombre%>  &nbsp; <%=Variables.agriApellido%>&nbsp;
                     </strong>
+                  
                     <div class="table-responsive">
                         <table id="tablalist" class="table table-dark table-sm">
 
