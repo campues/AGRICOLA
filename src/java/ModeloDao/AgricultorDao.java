@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class AgricultorDao {
 
@@ -166,7 +167,7 @@ public class AgricultorDao {
         return agricultor;
 
     }
-
+   
     // listar todos las asociaciones
     public List<Agricultor> listarAgriCed(String cedula) throws SQLException {
         List<Agricultor> listarAgri = new ArrayList<Agricultor>();

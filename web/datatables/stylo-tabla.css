@@ -1,0 +1,44 @@
+
+/*estilos para la tabla*/
+table th {
+    background-color: #154360 ;
+}
+table th:hover {
+    background-color: #001a39;
+}
+
+/*para alinear los botones y cuadro de busqueda*/
+.btn-group,.btn-group-vertical {
+    position: absolute !important;
+    top: 8%;
+    right: 0px;
+    background-color: #000;
+    border-radius: 5px;
+}
+
+/*Mostrar 10 registros*/
+div.dataTables_wrapper div.dataTables_length label {
+    position: relative;
+    text-shadow: 0px 0px 5px #154360 ; 
+}
+
+/*Buscar:Buscar registro*/
+div.dataTables_wrapper div.dataTables_filter {
+    position: relative;
+    margin-top: -20px;
+    margin-bottom: -5px;
+
+}
+
+/*Mostrando registros del 1 al 2 de un total de 2 registros */
+div.dataTables_wrapper div.dataTables_info {
+    text-shadow: 0px 0px 5px #154360 ; 
+    position: relative;
+    margin-top: -20px
+}
+/*Anterior 1 Siguiente*/
+div.dataTables_wrapper div.dataTables_paginate {
+    text-shadow: 1px 1px 1px #000000   ; 
+}
+
+

@@ -38,6 +38,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -46,6 +48,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import javax.swing.JOptionPane;
 
 public class Controlador extends HttpServlet {
 
@@ -735,6 +738,7 @@ public class Controlador extends HttpServlet {
         // ==============================DETALLES PRODUCTO===========================================================
         if (menu.equals("Detalles")) {
             try {
+                String msj;
                 switch (accion) {
                     case "Listar":
                         try {
@@ -764,8 +768,15 @@ public class Controlador extends HttpServlet {
                         de.setFk_agricutor(request.getParameter("txtAgricultor"));
                         de.setFk_producto(request.getParameter("txtProducto"));
                         de.setFk_empleado(request.getParameter("txtEmpleado"));
-                        detalleDAO.insertarDetalle(de);
-                        RequestDispatcher distss = request.getRequestDispatcher("Controlador?menu=Detalles&accion=Listar");
+                        msj = "";
+                       // int v = detalleDAO.registrar_Suminstro(de);
+                        
+                        if (detalleDAO.insertarDetalle(de)==true) {
+                            msj = "5"; //si inserto correctamente
+                        } else {
+                            msj = "6"; //hubo un error en inserccion
+                        }
+                        RequestDispatcher distss = request.getRequestDispatcher("Controlador?menu=Detalles&accion=Listar&msj=" + msj);
                         distss.forward(request, response);
                         break;
                     case "Editar":
@@ -790,7 +801,13 @@ public class Controlador extends HttpServlet {
 
                         de.setFk_producto(request.getParameter("txtProducto"));
                         de.setFk_empleado(request.getParameter("txtEmpleado"));
-                        detalleDAO.actualizar(de);
+                        msj = "";
+
+                        if (detalleDAO.actualizar(de) == true) {
+                            msj = "5"; //si inserto correctamente
+                        } else {
+                            msj = "6"; //hubo un error en inserccion
+                        }
                         request.getRequestDispatcher("Controlador?menu=Detalles&accion=Listar").forward(request, response);
                         break;
                     case "Buscar":
@@ -802,7 +819,7 @@ public class Controlador extends HttpServlet {
                     case "Eliminar":
                         Detallespro detaEliminar = detalleDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_detallesPro")));
                         detalleDAO.eliminarDe(detaEliminar);
-                        request.getRequestDispatcher("Controlador?menu=Detalles&accion=Listar").forward(request, response);
+                        request.getRequestDispatcher("Controlador?menu=Detalles&accion=Listar&msj=1").forward(request, response);
                         break;
                     default:
                         break;
@@ -811,6 +828,8 @@ public class Controlador extends HttpServlet {
             } catch (SQLException e) {
                 request.setAttribute("error", e);
                 request.getRequestDispatcher("error.jsp").forward(request, response);
+            } catch (Exception ex) {
+                Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -896,6 +915,7 @@ public class Controlador extends HttpServlet {
                     case "Eliminar":
                         Agricultor agEliminar = agricultorDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_agricultor")));
                         agricultorDAO.eliminarAgri(agEliminar);
+
                         request.getRequestDispatcher("Controlador?menu=Agricultor&accion=Listar").forward(request, response);
                         break;
                     default:

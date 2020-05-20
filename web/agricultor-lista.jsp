@@ -7,10 +7,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <title>Lista de clientes</title>
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"/> 
+        <!-- dataTable -->
+        <link rel="stylesheet" href="datatables/datatables.min.css"/>
+        <link rel="stylesheet" href="datatables/stylo-tabla.css" />
     </head>
     <body>
-      <!-- Main container -->
+        <!-- Main container -->
         <main class="full-box main-container">
             <!--------------EMCABEZADO------------------->
             <jsp:include page="header.jsp"/>
@@ -38,46 +40,43 @@
                     <p class="text-justify">
                         Lista de agricultores
                     </p>
-                </div>
-
-                <div class="container-fluid">
-                    <ul class="full-box list-unstyled page-nav-tabs">
-                        <li>
-                            <a href="agricultor-nuevo.jsp"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR AGRICULTORES</a>
-                        </li>
-                        <li>
-                            <a href="Controlador?menu=Agricultor&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE AGRICULTORES</a>
-                        </li>
-                        <li>
-                            <a  href="" data-toggle="modal" data-target="#ModalBuscar"><i  class="fas fa-search fa-fw"></i> &nbsp; BUSCAR AGRICULTOR</a>
-                        </li>
-                    </ul>	
-                </div>
-                <!-- ============================================MODAL HERRAMIENTAS=============================0 -->
-                <div class="modal fade" id="ModalBuscar" tabindex="-1" role="dialog" aria-labelledby="ModalBuscar" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="etiqueta">¿A que Agricultor estas buscando?</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <form class="modal-body" action="Controlador?menu=Agricultor" method="POST"  >
-                                <div class="form-group">
-                                    <label  class="bmd-label-floating">Ingresa el numero de cedula</label>
-                                    <input type="text"  class="form-control" name="txtCedula" required="" title="Ingresa un nombre">
+                    <div class="container-fluid">
+                        <ul class="full-box list-unstyled page-nav-tabs">
+                            <li>
+                                <a href="agricultor-nuevo.jsp"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR AGRICULTORES</a>
+                            </li>
+                            <li>
+                                <a href="Controlador?menu=Agricultor&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE AGRICULTORES</a>
+                            </li>
+                            <li>
+                                <a  href="" data-toggle="modal" data-target="#ModalBuscar"><i  class="fas fa-search fa-fw"></i> &nbsp; BUSCAR AGRICULTOR</a>
+                            </li>
+                        </ul>	
+                    </div>
+                    <!-- ============================================MODAL HERRAMIENTAS=============================0 -->
+                    <div class="modal fade" id="ModalBuscar" tabindex="-1" role="dialog" aria-labelledby="ModalBuscar" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="etiqueta">¿A que Agricultor estas buscando?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
-                                <p class="text-center">
-                                    <button   type="submit" name="accion" value="Buscar" class="btn btn-raised btn-info "><i class="fas fa-search "></i> &nbsp; BUSCAR</button>
-                                </p>
-                            </form>
+                                <form class="modal-body" action="Controlador?menu=Agricultor" method="POST"  >
+                                    <div class="form-group">
+                                        <label  class="bmd-label-floating">Ingresa el numero de cedula</label>
+                                        <input type="text"  class="form-control" name="txtCedula" required="" title="Ingresa un nombre">
+                                    </div>
+                                    <p class="text-center">
+                                        <button   type="submit" name="accion" value="Buscar" class="btn btn-raised btn-info "><i class="fas fa-search "></i> &nbsp; BUSCAR</button>
+                                    </p>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- ===================================================================================================== -->
-                <!-- Content here-->
-                <div class="container-fluid">
+                    <!-- ===================================================================================================== -->
+                    <!-- Content here-->
                     <div class="table-responsive">
                         <table id="tablalist" class="table table-dark table-sm">
                             <thead>
@@ -131,18 +130,19 @@
                             </tbody>
                         </table>
                     </div>
-
                 </div>
             </section>
 
-            <!--    Datatables-->
+            <script src="js/bootstrap.min.js" type="text/javascript"></script>
             <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
-            <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script> 
-            <script src="js/datetable.js" type="text/javascript"></script>
+            <script src="js/popper.min.js" type="text/javascript"></script>
+
+            <!-- jQuery, dataTable -->
+            <script src="datatables/datatables.min.js" type="text/javascript" ></script>    
+            <script src="datatables//stylo-tabla.js" type="text/javascript"></script>
         </main>
         <!-- jQuery Custom Content Scroller V3.1.5 -->
         <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
-
         <!-- Bootstrap Material Design V4.0 -->
         <script src="./js/bootstrap-material-design.min.js"></script>
         <script>

@@ -7,9 +7,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <title>Nuevo lote</title>
+        <script src="https://code.jquery.com/jquery-2.2.4.js"
+        integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
     </head>
     <body>
-            <!-- Main container -->
+        <!-- Main container -->
         <main class="full-box main-container">
             <!--------------EMCABEZADO------------------->
             <jsp:include page="header.jsp"/>
@@ -52,18 +54,22 @@
                     </ul>
                 </div>
                 <!--======================CONTENIDO==========================00-->
+
                 <div class="container-fluid">
-                    <form action="Controlador?menu=Lote"  class="form-neon" method="POST"  >
+                    <form action="Controlador?menu=Lote"  id="registro" class="form-neon" method="POST"  >
                         <fieldset>
                             <legend><i class="far fa-plus-square"></i> &nbsp; Informacion del lote</legend>
                             <input type="hidden"  class="" name="fkAgricultor"   value="<%=Variables.idAgricultor%>" id="item_codigo" readonly="readonly" >
                             <div class="container-fluid">
+                                <a href="#" title="Obtener Cordenas para el registro de la Ubicación Geografica" id="pedirvan" class="btn-raised btn-danger" > <i class="icon-location-pin"></i></a> 
+                                &nbsp;&nbsp;
+                                <label style="color: black"  id="nlat" ></label>/
+                                <label  style="color: black"  id="nlon" ></label>
                                 <div class="row">
-
-                                    <div class=col-md-2">
+                                    <div class=col-md-3">
                                         <div class="form-group">
-                                            <label  class="bmd-label-floating">Ubicacion Geografica</label>
-                                            <input type="text"  class="form-control" name="txtUbi"  >
+                                            <label class="bmd-label-floating">Geolocalización</label>
+                                            <input type="text"  class="form-control" name="txtUbi" id="txtUbi"   >
                                         </div>
                                     </div>
 
@@ -111,9 +117,9 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                         <   <label for="" class="etiqueta">Certificado:</label>
-                                            <label style="color: #020202;">SI</label> <input  type="radio" name="txtCertificado" value="SI" required="">&nbsp;
-                                            <label style="color: #020202;">NO</label><input type="radio" name="txtCertificado" value="NO" required="">
+                                            <   <label for="" class="etiqueta">Certificado:</label>
+                                            <label style="color: #020202;">SI</label> <input  type="radio" name="txtCertificado" value="SI" >&nbsp;
+                                            <label style="color: #020202;">NO</label><input type="radio" name="txtCertificado" value="NO" >
                                         </div>
                                     </div>
 
@@ -226,7 +232,7 @@
             </section>
         </main>
 
-
+        <script src="js/geolocalizacion.js" type="text/javascript"></script>
         <!--=============================================
         =            Include JavaScript files           =
         ==============================================-->

@@ -7,8 +7,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <title>Datos de la empresa</title>
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"/> 
-
+        <!-- dataTable -->
+        <link rel="stylesheet" href="datatables/datatables.min.css"/>
+        <link rel="stylesheet" href="datatables/stylo-tabla.css" />
     </head>
 
     <body>
@@ -40,132 +41,129 @@
                     <p class="text-justify">
                         CULTIVO EXISTENTES
                     </p>
-                </div>
 
-                <div class="container-fluid">
-                    <ul class="full-box list-unstyled page-nav-tabs">
-                        <li>
-                            <a  href="#" data-toggle="modal" data-target="#ModalAgregar"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR</a>
-                        </li>
-                        <li>
-                            <a href="Controlador?menu=Cultivo&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTAR </a>
-                        </li>
-                        <li>
-                            <a href="#" data-toggle="modal" data-target="#ModalBuscar"><i  class="fas fa-search fa-fw"></i> &nbsp; BUSCAR </a>
-                        </li>
-                        <li>
-                            <a href="Controlador?menu=Visitas&accion=Listar"><i class="fas icon-back fa-fw"></i> &nbsp; Regresar</a>
-                        </li>
-                    </ul>	
-                </div>
-
-                <!-- ============================================MODAL AGREGAR============================= -->
-                <div class="modal fade" id="ModalAgregar" tabindex="-1" role="dialog" aria-labelledby="ModalAgregar" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="titulo modal-header">
-                                <h5>Agregar Cultivo</h5>
-                                <button type="button" class="close" data-dismiss="modal" >
-                                    <span class="etiqueta4" >&times;</span>
-                                </button>
-                            </div>
-                            <form class="modal-body" action="Controlador?menu=Cultivo" method="POST"  >
-                                <fieldset>
-                                    <div class="row">
-                                        <input type="hidden"  class="" name="fkVisitas"   value="<%=Variables.idVisitas%>" id="item_codigo" readonly="readonly" >
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label  class="bmd-label-floating">Nombre</label>
-                                                <input type="text"  class="form-control" name="txtNombre" required="" title="Ingresa el nombre del cultivo">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label  class="bmd-label-floating">Area</label>
-                                                <input type="text"  class="form-control" name="txtArea" required="" title="Ingresa el area">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label  class="bmd-label-floating">Densidad</label>
-                                                <input type="text"  class="form-control" name="txtDensidad" required="" title="Ingresa la densidad">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label  class="bmd-label-floating">Numero</label>
-                                                <input type="number"  class="form-control" name="txtNumero" required="" title="Ingresa el numero de plantas">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <div class="form-group">
-                                                <label  class="">Aplicación del último producto prohibido,fecha</label>
-                                                <input type="date"  class="form-control" name="txtFecha" required="" title="Ingresa la fecha">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label  class="bmd-label-floating">Estimado de cosecha</label>
-                                                <input type="number"  class="form-control" name="txtEstimacion" required="" title="Ingresa la estimacion">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="item" class="bmd-label-floating">Estatus</label>
-                                                <select class="form-control" name="opEstatus" id="item">
-                                                    <option value="" selected="" disabled="">Seleccione una opcion</option>
-                                                    <option  value="Organico">Organico</option>
-                                                    <option value="Convencional">Convencional</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label  class="bmd-label-floating">Manejo Organicamente desde(Año)</label>
-                                                <input type="number"  class="form-control" name="txtAnio_or" required="" title="Ingresa el Año ">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label  class="bmd-label-floating">Año de la primera preinspección</label>
-                                                <input type="number"  class="form-control" name="txtAnio_ins" required="" title="Ingresa el Año">
-                                            </div>
-                                        </div>
-                                </fieldset>
-                                <p class="text-center" >
-                                    <button   type="submit" name="accion" value="Agregar" class="btn btn-raised btn-info"><i class=" fas fa-save "></i> &nbsp; AGREGAR</button>
-                                </p>
-                        </div>
-                        </form>
+                    <div class="container-fluid">
+                        <ul class="full-box list-unstyled page-nav-tabs">
+                            <li>
+                                <a  href="#" data-toggle="modal" data-target="#ModalAgregar"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR</a>
+                            </li>
+                            <li>
+                                <a href="Controlador?menu=Cultivo&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTAR </a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ModalBuscar"><i  class="fas fa-search fa-fw"></i> &nbsp; BUSCAR </a>
+                            </li>
+                            <li>
+                                <a href="Controlador?menu=Visitas&accion=Listar"><i class="fas icon-back fa-fw"></i> &nbsp; Regresar</a>
+                            </li>
+                        </ul>	
                     </div>
-                </div>
-                </div>
-                <!-- ============================================MODAL BUSCAR============================= -->
-                <div class="modal fade" id="ModalBuscar" tabindex="-1" role="dialog" aria-labelledby="ModalBuscar" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="etiqueta">¿Busca el cultivo?</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <form class="modal-body" action="Controlador?menu=Cultivo" method="POST"  >
-                                <div class="form-group">
-                                    <label  class="bmd-label-floating">Ingresa el Nombre del cultivo</label>
-                                    <input type="text"  class="form-control" name="txtBusqueda" required="" title="Ingresa un nombre">
+
+                    <!-- ============================================MODAL AGREGAR============================= -->
+                    <div class="modal fade" id="ModalAgregar" tabindex="-1" role="dialog" aria-labelledby="ModalAgregar" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="titulo modal-header">
+                                    <h5>Agregar Cultivo</h5>
+                                    <button type="button" class="close" data-dismiss="modal" >
+                                        <span class="etiqueta4" >&times;</span>
+                                    </button>
                                 </div>
-                                <p class="text-center">
-                                    <button   type="submit" name="accion" value="Buscar" class="btn btn-raised btn-info "><i class="fas fa-search "></i> &nbsp; BUSCAR</button>
-                                </p>
+                                <form class="modal-body" action="Controlador?menu=Cultivo" method="POST"  >
+                                    <fieldset>
+                                        <div class="row">
+                                            <input type="hidden"  class="" name="fkVisitas"   value="<%=Variables.idVisitas%>" id="item_codigo" readonly="readonly" >
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label  class="bmd-label-floating">Nombre</label>
+                                                    <input type="text"  class="form-control" name="txtNombre" required="" title="Ingresa el nombre del cultivo">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label  class="bmd-label-floating">Area</label>
+                                                    <input type="text"  class="form-control" name="txtArea" required="" title="Ingresa el area">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label  class="bmd-label-floating">Densidad</label>
+                                                    <input type="text"  class="form-control" name="txtDensidad" required="" title="Ingresa la densidad">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label  class="bmd-label-floating">Numero</label>
+                                                    <input type="number"  class="form-control" name="txtNumero" required="" title="Ingresa el numero de plantas">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    <label  class="">Aplicación del último producto prohibido,fecha</label>
+                                                    <input type="date"  class="form-control" name="txtFecha" required="" title="Ingresa la fecha">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label  class="bmd-label-floating">Estimado de cosecha</label>
+                                                    <input type="number"  class="form-control" name="txtEstimacion" required="" title="Ingresa la estimacion">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="item" class="bmd-label-floating">Estatus</label>
+                                                    <select class="form-control" name="opEstatus" id="item">
+                                                        <option value="" selected="" disabled="">Seleccione una opcion</option>
+                                                        <option  value="Organico">Organico</option>
+                                                        <option value="Convencional">Convencional</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label  class="bmd-label-floating">Manejo Organicamente desde(Año)</label>
+                                                    <input type="number"  class="form-control" name="txtAnio_or" required="" title="Ingresa el Año ">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label  class="bmd-label-floating">Año de la primera preinspección</label>
+                                                    <input type="number"  class="form-control" name="txtAnio_ins" required="" title="Ingresa el Año">
+                                                </div>
+                                            </div>
+                                    </fieldset>
+                                    <p class="text-center" >
+                                        <button   type="submit" name="accion" value="Agregar" class="btn btn-raised btn-info"><i class=" fas fa-save "></i> &nbsp; AGREGAR</button>
+                                    </p>
+                            </div>
                             </form>
                         </div>
                     </div>
-                </div>
-                <!-- ===================================================================================================== -->
-                <!-- Content here-->
-                <div class="container-fluid">
+                    <!-- ============================================MODAL BUSCAR============================= -->
+                    <div class="modal fade" id="ModalBuscar" tabindex="-1" role="dialog" aria-labelledby="ModalBuscar" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="etiqueta">¿Busca el cultivo?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form class="modal-body" action="Controlador?menu=Cultivo" method="POST"  >
+                                    <div class="form-group">
+                                        <label  class="bmd-label-floating">Ingresa el Nombre del cultivo</label>
+                                        <input type="text"  class="form-control" name="txtBusqueda" required="" title="Ingresa un nombre">
+                                    </div>
+                                    <p class="text-center">
+                                        <button   type="submit" name="accion" value="Buscar" class="btn btn-raised btn-info "><i class="fas fa-search "></i> &nbsp; BUSCAR</button>
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ===================================================================================================== -->
+                    <!-- Content here-->
                     <div class="table-responsive">
                         <table id="tablalist" class="table table-dark table-sm">
                             <thead >
@@ -223,10 +221,14 @@
                 </div>
 
             </section>
-            <!--    Datatables-->
+
+            <script src="js/bootstrap.min.js" type="text/javascript"></script>
             <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
-            <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script> 
-            <script src="js/datetable.js" type="text/javascript"></script>
+            <script src="js/popper.min.js" type="text/javascript"></script>
+
+            <!-- jQuery, dataTable -->
+            <script src="datatables/datatables.min.js" type="text/javascript" ></script>    
+            <script src="datatables//stylo-tabla.js" type="text/javascript"></script>
         </main>
         <!-- popper -->
         <script src="./js/popper.min.js"></script>

@@ -10,7 +10,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Datos de la empresa</title>
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"/> 
+        <!-- dataTable -->
+        <link rel="stylesheet" href="datatables/datatables.min.css"/>
+        <link rel="stylesheet" href="datatables/stylo-tabla.css" />
+
     </head>
 
     <%
@@ -19,8 +22,42 @@
         List<Empleado> empleado = (List<Empleado>) request.getAttribute("listaEmple");
         List<Detallespro> detalles = (List<Detallespro>) request.getAttribute("listaDe");
     %>
+
+    <%  String mensaje = "";
+        int msj;
+        if (request.getParameter("msj") != null) {
+            msj = Integer.valueOf(request.getParameter("msj"));
+        } else {
+            msj = 0;
+        }
+        switch (msj) {
+            case 1:
+                mensaje = "Se ha eliminado correctamente";
+                break;
+            case 2:
+                mensaje = "Hubo un problema al eliminar, contacte al administrador";
+                break;
+            case 3:
+                mensaje = "Los datos se han actualizado correctamente";
+                break;
+            case 4:
+                mensaje = "Hubo un problema al actualizar, contacte al administrador";
+                break;
+            case 5:
+                mensaje = "Datos registrados correctamente";
+                break;
+            case 6:
+                mensaje = "Hubo un problema al registrar, contacte al administrador";
+                break;
+            default:
+                break;
+        }
+
+    %>
+
+
     <body>
-      <!-- Main container -->
+        <!-- Main container -->
         <main class="full-box main-container">
             <!--------------EMCABEZADO------------------->
             <jsp:include page="header.jsp"/>
@@ -48,8 +85,6 @@
                     <p class="text-justify">
                         Suministrar productos al agricultor
                     </p>
-                </div>
-                <div class="container-fluid">
                     <ul class="full-box list-unstyled page-nav-tabs">
                         <li>
                             <a  href="#" data-toggle="modal"  data-target="#ModalAgregar"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR</a>
@@ -61,92 +96,93 @@
                             <a   href="#" data-toggle="modal" data-target="#ModalBuscar"><i  class="fas fa-search fa-fw"></i> &nbsp; BUSCAR </a>
                         </li>
                     </ul>	
-                </div>
-                <!-- ============================================MODAL AGREGAR============================= -->
-                <div class="modal fade" id="ModalAgregar" tabindex="-1" role="dialog" aria-labelledby="ModalAgregar" aria-hidden="true">
-                    <div class="modal-dialog " role="document">
-                        <div class="modal-content">
-                            <div class="titulo modal-header">
-                                <h5>Nuevo Suministro</h5>
-                                <button type="button" class="close" data-dismiss="modal" >
-                                    <span class="etiqueta4" >&times;</span>
-                                </button>
+
+
+                    <!-- ============================================MODAL AGREGAR============================= -->
+                    <div class="modal fade" id="ModalAgregar" tabindex="-1" role="dialog" aria-labelledby="ModalAgregar" aria-hidden="true">
+                        <div class="modal-dialog " role="document">
+                            <div class="modal-content">
+                                <div class="titulo modal-header">
+                                    <h5>Nuevo Suministro</h5>
+                                    <button type="button" class="close" data-dismiss="modal" >
+                                        <span class="etiqueta4" >&times;</span>
+                                    </button>
+                                </div>
+                                <form class="modal-body" action="Controlador?menu=Detalles" method="POST"  >
+
+                                    <div class="form-group">
+                                        <input type="hidden"  name="pk" class="form-control" >
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label  class="">Fecha</label>
+                                        <input type="date"  class="form-control" name="txtFecha" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="" class="bmd-label-floating">Cantidad</label>
+                                        <input type="text"  class="form-control" name="txtCantidad" >
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="item" class="bmd-label-floating">Agricultor</label>
+
+                                        <select class="form-control" name="txtAgricultor" id="item"  >
+                                            <option value="" selected disabled>Seleccione Agricultor</option>
+                                            <%for (Agricultor ag : agricultor) {%> 
+                                            <option value="<%=ag.getPk_agricultor()%>"><%=ag.getNombre1()%> </option>
+                                            <%} %>
+                                        </select>
+                                    </div> 
+                                    <div class="form-group">
+                                        <label for="item" class="bmd-label-floating">Producto</label>
+                                        <select class="form-control" name="txtProducto" id="item" >
+                                            <option value="" selected disabled>Seleccione el Producto</option>
+                                            <option value="" selected disabled>Seleccione Agricultor</option>
+                                            <%for (Producto pro : producto) {%> 
+                                            <option value="<%=pro.getPk_producto()%>"><%=pro.getNomInsumos()%> </option>
+                                            <%} %>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="item" class="bmd-label-floating">Empleado</label>
+                                        <select class="form-control" name="txtEmpleado" id="item" >
+                                            <option value="" selected disabled >Seleccione Empleado</option>
+                                            <%for (Empleado em : empleado) {%> 
+                                            <option value="<%=em.getPk_empleado()%>"><%=em.getNombre()%> </option>
+                                            <%}%>
+                                        </select>
+                                    </div>
+                                    <p class="text-center">
+                                        <button   type="submit" name="accion" value="Agregar" class="btn btn-raised btn-info" onkeyup="validar2()"><i class=" fas fa-save "></i> &nbsp; AGREGAR</button>
+                                    </p>
+                                </form>
                             </div>
-                            <form class="modal-body" action="Controlador?menu=Detalles" method="POST"  >
-
-                                <div class="form-group">
-                                    <input type="hidden"  name="pk" class="form-control" >
-                                </div>
-
-                                <div class="form-group">
-                                    <label  class="">Fecha</label>
-                                    <input type="date"  class="form-control" name="txtFecha" >
-                                </div>
-                                <div class="form-group">
-                                    <label for="" class="bmd-label-floating">Cantidad</label>
-                                    <input type="text"  class="form-control" name="txtCantidad" >
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="item" class="bmd-label-floating">Agricultor</label>
-
-                                    <select class="form-control" name="txtAgricultor" id="item"  >
-                                        <option value="" selected disabled>Seleccione Agricultor</option>
-                                        <%for (Agricultor ag : agricultor) {%> 
-                                        <option value="<%=ag.getPk_agricultor()%>"><%=ag.getNombre1()%> </option>
-                                        <%} %>
-                                    </select>
-                                </div> 
-                                <div class="form-group">
-                                    <label for="item" class="bmd-label-floating">Producto</label>
-                                    <select class="form-control" name="txtProducto" id="item" >
-                                        <option value="" selected disabled>Seleccione el Producto</option>
-                                        <option value="" selected disabled>Seleccione Agricultor</option>
-                                        <%for (Producto pro : producto) {%> 
-                                        <option value="<%=pro.getPk_producto()%>"><%=pro.getNomInsumos()%> </option>
-                                        <%} %>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="item" class="bmd-label-floating">Empleado</label>
-                                    <select class="form-control" name="txtEmpleado" id="item" >
-                                        <option value="" selected disabled >Seleccione Empleado</option>
-                                        <%for (Empleado em : empleado) {%> 
-                                        <option value="<%=em.getPk_empleado()%>"><%=em.getNombre()%> </option>
-                                        <%}%>
-                                    </select>
-                                </div>
-                                <p class="text-center">
-                                    <button   type="submit" name="accion" value="Agregar" class="btn btn-raised btn-info" onkeyup="validar2()"><i class=" fas fa-save "></i> &nbsp; AGREGAR</button>
-                                </p>
-                            </form>
                         </div>
                     </div>
-                </div>
-                <!-- ============================================MODAL BUSCAR============================= -->
-                <div class="modal fade" id="ModalBuscar" tabindex="-1" role="dialog" aria-labelledby="ModalBuscar" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="etiqueta">¿A Agricultor estas buscando?</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <form class="modal-body" action="Controlador?menu=Detalles" method="POST"  >
-                                <div class="form-group">
-                                    <label  class="bmd-label-floating">Ingresa el Nombre del Agricultor </label>
-                                    <input type="text"  class="form-control" name="txtBusqueda" required="" title="Ingresa un nombre">
+                    <!-- ============================================MODAL BUSCAR============================= -->
+                    <div class="modal fade" id="ModalBuscar" tabindex="-1" role="dialog" aria-labelledby="ModalBuscar" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="etiqueta">¿A Agricultor estas buscando?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
-                                <p class="text-center">
-                                    <button   type="submit" name="accion" value="Buscar" class="btn btn-raised btn-info "><i class="fas fa-search "></i> &nbsp; BUSCAR</button>
-                                </p>
-                            </form>
+                                <form class="modal-body" action="Controlador?menu=Detalles" method="POST"  >
+                                    <div class="form-group">
+                                        <label  class="bmd-label-floating">Ingresa el Nombre del Agricultor </label>
+                                        <input type="text"  class="form-control" name="txtBusqueda" required="" title="Ingresa un nombre">
+                                    </div>
+                                    <p class="text-center">
+                                        <button   type="submit" name="accion" value="Buscar" class="btn btn-raised btn-info "><i class="fas fa-search "></i> &nbsp; BUSCAR</button>
+                                    </p>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- Content here-->
-                <div class="container-fluid"  >
+                    <!-- Content here-->
+                    <label style="color:red;"><%=mensaje%></label>
                     <div class="table-responsive ">
                         <table id="tablalist" class="table table-dark table-sm">
                             <thead >
@@ -197,26 +233,23 @@
                     </div>
                 </div>
             </section>
-
-
-            <!-- popper -->
-            <script src="./js/popper.min.js"></script>
-            <!-- Bootstrap V4.3 -->
-            <script src="./js/bootstrap.min.js"></script>
-            <!--    Datatables-->
-            <script src="js/Validar.js" type="text/javascript"></script>
+            <script src="js/bootstrap.min.js" type="text/javascript"></script>
             <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
-            <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script> 
-            <script src="js/datetable.js" type="text/javascript"></script>
+            <script src="js/popper.min.js" type="text/javascript"></script>
+
+            <!-- jQuery, dataTable -->
+            <script src="datatables/datatables.min.js" type="text/javascript" ></script>    
+            <script src="datatables//stylo-tabla.js" type="text/javascript"></script>
+
         </main>
         <!-- jQuery Custom Content Scroller V3.1.5 -->
         <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
         <!-- Bootstrap Material Design V4.0 -->
         <script src="./js/bootstrap-material-design.min.js"></script>
         <script>
-                                        $(document).ready(function () {
-                                            $('body').bootstrapMaterialDesign();
-                                        });
+                                            $(document).ready(function () {
+                                                $('body').bootstrapMaterialDesign();
+                                            });
         </script>
 
         <script src="./js/main.js"></script>

@@ -7,10 +7,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <title>Datos de la empresa</title>
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"/> 
+        <!-- dataTable -->
+        <link rel="stylesheet" href="datatables/datatables.min.css"/>
+        <link rel="stylesheet" href="datatables/stylo-tabla.css" />
     </head>
     <body>
-              <!-- Main container -->
+        <!-- Main container -->
         <main class="full-box main-container">
             <!--------------EMCABEZADO------------------->
             <jsp:include page="header.jsp"/>
@@ -114,10 +116,14 @@
 
 
             </section>
-            <!--    Datatables-->
+
+            <script src="js/bootstrap.min.js" type="text/javascript"></script>
             <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
-            <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script> 
-            <script src="js/datetable.js" type="text/javascript"></script>
+            <script src="js/popper.min.js" type="text/javascript"></script>
+
+            <!-- jQuery, dataTable -->
+            <script src="datatables/datatables.min.js" type="text/javascript" ></script>    
+            <script src="datatables//stylo-tabla.js" type="text/javascript"></script>
         </main>
         <!-- popper -->
         <script src="./js/popper.min.js"></script>

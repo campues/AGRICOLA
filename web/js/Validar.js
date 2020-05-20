@@ -11,6 +11,19 @@ function validar2() {
     alertify.success("Producto Registrado");
 }
 
+
+function validar2() {
+    var n0 = document.getElementsByName("txtCedula").value;
+        var error= document.getElementById("error");
+
+    if (n0.value === "") {
+        n0.focus();
+        error.textContent="Digita la cedula";
+        return false;
+    }
+}
+
+
 function validar() {
     var n0 = document.getElementsByName("txtNom1").value;
     var n1 = document.getElementsByName("txtNom2").value;

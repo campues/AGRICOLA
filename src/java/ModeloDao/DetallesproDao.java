@@ -12,7 +12,6 @@ import java.util.List;
 
 public class DetallesproDao {
     //variables para la conexion 
-
     private Conexion con;
     private Connection connection;
 
@@ -24,8 +23,8 @@ public class DetallesproDao {
         System.out.println(jdbcURL);
         con = new Conexion(jdbcURL, jdbcUsername, jdbcPassword);
     }
-    // Insertar Empleado
 
+    // Insertar Empleado
     public boolean insertarDetalle(Detallespro det) throws SQLException {
         String sql = " INSERT INTO detallespro (pk_detallesPro,fechaEntrega,cantidad,fk_agricultor,fk_producto,fk_empleado)"
                 + " VALUES (?,?,?,?,?,?)";
@@ -44,6 +43,23 @@ public class DetallesproDao {
         statement.close();
         con.desconectar();
         return rowInserted;
+    }
+
+    public int registrar_Suminstro(Detallespro d) throws Exception {
+        String com = "INSERT INTO detallespro (pk_detallesPro,fechaEntrega,cantidad,fk_agricultor,fk_producto,fk_empleado) "
+                + "VALUES (null,'" + d.getFechaEntrega() + "','"
+                + d.getCantidad() + "','"
+                + d.getFk_agricutor() + "','"
+                + d.getFk_producto() + "','"
+                + d.getFk_empleado() + "')"; //hacemos la consulta SQL
+
+        con.conectar();
+        connection = con.getJdbcConnection();
+        PreparedStatement statement = connection.prepareStatement(com);
+        int res = statement.executeUpdate(com); //ejecutamos la consulta
+        System.out.println(com);
+        con.desconectar(); //cerramos la conexion		
+        return res;
     }
 
     // actualizar

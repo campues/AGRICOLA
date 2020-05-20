@@ -13,7 +13,10 @@ function CalcularTotal() {
     if (Tcultivo > 3) {
         alertify.alert("Error", "El criterio es entre 1 y  3").set('label', 'OK');
         return false;
-    } 
+    } else{
+        // error.textContent="Bien";
+        //alertify.success("Producto Registrado");
+    }
     if (TipCultivo > 3) {
         alertify.alert("Error", "El criterio es entre 1 y  3").set('label', 'OK');
         return false;
