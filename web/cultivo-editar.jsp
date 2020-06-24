@@ -35,7 +35,7 @@
     </head>
 
     <body>
-             <!-- Main container -->
+        <!-- Main container -->
         <main class="full-box main-container">
             <!--------------EMCABEZADO------------------->
             <jsp:include page="header.jsp"/>
@@ -70,43 +70,43 @@
                                 <input type="hidden"  name="pk" class="form-control"  value="${cult.pk_cultivo}">
 
                                 <input type="hidden"  class="" name="fkVisitas"   value="<%=Variables.idVisitas%>" id="item_codigo" readonly="readonly" >
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="form-group">
                                         <label  class="bmd-label-floating">Nombre</label>
                                         <input type="text"  class="form-control" name="txtNombre" required="" value="${cult.nomCultivo}">
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-1">
                                     <div class="form-group">
                                         <label  class="bmd-label-floating">Area</label>
                                         <input type="text"  class="form-control" name="txtArea" required=""  value="${cult.area}">
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="form-group">
                                         <label  class="bmd-label-floating">Densidad</label>
                                         <input type="text"  class="form-control" name="txtDensidad" required=""  value="${cult.densidadSiembra}">
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="form-group">
-                                        <label  class="bmd-label-floating">Numero</label>
+                                        <label  class="bmd-label-floating">Numero de plantas</label>
                                         <input type="number"  class="form-control" name="txtNumero" required=""  value="${cult.numPlantas}">
                                     </div>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label  class="">Aplicación del último producto prohibido,fecha</label>
                                         <input type="date"  class="form-control" name="txtFecha" required=""  value="${cult.fechaPro}">
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="form-group">
                                         <label  class="bmd-label-floating">Estimado de cosecha</label>
                                         <input type="number"  class="form-control" name="txtEstimacion" required=""  value="${cult.es_cosecha}">
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="item" class="bmd-label-floating">Estatus</label>
                                         <select class="form-control" name="opEstatus" id="item">
@@ -116,13 +116,13 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label  class="bmd-label-floating">Manejo Organicamente desde(Año)</label>
                                             <input type="number"  class="form-control" name="txtAnio_or" required=""  value="${cult.anio_organica}">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label  class="bmd-label-floating">Año de la primera preinspección</label>
                                         <input type="number"  class="form-control" name="txtAnio_ins" required=""  value="${cult.anio_inspeccion}">
@@ -130,6 +130,37 @@
                                 </div>
                             </div>
                         </fieldset>
+                        <fieldset>
+                            <legend><i class="fas icon-cw fa-fw"></i> &nbsp; Rotación de cultivo</legend>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label  class="bmd-label-floating">1°Año anterior</label>
+                                            <input type="text"  class="form-control" name="txt1anio" required="" value="${cult.rotacion1}" title="nombre de cultivo existente anterior">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label  class="bmd-label-floating">2° Año anterior</label>
+                                            <input type="text"  class="form-control" name="txt2anio" required="" value="${cult.rotacion2}" title="nombre de cultivo existente anterior">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label  class="bmd-label-floating">3° Año anterior</label>
+                                            <input type="text"  class="form-control" name="txt3anio" required="" value="${cult.rotacion3}" title="nombre de cultivo existente anterior">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label  class="bmd-label-floating">Observaciones</label>
+                                            <input type="text"  class="form-control" name="txtobCultivos" required="" value="${cult.obCultivo}" title="Alguna observación del cultivo">
+                                        </div>
+                                    </div>
+
+                                </div> 
+                        </fieldset>      
                         <p class="text-center" >
                             <button   type="submit" name="accion" value="Actualizar" class="btn btn-raised btn-success btn-sm"> ACTUALIZAR</button>
                             <button   type="submit" name="accion" value="Listar" class="btn btn-raised btn-danger btn-sm"> CANCELAR</button>

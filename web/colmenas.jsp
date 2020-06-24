@@ -35,8 +35,8 @@
                 </nav>
                 <!-- Page header -->
                 <div class="full-box page-header">
-                    <h3 class="text-left">
-                        <i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA Colmenas
+                    <h3 class="text-left" style="color: #fbf100">
+                        <i class="fas icon-box "></i> &nbsp; COLMENAS EXISTENTES
                     </h3>
                     <p class="text-justify">
                         Numero de colmenas

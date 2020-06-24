@@ -95,8 +95,8 @@ public class CultivoDao {
     // Insertar Cultivo
     public boolean insertarCul(Cultivo cu) throws SQLException {
         String sql = "INSERT INTO cultivo (pk_cultivo,nomCultivo,area,denSiembra,numPlantas,fechaPro_prohibido,"
-                + "estiCosecha,estatus,anioOrganico,anioInspeccion,fk_visitasc) "
-                + "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+                + "estiCosecha,estatus,anioOrganico,anioInspeccion,rotacion1,rotacion2,rotacion3,obCultivo,fk_visitasc) "
+                + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         con.conectar();
         connection = con.getJdbcConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
@@ -110,7 +110,11 @@ public class CultivoDao {
         statement.setString(8, cu.getEstatus());
         statement.setString(9, cu.getAnio_organica());
         statement.setString(10, cu.getAnio_inspeccion());
-        statement.setInt(11, cu.getFk_visitasc());
+        statement.setString(11, cu.getRotacion1());
+        statement.setString(12, cu.getRotacion2());
+        statement.setString(13, cu.getRotacion3());
+        statement.setString(14, cu.getObCultivo());
+        statement.setInt(15, cu.getFk_visitasc());
         System.out.println(cu.getNomCultivo());
 
         boolean rowInserted = statement.executeUpdate() > 0;
@@ -123,7 +127,8 @@ public class CultivoDao {
     public boolean actualizar(Cultivo cu) throws SQLException {
         boolean rowActualizar = false;
         String sql = "UPDATE cultivo SET nomCultivo=?,area=?,denSiembra=?,numPlantas=?,fechaPro_prohibido=?, "
-                + "estiCosecha=?,estatus=?,anioOrganico=?,anioInspeccion=?,fk_visitasc=? WHERE pk_cultivo=? ";
+                + "estiCosecha=?,estatus=?,anioOrganico=?,anioInspeccion=?"
+                + ",rotacion1=?,rotacion2=?,rotacion3=?,obCultivo=?,fk_visitasc=? WHERE pk_cultivo=? ";
         con.conectar();
         connection = con.getJdbcConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
@@ -136,8 +141,12 @@ public class CultivoDao {
         statement.setString(7, cu.getEstatus());
         statement.setString(8, cu.getAnio_organica());
         statement.setString(9, cu.getAnio_inspeccion());
-        statement.setInt(10, cu.getFk_visitasc());
-        statement.setInt(11, cu.getPk_cultivo());
+         statement.setString(10, cu.getRotacion1());
+        statement.setString(11, cu.getRotacion2());
+        statement.setString(12, cu.getRotacion3());
+        statement.setString(13, cu.getObCultivo());
+        statement.setInt(14, cu.getFk_visitasc());
+        statement.setInt(15, cu.getPk_cultivo());
         System.out.println(cu.getNomCultivo());
 
         rowActualizar = statement.executeUpdate() > 0;
@@ -168,6 +177,10 @@ public class CultivoDao {
                     res.getString("estatus"),
                     res.getString("anioOrganico"),
                     res.getString("anioInspeccion"),
+                    res.getString("rotacion1"),
+                    res.getString("rotacion2"),
+                    res.getString("rotacion3"),
+                    res.getString("obCultivo"),
                     res.getInt("fk_visitasc")
             );
         }

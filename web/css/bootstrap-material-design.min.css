@@ -2398,6 +2398,8 @@ fieldset:disabled a.custom-file-control:before {
 .btn-danger:focus {
     box-shadow: none, 0 0 0 0.2rem rgba(246, 95, 84, 0.5);
 }
+
+
 .btn-danger.disabled,
 .btn-danger:disabled {
     color: #fff;

@@ -3,6 +3,7 @@ package Modelo;
 import java.util.Date;
 
 public class Cultivo {
+
     //zona de atributo
     private int pk_cultivo;
     private String nomCultivo;  // texto   Nuevo / SCI  
@@ -14,15 +15,18 @@ public class Cultivo {
     private String estatus;// combobox SCI
     private String anio_organica;  // texto  Nuevo
     private String anio_inspeccion; // texto Nuevo
+    private String rotacion1; // texto 1ra rotacion
+    private String rotacion2; // texto 2ra rotacion
+    private String rotacion3; // texto 3ra rotacion
+    private String obCultivo; // texto observacion del cultivo
     private int fk_visitasc;
-    
-    
-      public Cultivo() {
+
+    public Cultivo() {
     }
-    
+
     //zona de contructores
 
-    public Cultivo(int pk_cultivo, String nomCultivo, String area, String densidadSiembra, String numPlantas, String fechaPro, String es_cosecha, String estatus, String anio_organica, String anio_inspeccion, int fk_visitasc) {
+    public Cultivo(int pk_cultivo, String nomCultivo, String area, String densidadSiembra, String numPlantas, String fechaPro, String es_cosecha, String estatus, String anio_organica, String anio_inspeccion, String rotacion1, String rotacion2, String rotacion3, String obCultivo, int fk_visitasc) {
         this.pk_cultivo = pk_cultivo;
         this.nomCultivo = nomCultivo;
         this.area = area;
@@ -33,14 +37,15 @@ public class Cultivo {
         this.estatus = estatus;
         this.anio_organica = anio_organica;
         this.anio_inspeccion = anio_inspeccion;
+        this.rotacion1 = rotacion1;
+        this.rotacion2 = rotacion2;
+        this.rotacion3 = rotacion3;
+        this.obCultivo = obCultivo;
         this.fk_visitasc = fk_visitasc;
     }
-
-   
   
-    
-    //zona de gett y setts
 
+    //zona de gett y setts
     public int getPk_cultivo() {
         return pk_cultivo;
     }
@@ -89,7 +94,6 @@ public class Cultivo {
         this.fechaPro = fechaPro;
     }
 
-   
     public String getEs_cosecha() {
         return es_cosecha;
     }
@@ -122,6 +126,41 @@ public class Cultivo {
         this.anio_inspeccion = anio_inspeccion;
     }
 
+    public String getRotacion1() {
+        return rotacion1;
+    }
+
+    public void setRotacion1(String rotacion1) {
+        this.rotacion1 = rotacion1;
+    }
+
+    public String getRotacion2() {
+        return rotacion2;
+    }
+
+    public void setRotacion2(String rotacion2) {
+        this.rotacion2 = rotacion2;
+    }
+
+    public String getRotacion3() {
+        return rotacion3;
+    }
+
+    public void setRotacion3(String rotacion3) {
+        this.rotacion3 = rotacion3;
+    }
+
+    public String getObCultivo() {
+        return obCultivo;
+    }
+
+    public void setObCultivo(String obCultivo) {
+        this.obCultivo = obCultivo;
+    }
+
+    
+    
+    
     public int getFk_visitasc() {
         return fk_visitasc;
     }
@@ -129,8 +168,7 @@ public class Cultivo {
     public void setFk_visitasc(int fk_visitasc) {
         this.fk_visitasc = fk_visitasc;
     }
-
-
     
     
+
 }

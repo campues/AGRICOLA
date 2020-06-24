@@ -35,8 +35,8 @@
                 </nav>
                 <!-- Page header -->
                 <div class="full-box page-header">
-                    <h3 class="text-left">
-                        <i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE INSPECCIONES
+                    <h3 class="text-left" style="color: #d8ff54">
+                        <i class="fas fa-clipboard-list fa-fw" ></i> &nbsp; LISTA DE INSPECCIONES
                     </h3>
                     <p class="text-justify">
                         lista de Inspecciones realizadas
@@ -87,15 +87,15 @@
                                             <%if (session.getAttribute("tipo").equals("1")) {%> 
                                             <a title="Eliminar registro"  class="btn btn-raised btn-danger btn-sm" href="Controlador?menu=Visitas&accion=Eliminar&pk_visitas=${v.pk_visitas}">
                                                 <i class="far fa-trash-alt"></i></a>
-                                            <a title="Apicultura" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Visitas&accion=VerColmena&pk_visitas=${v.pk_visitas}">
-                                                <i class="fas fa-box-open"></i></a>
+                                                <a title="Apicultura"  style="background: #fbf100;" class="btn btn-raised  btn-sm" href="Controlador?menu=Visitas&accion=VerColmena&pk_visitas=${v.pk_visitas}">
+                                                <i class="fas icon-box" ></i></a>
                                             <a  title="Cultivos" class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Visitas&accion=VerCultivo&pk_visitas=${v.pk_visitas}">
-                                                <i class="fas fa-clipboard-list"></i></a>
+                                                <i class="fas icon-feather"></i></a>
                                                 <%} else {%>
-                                            <a title="Apicultura" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Visitas&accion=VerColmena&pk_visitas=${v.pk_visitas}">
-                                                <i class="fas fa-box-open"></i></a>
+                                            <a title="Apicultura"   style="background: #fbf100;"  class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Visitas&accion=VerColmena&pk_visitas=${v.pk_visitas}">
+                                                  <i class="fas icon-box"></i></a>
                                             <a  title="Cultivos" class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Visitas&accion=VerCultivo&pk_visitas=${v.pk_visitas}">
-                                                <i class="fas fa-clipboard-list"></i></a>
+                                               <i class="fas icon-feather"></i></a>
                                                 <%}%>
 
                                         </td>

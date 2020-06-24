@@ -6,6 +6,7 @@ public class Agricultor {
 
     //zona de atributo
     private int pk_agricultor;
+    private String codigo;
     private String nombre1;
     private String nombre2;
     private String apellido1;
@@ -23,8 +24,9 @@ public class Agricultor {
 
     // zona de constructor
 
-    public Agricultor(int pk_agricultor, String nombre1, String nombre2, String apellido1, String apellido2, String cedula, String direccion, String telefono, String fechaAfiliacion, String estatus, String liderAsociacion) {
+    public Agricultor(int pk_agricultor, String codigo, String nombre1, String nombre2, String apellido1, String apellido2, String cedula, String direccion, String telefono, String fechaAfiliacion, String estatus, String liderAsociacion) {
         this.pk_agricultor = pk_agricultor;
+        this.codigo = codigo;
         this.nombre1 = nombre1;
         this.nombre2 = nombre2;
         this.apellido1 = apellido1;
@@ -37,15 +39,16 @@ public class Agricultor {
         this.liderAsociacion = liderAsociacion;
     }
     
-    
+
     // zona de encapsulamiento
-    
     public Agricultor(int pk_agricultor, String nombre1) {
         this.pk_agricultor = pk_agricultor;
         this.nombre1 = nombre1;
     }
 
     // GETS Y SETS
+    
+    
     public int getPk_agricultor() {
         return pk_agricultor;
     }
@@ -54,6 +57,14 @@ public class Agricultor {
         this.pk_agricultor = pk_agricultor;
     }
 
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+    
     public String getNombre1() {
         return nombre1;
     }

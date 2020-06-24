@@ -68,22 +68,23 @@ $("#btn6").click(function () {
 //Progresivo
 $("#btn7").click(function () {
     Swal.mixin({
+        input:'radio',
         input: 'text', //puede ser text, number, email, password, textarea, select, radio
         confirmButtonText: 'Siguiente &rarr;',
         showCancelButton: true,
-        progressSteps: ['1', '2', '3']
+        progressSteps: ['1', '2', '3','4']
     }).queue([
         {
-            title: 'Pregunta 1',
-            text: '¿Color favorito?'
+            title: 'Primer Nombre',
         },
         {
-            title: 'Pregunta 2',
-            text: '¿Animal favorito?'
+            title: 'Segundo Nombre',
         },
         {
-            title: 'Pregunta 3',
-            text: '¿País de origen?'
+            title: 'Primer Apellido',
+        },
+        {
+            title: 'Segundo Apellido',
         }
     ]).then((result) => {
         if (result.value) {
@@ -98,6 +99,7 @@ $("#btn7").click(function () {
         }
     });
 });
+
 //con TIMER
 let timerInterval
 $("#btn8").click(function () {

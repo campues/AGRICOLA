@@ -1,6 +1,7 @@
 package Modelo;
 
 import java.io.InputStream;
+
 public class Visitas {
     //zona de atributo
 
@@ -12,7 +13,6 @@ public class Visitas {
     private String obHalasgoDete;// text- observacion de inspeccion
     private String obPlazoAccion;// text- plazo de implementacion
     private String certificado;// texboxk -aprobarla certificacion SI/NO
-    private InputStream anexoCertif;// imagen- foto de anexo de certificacion
     private String tipoInspeccion; //Seleccion-  NUEVO LOTE/INSPECCION SCI
 
     private String con_compromiso;//texboxk -  contrato de compromiso
@@ -21,14 +21,27 @@ public class Visitas {
     private String elab_bocashi; //texbox -  elaboraación de estractos, bocashi
     private String pco_uvillas; //texbox -  protodolo de cultivo orgánico de uvillas
     private String cos_poscosecha; //texbox - cosecha y poscosecha 
-    private int fk_lote;
-    private int fk_empleadov;
+
+    private String tamaCultivo; //numero
+    private String tipoCultivo;//numero
+    private String tipoAplicacion;//numero
+    private String situacionVecino;//numero
+    private String tAgOrganica;//numero
+    private String poProductivo;//numero
+    private String recFruta;//numero
+    private String total;//numero total
+    private String selecCultivo; // texto
+    private String obCultivo; // texto
+    private String tipoRiesgo; // texto
+
+    private String fk_lote;
+    private String fk_empleadov;
 
     //zona de contructores 18 atributos
     public Visitas() {
     }
 
-    public Visitas(int pk_visitas, String fecha, String nom_informante, String tipoInspeccion, int fk_lote, int fk_empleadov) {
+    public Visitas(int pk_visitas, String fecha, String nom_informante, String tipoInspeccion, String fk_lote, String fk_empleadov) {
         this.pk_visitas = pk_visitas;
         this.fecha = fecha;
         this.nom_informante = nom_informante;
@@ -37,7 +50,7 @@ public class Visitas {
         this.fk_empleadov = fk_empleadov;
     }
 
-    public Visitas(int pk_visitas, String fecha, String nom_informante, String parentesco, String tipo_auditoria, String obHalasgoDete, String obPlazoAccion, String certificado, String tipoInspeccion, String con_compromiso, String np_organica, String rc_interno, String elab_bocashi, String pco_uvillas, String cos_poscosecha, int fk_lote, int fk_empleadov) {
+    public Visitas(int pk_visitas, String fecha, String nom_informante, String parentesco, String tipo_auditoria, String obHalasgoDete, String obPlazoAccion, String certificado, String tipoInspeccion, String con_compromiso, String np_organica, String rc_interno, String elab_bocashi, String pco_uvillas, String cos_poscosecha, String tamaCultivo, String tipoCultivo, String tipoAplicacion, String situacionVecino, String tAgOrganica, String poProductivo, String recFruta, String total, String selecCultivo, String obCultivo, String tipoRiesgo, String fk_lote, String fk_empleadov) {
         this.pk_visitas = pk_visitas;
         this.fecha = fecha;
         this.nom_informante = nom_informante;
@@ -53,6 +66,17 @@ public class Visitas {
         this.elab_bocashi = elab_bocashi;
         this.pco_uvillas = pco_uvillas;
         this.cos_poscosecha = cos_poscosecha;
+        this.tamaCultivo = tamaCultivo;
+        this.tipoCultivo = tipoCultivo;
+        this.tipoAplicacion = tipoAplicacion;
+        this.situacionVecino = situacionVecino;
+        this.tAgOrganica = tAgOrganica;
+        this.poProductivo = poProductivo;
+        this.recFruta = recFruta;
+        this.total = total;
+        this.selecCultivo = selecCultivo;
+        this.obCultivo = obCultivo;
+        this.tipoRiesgo = tipoRiesgo;
         this.fk_lote = fk_lote;
         this.fk_empleadov = fk_empleadov;
     }
@@ -177,22 +201,108 @@ public class Visitas {
         this.cos_poscosecha = cos_poscosecha;
     }
 
-    public int getFk_lote() {
+    public String getTamaCultivo() {
+        return tamaCultivo;
+    }
+
+    public void setTamaCultivo(String tamaCultivo) {
+        this.tamaCultivo = tamaCultivo;
+    }
+
+    public String getTipoCultivo() {
+        return tipoCultivo;
+    }
+
+    public void setTipoCultivo(String tipoCultivo) {
+        this.tipoCultivo = tipoCultivo;
+    }
+
+    public String getTipoAplicacion() {
+        return tipoAplicacion;
+    }
+
+    public void setTipoAplicacion(String tipoAplicacion) {
+        this.tipoAplicacion = tipoAplicacion;
+    }
+
+    public String getSituacionVecino() {
+        return situacionVecino;
+    }
+
+    public void setSituacionVecino(String situacionVecino) {
+        this.situacionVecino = situacionVecino;
+    }
+
+    public String gettAgOrganica() {
+        return tAgOrganica;
+    }
+
+    public void settAgOrganica(String tAgOrganica) {
+        this.tAgOrganica = tAgOrganica;
+    }
+
+    public String getPoProductivo() {
+        return poProductivo;
+    }
+
+    public void setPoProductivo(String poProductivo) {
+        this.poProductivo = poProductivo;
+    }
+
+    public String getRecFruta() {
+        return recFruta;
+    }
+
+    public void setRecFruta(String recFruta) {
+        this.recFruta = recFruta;
+    }
+
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
+    }
+
+    public String getSelecCultivo() {
+        return selecCultivo;
+    }
+
+    public void setSelecCultivo(String selecCultivo) {
+        this.selecCultivo = selecCultivo;
+    }
+
+    public String getObCultivo() {
+        return obCultivo;
+    }
+
+    public void setObCultivo(String obCultivo) {
+        this.obCultivo = obCultivo;
+    }
+
+    public String getTipoRiesgo() {
+        return tipoRiesgo;
+    }
+
+    public void setTipoRiesgo(String tipoRiesgo) {
+        this.tipoRiesgo = tipoRiesgo;
+    }
+
+    public String getFk_lote() {
         return fk_lote;
     }
 
-    public void setFk_lote(int fk_lote) {
+    public void setFk_lote(String fk_lote) {
         this.fk_lote = fk_lote;
     }
 
-    public int getFk_empleadov() {
+    public String getFk_empleadov() {
         return fk_empleadov;
     }
 
-    public void setFk_empleadov(int fk_empleadov) {
+    public void setFk_empleadov(String fk_empleadov) {
         this.fk_empleadov = fk_empleadov;
     }
-
-
 
 }

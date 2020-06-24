@@ -36,8 +36,8 @@
                 </nav>
                 <!-- Page header -->
                 <div class="full-box page-header">
-                    <h3 class="text-left">
-                        <i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE LOTES
+                    <h3 class="text-left" style="color: #ffcc2f">
+                        <i class="fas icon-tree fa-fw "></i> &nbsp; LISTA DE LOTES
                     </h3>
                     <p class="text-justify">
                         lista de lotes existentes
@@ -95,8 +95,8 @@
                                     <th>ID</th>
                                     <th>UbGeograafica</th>
                                     <th>Codigo</th>
-                                    <th>Observaciones</th>
-                                    <th>Recomendaciones</th>
+                                    <th>Altura</th>
+                                    <th>Parroquia</th>
                                     <th class="ac text-center">Opciones</th>
                                 </tr>
                             </thead>
@@ -105,23 +105,24 @@
                                     <tr >
                                         <td>${l.pk_lote}</td>
                                         <td>${l.ubi_Geografica}</td>
-                                        <td>${l.codigo}</td>
-                                        <td>${l.observaciones}</td>
-                                        <td>${l.recomendaciones}</td>
+                                        <td>${l.cod}</td>
+                                        <td>${l.altura}</td>
+                                        <td>${l.parroquia}</td>
 
                                         <td class="text-center">
                                             <%if (session.getAttribute("tipo").equals("1")) {%>
                                             <a title="Eliminar Registro" class="btn btn-raised btn-danger btn-sm" href="Controlador?menu=Lote&accion=Eliminar&pk_lote=${l.pk_lote}">
                                                 <i class="far fa-trash-alt"></i></a>
                                             <a title="Agregar datos Extras al Lote" class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Lote&accion=LoteDatos&pk_lote=${l.pk_lote}">
-                                                <i class="fas icon-text-document-inverted"></i></a>
+                                                <i class="fas  icon-colours"></i></a>
                                             <a title="Lista de Visitas" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Lote&accion=VerVisitas&pk_lote=${l.pk_lote}">
                                                 <i class="fas fa-clipboard-list"></i></a>
                                                 <%} else {%>
+                                                
                                             <a title="Agregar datos Extras al Lote" class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Lote&accion=LoteDatos&pk_lote=${l.pk_lote}">
-                                                <i class="fas icon-text-document-inverted"></i></a>
+                                               <i class="fas  icon-colours"></i></a>
                                             <a title="Lista de Visitas" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Lote&accion=VerVisitas&pk_lote=${l.pk_lote}">
-                                                <i class="fas fa-clipboard-list"></i></a>
+                                                 <i class="fas fa-clipboard-list"></i></a>
 
                                             <%}%>
 

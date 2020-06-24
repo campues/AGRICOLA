@@ -65,7 +65,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="titulo modal-header">
-                                    <i class="fas fa-user-lock"></i> &nbsp;  <h5>Nuevo Empleado</h5>
+                                    <i class="fas icon-v-card"></i> &nbsp;  <h5>Nuevo Empleado</h5>
                                     <button type="button" class="close" data-dismiss="modal" >
                                         <span class="etiqueta4" >&times;</span>
                                     </button>

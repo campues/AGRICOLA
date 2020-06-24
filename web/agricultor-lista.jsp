@@ -33,17 +33,17 @@
 
                 </nav>
                 <!-- Page header -->
-                <div class="full-box page-header">
+                <div class="full-box page-header"  >
                     <h3 class="text-left">
                         <i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE AGRICULTORES
                     </h3>
                     <p class="text-justify">
                         Lista de agricultores
                     </p>
-                    <div class="container-fluid">
-                        <ul class="full-box list-unstyled page-nav-tabs">
+                    <div class="container-fluid" >
+                        <ul class="full-box list-unstyled page-nav-tabs" >
                             <li>
-                                <a href="agricultor-nuevo.jsp"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR AGRICULTORES</a>
+                                <a   href="agricultor-nuevo.jsp"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR AGRICULTORES</a>
                             </li>
                             <li>
                                 <a href="Controlador?menu=Agricultor&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE AGRICULTORES</a>
@@ -81,7 +81,7 @@
                         <table id="tablalist" class="table table-dark table-sm">
                             <thead>
                                 <tr class=" roboto-medium">
-                                    <th>ID</th>
+                                    <th>Codigo</th>
                                     <th>Nombre</th>
                                     <th>Apellido</th>
                                     <th>Cedula</th>
@@ -94,7 +94,7 @@
                             <tbody>
                                 <c:forEach var="a" items="${listaAgri}">
                                     <tr > 
-                                        <td>${a.pk_agricultor}</td>
+                                        <td>${a.codigo}</td>
                                         <td>${a.nombre1}</td>
                                         <td>${a.apellido1}</td>
                                         <td>${a.cedula}</td>
@@ -111,16 +111,16 @@
                                                 <i class="far fa-trash-alt"></i></a>
 
                                             <a title="Lotes del Agricultor" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Agricultor&accion=VerTerreno&pk_agricultor=${a.pk_agricultor}">
-                                                <i class="fas fa-box-open"></i></a>
+                                                <i class="fas icon-layers"></i></a>
 
                                             <%} else if (session.getAttribute("tipo").equals("2")) {%>
                                             <a  title="Actualizar datos del Agricultor" class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Agricultor&accion=showedit&pk_agricultor=${a.pk_agricultor}">
                                                 <i class="fas  fa-sync-alt"></i></a>
                                             <a title="Lotes del Agricultor" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Agricultor&accion=VerTerreno&pk_agricultor=${a.pk_agricultor}">
-                                                <i class="fas fa-box-open"></i></a>
+                                                 <i class="fas icon-layers"></i></a>
                                                 <%} else {%>
                                             <a title="Lotes del Agricultor" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Agricultor&accion=VerTerreno&pk_agricultor=${a.pk_agricultor}">
-                                                <i class="fas fa-box-open"></i></a>
+                                                 <i class="fas icon-layers"></i></a>
                                                 <%}%>
 
                                         </td>

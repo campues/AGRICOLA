@@ -4,14 +4,37 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <title>Nuevo lote</title>
+        < <link href="css/alertify.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/default.min.css" rel="stylesheet" type="text/css"/>
+        <script src="css/alertify.min.js" type="text/javascript"></script>
+        <!-- Normalize V8.0.1 -->
+        <link rel="stylesheet" href="./css/normalize.css">
+
+        <!-- Bootstrap V4.3 -->
+        <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+        <!-- Bootstrap Material Design V4.0 -->
+        <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+
+        <!-- Font Awesome V5.9.0 -->
+        <link rel="stylesheet" href="./css/all.css">
+
+        <!-- Sweet Alerts V8.13.0 CSS file -->
+        <link rel="stylesheet" href="./css/sweetalert2.min.css">
+
+        <!-- Sweet Alert V8.13.0 JS file-->
+        <script src="./js/sweetalert2.min.js" ></script>
+
+        <!-- jQuery Custom Content Scroller V3.1.5 -->
+        <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
+        <!-- General Styles -->
+        <link rel="stylesheet" href="./css/style.css">
+
     </head>
-
-
     <body>
-           <!-- Main container -->
+        <!-- Main container -->
         <main class="full-box main-container">
             <!--------------EMCABEZADO------------------->
             <jsp:include page="header.jsp"/>
@@ -63,6 +86,16 @@
                             <input type="hidden"  class="" name="fkLote"   value="<%=Variables.idLote%>" id="item_codigo" readonly="readonly" >
                             <div class="container-fluid">
                                 <div class="row">
+                                    <div class="col-12 col-md-3">
+                                        <div class="form-group">
+                                            <label for="item" class="etiqueta">Tipo de Inspeccion</label>
+                                            <select class="form-control" name="opInspeccion" id="item">
+                                                <option value="" selected="" disabled="">Seleccione una opcion</option>
+                                                <option  value="VISITA NUEVA">VISITA NUEVA</option>
+                                                <option value="VISITA SCI">VISITA SCI</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class=col-md-2">
                                         <div class="form-group">
                                             <label  class="etiqueta">Fecha</label>
@@ -70,7 +103,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Informante</label>
                                             <input type="text"  class="form-control" name="txtInformante"  >
@@ -100,25 +133,10 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label  class="etiqueta">Aprueba Certificacion</label>
-                                            <label class="etiqueta">SI</label> <input  type="radio" name="checCertf" value="SI" required="">&nbsp;
-                                            <label class="etiqueta">NO</label><input type="radio" name="checCertf" value="NO" required="">
-                                        </div>
-                                    </div>
-                                   
+
+
+
                                     <div class="col-12 col-md-3">
-                                        <div class="form-group">
-                                            <label for="item" class="etiqueta">Tipo de Inspeccion</label>
-                                            <select class="form-control" name="opInspeccion" id="item">
-                                                <option value="" selected="" disabled="">Seleccione una opcion</option>
-                                                <option  value="VISITA NUEVA">VISITA NUEVA</option>
-                                                <option value="VISITA SCI">VISITA SCI</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                     <div class="col-12 col-md-3">
                                         <div class="form-group">
                                             <label for="item" class="bmd-label-floating">Empleado</label>
                                             <select class="form-control" name="fkEmpleado" id="item" >
@@ -134,8 +152,11 @@
                         </fieldset>
                         <br>
                         <fieldset>
+
                             <legend><i class="fas fa-file-pdf fa-fw"></i> &nbsp; Documentación</legend>
+
                             <div class="row fondo">
+
                                 <div class="col-md-5">
                                     <label class="etiqueta">Contrato de Compromiso A 19-01-1</label> 
                                     <input type="checkbox"  value="SI"  name="checContrato" >
@@ -175,7 +196,120 @@
                                     </div>
                                 </div>
                             </div>
+                        </fieldset>
+                        <fieldset >
+                            <legend><i class="fas fa-file-pdf fa-fw"></i> &nbsp; Riesgo de Contaminación</legend>
 
+                            <div class="container-fluid">
+                                <select class="form-control" name="opSelect" id="opRiesgo" required="required">
+                                    <option selected disabled>Seleccione una opcion</option>
+                                    <option value="CEstablecimiento">Cultivo en Establecimiento</option>
+                                    <option value="CProducion">Cultivo en Producción</option>
+                                </select>
+                                <br>
+                                <table   class="table table-dark table-sm  "style="font-size: 13px;">
+                                    <thead >
+                                        <tr class="roboto-medium">
+                                            <th>ITEM</th>
+                                            <th >PUNTAJE</th>
+                                            <th>DESCRIPCIÓN</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="tu">Tamaño de Cultivo</td>
+                                            <td ><input type="number" name="n1" class="entrada" id="txtTamCultivo" onkeyup="CalcularTotal()" required> </td>
+                                            <td>
+                                                1)&nbsp;Pequeña(menor a 2 hectáreas)<br>
+                                                2)&nbsp;Mediana (de 2 a 4 hertáreas)<br>
+                                                3)&nbsp;Grande (Mayor a 4 Hectáreas)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td> Tipo de cultivo</td>
+                                            <td><input type="number" name="n2" class="entrada" id="txtTipCultivo" onkeyup="CalcularTotal()" required> </td>
+                                            <td> 
+                                                1)&nbsp;Uvillas + autoconsumo + barbecho<br>
+                                                2)&nbsp;Uvilla +Maíz, Trigo, Arveja, Chochos, Quinoa<br>
+                                                3)&nbsp;Solo Uvilla o barbecho
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tipo de aplicación</td>
+                                            <td><input type="number" name="n3" class="entrada" id="txtTipAplicacion" onkeyup="CalcularTotal()" required> </td>
+                                            <td>
+                                                1)&nbsp;Tiene mochila manual<br>
+                                                2)&nbsp;mochila mecánica o de motor<br>
+                                                3)&nbsp;Fumigadora de tractor
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Situación de los vecinos</td>
+                                            <td><input type="number" name="n4" class="entrada" id="txtSitVecinos"onkeyup="CalcularTotal()"  required> </td>
+                                            <td> 
+                                                1)&nbsp;El vecino no representa riesgol<br>
+                                                2) &nbsp;El vecino poco riesgol<br>
+                                                3)&nbsp;El vecino representa muchos riesgos
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Trayectoria agricola organica</td>
+                                            <td><input type="number" name="n5" class="entrada" id="txtTrayAgricola"onkeyup="CalcularTotal()" required> </td>
+                                            <td>
+                                                1)&nbsp;Agricultor tradicional organica<br>
+                                                2) &nbsp;Agricultor que maneja su cultivo de forma intensiva sin quimicos<br>
+                                                3) &nbsp;Agricultor totalmente nuevo 
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Potencial productivo</td>
+                                            <td><input type="number" name="n6" class="entrada" id="txtPotProductivo"onkeyup="CalcularTotal()" required> </td>
+                                            <td>
+                                                1)&nbsp;1 a 5 kg/planta ciclo<br>
+                                                2)&nbsp;5,1 a 10 kg/planta clico<br>
+                                                3)&nbsp;>10 kg/planta ciclo
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Recepcion de la fruta</td>
+                                            <td><input type="number" name="n7" class="entrada" id="txtRecFruta" onkeyup="CalcularTotal()" required> </td>
+                                            <td>
+                                                1)&nbsp;siempre cumple con fruta de calidad<br>
+                                                2) &nbsp;Ha representado problemas esporádicos<br>
+                                                3)  &nbsp;Ha tenido quejas cosntantes
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                                <table class="table table-dark table-sm "style="font-size: 13px;">
+                                    <tbody>
+                                        <tr>
+                                            <td class="badge-dark"> PUNTUACIÓN</td>
+                                            <td colspan=""><input type="number" id="total" name="total"  class="txte" readonly="" ></td>
+                                            <td class="etiqueta4">espacioespacioespacioespacio</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="badge-success">OBSERVACIONES </td>
+                                            <td colspan="2">
+                                                <input name="txtObservCul"  class="txte"   id="obCultivoo" >
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="badge-secondary">TIPO RIESGO</td>
+                                            <td colspan="2"><input class="txte" name="txtTipoRiesgo" type="text" id="tipoR"    >
+                                            </td>
+                                        </tr>
+                                    <tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label  class="etiqueta">Aprueba Certificacion</label>
+                                    <label class="etiqueta">SI</label> <input  type="radio" name="checCertf" value="SI" required="">&nbsp;
+                                    <label class="etiqueta">NO</label><input type="radio" name="checCertf" value="NO" required="">
+                                </div>
+                            </div>
                         </fieldset>
                         <p class="text-center" style="margin-top: 40px;">
                             <button type="reset" class="btn btn-raised btn-secondary btn-sm"><i class="fas fa-paint-roller"></i> &nbsp; LIMPIAR</button>
@@ -189,6 +323,7 @@
         <!--=============================================
         =            Include JavaScript files           =
         ==============================================-->
+        <script src="js/codigo.js" type="text/javascript"></script>
         <!-- jQuery V3.4.1 -->
         <script src="js/permisos.js" type="text/javascript"></script>
 
@@ -206,9 +341,10 @@
         <!-- Bootstrap Material Design V4.0 -->
         <script src="./js/bootstrap-material-design.min.js" ></script>
         <script>$(document).ready(function () {
-                $('body').bootstrapMaterialDesign();
-            });</script>
+                                                    $('body').bootstrapMaterialDesign();
+                                                });</script>
 
         <script src="./js/main.js" ></script>
+        <script src="js/Riesgo.js" type="text/javascript"></script>
     </body>
 </html>

@@ -58,7 +58,7 @@
                 <!-- Page header -->
                 <div class="full-box page-header">
                     <h3 class="text-left">
-                        <i class="fas fa-building fa-fw"></i> &nbsp; DATOS EXTRAS DEL LOTE
+                        <i class="fas icon-grid "></i> &nbsp; DATOS EXTRAS DEL LOTE
                     </h3>
 
                 </div>
@@ -292,80 +292,6 @@
                                                 <td>${m.cantidad}</td>
                                                 <%if (session.getAttribute("tipo").equals("1")) {%>
                                                 <td class="btnLis"><a title="Eliminar Mano Obra"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=ManObra&accion=Eliminar&pk_manObra=${m.pk_manObra}">
-                                                        <i class="far fa-trash-alt"></i></a>
-                                                </td>
-                                                <%} else {%>
-
-                                                <%}%>
-                                            </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <!---------->
-                        <!-- ============================================MODAL AGREGAR INSUMOS============================= -->
-                        <div class="modal fade " id="ModalInsumo" tabindex="-1" role="dialog" aria-labelledby="ModalInsumo" aria-hidden="true">
-                            <div class="modal-dialog " role="document">
-                                <div class="modal-content "  >
-                                    <div class="titulo modal-header">
-                                        <h5>Agregar Productos aplicados</h5>
-                                        <button type="button" class="close" data-dismiss="modal" >
-                                            <span class="etiqueta4" >&times;</span>
-                                        </button>
-                                    </div>
-                                    <form action="Controlador?menu=InsumoLote"  class="form-neon" method="POST">
-                                        <input type="hidden"   name="fk_lotei"  value="<%=Variables.idLote%>">
-                                        <div class="form-group">
-                                            <label for="item" class="bmd-label-floating">Tipo Insumo</label>
-                                            <select class="form-control" name="opInsumo" id="item">
-                                                <option value="" selected="" disabled="">Seleccione una opcion</option>
-                                                <option value="Organicos">Organicos</option>
-                                                <option value="Inorganicos">Inorganicos</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label  class="bmd-label-floating">Nombre Producto</label>
-                                            <input type="text"  class="form-control" name="txtNombre">
-                                        </div>
-                                        <div class="form-group">
-                                            <label  class="bmd-label-floating">Cantidad</label>
-                                            <input type="text"  class="form-control" name="txtCantidad">
-                                        </div>
-                                        <p class="text-center">
-                                            <button   type="submit" name="accion" value="Agregar" class="btn btn-raised btn-info"><i class=" fas fa-save "></i> &nbsp; AGREGAR</button>
-                                        </p>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <!--Lista INSUMOS-->
-                        <div class="col-md-5">
-                            <div class="table-responsive">
-                                <table class=" table table-dark table-sm">
-                                    <thead>
-                                        <tr style="background: #34ce57;">
-                                            <th colspan="4" class="text-center "><a class="etiqueta4" href="#" data-toggle="modal"  data-target="#ModalInsumo"><i class="fas fa-plus fa-fw"></i> &nbsp;Productos Aplicados</a></th>
-                                        </tr>
-                                        <tr class="text-center roboto-medium">
-                                            <th>Tipo</th>
-                                            <th>Nombre</th>
-                                            <th>Cantidad</th>
-                                                <%if (session.getAttribute("tipo").equals("1")) {%>
-                                            <th>Eliminar</th>
-                                                <%} else {%>
-
-                                            <%}%>
-                                        </tr>
-                                    </thead>
-                                    <tbody  >
-                                        <c:forEach var="in" items="${listaInsu}">
-                                            <tr class="text-center">
-                                                <td>${in.tipoInsumo}</td>
-                                                <td>${in.nomInsumo}</td>
-                                                <td>${in.cantidad}</td>
-                                                <%if (session.getAttribute("tipo").equals("1")) {%>
-                                                <td class="btnLis"><a title="Eliminar Producto aplicado"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=InsumoLote&accion=Eliminar&pk_insumo=${in.pk_insumo}">
                                                         <i class="far fa-trash-alt"></i></a>
                                                 </td>
                                                 <%} else {%>

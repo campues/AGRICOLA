@@ -39,7 +39,7 @@
     </session-config>
     <context-param>
         <param-name>jdbcURL</param-name>
-        <param-value>jdbc:mysql://localhost:3306/loscaser_agricola?serverTimezone=EST5EDT</param-value>
+        <param-value>jdbc:mysql://localhost:3306/agricolares?serverTimezone=EST5EDT</param-value>
     </context-param>
     <context-param>
         <param-name>jdbcUsername</param-name>

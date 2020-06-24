@@ -55,7 +55,6 @@
         <nav class="full-box nav-lateral-menu">
             <ul>
                 <li>
-
                     <a href="Controlador?menu=Inicio"  ><i class="fas fa-home fa-fw"></i> &nbsp; Inicio</a>
                 </li>
 
@@ -69,7 +68,7 @@
                             <a href="Controlador?menu=Agricultor&accion=Listar"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de Agricultores</a>
                         </li>
                         <li>
-                            <a href="client-search.jsp"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar Agricultor</a>
+                            <a href="Controlador?menu=BAgricultor&accion=Entrar"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar Agricultor</a>
                         </li>
                     </ul>
                 </li>

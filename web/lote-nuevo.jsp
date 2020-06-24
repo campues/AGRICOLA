@@ -54,7 +54,6 @@
                     </ul>
                 </div>
                 <!--======================CONTENIDO==========================00-->
-                <%=Variables.agriNombre%>  &nbsp; <%=Variables.agriApellido%>&nbsp;
                 <div class="container-fluid">
                     <form action="Controlador?menu=Lote"  id="registro" class="form-neon" method="POST"  >
                         <fieldset>
@@ -86,9 +85,9 @@
                                             <input type="text" readonly class="form-control" name=""  value="${random}"  >
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="item" class="bmd-label-floating">Provincia</label>
+                                            <label for="item" class="">Provincia</label>
                                             <select class="form-control" name="opProvincia" id="item">
                                                 <option value="" selected="" disabled="">Seleccione una opcion</option>
                                                 <c:forEach var="p" items="${lisPro}" >
@@ -97,7 +96,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label  class="bmd-label-floating">Parroquia</label>
                                             <input type="text" class="form-control" name="txtPar">
@@ -114,28 +113,6 @@
                                             </select>
                                         </div>
                                     </div>
-
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <   <label for="" class="etiqueta">Certificado:</label>
-                                            <label style="color: #020202;">SI</label> <input  type="radio" name="txtCertificado" value="SI" >&nbsp;
-                                            <label style="color: #020202;">NO</label><input type="radio" name="txtCertificado" value="NO" >
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12 col-md-4">
-                                        <div class="form-group">
-                                            <label for="item" class="bmd-label-floating">Observaciones</label>
-                                            <input type="text" class="form-control" name="txtObserv" id="item" >
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-4">
-                                        <div class="form-group">
-                                            <label for="item" class="bmd-label-floating">Recomendaciones</label>
-                                            <input type="text" class="form-control" name="txtRecom"  id="item" >
-                                        </div>
-                                    </div>
-
                                 </div>
                             </div>
                         </fieldset>
@@ -160,24 +137,24 @@
                                     <!--=========================Infraestructura======================-->
                                     <div class="col-md-6">
                                         <label class="etiqueta">Bodega</label>
-                                        <input type="checkbox"   value="SI"  id="boton" name="checBodega" >
-                                        <input type="text" class="texto"   id="caja" name="txtObBodega" placeholder="Describe alguna observacion">
+                                        <input type="checkbox"   value="SI"  name="checBodega" >
+                                        <input type="text" class="texto"    name="txtObBodega" placeholder="Describe alguna observacion">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="etiqueta">Poscosecha</label>
                                         <input type="checkbox"   value="SI"  name="checPoscosecha" >
-                                        <input type="text" class="texto"   id="cajaa"   name="txtOb_poscosecha"  placeholder="Alguna Observacion" >
+                                        <input type="text" class="texto"      name="txtOb_poscosecha"  placeholder="Alguna Observacion" >
                                     </div>
                                     <br><br>
                                     <div class="col-md-6">
                                         <label for="" class="etiqueta">Capacitacion</label>
                                         <input type="checkbox" value="SI"  name="checCapacitacion" >
-                                        <input type="text" class="texto"   id="caja" name="txtObCapacitacion" placeholder="Describe alguna observacion">
+                                        <input type="text" class="texto"   name="txtObCapacitacion" placeholder="Describe alguna observacion">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="" class="etiqueta"> Medio de Trasporte</label>
                                         <input type="checkbox"  value="SI"  name="checTransp">
-                                        <input type="text" class="texto"   id="caja" name="txtObTransporte" placeholder="Describe alguna observacion">
+                                        <input type="text" class="texto"   name="txtObTransporte" placeholder="Describe alguna observacion">
                                     </div>
 
                                     <div class="col-md-5">

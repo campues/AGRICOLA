@@ -36,10 +36,10 @@ public class LoteDao {
         while (res.next()) {
             int pk = res.getInt("pk_lote");
             String ubi = res.getString("ubi_Geografica");
-            String cod = res.getString("codigo");
-            String obs = res.getString("observaciones");
-            String rec = res.getString("recomendaciones");
-            Lote lote = new Lote(pk, ubi, cod, obs, rec);
+            String altu = res.getString("altura");
+            String cod = res.getString("cod");
+            String parr = res.getString("parroquia");
+            Lote lote = new Lote(pk, ubi, altu, cod, parr);
             listarLote.add(lote);
         }
         con.desconectar();
@@ -58,20 +58,20 @@ public class LoteDao {
         while (res.next()) {
             int pk = res.getInt("pk_lote");
             String ubi = res.getString("ubi_Geografica");
-            String cod = res.getString("codigo");
-            String obs = res.getString("observaciones");
-            String rec = res.getString("recomendaciones");
-            Lote lote = new Lote(pk, ubi, cod, obs, rec);
+            String altu = res.getString("altura");
+            String cod = res.getString("cod");
+            String parr = res.getString("parroquia");
+            Lote lote = new Lote(pk, ubi, altu, cod, parr);
             listarLoteID.add(lote);
         }
         con.desconectar();
         return listarLoteID;
     }
-    // CONSULTA PARA GENERAR CODIGO
 
+    // CONSULTA PARA GENERAR CODIGO
     public String GenerarSerie() throws SQLException {
         String numeroserie = "";
-        String sql = "select max(codigo) from lote WHERE fk_agricultorl='" + global.idAgricultor + "' ";
+        String sql = "select max(cod) from lote WHERE fk_agricultorl='" + global.idAgricultor + "' ";
 
         con.conectar();
         connection = con.getJdbcConnection();
@@ -94,10 +94,10 @@ public class LoteDao {
         while (res.next()) {
             int pk = res.getInt("pk_lote");
             String ubi = res.getString("ubi_Geografica");
-            String codd = res.getString("codigo");
-            String obs = res.getString("observaciones");
-            String rec = res.getString("recomendaciones");
-            Lote lote = new Lote(pk, ubi, codd, obs, rec);
+            String altu = res.getString("altura");
+            String cod = res.getString("cod");
+            String parr = res.getString("parroquia");
+            Lote lote = new Lote(pk, ubi, altu, cod, parr);
             listarLoteID.add(lote);
         }
         con.desconectar();
@@ -118,9 +118,9 @@ public class LoteDao {
             lote = new Lote(
                     res.getInt("pk_lote"),
                     res.getString("ubi_Geografica"),
-                    res.getString("codigo"),
-                    res.getString("observaciones"),
-                    res.getString("recomendaciones")
+                    res.getString("altura"),
+                    res.getString("cod"),
+                    res.getString("parroquia")
             );
         }
         res.close();
@@ -130,12 +130,12 @@ public class LoteDao {
 
     // Insertar Lote SIN IMAGEN
     public boolean insertarLoteSIN(Lote lot) throws SQLException {
-        String sql = "INSERT INTO lote (pk_lote,ubi_Geografica,altura,codigo,parroquia,observaciones, "
-                + "recomendaciones,certificacion,banio,agua_potable,luz_electrica,agua_riego, "
+        String sql = "INSERT INTO lote (pk_lote,ubi_Geografica,altura,cod,parroquia, "
+                + "banio,agua_potable,luz_electrica,agua_riego, "
                 + "bodega,poscosecha,ob_bodega,ob_poscosecha,capacitaciones,ob_capacitaciones, "
                 + "m_transporte,ob_transporte,inc_abono,riesgo_erosion,registr_lote,usopp, "
                 + "en_prdoduc,cont_lateral,agua_procesamiento,des_produccion,fk_provincia,fk_agricultorl,fk_asociacionl) "
-                + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         System.out.println(lot.getPk_lote());
         con.conectar();
@@ -144,34 +144,31 @@ public class LoteDao {
         stm.setString(1, null);
         stm.setString(2, lot.getUbi_Geografica());
         stm.setString(3, lot.getAltura());
-        stm.setString(4, lot.getCodigo());
+        stm.setString(4, lot.getCod());
         stm.setString(5, lot.getParroquia());
-        stm.setString(6, lot.getObservaciones());
-        stm.setString(7, lot.getRecomendaciones());
-        stm.setString(8, lot.getCertificado());
-        stm.setString(9, lot.getBanio());
-        stm.setString(10, lot.getAgua_potable());
-        stm.setString(11, lot.getLuz_electrica());
-        stm.setString(12, lot.getAgua_riego());
-        stm.setString(13, lot.getBodega());
-        stm.setString(14, lot.getPoscosecha());
-        stm.setString(15, lot.getOb_bodega());
-        stm.setString(16, lot.getOb_poscosecha());
-        stm.setString(17, lot.getCapacitacion());
-        stm.setString(18, lot.getOb_capacitacion());
-        stm.setString(19, lot.getM_transporte());
-        stm.setString(20, lot.getOb_transporte());
-        stm.setString(21, lot.getInc_abono());
-        stm.setString(22, lot.getRiesgo_erosion());
-        stm.setString(23, lot.getRegistr_lote());
-        stm.setString(24, lot.getUsopp());
-        stm.setString(25, lot.getEn_prdoduc());
-        stm.setString(26, lot.getCont_lateral());
-        stm.setString(27, lot.getAgua_procesamiento());
-        stm.setString(28, lot.getDes_produccion());
-        stm.setInt(29, lot.getFk_provincia());
-        stm.setInt(30, lot.getFk_agricultorl());
-        stm.setInt(31, lot.getFk_asociacion());
+        stm.setString(6, lot.getBanio());
+        stm.setString(7, lot.getAgua_potable());
+        stm.setString(8, lot.getLuz_electrica());
+        stm.setString(9, lot.getAgua_riego());
+        stm.setString(10, lot.getBodega());
+        stm.setString(11, lot.getPoscosecha());
+        stm.setString(12, lot.getOb_bodega());
+        stm.setString(13, lot.getOb_poscosecha());
+        stm.setString(14, lot.getCapacitacion());
+        stm.setString(15, lot.getOb_capacitacion());
+        stm.setString(16, lot.getM_transporte());
+        stm.setString(17, lot.getOb_transporte());
+        stm.setString(18, lot.getInc_abono());
+        stm.setString(19, lot.getRiesgo_erosion());
+        stm.setString(20, lot.getRegistr_lote());
+        stm.setString(21, lot.getUsopp());
+        stm.setString(22, lot.getEn_prdoduc());
+        stm.setString(23, lot.getCont_lateral());
+        stm.setString(24, lot.getAgua_procesamiento());
+        stm.setString(25, lot.getDes_produccion());
+        stm.setInt(26, lot.getFk_provincia());
+        stm.setInt(27, lot.getFk_agricultorl());
+        stm.setInt(28, lot.getFk_asociacion());
         boolean rowInserted = stm.executeUpdate() > 0;
         stm.close();
         con.desconectar();
@@ -181,8 +178,8 @@ public class LoteDao {
     // actualizar
     public boolean actualizar(Lote lote) throws SQLException {
         boolean rowActualizar = false;
-        String sql = "UPDATE lote SET ubi_Geografica=?,altura=?,codigo=?,parroquia=?,observaciones=?,"
-                + " recomendaciones=?,cerficacion=?,banio=?,agua_potable=?,luz_electrica=?,agua_riego=?,"
+        String sql = "UPDATE lote SET ubi_Geografica=?,altura=?,cod=?,parroquia=?, "
+                + "banio=?,agua_potable=?,luz_electrica=?,agua_riego=?,"
                 + " bodega=?,poscosecha=?,ob_bodega=?,ob_poscosecha=?,capacitaciones=?,ob_capacitaciones=?,"
                 + " m_transporte=?,ob_transporte=?,inc_abono=?,riesgo_erosion=?,registr_lote=?,usopp=?,"
                 + " en_prdoduc=?,cont_lateral=?,agua_procesamiento=?,des_produccion=?,fk_provincia=?,fk_agricultorl=?,"
@@ -193,35 +190,32 @@ public class LoteDao {
         PreparedStatement stm = connection.prepareStatement(sql);
         stm.setString(1, lote.getUbi_Geografica());
         stm.setString(2, lote.getAltura());
-        stm.setString(3, lote.getCodigo());
+        stm.setString(3, lote.getCod());
         stm.setString(4, lote.getParroquia());
-        stm.setString(5, lote.getObservaciones());
-        stm.setString(6, lote.getRecomendaciones());
-        stm.setString(7, lote.getCertificado());
-        stm.setString(8, lote.getBanio());
-        stm.setString(9, lote.getAgua_potable());
-        stm.setString(1, lote.getLuz_electrica());
-        stm.setString(10, lote.getAgua_riego());
-        stm.setString(11, lote.getBodega());
-        stm.setString(12, lote.getPoscosecha());
-        stm.setString(13, lote.getOb_bodega());
-        stm.setString(14, lote.getOb_poscosecha());
-        stm.setString(15, lote.getCapacitacion());
-        stm.setString(16, lote.getOb_capacitacion());
-        stm.setString(17, lote.getM_transporte());
-        stm.setString(18, lote.getOb_transporte());
-        stm.setString(19, lote.getInc_abono());
-        stm.setString(20, lote.getRiesgo_erosion());
-        stm.setString(21, lote.getRegistr_lote());
-        stm.setString(22, lote.getUsopp());
-        stm.setString(23, lote.getEn_prdoduc());
-        stm.setString(24, lote.getCont_lateral());
-        stm.setString(25, lote.getAgua_procesamiento());
-        stm.setString(26, lote.getDes_produccion());
-        stm.setInt(27, lote.getFk_provincia());
-        stm.setInt(28, lote.getFk_agricultorl());
-        stm.setInt(29, lote.getFk_asociacion());
-        stm.setInt(30, lote.getPk_lote());
+        stm.setString(5, lote.getBanio());
+        stm.setString(6, lote.getAgua_potable());
+        stm.setString(7, lote.getLuz_electrica());
+        stm.setString(8, lote.getAgua_riego());
+        stm.setString(9, lote.getBodega());
+        stm.setString(10, lote.getPoscosecha());
+        stm.setString(11, lote.getOb_bodega());
+        stm.setString(12, lote.getOb_poscosecha());
+        stm.setString(13, lote.getCapacitacion());
+        stm.setString(14, lote.getOb_capacitacion());
+        stm.setString(15, lote.getM_transporte());
+        stm.setString(16, lote.getOb_transporte());
+        stm.setString(17, lote.getInc_abono());
+        stm.setString(18, lote.getRiesgo_erosion());
+        stm.setString(19, lote.getRegistr_lote());
+        stm.setString(20, lote.getUsopp());
+        stm.setString(21, lote.getEn_prdoduc());
+        stm.setString(22, lote.getCont_lateral());
+        stm.setString(23, lote.getAgua_procesamiento());
+        stm.setString(24, lote.getDes_produccion());
+        stm.setInt(25, lote.getFk_provincia());
+        stm.setInt(26, lote.getFk_agricultorl());
+        stm.setInt(27, lote.getFk_asociacion());
+        stm.setInt(28, lote.getPk_lote());
 
         System.out.println(lote.getUbi_Geografica());
         rowActualizar = stm.executeUpdate() > 0;

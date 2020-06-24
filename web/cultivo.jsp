@@ -35,8 +35,8 @@
                 </nav>
                 <!-- Page header -->
                 <div class="full-box page-header">
-                    <h3 class="text-left">
-                        <i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE CULTIVO
+                    <h3 class="text-left" style="color: #00ce7a; ">
+                        <i class="fas icon-feather"></i> &nbsp; LISTA DE CULTIVO
                     </h3>
                     <p class="text-justify">
                         CULTIVO EXISTENTES
@@ -60,16 +60,16 @@
                     </div>
 
                     <!-- ============================================MODAL AGREGAR============================= -->
-                    <div class="modal fade" id="ModalAgregar" tabindex="-1" role="dialog" aria-labelledby="ModalAgregar" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
+                    <div class="modal"  id="ModalAgregar" tabindex="-1" role="dialog" aria-labelledby="ModalAgregar" aria-hidden="true">
+                        <div class="modal-dialog" role="document"   >
+                            <div class="modal-content" style="width: 130%" >
                                 <div class="titulo modal-header">
                                     <h5>Agregar Cultivo</h5>
                                     <button type="button" class="close" data-dismiss="modal" >
                                         <span class="etiqueta4" >&times;</span>
                                     </button>
                                 </div>
-                                <form class="modal-body" action="Controlador?menu=Cultivo" method="POST"  >
+                                <form class="modal-body" action="Controlador?menu=Cultivo" method="POST" >
                                     <fieldset>
                                         <div class="row">
                                             <input type="hidden"  class="" name="fkVisitas"   value="<%=Variables.idVisitas%>" id="item_codigo" readonly="readonly" >
@@ -79,7 +79,7 @@
                                                     <input type="text"  class="form-control" name="txtNombre" required="" title="Ingresa el nombre del cultivo">
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label  class="bmd-label-floating">Area</label>
                                                     <input type="text"  class="form-control" name="txtArea" required="" title="Ingresa el area">
@@ -87,13 +87,13 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label  class="bmd-label-floating">Densidad</label>
+                                                    <label  class="bmd-label-floating">Densidad de siembra</label>
                                                     <input type="text"  class="form-control" name="txtDensidad" required="" title="Ingresa la densidad">
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label  class="bmd-label-floating">Numero</label>
+                                                    <label  class="bmd-label-floating">Numero de plantas</label>
                                                     <input type="number"  class="form-control" name="txtNumero" required="" title="Ingresa el numero de plantas">
                                                 </div>
                                             </div>
@@ -133,6 +133,37 @@
                                                 </div>
                                             </div>
                                     </fieldset>
+                                    <fieldset>
+                                        <legend><i class="fas icon-cw fa-fw"></i> &nbsp; Rotación de cultivo</legend>
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label  class="bmd-label-floating">1°Año anterior</label>
+                                                        <input type="text"  class="form-control" name="txt1anio" required="" title="nombre de cultivo existente anterior">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label  class="bmd-label-floating">2° Año anterior</label>
+                                                        <input type="text"  class="form-control" name="txt2anio" required="" title="nombre de cultivo existente anterior">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label  class="bmd-label-floating">3° Año anterior</label>
+                                                        <input type="text"  class="form-control" name="txt3anio" required="" title="nombre de cultivo existente anterior">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label  class="bmd-label-floating">Observaciones</label>
+                                                        <input type="text"  class="form-control" name="txtobCultivos" required="" title="Alguna observación del cultivo">
+                                                    </div>
+                                                </div>
+
+                                            </div> 
+                                    </fieldset>       
                                     <p class="text-center" >
                                         <button   type="submit" name="accion" value="Agregar" class="btn btn-raised btn-info"><i class=" fas fa-save "></i> &nbsp; AGREGAR</button>
                                     </p>
@@ -183,7 +214,7 @@
                                         <td>${cu.numPlantas}</td>
                                         <td>${cu.estatus}</td>
 
-                                        <td class="col-re text-center">
+                                        <td class="text-center" style="width: 15%;">
                                             <%if (session.getAttribute("tipo").equals("1")) {%>
                                             <a  title="Actualizar Cultivo"  class="btn btn-raised btn-success btn-sm"   href="Controlador?menu=Cultivo&accion=Editar&pk_cultivo=${cu.pk_cultivo}">
                                                 <i class="fas  fa-sync-alt"></i></a>
@@ -191,27 +222,20 @@
                                             <a title="Eliminar Cultivo"   class="btn btn-raised btn-danger btn-sm " href="Controlador?menu=Cultivo&accion=Eliminar&pk_cultivo=${cu.pk_cultivo}">
                                                 <i class="far fa-trash-alt"></i></a>
 
-                                            <a title="Agregar datos Extras al Lote" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Cultivo&accion=CultivoExtras&pk_cultivo=${cu.pk_cultivo}">
-                                                <i class="fas icon-text-document-inverted"></i></a>
+                                                <a title="Productos aplicados en el cultivo" style="background: #01a1c9;color: #000" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Cultivo&accion=CultivoExtras&pk_cultivo=${cu.pk_cultivo}">
+                                                <i class="fas icon-shopping-cart"></i></a>
 
-                                            <a title="Riesgo de contaminacion" class="btn btn-raised btn-warning btn-sm" href="Controlador?menu=Cultivo&accion=CultivoRiesgo&pk_cultivo=${cu.pk_cultivo}">
-                                                <i class="fas icon-add-to-list"></i></a>
-                                                <%} else if (session.getAttribute("tipo").equals("2")) {%>
+                                            <%} else if (session.getAttribute("tipo").equals("2")) {%>
                                             <a  title="Actualizar Cultivo"  class="btn btn-raised btn-success btn-sm"   href="Controlador?menu=Cultivo&accion=Editar&pk_cultivo=${cu.pk_cultivo}">
                                                 <i class="fas  fa-sync-alt"></i></a>
-                                            <a title="Agregar datos Extras al Lote" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Cultivo&accion=CultivoExtras&pk_cultivo=${cu.pk_cultivo}">
-                                                <i class="fas icon-text-document-inverted"></i></a>
-
-                                            <a title="Riesgo de contaminacion" class="btn btn-raised btn-warning btn-sm" href="Controlador?menu=Cultivo&accion=CultivoRiesgo&pk_cultivo=${cu.pk_cultivo}">
-                                                <i class="fas icon-add-to-list"></i></a>
+                                            <a title="Productos aplicados en el cultivo" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Cultivo&accion=CultivoExtras&pk_cultivo=${cu.pk_cultivo}">
+                                                <i class="fas icon-shopping-cart"></i></a>
 
                                             <%} else {%>
-                                            <a title="Agregar datos Extras al Lote" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Cultivo&accion=CultivoExtras&pk_cultivo=${cu.pk_cultivo}">
-                                                <i class="fas icon-text-document-inverted"></i></a>
+                                            <a title="Productos aplicados en el cultivo" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Cultivo&accion=CultivoExtras&pk_cultivo=${cu.pk_cultivo}">
+                                                <i class="fas icon-shopping-cart"></i></a>
 
-                                            <a title="Riesgo de contaminacion" class="btn btn-raised btn-warning btn-sm" href="Controlador?menu=Cultivo&accion=CultivoRiesgo&pk_cultivo=${cu.pk_cultivo}">
-                                                <i class="fas icon-add-to-list"></i></a>
-                                                <%}%>
+                                            <%}%>
                                         </td>
                                     </tr>
                                 </c:forEach>

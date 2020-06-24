@@ -8,12 +8,9 @@ public class Lote {
     private int pk_lote;
     private String ubi_Geografica; // longitud-latitud
     private String altura;// 2,850 m
-    private String codigo; //LT01
+    private String cod; //LT01
     private String parroquia; //Desplegable
-    private String observaciones; //Descrip
-    private String recomendaciones; //Descrip
-    private InputStream croquis; // Imagen
-    private String certificado; // Check
+ 
 
     private String banio; // Check
     private String agua_potable; // Check
@@ -47,23 +44,20 @@ public class Lote {
     public Lote() {
     }
 
-    public Lote(int pk_lote, String ubi_Geografica, String codigo, String observaciones, String recomendaciones) {
-        this.pk_lote = pk_lote;
-        this.ubi_Geografica = ubi_Geografica;
-        this.codigo = codigo;
-        this.observaciones = observaciones;
-        this.recomendaciones = recomendaciones;
-    }
-
-    public Lote(int pk_lote, String ubi_Geografica, String altura, String codigo, String parroquia, String observaciones, String recomendaciones, String certificado, String banio, String agua_potable, String luz_electrica, String agua_riego, String bodega, String poscosecha, String ob_bodega, String ob_poscosecha, String capacitacion, String ob_capacitacion, String m_transporte, String ob_transporte, String inc_abono, String riesgo_erosion, String registr_lote, String usopp, String en_prdoduc, String cont_lateral, String agua_procesamiento, String des_produccion, int fk_provincia, int fk_agricultorl, int fk_asociacion) {
+    public Lote(int pk_lote, String ubi_Geografica, String altura, String cod, String parroquia) {
         this.pk_lote = pk_lote;
         this.ubi_Geografica = ubi_Geografica;
         this.altura = altura;
-        this.codigo = codigo;
+        this.cod = cod;
         this.parroquia = parroquia;
-        this.observaciones = observaciones;
-        this.recomendaciones = recomendaciones;
-        this.certificado = certificado;
+    }
+
+    public Lote(int pk_lote, String ubi_Geografica, String altura, String cod, String parroquia, String banio, String agua_potable, String luz_electrica, String agua_riego, String bodega, String poscosecha, String ob_bodega, String ob_poscosecha, String capacitacion, String ob_capacitacion, String m_transporte, String ob_transporte, String inc_abono, String riesgo_erosion, String registr_lote, String usopp, String en_prdoduc, String cont_lateral, String agua_procesamiento, String des_produccion, int fk_provincia, int fk_agricultorl, int fk_asociacion) {
+        this.pk_lote = pk_lote;
+        this.ubi_Geografica = ubi_Geografica;
+        this.altura = altura;
+        this.cod = cod;
+        this.parroquia = parroquia;
         this.banio = banio;
         this.agua_potable = agua_potable;
         this.luz_electrica = luz_electrica;
@@ -113,12 +107,12 @@ public class Lote {
         this.altura = altura;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public String getCod() {
+        return cod;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setCod(String cod) {
+        this.cod = cod;
     }
 
     public String getParroquia() {
@@ -127,30 +121,6 @@ public class Lote {
 
     public void setParroquia(String parroquia) {
         this.parroquia = parroquia;
-    }
-
-    public String getObservaciones() {
-        return observaciones;
-    }
-
-    public void setObservaciones(String observaciones) {
-        this.observaciones = observaciones;
-    }
-
-    public String getRecomendaciones() {
-        return recomendaciones;
-    }
-
-    public void setRecomendaciones(String recomendaciones) {
-        this.recomendaciones = recomendaciones;
-    }
-
-    public String getCertificado() {
-        return certificado;
-    }
-
-    public void setCertificado(String certificado) {
-        this.certificado = certificado;
     }
 
     public String getBanio() {
@@ -336,5 +306,7 @@ public class Lote {
     public void setFk_asociacion(int fk_asociacion) {
         this.fk_asociacion = fk_asociacion;
     }
+
+  
 
 }
