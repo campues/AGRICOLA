@@ -68,7 +68,6 @@
                             <!--<div class="nav-lateral-barra"></div> --> 
                             <div class="row">
                                 <input type="hidden"  name="pk" class="form-control"  value="${cult.pk_cultivo}">
-
                                 <input type="hidden"  class="" name="fkVisitas"   value="<%=Variables.idVisitas%>" id="item_codigo" readonly="readonly" >
                                 <div class="col-md-2">
                                     <div class="form-group">

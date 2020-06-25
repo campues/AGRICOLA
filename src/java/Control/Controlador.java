@@ -284,6 +284,60 @@ public class Controlador extends HttpServlet {
                         loteDAO.insertarLoteSIN(lote);
                         request.getRequestDispatcher("Controlador?menu=Lote&accion=Listarr").forward(request, response);
                         break;
+                    case "Editar":
+                        RequestDispatcher restt = request.getRequestDispatcher("lote-editar.jsp");
+                        lote = loteDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_lote")));
+                        request.setAttribute("lot", lote);
+                        //lista provincia y compara
+                        List<Provincia> lisProv = proviDAO.listarProvincia();
+                        request.setAttribute("lisPro", lisProv);
+
+                        List<Asociacion> listaasoc = asociacionDAO.listarAsociacion();
+                        request.setAttribute("lisAso", listaasoc);
+
+                        restt.forward(request, response);
+                        break;
+                    case "Actualizar":
+                        lote.setPk_lote(Integer.parseInt(request.getParameter("pk")));
+                        lote.setUbi_Geografica(request.getParameter("txtUbi"));
+                        lote.setAltura(request.getParameter("txtAlt"));
+                        lote.setCod(request.getParameter("txtCod"));
+                        lote.setParroquia(request.getParameter("txtPar"));
+
+                        lote.setBanio(request.getParameter("checBanio"));
+                        lote.setAgua_potable(request.getParameter("checAguaP"));
+                        lote.setLuz_electrica(request.getParameter("checLuzE"));
+                        lote.setAgua_riego(request.getParameter("checAguaR"));
+
+                        lote.setBodega(request.getParameter("checBodega"));
+                        lote.setOb_bodega(request.getParameter("txtObBodega"));
+                        lote.setPoscosecha(request.getParameter("checPoscosecha"));
+                        lote.setOb_poscosecha(request.getParameter("txtOb_poscosecha"));
+
+                        lote.setCapacitacion(request.getParameter("checCapacitacion"));
+                        lote.setOb_capacitacion(request.getParameter("txtObCapacitacion"));
+                        lote.setM_transporte(request.getParameter("checTransp"));
+                        lote.setOb_transporte(request.getParameter("txtObTransporte"));
+
+                        lote.setInc_abono(request.getParameter("txtInserAbono"));
+                        lote.setRiesgo_erosion(request.getParameter("txtRiegoE"));
+
+                        lote.setRegistr_lote(request.getParameter("opRegistro"));
+
+                        lote.setUsopp(request.getParameter("checUsopp"));
+                        lote.setEn_prdoduc(request.getParameter("checEnpro"));
+                        lote.setCont_lateral(request.getParameter("checContLateral"));
+                        lote.setAgua_procesamiento(request.getParameter("checAguaPro"));
+                        lote.setDes_produccion(request.getParameter("txtDesProduccion"));
+
+                        lote.setFk_provincia(Integer.parseInt(request.getParameter("opProvincia")));
+                        lote.setFk_agricultorl(Integer.parseInt(request.getParameter("fkAgricultor")));
+                        lote.setFk_asociacion(Integer.parseInt(request.getParameter("selectAso")));
+
+                        loteDAO.actualizar(lote);
+                        request.getRequestDispatcher("Controlador?menu=Lote&accion=Listar").forward(request, response);
+                        break;
+
                     case "Eliminar":
                         Lote loEliminar = loteDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_lote")));
                         loteDAO.eliminarLote(loEliminar);

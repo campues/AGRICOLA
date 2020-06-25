@@ -133,9 +133,6 @@
                                             </select>
                                         </div>
                                     </div>
-
-
-
                                     <div class="col-12 col-md-3">
                                         <div class="form-group">
                                             <label for="item" class="bmd-label-floating">Empleado</label>

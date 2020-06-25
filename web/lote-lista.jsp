@@ -86,7 +86,7 @@
                         COD: <%=Variables.idAgricultor%>
                         <%=Variables.agriNombre%>  &nbsp; <%=Variables.agriApellido%>&nbsp;
                     </strong>
-                  
+
                     <div class="table-responsive">
                         <table id="tablalist" class="table table-dark table-sm">
 
@@ -111,24 +111,25 @@
 
                                         <td class="text-center">
                                             <%if (session.getAttribute("tipo").equals("1")) {%>
+                                            <a  title="Actualizar Lote"  class="btn btn-raised btn-success btn-sm"   href="Controlador?menu=Lote&accion=Editar&pk_lote=${l.pk_lote}">
+                                                <i class="fas  icon-edit"></i></a>
+
                                             <a title="Eliminar Registro" class="btn btn-raised btn-danger btn-sm" href="Controlador?menu=Lote&accion=Eliminar&pk_lote=${l.pk_lote}">
                                                 <i class="far fa-trash-alt"></i></a>
-                                            <a title="Agregar datos Extras al Lote" class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Lote&accion=LoteDatos&pk_lote=${l.pk_lote}">
-                                                <i class="fas  icon-colours"></i></a>
+                                            <a title="Agregar datos Extras al Lote" class="btn btn-raised btn-info btn-sm" href="Controlador?menu=Lote&accion=LoteDatos&pk_lote=${l.pk_lote}">
+                                                <i class="fas  icon-colours" style="color: #040505"></i></a>
                                             <a title="Lista de Visitas" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Lote&accion=VerVisitas&pk_lote=${l.pk_lote}">
                                                 <i class="fas fa-clipboard-list"></i></a>
                                                 <%} else {%>
-                                                
-                                            <a title="Agregar datos Extras al Lote" class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Lote&accion=LoteDatos&pk_lote=${l.pk_lote}">
-                                               <i class="fas  icon-colours"></i></a>
+                                            <a  title="Actualizar Lote"  class="btn btn-raised btn-success btn-sm"   href="Controlador?menu=Lote&accion=Editar&pk_lote=${cu.pk_lote}">
+                                                <i class="fas  icon-edit"></i></a>
+
+                                            <a title="Agregar datos Extras al Lote" class="btn btn-raised btn-info btn-sm" href="Controlador?menu=Lote&accion=LoteDatos&pk_lote=${l.pk_lote}">
+                                                <i class="fas  icon-colours" style="color: #040505"></i></a>
                                             <a title="Lista de Visitas" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Lote&accion=VerVisitas&pk_lote=${l.pk_lote}">
-                                                 <i class="fas fa-clipboard-list"></i></a>
-
-                                            <%}%>
-
-
+                                                <i class="fas fa-clipboard-list"></i></a>
+                                                <%}%>
                                         </td>
-
                                     </tr>
                                 </c:forEach>
                             </tbody>

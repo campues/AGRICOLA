@@ -108,7 +108,7 @@ public class LoteDao {
     public Lote obtenerPorId(int pk_lote) throws SQLException {
         Lote lote = null;
 
-        String sql = "SELECT * FROM lote WHERE pk_lote= ? ";
+        String sql = "SELECT * FROM lote WHERE pk_lote=? ";
         con.conectar();
         connection = con.getJdbcConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
@@ -120,7 +120,30 @@ public class LoteDao {
                     res.getString("ubi_Geografica"),
                     res.getString("altura"),
                     res.getString("cod"),
-                    res.getString("parroquia")
+                    res.getString("parroquia"),
+                    res.getString("banio"),
+                    res.getString("agua_potable"),
+                    res.getString("luz_electrica"),
+                    res.getString("agua_riego"),
+                    res.getString("bodega"),
+                    res.getString("poscosecha"),
+                    res.getString("ob_bodega"),
+                    res.getString("ob_poscosecha"),
+                    res.getString("capacitaciones"),
+                    res.getString("ob_capacitaciones"),
+                    res.getString("m_transporte"),
+                    res.getString("ob_transporte"),
+                    res.getString("inc_abono"),
+                    res.getString("riesgo_erosion"),
+                    res.getString("registr_lote"),
+                    res.getString("usopp"),
+                    res.getString("en_prdoduc"),
+                    res.getString("cont_lateral"),
+                    res.getString("agua_procesamiento"),
+                    res.getString("des_produccion"),
+                    res.getInt("fk_provincia"),
+                    res.getInt("fk_agricultorl"),
+                    res.getInt("fk_asociacionl")
             );
         }
         res.close();

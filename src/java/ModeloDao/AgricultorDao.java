@@ -23,10 +23,6 @@ public class AgricultorDao {
         System.out.println(jdbcURL);
         con = new Conexion(jdbcURL, jdbcUsername, jdbcPassword);
     }
-
-    
-    
-    
     
     // listar todos Agricultores
     public List<Agricultor> listarAgricultor() throws SQLException {
