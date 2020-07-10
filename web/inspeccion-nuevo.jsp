@@ -5,7 +5,7 @@
 <html lang="es">
     <head>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <title>Nuevo lote</title>
+        <title>Agregar Inspeccion</title>
         < <link href="css/alertify.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/default.min.css" rel="stylesheet" type="text/css"/>
         <script src="css/alertify.min.js" type="text/javascript"></script>
@@ -57,10 +57,10 @@
                 <!--================Encabezado de página ======================-->
                 <div class="page-header">
                     <h3 class="text-danger">
-                        LOTE:<%=Variables.idLote%>
+                       INSPECCION
                     </h3>
                     <p class="text-justify">
-                        <i class="fas fa-plus fa-fw"></i> &nbsp; Realizar Inspeccion <br>
+                        <i class="fas fa-plus fa-fw"></i> &nbsp;  LOTE:<%=Variables.idLote%> <br>
                         Ingresa nueva inspeccion de lote
                     </p>
                 </div>
@@ -82,17 +82,17 @@
                 <div class="container-fluid">
                     <form action="Controlador?menu=Visitas"  class="form-neon" method="POST" >
                         <fieldset>
-                            <legend><i class="far fa-plus-square"></i> &nbsp; Datos de la inspeccion</legend>
+                            <legend><i class="far fa-plus-square"></i> &nbsp; Datos de la inspección</legend>
                             <input type="hidden"  class="" name="fkLote"   value="<%=Variables.idLote%>" id="item_codigo" readonly="readonly" >
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 col-md-3">
                                         <div class="form-group">
-                                            <label for="item" class="etiqueta">Tipo de Inspeccion</label>
-                                            <select class="form-control" name="opInspeccion" id="item">
-                                                <option value="" selected="" disabled="">Seleccione una opcion</option>
-                                                <option  value="VISITA NUEVA">VISITA NUEVA</option>
-                                                <option value="VISITA SCI">VISITA SCI</option>
+                                            <label for="item" class="etiqueta">Tipo de Inspeccion<label style="color: red">*</label></label>
+                                            <select class="form-control" name="opInspeccion" id="item" required>
+                                                <option value="" selected="" disabled="">Seleccione una opción</option>
+                                                <option  value="VISITA NUEVA">VISITA NUEVA (RDA-0302)</option>
+                                                <option value="VISITA SCI">VISITA SCI (RDA-0103)</option>
                                             </select>
                                         </div>
                                     </div>
@@ -106,7 +106,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Informante</label>
-                                            <input type="text"  class="form-control" name="txtInformante"  >
+                                            <input title="Nombre del informante"  type="text"  class="form-control" name="txtInformante"  >
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-3">
@@ -125,9 +125,9 @@
                                     </div>
                                     <div class="col-12 col-md-3">
                                         <div class="form-group">
-                                            <label for="item" class="etiqueta">Tipo de Auditoria</label>
+                                            <label for="item" class="etiqueta">Tipo de Auditoria<label style="color: red">*</label></label>
                                             <select class="form-control" name="opAuditoria" >
-                                                <option value="" selected="" disabled="">Seleccione una opcion</option>
+                                                <option value="" selected="" disabled="">Seleccione una opción</option>
                                                 <option  value="Normal">Normal</option>
                                                 <option value="Extraordinaria">Extraordinaria</option>
                                             </select>
@@ -135,8 +135,8 @@
                                     </div>
                                     <div class="col-12 col-md-3">
                                         <div class="form-group">
-                                            <label for="item" class="bmd-label-floating">Empleado</label>
-                                            <select class="form-control" name="fkEmpleado" id="item" >
+                                            <label for="item" class="bmd-label-floating">Empleado<label style="color: red">*</label></label>
+                                            <select class="form-control" name="fkEmpleado" id="item" required>
                                                 <option value="" selected="" disabled="">Seleccione Empleado</option>
                                                 <c:forEach var="em" items="${lisEmplea}">
                                                     <option value="${em.pk_empleado}">${em.nombre}</option>
@@ -195,15 +195,15 @@
                             </div>
                         </fieldset>
                         <fieldset >
-                            <legend><i class="fas fa-file-pdf fa-fw"></i> &nbsp; Riesgo de Contaminación</legend>
+                            <legend><i class="fas fa-file-pdf fa-fw"></i> &nbsp; Riesgo de Contaminación<label style="color: red">*</label></legend>
 
                             <div class="container-fluid">
-                                <select class="form-control" name="opSelect" id="opRiesgo" required="required">
+                                <select class="form-control" name="opSelect" id="opRiesgo" required>
                                     <option selected disabled>Seleccione una opcion</option>
                                     <option value="CEstablecimiento">Cultivo en Establecimiento</option>
                                     <option value="CProducion">Cultivo en Producción</option>
                                 </select>
-                                <br>
+                                <br> 
                                 <table   class="table table-dark table-sm  "style="font-size: 13px;">
                                     <thead >
                                         <tr class="roboto-medium">

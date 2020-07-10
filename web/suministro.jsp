@@ -9,7 +9,7 @@
 <html lang="es">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Datos de la empresa</title>
+        <title>Suministro</title>
         <!-- dataTable -->
         <link rel="stylesheet" href="datatables/datatables.min.css"/>
         <link rel="stylesheet" href="datatables/stylo-tabla.css" />

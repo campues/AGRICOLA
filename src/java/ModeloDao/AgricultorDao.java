@@ -10,7 +10,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class AgricultorDao {
 
     private Conexion con;
@@ -23,7 +22,7 @@ public class AgricultorDao {
         System.out.println(jdbcURL);
         con = new Conexion(jdbcURL, jdbcUsername, jdbcPassword);
     }
-    
+
     // listar todos Agricultores
     public List<Agricultor> listarAgricultor() throws SQLException {
 
@@ -171,6 +170,16 @@ public class AgricultorDao {
 
     }
 
+    public void Capturar(int id) {
+        String sql = "Select * from agricultor where pk_agricultor=" + id;
+        try {
+            connection = con.getJdbcConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+
     // listar todos las asociaciones
     public List<Agricultor> listarAgriCed(String cedula) throws SQLException {
         List<Agricultor> listarAgri = new ArrayList<Agricultor>();
@@ -213,8 +222,5 @@ public class AgricultorDao {
         con.desconectar();
         return rowEliminar;
     }
-
-    
-
 
 }

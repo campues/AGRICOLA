@@ -104,6 +104,9 @@
 
                                         <td class=" text-center">
                                             <%if (session.getAttribute("tipo").equals("1")) {%>
+                                             <a  title="Agregar Anexos" class="btn btn-raised  text-info btn-sm " href="Controlador?menu=Agricultor&accion=VerArchivo&pk_agricultor=${a.pk_agricultor}">
+                                                <i class="fas fa-file"></i></a>
+                                            
                                             <a  title="Actualizar datos del Agricultor" class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Agricultor&accion=showedit&pk_agricultor=${a.pk_agricultor}">
                                                 <i class="fas  fa-sync-alt"></i></a>
 
@@ -114,11 +117,15 @@
                                                 <i class="fas icon-layers"></i></a>
 
                                             <%} else if (session.getAttribute("tipo").equals("2")) {%>
+                                            <a  title="Agregar Anexos" class="btn btn-raised  text-info btn-sm " href="Controlador?menu=Agricultor&accion=VerArchivo&pk_agricultor=${a.pk_agricultor}">
+                                                <i class="fas fa-file"></i></a>
                                             <a  title="Actualizar datos del Agricultor" class="btn btn-raised btn-success btn-sm" href="Controlador?menu=Agricultor&accion=showedit&pk_agricultor=${a.pk_agricultor}">
                                                 <i class="fas  fa-sync-alt"></i></a>
                                             <a title="Lotes del Agricultor" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Agricultor&accion=VerTerreno&pk_agricultor=${a.pk_agricultor}">
                                                  <i class="fas icon-layers"></i></a>
                                                 <%} else {%>
+                                                <a  title="Agregar Anexos" class="btn btn-raised  text-info btn-sm " href="Controlador?menu=Agricultor&accion=VerArchivo&pk_agricultor=${a.pk_agricultor}">
+                                                <i class="fas fa-file"></i></a>
                                             <a title="Lotes del Agricultor" class="btn btn-raised btn-dark btn-sm" href="Controlador?menu=Agricultor&accion=VerTerreno&pk_agricultor=${a.pk_agricultor}">
                                                  <i class="fas icon-layers"></i></a>
                                                 <%}%>

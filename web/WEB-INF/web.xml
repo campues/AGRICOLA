@@ -16,6 +16,10 @@
         <servlet-name>ControladorHerramientas</servlet-name>
         <servlet-class>Control.ControladorHerramientas</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Control</servlet-name>
+        <servlet-class>Control.Control</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Controlador</servlet-name>
         <url-pattern>/Controlador</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>ControladorHerramientas</servlet-name>
         <url-pattern>/ControladorHerramientas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/Control</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

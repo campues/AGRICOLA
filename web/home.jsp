@@ -75,7 +75,6 @@
                         <div class="contenedor">
                             <img class="icon" src="assets/inicio/farmer.png">
                             <p class="tx">Agricultor</p>
-
                         </div>
                     </a>
                     <a href="Controlador?menu=Lote&accion=Listar" class="tile">

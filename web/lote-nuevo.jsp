@@ -10,9 +10,6 @@
         <script src="https://code.jquery.com/jquery-2.2.4.js"
         integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 
-
-
-
     </head>
     <body>
         <!-- Main container -->
@@ -84,15 +81,16 @@
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <label  class="bmd-label-floating">Codigo</label>
-                                            <input type="text" readonly class="form-control" name="txtCod"  value="${nserie}"  >
-                                            <input type="text" readonly class="form-control" name=""  value="${random}"  >
+                                            <label  class="bmd-label-floating">Codigo<label style="color: red">*</label></label>
+                                            <input type="text" class="form-control" name="txtCod"  value="${nserie}"  >
+                                            <!-- <input type="text" readonly class="form-control" name=""  value="${random}"  >  -->
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="item" class="">Provincia</label>
-                                            <select class="form-control" name="opProvincia" id="item">
+                                           
+                                            <label for="item" class="">Provincia <label style="color: red">*</label></label>
+                                            <select class="form-control" name="opProvincia" id="item"  required>
                                                 <option value="" selected="" disabled="">Seleccione una opcion</option>
                                                 <c:forEach var="p" items="${lisPro}" >
                                                     <option value="${p.pk_provincia}">${p.nomProvincia}</option>
@@ -108,8 +106,8 @@
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
-                                            <label for="item" class="bmd-label-floating">Asociacion</label>
-                                            <select class="form-control" name="selectAso" id="item">
+                                            <label for="item" class="bmd-label-floating">Asociacion <label style="color: red">*</label></label>
+                                            <select class="form-control" name="selectAso" id="item" required>
                                                 <option value="" selected="" disabled="">Seleccione una opcion</option>
                                                 <c:forEach var="a" items="${lisAso}" >
                                                     <option value="${a.pk_asociacion}">${a.nomAsociacion}</option>

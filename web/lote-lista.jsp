@@ -6,7 +6,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <title>Lista de items</title>
+        <title>LOTES</title>
         <!-- dataTable -->
         <link rel="stylesheet" href="datatables/datatables.min.css"/>
         <link rel="stylesheet" href="datatables/stylo-tabla.css" />
@@ -92,7 +92,7 @@
 
                             <thead>
                                 <tr class="roboto-medium">
-                                    <th>ID</th>
+                                  
                                     <th>UbGeograafica</th>
                                     <th>Codigo</th>
                                     <th>Altura</th>
@@ -103,7 +103,6 @@
                             <tbody>
                                 <c:forEach var="l" items="${listaLote}">
                                     <tr >
-                                        <td>${l.pk_lote}</td>
                                         <td>${l.ubi_Geografica}</td>
                                         <td>${l.cod}</td>
                                         <td>${l.altura}</td>

@@ -45,7 +45,7 @@ public class ProductoDao {
 
      // Insertar Empleado
     public boolean insertarPro(Producto pro) throws SQLException {
-        String sql = "INSERT INTO producto (pk_producto, nomInsumoS, stock, tipoInsumo) "
+        String sql = "INSERT INTO producto (pk_producto, nomInsumos, stock, tipoInsumo) "
                 + " VALUES (?,?,?,?)";
         System.out.println(pro.getNomInsumos());
         con.conectar();
@@ -75,7 +75,7 @@ public class ProductoDao {
         if (res.next()) {
             pro = new Producto(
                     res.getInt("pk_producto"),
-                    res.getString("nomInsumo"),
+                    res.getString("nomInsumos"),
                     res.getString("stock"),
                     res.getString("tipoInsumo")
             );

@@ -6,7 +6,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <title>Lista de items</title>
+        <title>Inspecciones</title>
         <!-- dataTable -->
         <link rel="stylesheet" href="datatables/datatables.min.css"/>
         <link rel="stylesheet" href="datatables/stylo-tabla.css" />
@@ -63,7 +63,7 @@
 
                             <thead>
                                 <tr class="roboto-medium">
-                                    <th>Id</th>
+                                  
                                     <th>Fecha</th>
                                     <th>Informante</th>
                                     <th>Tipo Inspec.</th>
@@ -77,7 +77,6 @@
                             <tbody>
                                 <c:forEach var="v" items="${listaVi}">
                                     <tr>
-                                        <td>${v.pk_visitas}</td>
                                         <td>${v.fecha}</td>
                                         <td>${v.nom_informante}</td>
                                         <td>${v.tipoInspeccion}</td>

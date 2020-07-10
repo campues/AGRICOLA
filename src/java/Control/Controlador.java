@@ -1,5 +1,6 @@
 package Control;
 
+import Modelo.Archivo;
 import Modelo.Agricultor;
 import Modelo.Animales;
 import Modelo.Asociacion;
@@ -17,6 +18,7 @@ import Modelo.Provincia;
 import Modelo.RiesgoContam;
 import Modelo.RotacionCultivo;
 import Modelo.Visitas;
+import ModeloDao.ArchivoDao;
 import ModeloDao.AgricultorDao;
 import ModeloDao.AnimalesDao;
 import ModeloDao.AsociacionDao;
@@ -39,6 +41,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -53,6 +56,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import javax.swing.JOptionPane;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
 
 public class Controlador extends HttpServlet {
 
@@ -92,6 +101,7 @@ public class Controlador extends HttpServlet {
     RotacionCultivo roCultivo = new RotacionCultivo();
     ProdAplicados proApli = new ProdAplicados();
     RiesgoContam rcontam = new RiesgoContam();
+
     String numeroserie = "";
 
     public void init() {
@@ -137,6 +147,107 @@ public class Controlador extends HttpServlet {
             Variables.panPrincipal = 0;
             Variables.idAgricultor = 0;
         }
+       
+        // ==============================AGRICULTOR===========================================================
+        if (menu.equals("Agricultor")) {
+            try {
+                switch (accion) {
+                    case "Listar":
+                        RequestDispatcher dist = request.getRequestDispatcher("agricultor-lista.jsp");
+                        List<Agricultor> listaAgric = agricultorDAO.listarAgricultor();
+                        request.setAttribute("listaAgri", listaAgric);
+                        Variables.panPrincipal = 10;
+                        dist.forward(request, response);
+                        break;
+                    case "Agregar":
+                        ag.setPk_agricultor(0);
+                        ag.setCodigo(request.getParameter("txtCodigo"));
+                        ag.setNombre1(request.getParameter("txtNom1"));
+                        ag.setNombre2(request.getParameter("txtNom2"));
+                        ag.setApellido1(request.getParameter("txtApe1"));
+                        ag.setApellido2(request.getParameter("txtApe2"));
+                        ag.setCedula(request.getParameter("txtCed"));
+
+                        ag.setDireccion(request.getParameter("txtDir"));
+                        ag.setTelefono(request.getParameter("txtTel"));
+                        ag.setFechaAfiliacion(request.getParameter("txtFec"));
+                        ag.setEstatus(request.getParameter("txtEst"));
+                        ag.setLiderAsociacion(request.getParameter("radioL"));
+                        agricultorDAO.insertarAgr(ag);
+                        request.getRequestDispatcher("Controlador?menu=Agricultor&accion=Listar").forward(request, response);
+                        break;
+                    case "Actualizar":
+                        ag.setPk_agricultor(Integer.parseInt(request.getParameter("pk")));
+                        ag.setCodigo(request.getParameter("txtCodigo"));
+                        ag.setNombre1(request.getParameter("txtNom1"));
+                        ag.setNombre2(request.getParameter("txtNom2"));
+                        ag.setApellido1(request.getParameter("txtApe1"));
+                        ag.setApellido2(request.getParameter("txtApe2"));
+                        ag.setCedula(request.getParameter("txtCed"));
+                        ag.setDireccion(request.getParameter("txtDir"));
+                        ag.setTelefono(request.getParameter("txtTel"));
+                        ag.setFechaAfiliacion(request.getParameter("txtFec"));
+                        ag.setEstatus(request.getParameter("txtEst"));
+                        ag.setLiderAsociacion(request.getParameter("radioL"));
+                        agricultorDAO.actualizarAg(ag);
+                        request.getRequestDispatcher("Controlador?menu=Agricultor&accion=Listar").forward(request, response);
+                        break;
+
+                    case "showedit":
+                        RequestDispatcher dists = request.getRequestDispatcher("agricultor-nuevo.jsp");
+                        ag = agricultorDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_agricultor")));
+                        request.setAttribute("agricul", ag);
+                        dists.forward(request, response);
+                        break;
+                    case "Buscar":
+                        RequestDispatcher distw = request.getRequestDispatcher("agricultor-lista.jsp");
+                        List<Agricultor> liss = agricultorDAO.listarAgriCed(request.getParameter("txtCedula"));
+                        request.setAttribute("listaAgri", liss);
+                        Variables.panPrincipal = 10;
+                        distw.forward(request, response);
+                        break;
+                    case "Enlistar":
+                        RequestDispatcher distq = request.getRequestDispatcher("agricultor-buscar.jsp");
+                        List<Agricultor> listaAgricc = agricultorDAO.listarAgricultor();
+                        request.setAttribute("listaAgri", listaAgricc);
+                        Variables.panPrincipal = 10;
+                        distq.forward(request, response);
+                        break;
+                    case "Editar":
+                        ag = agricultorDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_agricultor")));
+                        request.setAttribute("agricul", ag);
+                        Variables.idAgricultor = ag.getPk_agricultor();
+                        request.setAttribute("global", Variables.idAgricultor);
+                        request.getRequestDispatcher("Controlador?menu=Agricultor&accion=Listar").forward(request, response);
+                        break;
+                    case "VerArchivo":
+                        ag = agricultorDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_agricultor")));
+                        Variables.idAgricultor = ag.getPk_agricultor();
+                        response.sendRedirect("Control?accion=Listar");
+                        break;
+                    case "VerTerreno":
+                        ag = agricultorDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_agricultor")));
+                        Variables.idAgricultor = ag.getPk_agricultor();
+                        Variables.agriNombre = ag.getNombre1();
+                        Variables.agriApellido = ag.getApellido1();
+                        response.sendRedirect("Controlador?menu=Lote&accion=Listar");
+                        // request.getRequestDispatcher("Controlador?menu=Lote=Listar").forward(request, response);
+                        break;
+                    case "Eliminar":
+                        Agricultor agEliminar = agricultorDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_agricultor")));
+                        agricultorDAO.eliminarAgri(agEliminar);
+                        request.getRequestDispatcher("Controlador?menu=Agricultor&accion=Listar").forward(request, response);
+                        break;
+                    default:
+                        break;
+                }
+
+            } catch (SQLException e) {
+                request.setAttribute("error", e);
+                request.getRequestDispatcher("error.jsp").forward(request, response);
+            }
+        }
+
         // ==============================AGRICULTOR===========================================================
         if (menu.equals("BAgricultor")) {
             try {
@@ -207,6 +318,7 @@ public class Controlador extends HttpServlet {
                         List<Provincia> listaproz = proviDAO.listarProvincia();
                         request.setAttribute("lisPro", listaproz);
 
+                        /*
                         //DATOS DEL AGRICULTOR=============================================================
                         String nombre1 = Variables.agriNombre.split("")[0];
                         String apellido = Variables.agriApellido.split("")[0];
@@ -231,7 +343,7 @@ public class Controlador extends HttpServlet {
                         }
                         //genera numero aleatorio de 3 digitos
                         request.setAttribute("random", nombre1 + apellido + randon);
-
+                         */
                         d.forward(request, response);
                         break;
                     case "VerVisitas":
@@ -824,103 +936,6 @@ public class Controlador extends HttpServlet {
                 request.getRequestDispatcher("error.jsp").forward(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        // ==============================AGRICULTOR===========================================================
-        if (menu.equals("Agricultor")) {
-            try {
-                switch (accion) {
-                    case "Listar":
-                        RequestDispatcher dist = request.getRequestDispatcher("agricultor-lista.jsp");
-                        List<Agricultor> listaAgric = agricultorDAO.listarAgricultor();
-                        request.setAttribute("listaAgri", listaAgric);
-                        Variables.panPrincipal = 10;
-                        dist.forward(request, response);
-                        break;
-                    case "Agregar":
-                        ag.setPk_agricultor(0);
-                        ag.setCodigo(request.getParameter("txtCodigo"));
-                        ag.setNombre1(request.getParameter("txtNom1"));
-                        ag.setNombre2(request.getParameter("txtNom2"));
-                        ag.setApellido1(request.getParameter("txtApe1"));
-                        ag.setApellido2(request.getParameter("txtApe2"));
-                        ag.setCedula(request.getParameter("txtCed"));
-
-                        ag.setDireccion(request.getParameter("txtDir"));
-                        ag.setTelefono(request.getParameter("txtTel"));
-                        ag.setFechaAfiliacion(request.getParameter("txtFec"));
-                        ag.setEstatus(request.getParameter("txtEst"));
-                        ag.setLiderAsociacion(request.getParameter("radioL"));
-                        agricultorDAO.insertarAgr(ag);
-                        request.getRequestDispatcher("Controlador?menu=Agricultor&accion=Listar").forward(request, response);
-                        break;
-                    case "Actualizar":
-                        ag.setPk_agricultor(Integer.parseInt(request.getParameter("pk")));
-                        ag.setCodigo(request.getParameter("txtCodigo"));
-                        ag.setNombre1(request.getParameter("txtNom1"));
-                        ag.setNombre2(request.getParameter("txtNom2"));
-                        ag.setApellido1(request.getParameter("txtApe1"));
-                        ag.setApellido2(request.getParameter("txtApe2"));
-                        ag.setCedula(request.getParameter("txtCed"));
-                        ag.setDireccion(request.getParameter("txtDir"));
-                        ag.setTelefono(request.getParameter("txtTel"));
-                        ag.setFechaAfiliacion(request.getParameter("txtFec"));
-                        ag.setEstatus(request.getParameter("txtEst"));
-                        ag.setLiderAsociacion(request.getParameter("radioL"));
-                        agricultorDAO.actualizarAg(ag);
-                        request.getRequestDispatcher("Controlador?menu=Agricultor&accion=Listar").forward(request, response);
-                        break;
-                    case "showedit":
-                        RequestDispatcher dists = request.getRequestDispatcher("agricultor-nuevo.jsp");
-                        ag = agricultorDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_agricultor")));
-                        request.setAttribute("agricul", ag);
-                        dists.forward(request, response);
-                        break;
-                    case "Buscar":
-                        RequestDispatcher distw = request.getRequestDispatcher("agricultor-lista.jsp");
-                        List<Agricultor> liss = agricultorDAO.listarAgriCed(request.getParameter("txtCedula"));
-                        request.setAttribute("listaAgri", liss);
-                        Variables.panPrincipal = 10;
-                        distw.forward(request, response);
-                        break;
-                    case "Enlistar":
-                        RequestDispatcher distq = request.getRequestDispatcher("agricultor-buscar.jsp");
-                        List<Agricultor> listaAgricc = agricultorDAO.listarAgricultor();
-                        request.setAttribute("listaAgri", listaAgricc);
-                        Variables.panPrincipal = 10;
-                        distq.forward(request, response);
-                        break;
-
-                    case "Editar":
-                        ag = agricultorDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_agricultor")));
-                        request.setAttribute("agricul", ag);
-                        Variables.idAgricultor = ag.getPk_agricultor();
-                        request.setAttribute("global", Variables.idAgricultor);
-
-                        request.getRequestDispatcher("Controlador?menu=Agricultor&accion=Listar").forward(request, response);
-                        break;
-                    case "VerTerreno":
-                        ag = agricultorDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_agricultor")));
-                        Variables.idAgricultor = ag.getPk_agricultor();
-                        Variables.agriNombre = ag.getNombre1();
-                        Variables.agriApellido = ag.getApellido1();
-                        response.sendRedirect("Controlador?menu=Lote&accion=Listar");
-                        // request.getRequestDispatcher("Controlador?menu=Lote=Listar").forward(request, response);
-                        break;
-                    case "Eliminar":
-                        Agricultor agEliminar = agricultorDAO.obtenerPorId(Integer.parseInt(request.getParameter("pk_agricultor")));
-                        agricultorDAO.eliminarAgri(agEliminar);
-
-                        request.getRequestDispatcher("Controlador?menu=Agricultor&accion=Listar").forward(request, response);
-                        break;
-                    default:
-                        break;
-                }
-
-            } catch (SQLException e) {
-                request.setAttribute("error", e);
-                request.getRequestDispatcher("error.jsp").forward(request, response);
             }
         }
 

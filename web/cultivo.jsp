@@ -6,7 +6,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <title>Datos de la empresa</title>
+        <title>Cultivos</title>
         <!-- dataTable -->
         <link rel="stylesheet" href="datatables/datatables.min.css"/>
         <link rel="stylesheet" href="datatables/stylo-tabla.css" />
@@ -75,38 +75,38 @@
                                             <input type="hidden"  class="" name="fkVisitas"   value="<%=Variables.idVisitas%>" id="item_codigo" readonly="readonly" >
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label  class="bmd-label-floating">Nombre</label>
+                                                    <label  class="bmd-label-floating">Nombre<label style="color: red">*</label></label>
                                                     <input type="text"  class="form-control" name="txtNombre" required="" title="Ingresa el nombre del cultivo">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    <label  class="bmd-label-floating">Area</label>
+                                                    <label  class="bmd-label-floating">Area<label style="color: red">*</label></label>
                                                     <input type="text"  class="form-control" name="txtArea" required="" title="Ingresa el area">
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label  class="bmd-label-floating">Densidad de siembra</label>
-                                                    <input type="text"  class="form-control" name="txtDensidad" required="" title="Ingresa la densidad">
+                                                    <input type="text"  class="form-control" name="txtDensidad"  title="Ingresa la densidad">
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label  class="bmd-label-floating">Numero de plantas</label>
-                                                    <input type="number"  class="form-control" name="txtNumero" required="" title="Ingresa el numero de plantas">
+                                                    <input type="number"  class="form-control" name="txtNumero" title="Ingresa el numero de plantas">
                                                 </div>
                                             </div>
                                             <div class="col-md-5">
                                                 <div class="form-group">
-                                                    <label  class="">Aplicación del último producto prohibido,fecha</label>
-                                                    <input type="date"  class="form-control" name="txtFecha" required="" title="Ingresa la fecha">
+                                                    <label  class="">Aplicación del último producto prohibido,fecha<label style="color: red">*</label></label>
+                                                    <input type="date"  class="form-control" name="txtFecha" required title="Ingresa la fecha">
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label  class="bmd-label-floating">Estimado de cosecha</label>
-                                                    <input type="number"  class="form-control" name="txtEstimacion" required="" title="Ingresa la estimacion">
+                                                    <input type="number"  class="form-control" name="txtEstimacion" title="Ingresa la estimacion">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -123,13 +123,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label  class="bmd-label-floating">Manejo Organicamente desde(Año)</label>
-                                                    <input type="number"  class="form-control" name="txtAnio_or" required="" title="Ingresa el Año ">
+                                                    <input type="number"  class="form-control" name="txtAnio_or" title="Ingresa el Año ">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label  class="bmd-label-floating">Año de la primera preinspección</label>
-                                                    <input type="number"  class="form-control" name="txtAnio_ins" required="" title="Ingresa el Año">
+                                                    <input type="number"  class="form-control" name="txtAnio_ins" title="Ingresa el Año">
                                                 </div>
                                             </div>
                                     </fieldset>
@@ -140,25 +140,25 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label  class="bmd-label-floating">1°Año anterior</label>
-                                                        <input type="text"  class="form-control" name="txt1anio" required="" title="nombre de cultivo existente anterior">
+                                                        <input type="text"  class="form-control" name="txt1anio"  title="nombre de cultivo existente anterior">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label  class="bmd-label-floating">2° Año anterior</label>
-                                                        <input type="text"  class="form-control" name="txt2anio" required="" title="nombre de cultivo existente anterior">
+                                                        <input type="text"  class="form-control" name="txt2anio"  title="nombre de cultivo existente anterior">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label  class="bmd-label-floating">3° Año anterior</label>
-                                                        <input type="text"  class="form-control" name="txt3anio" required="" title="nombre de cultivo existente anterior">
+                                                        <input type="text"  class="form-control" name="txt3anio"  title="nombre de cultivo existente anterior">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label  class="bmd-label-floating">Observaciones</label>
-                                                        <input type="text"  class="form-control" name="txtobCultivos" required="" title="Alguna observación del cultivo">
+                                                        <input type="text"  class="form-control" name="txtobCultivos"  title="Alguna observación del cultivo">
                                                     </div>
                                                 </div>
 
@@ -199,7 +199,6 @@
                         <table id="tablalist" class="table table-dark table-sm">
                             <thead >
                                 <tr class="roboto-medium">
-                                    <th>ID</th>
                                     <th>Cultivo</th>
                                     <th>Numero plantas</th>
                                     <th>Estatus</th>
@@ -209,7 +208,6 @@
                             <tbody>
                                 <c:forEach var="cu" items="${listaCul}">
                                     <tr> 
-                                        <td>${cu.pk_cultivo}</td>
                                         <td>${cu.nomCultivo}</td>
                                         <td>${cu.numPlantas}</td>
                                         <td>${cu.estatus}</td>

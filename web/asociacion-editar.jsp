@@ -6,7 +6,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <title>Datos de la empresa</title>
+        <title>Actualizar Asociacion</title>
 
         <!-- Normalize V8.0.1 -->
         <link rel="stylesheet" href="./css/normalize.css">
@@ -69,53 +69,53 @@
                                 <input type="hidden"  name="pk" class="form-control"  value="${asoc.pk_asociacion}">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label  class="bmd-label-floating">Nombre Asociacion</label>
-                                        <input type="text"  class="form-control" name="txtNombre" required=""  pattern="[A-Za-z]+" value="${asoc.nomAsociacion}" >
+                                        <label  class="bmd-label-floating">Nombre Asociacion<label style="color: red">*</label></label>
+                                        <input type="text"  class="form-control" name="txtNombre"   value="${asoc.nomAsociacion}" >
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label  class="bmd-label-floating">Ruc</label>
-                                        <input type="number"  class="form-control" name="txtRuc" required=""  value="${asoc.ruc}" >
+                                        <input type="number"  class="form-control" name="txtRuc"   value="${asoc.ruc}" >
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label  class="bmd-label-floating">Geolocalización</label>
-                                        <input type="text"  class="form-control" name="txtGeoloc" required="" value="${asoc.geolocalizacion}" >
+                                        <input type="text"  class="form-control" name="txtGeoloc"  value="${asoc.geolocalizacion}" >
                                     </div>
                                 </div>
 
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label  class="bmd-label-floating">Telefono</label>
-                                        <input type="number"  class="form-control" name="txtTelefono" required="" value="${asoc. telefono}" >
+                                        <input type="number"  class="form-control" name="txtTelefono"  value="${asoc. telefono}" >
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label  class="bmd-label-floating">Nombres Completos (Responsable)</label>
-                                        <input type="text"  class="form-control" name="txtResponsable" required="" value="${asoc.responsable}" >
+                                        <input type="text"  class="form-control" name="txtResponsable"  value="${asoc.responsable}" >
                                     </div>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label  class="bmd-label-floating">Direccion</label>
-                                        <input type="text"  class="form-control" name="txtDireccion" required="" value="${asoc.direccion}" >
+                                        <input type="text"  class="form-control" name="txtDireccion" value="${asoc.direccion}" >
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label  class="bmd-label-floating">Parroquia</label>
-                                        <input type="text"  class="form-control" name="txtParroquia" required=""  value="${asoc.parroquia}" >
+                                        <input type="text"  class="form-control" name="txtParroquia"   value="${asoc.parroquia}" >
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="item" class="bmd-label-floating">Provincia</label>
-                                        <select class="form-control" name="opProvincia" id="item">
+                                        <label for="item" class="bmd-label-floating">Provincia<label style="color: red">*</label></label>
+                                        <select class="form-control" name="opProvincia" id="item" required>
                                             <option value="" selected="" disabled="">Seleccione una opcion</option>
                                             <c:forEach var="p" items="${lisPro}" >
                                                 <option value="${p.pk_provincia}"

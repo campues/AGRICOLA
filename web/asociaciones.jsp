@@ -5,7 +5,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <title>Datos de la empresa</title>
+        <title>Asociaciones</title>
         <!-- dataTable -->
         <link rel="stylesheet" href="datatables/datatables.min.css"/>
         <link rel="stylesheet" href="datatables/stylo-tabla.css" />
@@ -69,47 +69,47 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label  class="bmd-label-floating">Nombre Asociacion</label>
+                                                <label  class="bmd-label-floating">Nombre Asociacion<label style="color: red">*</label></label>
                                                 <input type="text"  class="form-control" name="txtNombre" required=""  pattern="[A-Za-z]+"  >
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label  class="bmd-label-floating">Ruc</label>
-                                                <input type="number"  class="form-control" name="txtRuc" required="" >
+                                                <input type="number"  class="form-control" name="txtRuc"  >
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label  class="bmd-label-floating">Geolocalización</label>
-                                                <input type="text"  class="form-control" name="txtGeoloc" required="" >
+                                                <input type="text"  class="form-control" name="txtGeoloc"  >
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label  class="bmd-label-floating">Telefono</label>
-                                                <input type="number"  class="form-control" name="txtTelefono" required=""  >
+                                                <input type="number"  class="form-control" name="txtTelefono"  >
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label  class="bmd-label-floating">Nombres Completos (Responsable)</label>
-                                        <input type="text"  class="form-control" name="txtResponsable" required=""  >
+                                        <input type="text"  class="form-control" name="txtResponsable"   >
                                     </div>
 
 
                                     <div class="form-group">
                                         <label  class="bmd-label-floating">Direccion</label>
-                                        <input type="text"  class="form-control" name="txtDireccion" required="" >
+                                        <input type="text"  class="form-control" name="txtDireccion"  >
                                     </div>
                                     <div class="form-group">
                                         <label  class="bmd-label-floating">Parroquia</label>
-                                        <input type="text"  class="form-control" name="txtParroquia" required="" pattern="[A-Za-z]+"  >
+                                        <input type="text"  class="form-control" name="txtParroquia"    >
                                     </div>
                                     <div class="form-group">
-                                        <label for="item" class="bmd-label-floating">Provincia</label>
-                                        <select class="form-control" name="opProvincia" id="item">
+                                        <label for="item" class="bmd-label-floating">Provincia<label style="color: red">*</label></label>
+                                        <select class="form-control" name="opProvincia" id="item" required="">
                                             <option value="" selected="" disabled="">Seleccione una opcion</option>
                                             <c:forEach var="p" items="${lisPro}" >
                                                 <option value="${p.pk_provincia}">${p.nomProvincia}</option>

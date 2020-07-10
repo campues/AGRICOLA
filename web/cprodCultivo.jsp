@@ -5,7 +5,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <title>Datos de la empresa</title>
+        <title>Productos Aplicados</title>
 
         <!-- Normalize V8.0.1 -->
         <link rel="stylesheet" href="./css/normalize.css">
@@ -75,7 +75,7 @@
                     <div class="modal-dialog " role="document">
                         <div class="modal-content " >
                             <div class="titulo modal-header">
-                                <h5>Agregar Animales</h5>
+                                <h5>Agregar Productos</h5>
                                 <button type="button" class="close" data-dismiss="modal" >
                                     <span class="etiqueta4" >&times;</span>
                                 </button>
@@ -83,8 +83,8 @@
                             <form action="Controlador?menu=ProAplicados"  class="form-neon" method="POST">
                                 <input type="hidden"   name="fk_cultivop"  value="<%=Variables.idLote%>">
                                 <div class="form-group">
-                                    <label for="item" class="bmd-label-floating">Tipo de Producto</label>
-                                    <select class="form-control" name="opTipo" id="item">
+                                    <label for="item" class="bmd-label-floating">Tipo de Producto<label style="color: red">*</label></label>
+                                    <select class="form-control" name="opTipo" id="item" required>
                                         <option value="" selected="" disabled="">Seleccione una opcion</option>
                                         <option value="1">Otros productos utilizados en el Lote</option>
                                         <option value="2">Aplicación del último producto prohibido</option>
@@ -94,8 +94,8 @@
                                 <div class="row">
                                     <div class="col-md-5">
                                         <div class="form-group">
-                                            <label for="item" class="bmd-label-floating">Origen</label>
-                                            <select class="form-control" name="opOrigen" id="item">
+                                            <label for="item" class="bmd-label-floating">Origen<label style="color: red">*</label></label>
+                                            <select class="form-control" name="opOrigen" id="item" required>
                                                 <option value="" selected="" disabled="">Seleccione una opcion</option>
                                                 <option value="Propio">Propio</option>
                                                 <option value="Comprado">Complado</option>
@@ -123,8 +123,8 @@
 
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label  class="etiqueta">Fecha</label>
-                                            <input type="date"  class="form-control" name="txtFecha">
+                                            <label  class="etiqueta">Fecha<label style="color: red">*</label></label>
+                                            <input type="date"  class="form-control" name="txtFecha" required>
                                         </div>
                                     </div>
                                 </div>
