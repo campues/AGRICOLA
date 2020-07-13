@@ -54,7 +54,7 @@ public class Control extends HttpServlet {
                 case "Listar":
                     RequestDispatcher diste = request.getRequestDispatcher("archivo.jsp");
                     List<Archivo> ar = archivoDao.listarArchivoID();
-                    request.setAttribute("archivos", ar);
+                    request.setAttribute("arch", ar);
                     diste.forward(request, response);
                     break;
                 case "Agregar":
@@ -64,25 +64,32 @@ public class Control extends HttpServlet {
                     List items = fileUpload.parseRequest(request); //Captura todo los datos del formulario
                     for (int i = 0; i < items.size(); i++) {
                         FileItem fileItem = (FileItem) items.get(i);
+                        
                         if (!fileItem.isFormField()) {
-                            File f = new File("appservers/apache-tomcat-8.0.48/webapps/ROOT/img/" + fileItem.getName());
-                            //File f = new File("C:\\apache-tomcat-8.5.57\\webapps\\ROOT\\img\\" + fileItem.getName());
+                            File f = new File("appservers/apache-tomcat-8.0.48/webapps/Anexos/" + fileItem.getFieldName());
+                            //File f = new File("C://apache-tomcat-8.5.57/webapps/Anexos/" + fileItem.getName());
                             fileItem.write(f);
-                            //p.setRuta(f.getAbsolutePath());
-                           archivo.setRuta("http://loscaseritos.com:10626/img/" + fileItem.getName());
-                            //archivo.setRuta("http://localhost:8080/img/" + fileItem.getName());
+                            archivo.setRuta("http://loscaseritos.com:10626/Anexos/" + fileItem.getName());
+                            //archivo.setRuta("http://localhost:8080/Anexos/" + fileItem.getName());
                         } else {
                             lista.add(fileItem.getString()); //Recorre los campos 
                         }
                     }
                     archivo.setFk_agricultord(lista.get(0));
                     archivo.setNomArchivo(lista.get(1));
+                    archivo.setTipo(lista.get(2));
+
                     archivoDao.insertarArchivo(archivo);
                     request.getRequestDispatcher("Control?accion=Listar").forward(request, response);
                     break;
                 case "Eliminar":
-                    Archivo arch = archivoDao.obtenerPorId(Integer.parseInt(request.getParameter("pk_archivo")));
-                    archivoDao.eliminarArchivo(arch);
+                    File f = null;
+                    archivo = archivoDao.obtenerPorId(Integer.parseInt(request.getParameter("pk_archivo")));
+                    String nombre = archivo.getRuta().split("/")[4];
+                    f = new File("/home/loscaser/appservers/apache-tomcat-8.0.48/webapps/Anexos/" + nombre);
+                    // f = new File("C://apache-tomcat-8.5.57/webapps/Anexos/" + nombre);
+                    f.delete();
+                    archivoDao.eliminarArchivo(archivo);
                     request.getRequestDispatcher("Control?accion=Listar").forward(request, response);
                     break;
                 default:

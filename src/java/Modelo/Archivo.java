@@ -1,23 +1,34 @@
-
 package Modelo;
 
 public class Archivo {
+
     private int pk_archivo;
     private String nomArchivo;
+    private String tipo;
     private String ruta;
     private String fk_agricultord;
 
     public Archivo() {
     }
 //constructor
-    public Archivo(int pk_archivo, String nomArchivo, String ruta, String fk_agricultord) {
+
+    public Archivo(int pk_archivo, String nomArchivo, String tipo, String ruta, String fk_agricultord) {
         this.pk_archivo = pk_archivo;
         this.nomArchivo = nomArchivo;
+        this.tipo = tipo;
         this.ruta = ruta;
         this.fk_agricultord = fk_agricultord;
     }
+    
+
+    public String getTipo() {   
+        return tipo;
+    }
 
 // gets y setts
+    public void setTipo(String tipo) {    
+        this.tipo = tipo;
+    }
 
     public int getPk_archivo() {
         return pk_archivo;
@@ -51,7 +62,4 @@ public class Archivo {
         this.fk_agricultord = fk_agricultord;
     }
 
-    
-  
-    
 }

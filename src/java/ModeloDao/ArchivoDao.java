@@ -37,10 +37,11 @@ public class ArchivoDao {
         while (res.next()) {
             int pk = res.getInt("pk_archivo");
             String nom = res.getString("nomArchivo");
+            String tip = res.getString("tipo");
             String rut = res.getString("ruta");
             String fk = res.getString("fk_agricultord");
 
-            Archivo archivo = new Archivo(pk, nom, rut, fk);
+            Archivo archivo = new Archivo(pk, nom, tip, rut, fk);
             listarAr.add(archivo);
         }
         con.desconectar();
@@ -59,10 +60,11 @@ public class ArchivoDao {
         while (res.next()) {
             int pk = res.getInt("pk_archivo");
             String nom = res.getString("nomArchivo");
+            String tip = res.getString("tipo");
             String rut = res.getString("ruta");
             String fk = res.getString("fk_agricultord");
 
-            Archivo archivo = new Archivo(pk, nom, rut, fk);
+            Archivo archivo = new Archivo(pk, nom, tip, rut, fk);
             listarArID.add(archivo);
         }
         con.desconectar();
@@ -71,15 +73,16 @@ public class ArchivoDao {
 
     // Insertar Empleado
     public boolean insertarArchivo(Archivo ar) throws SQLException {
-        String sql = "INSERT INTO archivo (nomArchivo,ruta,fk_agricultord)VALUES(?,?,?)";
+        String sql = "INSERT INTO archivo (nomArchivo,tipo,ruta,fk_agricultord)VALUES(?,?,?,?)";
         System.out.println(ar.getNomArchivo());
         con.conectar();
         connection = con.getJdbcConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
-        
+
         statement.setString(1, ar.getNomArchivo());
-        statement.setString(2, ar.getRuta());
-        statement.setString(3, ar.getFk_agricultord());
+        statement.setString(2, ar.getTipo());
+        statement.setString(3, ar.getRuta());
+        statement.setString(4, ar.getFk_agricultord());
         boolean rowInserted = statement.executeUpdate() > 0;
         statement.close();
         con.desconectar();
@@ -99,6 +102,7 @@ public class ArchivoDao {
             archivo = new Archivo(
                     res.getInt("pk_archivo"),
                     res.getString("nomArchivo"),
+                    res.getString("tipo"),
                     res.getString("ruta"),
                     res.getString("fk_agricultord")
             );
